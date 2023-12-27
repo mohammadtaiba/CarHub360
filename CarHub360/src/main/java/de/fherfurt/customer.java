@@ -1,18 +1,20 @@
 package de.fherfurt;
-
+import java.util.Date;
 /**
  * @author rudolfminz
  */
+
+
 public class customer {
 
     private int CustomerId;
     private String FirstName;
     private String LastName;
     private String Email;
-    private date Birthdate;
+    private Date Birthdate;
     private boolean IsFemale;
 
-    public customer(int customerId, String firstName, String lastName, String email, date birthdate, boolean isFemale) {
+    public customer(int customerId, String firstName, String lastName, String email, Date birthdate, boolean isFemale) {
         CustomerId = customerId;
         FirstName = firstName;
         LastName = lastName;
@@ -53,11 +55,11 @@ public class customer {
         Email = email;
     }
 
-    public date getBirthdate() {
+    public Date getBirthdate() {
         return Birthdate;
     }
 
-    public void setBirthdate(date birthdate) {
+    public void setBirthdate(Date birthdate) {
         Birthdate = birthdate;
     }
 
@@ -68,7 +70,7 @@ public class customer {
     public void setFemale(boolean female) {
         IsFemale = female;
     }
-    public void CreateCustomer(int CustomerId, String FirstName, String LastName, String Email, date Birthdate, boolean IsFemale){
+    public void CreateCustomer(int CustomerId, String FirstName, String LastName, String Email, Date Birthdate, boolean IsFemale){
 
 
     }
