@@ -1,5 +1,7 @@
 package de.fherfurt;
 
+import java.util.Date;
+
 public class RentVehicle
 {
     private int RentVehicleId;
