@@ -1,12 +1,12 @@
 package de.fherfurt;
 
-public class ForSale
+public class SaleVehicle
 {
     private int VehicleId;
     private float SalePrice;
     private boolean IsNew;
 
-    public ForSale(int vehicleId, float salePrice, boolean isNew) {
+    public SaleVehicle(int vehicleId, float salePrice, boolean isNew) {
         VehicleId = vehicleId;
         SalePrice = salePrice;
         IsNew = isNew;

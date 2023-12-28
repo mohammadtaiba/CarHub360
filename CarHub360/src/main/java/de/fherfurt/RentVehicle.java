@@ -1,6 +1,6 @@
 package de.fherfurt;
 
-public class ForRent
+public class RentVehicle
 {
     private int RentVehicleId;
     private int RentVehicleVehicleId;
@@ -11,7 +11,7 @@ public class ForRent
     private Date EndDate;
     private float Deposit;
 
-    public ForRent(int rentVehicleId, int rentVehicleVehicleId, boolean isAvailable, float dailyPrice, String licensePlate, Date startDate, Date endDate, float deposit) {
+    public RentVehicle(int rentVehicleId, int rentVehicleVehicleId, boolean isAvailable, float dailyPrice, String licensePlate, Date startDate, Date endDate, float deposit) {
         RentVehicleId = rentVehicleId;
         RentVehicleVehicleId = rentVehicleVehicleId;
         IsAvailable = isAvailable;

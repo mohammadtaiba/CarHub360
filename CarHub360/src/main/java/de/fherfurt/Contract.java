@@ -5,32 +5,40 @@ import java.util.Date;
 public class Contract
 {
     /* Methods */
-    public void CreatePurchaseContract(int ContractID, int ContractCustomerId, int ContractVehicleId, Date ContractSaleDate) {
-        // Logic to create a purchase contract
+    public void CreatePurchaseContract(int ContractID, int ContractCustomerId, RentVehicle _RentVehicle, Date ContractSaleDate)
+    {
     }
 
-    public void CreateRentalContract(int ContractID, int ContractCustomerId, int ContractVehicleId, Date RentalStartdate, Date RentalEnddate) {
+    public void CreateRentalContract(int ContractID, int ContractCustomerId, int ContractVehicleId, Date RentalStartdate, Date RentalEnddate)
+    {
         // Logic to create a rental contract
     }
 
-    public void TerminateRentalContract(int ContractID) {
+    public void TerminateRentalContract(int ContractID)
+    {
         // Logic to terminate a rental contract
     }
 
-    public void RenewRentalContract(int ContractID) {
+    public void RenewRentalContract(int ContractID)
+    {
         // Logic to renew a rental contract
     }
 
-    public void GetRentalContractDetails(int ContractID) {
+    public void GetRentalContractDetails(int ContractID)
+    {
         // Logic to get rental contract details
     }
 
-    public void GetPurchaseContractDetails(int ContractID) {
+    public void GetPurchaseContractDetails(int ContractID)
+    {
         // Logic to get purchase contract details
     }
 
 
     /* Attributes */
+    private Customer m_Customer;
+    private SaleVehicle m_SaleVehicle;
+    private RentVehicle m_RentVehicle;
     private int ContractId;
     private int ContractCustomerId;
     private int ContractVehicleId;
