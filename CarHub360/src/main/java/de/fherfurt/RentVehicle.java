@@ -14,7 +14,7 @@ public class RentVehicle extends Vehicle
     private float Deposit;
 
     public RentVehicle(int rentVehicleId, int rentVehicleVehicleId, boolean isAvailable, float dailyPrice, String licensePlate, Date startDate, Date endDate, float deposit) {
-        super(); // Ruft den Konstruktor der Basisklasse auf, ergänze!
+        super(); // Ruft den Konstruktor der Basisklasse auf, ergänze!  <---
         RentVehicleId = rentVehicleId;
         RentVehicleVehicleId = rentVehicleVehicleId;
         IsAvailable = isAvailable;
@@ -25,8 +25,8 @@ public class RentVehicle extends Vehicle
         Deposit = deposit;
     }
 
-    // ergänze!
-    public void GetRentVehicleVehicleDetails (int VehicleId) {
+    public void GetRentVehicleDetails (int VehicleId)
+    {
 
     }
 

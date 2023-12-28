@@ -5,15 +5,17 @@ import java.util.Date;
 public class Contract
 {
     /* Methods */
-    public void createPurchaseContract(int ContractID, int ContractCustomerId, RentVehicle _RentVehicle, Date ContractSaleDate)
+    public void createPurchaseContract(int contractID, Customer customer, SaleVehicle saleVehicle)
     {
-        System.out.println("Vertragsnummer: ", ContractID, _RentVehicle.);
+        setContractId(contractID);
+        System.out.println("Vertragsnummer: ");
     }
 
-    public void createRentalContract(int ContractID, int ContractCustomerId, int ContractVehicleId, Date RentalStartdate, Date RentalEnddate)
+    public void createRentalContract(int contractID, Customer customer, RentVehicle rentVehicle)
     {
-        // Logic to create a rental contract
-    }
+        setContractId(contractID);
+        rentVehicle.setAvailable(false);
+        rentVehicle.setDeposit(rentVehicle.getT);    }
 
     public void terminateRentalContract(int ContractID)
     {
