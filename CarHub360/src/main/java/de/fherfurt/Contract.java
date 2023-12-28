@@ -4,6 +4,31 @@ import java.util.Date;
 
 public class Contract
 {
+    /* Methods */
+    public void CreatePurchaseContract(int ContractID, int ContractCustomerId, int ContractVehicleId, Date ContractSaleDate) {
+        // Logic to create a purchase contract
+    }
+
+    public void CreateRentalContract(int ContractID, int ContractCustomerId, int ContractVehicleId, Date RentalStartdate, Date RentalEnddate) {
+        // Logic to create a rental contract
+    }
+
+    public void TerminateRentalContract(int ContractID) {
+        // Logic to terminate a rental contract
+    }
+
+    public void RenewRentalContract(int ContractID) {
+        // Logic to renew a rental contract
+    }
+
+    public void GetRentalContractDetails(int ContractID) {
+        // Logic to get rental contract details
+    }
+
+    public void GetPurchaseContractDetails(int ContractID) {
+        // Logic to get purchase contract details
+    }
+
 
     /* Attributes */
     private int ContractId;
@@ -72,32 +97,5 @@ public class Contract
         RentalEndDate = rentalEndDate;
     }
 
-
-    /* Methods */
-    public void CreatePurchaseContract(int ContractID, int ContractCustomerId, int ContractVehicleId, Date ContractSaleDate) {
-        // Logic to create a purchase contract
-    }
-
-    public void CreateRentalContract(int ContractID, int ContractCustomerId, int ContractVehicleId, Date RentalStartdate, Date RentalEnddate) {
-        // Logic to create a rental contract
-    }
-
-    public void TerminateRentalContract(int ContractID) {
-        // Logic to terminate a rental contract
-    }
-
-    public void RenewRentalContract(int ContractID) {
-        // Logic to renew a rental contract
-    }
-
-    public ContractDetails GetRentalContractDetails(int ContractID) {
-        // Logic to get rental contract details
-        return null; // Placeholder return
-    }
-
-    public ContractDetails GetPurchaseContractDetails(int ContractID) {
-        // Logic to get purchase contract details
-        return null; // Placeholder return
-    }
 
 }
