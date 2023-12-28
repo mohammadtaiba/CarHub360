@@ -2,7 +2,7 @@ package de.fherfurt;
 
 import java.util.Date;
 
-public class RentVehicle
+public class RentVehicle extends Vehicle
 {
     private int RentVehicleId;
     private int RentVehicleVehicleId;
@@ -14,6 +14,7 @@ public class RentVehicle
     private float Deposit;
 
     public RentVehicle(int rentVehicleId, int rentVehicleVehicleId, boolean isAvailable, float dailyPrice, String licensePlate, Date startDate, Date endDate, float deposit) {
+        super(); // Ruft den Konstruktor der Basisklasse auf, ergänze!
         RentVehicleId = rentVehicleId;
         RentVehicleVehicleId = rentVehicleVehicleId;
         IsAvailable = isAvailable;
@@ -22,6 +23,11 @@ public class RentVehicle
         StartDate = startDate;
         EndDate = endDate;
         Deposit = deposit;
+    }
+
+    // ergänze!
+    public void GetRentVehicleVehicleDetails (int VehicleId) {
+
     }
 
     public int getRentVehicleId() {

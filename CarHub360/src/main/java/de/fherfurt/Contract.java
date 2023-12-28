@@ -5,31 +5,32 @@ import java.util.Date;
 public class Contract
 {
     /* Methods */
-    public void CreatePurchaseContract(int ContractID, int ContractCustomerId, RentVehicle _RentVehicle, Date ContractSaleDate)
+    public void createPurchaseContract(int ContractID, int ContractCustomerId, RentVehicle _RentVehicle, Date ContractSaleDate)
     {
+        System.out.println("Vertragsnummer: ", ContractID, _RentVehicle.);
     }
 
-    public void CreateRentalContract(int ContractID, int ContractCustomerId, int ContractVehicleId, Date RentalStartdate, Date RentalEnddate)
+    public void createRentalContract(int ContractID, int ContractCustomerId, int ContractVehicleId, Date RentalStartdate, Date RentalEnddate)
     {
         // Logic to create a rental contract
     }
 
-    public void TerminateRentalContract(int ContractID)
+    public void terminateRentalContract(int ContractID)
     {
         // Logic to terminate a rental contract
     }
 
-    public void RenewRentalContract(int ContractID)
+    public void renewRentalContract(int ContractID)
     {
         // Logic to renew a rental contract
     }
 
-    public void GetRentalContractDetails(int ContractID)
+    public void getRentalContractDetails(int ContractID)
     {
         // Logic to get rental contract details
     }
 
-    public void GetPurchaseContractDetails(int ContractID)
+    public void getPurchaseContractDetails(int ContractID)
     {
         // Logic to get purchase contract details
     }

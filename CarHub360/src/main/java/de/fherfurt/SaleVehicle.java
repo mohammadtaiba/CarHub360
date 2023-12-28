@@ -1,15 +1,21 @@
 package de.fherfurt;
 
-public class SaleVehicle
+public class SaleVehicle extends Vehicle
 {
     private int VehicleId;
     private float SalePrice;
     private boolean IsNew;
 
     public SaleVehicle(int vehicleId, float salePrice, boolean isNew) {
+        super(); // // Ruft den Konstruktor der Basisklasse auf, ergänze!
         VehicleId = vehicleId;
         SalePrice = salePrice;
         IsNew = isNew;
+    }
+
+    // ergänze!
+    public void GetSaleVehicleVehicleDetails (int VehicleId) {
+
     }
 
     public int getVehicleId() {
