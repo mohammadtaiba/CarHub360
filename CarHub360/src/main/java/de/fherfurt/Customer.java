@@ -5,7 +5,7 @@ import java.util.Date;
  */
 
 
-public class customer {
+public class Customer {
 
     private int CustomerId;
     private String FirstName;
@@ -14,8 +14,8 @@ public class customer {
     private Date Birthdate;
     private boolean IsFemale;
 
-    public customer(int customerId, String firstName, String lastName, String email, Date birthdate, boolean isFemale) {
-        CustomerId = customerId;
+    public Customer(int CustomerId, String firstName, String lastName, String email, Date birthdate, boolean isFemale) {
+        CustomerId = CustomerId;
         FirstName = firstName;
         LastName = lastName;
         Email = email;
@@ -27,8 +27,8 @@ public class customer {
         return CustomerId;
     }
 
-    public void setCustomerId(int customerId) {
-        CustomerId = customerId;
+    public void setCustomerId(int CustomerId) {
+        CustomerId = CustomerId;
     }
 
     public String getFirstName() {
