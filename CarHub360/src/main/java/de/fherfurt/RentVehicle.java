@@ -9,8 +9,7 @@ public class RentVehicle extends Vehicle
     private boolean IsAvailable;
     private float DailyPrice;
     private String LicensePlate;
-    private Date StartDate;
-    private Date EndDate;
+    // private Date StartDate, EndDate; // --> Die brauchst du gar nicht, die habe ich bei Contract verschoben!
     private float Deposit;
 
     public RentVehicle(int rentVehicleId, int rentVehicleVehicleId, boolean isAvailable, float dailyPrice, String licensePlate, Date startDate, Date endDate, float deposit) {
@@ -20,8 +19,7 @@ public class RentVehicle extends Vehicle
         IsAvailable = isAvailable;
         DailyPrice = dailyPrice;
         LicensePlate = licensePlate;
-        StartDate = startDate;
-        EndDate = endDate;
+
         Deposit = deposit;
     }
 
@@ -68,22 +66,6 @@ public class RentVehicle extends Vehicle
 
     public void setLicensePlate(String licensePlate) {
         LicensePlate = licensePlate;
-    }
-
-    public Date getStartDate() {
-        return StartDate;
-    }
-
-    public void setStartDate(Date startDate) {
-        StartDate = startDate;
-    }
-
-    public Date getEndDate() {
-        return EndDate;
-    }
-
-    public void setEndDate(Date endDate) {
-        EndDate = endDate;
     }
 
     public float getDeposit() {
