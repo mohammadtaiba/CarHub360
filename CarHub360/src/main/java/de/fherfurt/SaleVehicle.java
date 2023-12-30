@@ -13,7 +13,7 @@ public class SaleVehicle extends Vehicle
         IsNew = isNew;
     }
 
-    public void GetSaleVehicleDetails (int VehicleId) // ergänze! ergänze!  <---
+    public void GetSaleVehicleDetails (int VehicleId) // ergänze! <---
     {
 
     }
@@ -41,4 +41,6 @@ public class SaleVehicle extends Vehicle
     public void setNew(boolean aNew) {
         IsNew = aNew;
     }
+
+    public void getSaleVehicleDetails() {} // ergänze! <---
 }

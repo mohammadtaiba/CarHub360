@@ -75,4 +75,7 @@ public class RentVehicle extends Vehicle
     public void setDeposit(float deposit) {
         Deposit = deposit;
     }
+
+    public void getRentVehicleDetails() {} // ergänze! <---
+
 }
