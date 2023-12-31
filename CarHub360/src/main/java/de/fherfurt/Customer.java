@@ -77,8 +77,9 @@ public class Customer {
     public void DeleteCustomer(int CustomerID){
 
     }
-    public void GetCustomerDetails(int CustomerID){ // hier sollte auch die CustomerAdress - Details mit rein!
-
+    public String GetCustomerDetails(int CustomerID) // hier sollte auch die CustomerAdress-Details mit ausgegeben!
+    {
+        return null;
     }
 
 }
