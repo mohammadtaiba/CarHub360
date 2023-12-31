@@ -6,11 +6,12 @@ public class SaleVehicle extends Vehicle
     private float SalePrice;
     private boolean IsNew;
 
-    public SaleVehicle(int vehicleId, float salePrice, boolean isNew) {
-        super(); // // Ruft den Konstruktor der Basisklasse auf, ergänze!
-        VehicleId = vehicleId;
+    public SaleVehicle(int vehicleId, String name, String brand, int kilometerCount, int constructionYear, String type)
+    {
+        super(vehicleId, name, brand, kilometerCount, constructionYear, type);
+        /*VehicleId = vehicleId;
         SalePrice = salePrice;
-        IsNew = isNew;
+        IsNew = isNew;*/
     }
 
     public void GetSaleVehicleDetails (int VehicleId) // ergänze! <---
@@ -42,5 +43,8 @@ public class SaleVehicle extends Vehicle
         IsNew = aNew;
     }
 
-    public void getSaleVehicleDetails() {} // ergänze! <---
+    public String getSaleVehicleDetails()  // ergänze! <---
+    {
+        return null;
+    }
 }
