@@ -18,10 +18,6 @@ public class Vehicle {
         Type = type;
     }
 
-    public Vehicle() {
-
-    }
-
     public int getVehicleId() {
         return VehicleId;
     }

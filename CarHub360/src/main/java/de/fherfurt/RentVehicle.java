@@ -8,21 +8,21 @@ public class RentVehicle extends Vehicle
     private int RentVehicleId;
     private int RentVehicleVehicleId;
     private boolean IsAvailable;
-    private float DailyPrice;
+    private double DailyPrice;
     private String LicensePlate;
-    // private Date StartDate, EndDate; // --> Die brauchst du gar nicht, die habe ich bei ContractValidation verschoben!
     private float Deposit;
 
 
-    public RentVehicle(int rentVehicleId, int rentVehicleVehicleId, boolean isAvailable, float dailyPrice, String licensePlate, Date startDate, Date endDate, float deposit) {
-        super(); // Ruft den Konstruktor der Basisklasse auf, ergänze!  <---
-        RentVehicleId = rentVehicleId;
-        RentVehicleVehicleId = rentVehicleVehicleId;
-        IsAvailable = isAvailable;
-        DailyPrice = dailyPrice;
-        LicensePlate = licensePlate;
-
-        Deposit = deposit;
+    public RentVehicle(int vehicleId, String name, String brand, int kilometerCount, int constructionYear, String type,
+                       int rentVehicleId, int rentVehicleVehicleId, boolean isAvailable, double dailyPrice, String licensePlate, float deposit)
+    {
+        super(vehicleId, name, brand, kilometerCount, constructionYear, type);
+        this.RentVehicleId = rentVehicleId;
+        this.RentVehicleVehicleId = rentVehicleVehicleId;
+        this.IsAvailable = isAvailable;
+        this.DailyPrice = dailyPrice;
+        this.LicensePlate = licensePlate;
+        this.Deposit = deposit;
     }
 
     public void GetRentVehicleDetails (int VehicleId)
@@ -54,11 +54,11 @@ public class RentVehicle extends Vehicle
         IsAvailable = available;
     }
 
-    public float getDailyPrice() {
+    public double getDailyPrice() {
         return DailyPrice;
     }
 
-    public void setDailyPrice(float dailyPrice) {
+    public void setDailyPrice(double dailyPrice) {
         DailyPrice = dailyPrice;
     }
 

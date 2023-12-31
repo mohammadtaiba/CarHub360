@@ -15,7 +15,7 @@ public class Payment
     public boolean processPayment(int paymentId, Customer customer, PaymentMethod paymentMethod,
                                   PaymentStatus paymentStatus, BigDecimal paymentAmount) {
         if (payments.containsKey(paymentId) || paymentId <= 0 || customer == null || paymentMethod == null
-                || paymentStatus == null || paymentAmount == null || paymentAmount.compareTo(BigDecimal.ZERO) < 0)
+                || paymentStatus == null || paymentAmount == null || paymentAmount.compareTo(BigDecimal.ZERO) <= 0)
         {
             return false;
         }

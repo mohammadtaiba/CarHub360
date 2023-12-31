@@ -6,17 +6,12 @@ public class SaleVehicle extends Vehicle
     private float SalePrice;
     private boolean IsNew;
 
-    public SaleVehicle(int vehicleId, String name, String brand, int kilometerCount, int constructionYear, String type)
+    public SaleVehicle(int vehicleId, String name, String brand, int kilometerCount, int constructionYear, String type,
+                       float salePrice, boolean isNew)
     {
         super(vehicleId, name, brand, kilometerCount, constructionYear, type);
-        /*VehicleId = vehicleId;
-        SalePrice = salePrice;
-        IsNew = isNew;*/
-    }
-
-    public void GetSaleVehicleDetails (int VehicleId) // ergänze! <---
-    {
-
+        this.SalePrice = salePrice;
+        this.IsNew = isNew;
     }
 
     public int getVehicleId() {

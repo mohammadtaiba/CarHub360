@@ -15,12 +15,12 @@ public class Customer {
     private boolean IsFemale;
 
     public Customer(int CustomerId, String firstName, String lastName, String email, Date birthdate, boolean isFemale) {
-        CustomerId = CustomerId;
-        FirstName = firstName;
-        LastName = lastName;
-        Email = email;
-        Birthdate = birthdate;
-        IsFemale = isFemale;
+        this.CustomerId = CustomerId;
+        this.FirstName = firstName;
+        this.LastName = lastName;
+        this.Email = email;
+        this.Birthdate = birthdate;
+        this.IsFemale = isFemale;
     }
 
     public int getCustomerId() {
