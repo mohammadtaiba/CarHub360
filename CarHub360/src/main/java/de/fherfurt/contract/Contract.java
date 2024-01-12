@@ -15,6 +15,13 @@ public class Contract
     private Map<Integer, ContractDetails> contracts = new HashMap<>();
 
     /* class-Methods */
+    /**
+     * Creates a purchase contract and adds it to the contract collection.
+     * @param contractId Unique identifier for the contract.
+     * @param customer Customer associated with the purchase.
+     * @param saleVehicle Vehicle that is being purchased.
+     * @return true if the contract is successfully created and false if the contractId already exists or parameters are invalid.
+     */
     public boolean createPurchaseContract(int contractId, Customer customer, SaleVehicle saleVehicle)
     {
         if (contractId >= 0 && customer != null && saleVehicle != null && !contracts.containsKey(contractId))
@@ -28,6 +35,15 @@ public class Contract
         return false;
     }
 
+    /**
+     * Creates a rental contract and adds it to the contract collection.
+     * @param contractId Unique identifier for the contract.
+     * @param customer Customer associated with the rental.
+     * @param rentVehicle Vehicle that is being rented.
+     * @param rentalStartdate The start date of the rental period.
+     * @param rentalEnddate The end date of the rental period.
+     * @return true if the contract is successfully created and false if the contractId already exists or parameters are invalid.
+     */
     public boolean createRentalContract(int contractId, Customer customer, RentVehicle rentVehicle,
                                         LocalDate rentalStartdate, LocalDate rentalEnddate)
     {
@@ -43,6 +59,11 @@ public class Contract
         return false;
     }
 
+    /**
+     * Terminates an existing rental contract by setting its end date to the current date and making the vehicle available again.
+     * @param contractId Identifier of the rental contract to be terminated.
+     * @return true if the contract is successfully terminated, false if the contract is not found or is not a rental contract.
+     */
     public boolean terminateRentalContract(int contractId)
     {
         ContractDetails details = contracts.get(contractId);
@@ -56,6 +77,12 @@ public class Contract
         return false;
     }
 
+    /**
+     * Renews an existing rental contract with a new end date and ensures the vehicle remains unavailable.
+     * @param contractId Identifier of the rental contract to be renewed.
+     * @param newRentalEnddate New end date for the rental contract.
+     * @return true if the contract is successfully renewed, false if the contract is not found, is not a rental contract, or the new end date is invalid.
+     */
     public boolean renewRentalContract(int contractId, LocalDate newRentalEnddate)
     {
         ContractDetails details = contracts.get(contractId);
@@ -69,6 +96,11 @@ public class Contract
         return false;
     }
 
+    /**
+     * Calculates the total price of a rental contract based on the number of days rented and the daily price of the vehicle.
+     * @param contractId Identifier of the rental contract.
+     * @return the total price of the rental period, or -1 if the contract is not found or is not a rental contract.
+     */
     public double getTotalPrice(int contractId)
     {
         ContractDetails details = contracts.get(contractId);
@@ -80,6 +112,11 @@ public class Contract
         return -1;
     }
 
+    /**
+     * Retrieves the details of a rental contract in a formatted string.
+     * @param contractId Identifier of the rental contract.
+     * @return A string containing the rental contract details, or a message indicating no rental contract was found.
+     */
     public String getRentalContractDetails(int contractId)
     {
         ContractDetails details = contracts.get(contractId);
@@ -95,6 +132,11 @@ public class Contract
         return "No rental contract found with this ID.";
     }
 
+    /**
+     * Retrieves the details of a purchase contract in a formatted string.
+     * @param contractId Identifier of the purchase contract.
+     * @return A string containing the purchase contract details, or a message indicating no purchase contract was found.
+     */
     public String getPurchaseContractDetails(int contractId)
     {
         ContractDetails details = contracts.get(contractId);
@@ -109,6 +151,12 @@ public class Contract
     }
 
 
+    /**
+     * Validates the rental period ensuring the start date is not after the end date and not before the current date.
+     * @param startDate The start date of the rental period.
+     * @param endDate The end date of the rental period.
+     * @return true if the rental period is valid, false otherwise.
+     */
     public static boolean validateRentalPeriod(LocalDate startDate, LocalDate endDate)
     {
         return startDate != null           &&
@@ -140,6 +188,7 @@ public class Contract
             this.rentalEndDate = rentalEnddate;
         }
 
+        /* Setter & Getter Methods of inner class-attributes */
         public Customer getCustomer() {
             return customer;
         }
