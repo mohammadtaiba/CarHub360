@@ -1,4 +1,4 @@
-package de.fherfurt;
+package de.fherfurt.customerHistory;
 
 /**
  * @author rudolfminz

@@ -1,4 +1,5 @@
-package de.fherfurt;
+package de.fherfurt.customerHistory;
+
 import java.util.Date;
 
 
@@ -6,7 +7,7 @@ public class CustomerHistory {
     private int CustomerHistoryId;
     private int CustomerHistoryCustomerId;
     private int CustomerHistoryVehicleId;
-    private  CustomerHistoryReview CustomerHistoryReview ;
+    private de.fherfurt.CustomerHistoryReview CustomerHistoryReview ;
     private String Desriction;
     private Date ActionDate;
     private boolean IsforRentalCar;

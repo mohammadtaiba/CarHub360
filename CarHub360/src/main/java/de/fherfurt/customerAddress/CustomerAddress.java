@@ -1,5 +1,4 @@
-package de.fherfurt;
-import de.fherfurt.Customer;
+package de.fherfurt.customerAddress;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -57,7 +56,7 @@ public class CustomerAddress {
 
     }
 
-    private Map<Integer, CustomerAddress.CustomerAddressDetails> customerAddresses = new HashMap<>();
+    private Map<Integer, CustomerAddressDetails> customerAddresses = new HashMap<>();
 
     public boolean UpdateCustomerAddress(int CustomerId, int City, String PostalCode, String Street,String StreetNumber){
 

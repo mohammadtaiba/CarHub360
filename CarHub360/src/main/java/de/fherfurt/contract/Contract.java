@@ -1,6 +1,5 @@
 package de.fherfurt.contract;
 
-import de.fherfurt.Customer;
 import de.fherfurt.RentVehicle;
 import de.fherfurt.SaleVehicle;
 

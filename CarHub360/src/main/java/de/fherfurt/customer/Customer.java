@@ -1,5 +1,4 @@
-package de.fherfurt;
-import de.fherfurt.contract.Contract;
+package de.fherfurt.customer;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -88,13 +87,13 @@ public class Customer {
 
     }
 
-    private Map<Integer, Customer.CustomerDetails> customers = new HashMap<>();
+    private Map<Integer, CustomerDetails> customers = new HashMap<>();
 
     public boolean CreateCustomer(int CustomerId, String FirstName, String LastName, String Email, Date Birthdate, boolean IsFemale) {
 
         if (!customers.containsKey(CustomerId)) {
             if (CustomerId >= 0 && FirstName != null && LastName != null && Email != null && Birthdate != null) {
-                Customer.CustomerDetails newCustomer = new Customer.CustomerDetails(CustomerId, FirstName, LastName, Email, Birthdate, IsFemale);
+                CustomerDetails newCustomer = new CustomerDetails(CustomerId, FirstName, LastName, Email, Birthdate, IsFemale);
 
                 return true;
             } else {
