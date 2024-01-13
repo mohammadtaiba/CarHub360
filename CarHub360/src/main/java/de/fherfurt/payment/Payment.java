@@ -12,6 +12,15 @@ public class Payment
     private Map<Integer, PaymentDetails> payments = new HashMap<>();
 
     /* class-Methods */
+    /**
+     * Processes a payment and adds it to the payment collection if it does not already exist and the parameters are valid.
+     * @param paymentId Unique identifier for the payment.
+     * @param customer The customer making the payment.
+     * @param paymentMethod The method used for payment.
+     * @param paymentStatus The current status of the payment (e.g., processed, pending).
+     * @param paymentAmount The amount of the payment.
+     * @return true if the payment is successfully processed, false if the paymentId already exists, is less than or equal to 0, or any parameters are invalid.
+     */
     public boolean processPayment(int paymentId, Customer customer, PaymentMethod paymentMethod,
                                   PaymentStatus paymentStatus, BigDecimal paymentAmount) {
         if (payments.containsKey(paymentId) || paymentId <= 0 || customer == null || paymentMethod == null
@@ -25,6 +34,11 @@ public class Payment
         return true;
     }
 
+    /**
+     * Retrieves the details of a payment in a formatted string.
+     * @param paymentId The unique identifier of the payment.
+     * @return A string containing the payment details, or a message indicating the payment ID was not found.
+     */
     public String getPaymentDetails(int paymentId)
     {
         PaymentDetails details = payments.get(paymentId);
@@ -55,26 +69,23 @@ public class Payment
             this.paymentAmount = paymentAmount;
         }
 
+        /* Setter & Getter Methods of inner class-attributes */
         public Customer getCustomer()
         {
             return customer;
         }
-
         public PaymentMethod getPaymentMethod()
         {
             return paymentMethod;
         }
-
         public PaymentStatus getPaymentStatus()
         {
             return paymentStatus;
         }
-
         public BigDecimal getPaymentAmount()
         {
             return paymentAmount;
         }
     }
 
-    // Additional getters or methods if needed
 }
