@@ -1,7 +1,7 @@
-package de.fherfurt;
+package de.fherfurt.RentVehicle;
 
 
-import java.util.Date;
+import de.fherfurt.Vehicle.Vehicle;
 
 public class RentVehicle extends Vehicle
 {

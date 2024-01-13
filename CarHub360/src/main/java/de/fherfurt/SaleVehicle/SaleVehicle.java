@@ -1,4 +1,6 @@
-package de.fherfurt;
+package de.fherfurt.SaleVehicle;
+
+import de.fherfurt.Vehicle.Vehicle;
 
 public class SaleVehicle extends Vehicle
 {
@@ -14,17 +16,11 @@ public class SaleVehicle extends Vehicle
         this.IsNew = isNew;
     }
 
-    public int getVehicleId() {
-        return VehicleId;
-    }
+    public int getVehicleId() {return VehicleId; }
 
-    public void setVehicleId(int vehicleId) {
-        VehicleId = vehicleId;
-    }
+    public void setVehicleId(int vehicleId) {VehicleId = vehicleId; }
 
-    public float getSalePrice() {
-        return SalePrice;
-    }
+    public float getSalePrice() { return SalePrice; }
 
     public void setSalePrice(float salePrice) {
         SalePrice = salePrice;

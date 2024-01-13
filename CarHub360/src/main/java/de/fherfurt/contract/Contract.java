@@ -1,7 +1,7 @@
 package de.fherfurt.contract;
 
-import de.fherfurt.RentVehicle;
-import de.fherfurt.SaleVehicle;
+import de.fherfurt.RentVehicle.RentVehicle;
+import de.fherfurt.SaleVehicle.SaleVehicle;
 
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
