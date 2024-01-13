@@ -1,56 +1,84 @@
 package de.fherfurt;
+import de.fherfurt.Customer;
 
-/**
- * @author rudolfminz
- */
+import java.util.HashMap;
+import java.util.Map;
+
 public class CustomerAddress {
 
-    private int CustomerId;
-    private String City;
-    private String PostalCode;
-    private String Street;
-    private String StreetNumber;
+    private class CustomerAddressDetails {
 
-    public int getCustomerId() {
-        return CustomerId;
+        private int CustomerId;
+        private String City;
+        private String PostalCode;
+        private String Street;
+        private String StreetNumber;
+
+        public int getCustomerId() {
+            return CustomerId;
+        }
+
+        public void setCustomerId(int customerId) {
+            CustomerId = customerId;
+        }
+
+        public String getCity() {
+            return City;
+        }
+
+        public void setCity(String city) {
+            City = city;
+        }
+
+        public String getPostalCode() {
+            return PostalCode;
+        }
+
+        public void setPostalCode(String postalCode) {
+            PostalCode = postalCode;
+        }
+
+        public String getStreet() {
+            return Street;
+        }
+
+        public void setStreet(String street) {
+            Street = street;
+        }
+
+        public String getStreetNumber() {
+            return StreetNumber;
+        }
+
+        public void setStreetNumber(String streetNumber) {
+            StreetNumber = streetNumber;
+        }
+
+
     }
 
-    public void setCustomerId(int customerId) {
-        CustomerId = customerId;
-    }
+    private Map<Integer, CustomerAddress.CustomerAddressDetails> customerAddresses = new HashMap<>();
 
-    public String getCity() {
-        return City;
-    }
+    public boolean UpdateCustomerAddress(int CustomerId, int City, String PostalCode, String Street,String StreetNumber){
 
-    public void setCity(String city) {
-        City = city;
-    }
+        if (!customerAddresses.containsKey(CustomerId)) {
+        if (CustomerId >= 0 && City != null && PostalCode != null && Street != null && StreetNumber != null) {
+            // Update the customer address
+            this.CustomerId = CustomerId;
+            this.City = City;
+            this.PostalCode = PostalCode;
+            this.Street = Street;
+            this.StreetNumber = StreetNumber;
 
-    public String getPostalCode() {
-        return PostalCode;
-    }
+            System.out.println("Customer address updated successfully.");
+        } else {
+            System.out.println("Invalid customer address details. Update failed.");
 
-    public void setPostalCode(String postalCode) {
-        PostalCode = postalCode;
+        }
+        return false;
+        } else {
+            System.out.println("CustomerId is taken");
+            return false;
+        }
     }
-
-    public String getStreet() {
-        return Street;
-    }
-
-    public void setStreet(String street) {
-        Street = street;
-    }
-
-    public String getStreetNumber() {
-        return StreetNumber;
-    }
-
-    public void setStreetNumber(String streetNumber) {
-        StreetNumber = streetNumber;
-    }
-    public void UpdateCustomerAddress(int CustomerId, int City, String PostalCode, String Street,String StreetNumber){
-
-    }
-}
+}}

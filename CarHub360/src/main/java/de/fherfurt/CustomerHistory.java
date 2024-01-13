@@ -1,9 +1,7 @@
 package de.fherfurt;
 import java.util.Date;
 
-/**
- * @author rudolfminz
- */
+
 public class CustomerHistory {
     private int CustomerHistoryId;
     private int CustomerHistoryCustomerId;
