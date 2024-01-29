@@ -76,13 +76,9 @@ public class RentVehicle extends Vehicle
     }
 
     public String getRentVehicleDetails() {
-        return "Rent Vehicle Details: \n" +
-                "Vehicle ID: " + getVehicleId() + "\n" +
-                "Name: " + getName() + "\n" +
-                "Brand: " + getBrand() + "\n" +
-                "Kilometer Count: " + getKilometerCount() + "\n" +
-                "Construction Year: " + getConstructionYear() + "\n" +
-                "Type: " + getType() + "\n" +
+        return
+                getVehicleDetails(getRentVehicleId())+ "\n" +
+                "Rent Vehicle Details: \n" +
                 "Rent Vehicle ID: " + getRentVehicleId() + "\n" +
                 "Is Available: " + isAvailable() + "\n" +
                 "Daily Price: " + getDailyPrice() + "\n" +

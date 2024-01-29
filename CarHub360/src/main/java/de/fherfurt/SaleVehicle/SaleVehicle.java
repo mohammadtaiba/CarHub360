@@ -29,13 +29,9 @@ public class SaleVehicle extends Vehicle
     public void setNew(boolean aNew) {IsNew = aNew;}
 
     public String getSaleVehicleDetails() {
-        return "Sale Vehicle Details: \n" +
+        return getVehicleDetails(getVehicleId())+ "\n" +
+                "Sale Vehicle Details: \n" +
                 "Vehicle ID: " + getVehicleId() + "\n" +
-                "Name: " + getName() + "\n" +
-                "Brand: " + getBrand() + "\n" +
-                "Kilometer Count: " + getKilometerCount() + "\n" +
-                "Construction Year: " + getConstructionYear() + "\n" +
-                "Type: " + getType() + "\n" +
                 "Sale Price: " + getSalePrice() + "\n" +
                 "Is New: " + isNew();
 }

@@ -19,13 +19,14 @@ public class Vehicle {
         private String Type;
 
         public VehicleData(int vehicleId, String name, String brand, int kilometerCount, int constructionYear, String type) {
-            VehicleId = vehicleId;
-            Name = name;
-            Brand = brand;
-            KilometerCount = kilometerCount;
-            ConstructionYear = constructionYear;
-            Type = type;
+            this.VehicleId = vehicleId;
+            this.Name = name;
+            this.Brand = brand;
+            this.KilometerCount = kilometerCount;
+            this.ConstructionYear = constructionYear;
+            this.Type = type;
         }
+
 
         public int getVehicleId() {
             return VehicleId;
