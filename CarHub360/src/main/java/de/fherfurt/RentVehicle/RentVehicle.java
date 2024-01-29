@@ -3,6 +3,7 @@ package de.fherfurt.RentVehicle;
 
 import de.fherfurt.Vehicle.Vehicle;
 
+
 public class RentVehicle extends Vehicle
 {
     private int RentVehicleId;
@@ -25,10 +26,6 @@ public class RentVehicle extends Vehicle
         this.Deposit = deposit;
     }
 
-    public void GetRentVehicleDetails (int VehicleId)
-    {
-
-    }
 
     public int getRentVehicleId() {
         return RentVehicleId;
@@ -78,9 +75,19 @@ public class RentVehicle extends Vehicle
         Deposit = deposit;
     }
 
-    public String getRentVehicleDetails()
-    {
-        return null;
-    } // ergänze! <---
+    public String getRentVehicleDetails() {
+        return "Rent Vehicle Details: \n" +
+                "Vehicle ID: " + getVehicleId() + "\n" +
+                "Name: " + getName() + "\n" +
+                "Brand: " + getBrand() + "\n" +
+                "Kilometer Count: " + getKilometerCount() + "\n" +
+                "Construction Year: " + getConstructionYear() + "\n" +
+                "Type: " + getType() + "\n" +
+                "Rent Vehicle ID: " + getRentVehicleId() + "\n" +
+                "Is Available: " + isAvailable() + "\n" +
+                "Daily Price: " + getDailyPrice() + "\n" +
+                "License Plate: " + getLicensePlate() + "\n" +
+                "Deposit: " + getDeposit();
+    }
 
 }

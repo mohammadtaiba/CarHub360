@@ -7,6 +7,9 @@ import java.util.Map;
 public class Vehicle {
 
 
+    public Vehicle(int vehicleId, String name, String brand, int kilometerCount, int constructionYear, String type) {
+    }
+
     private static class VehicleData {
         private int VehicleId;
         private String Name;
