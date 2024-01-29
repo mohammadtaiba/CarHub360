@@ -1,144 +1,134 @@
 package de.fherfurt.customer;
 
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
-
-
+import de.fherfurt.customerAddress.CustomerAddress;
 public class Customer {
 
     private class CustomerDetails {
+        private int customerId;
+        private String firstName;
+        private String lastName;
+        private String email;
+        private Date birthdate;
+        private boolean isFemale;
+        private boolean isDeleted;
+        private CustomerAddress customerAddress; // Komposition
 
-
-        private int CustomerId;
-        private String FirstName;
-        private String LastName;
-        private String Email;
-        private Date Birthdate;
-        private boolean IsFemale;
-        private boolean IsDeleted;
-
-        public CustomerDetails(int CustomerId, String firstName, String lastName, String email, Date birthdate, boolean isFemale) {
-            this.CustomerId = CustomerId;
-            this.FirstName = firstName;
-            this.LastName = lastName;
-            this.Email = email;
-            this.Birthdate = birthdate;
-            this.IsFemale = isFemale;
-            this.IsDeleted = false;
+        public CustomerDetails(int customerId, String firstName, String lastName, String email, Date birthdate, boolean isFemale) {
+            this.customerId = customerId;
+            this.firstName = firstName;
+            this.lastName = lastName;
+            this.email = email;
+            this.birthdate = birthdate;
+            this.isFemale = isFemale;
+            this.isDeleted = false;
+            this.customerAddress = new CustomerAddress(); // Neue Adresse erstellen
         }
 
         public int getCustomerId() {
-            return CustomerId;
+            return customerId;
         }
 
-        public void setCustomerId(int CustomerId) {
-            CustomerId = CustomerId;
+        public void setCustomerId(int customerId) {
+            this.customerId = customerId;
         }
 
         public String getFirstName() {
-            return FirstName;
+            return firstName;
         }
 
         public void setFirstName(String firstName) {
-            FirstName = firstName;
+            this.firstName = firstName;
         }
 
         public String getLastName() {
-            return LastName;
+            return lastName;
         }
 
         public void setLastName(String lastName) {
-            LastName = lastName;
+            this.lastName = lastName;
         }
 
         public String getEmail() {
-            return Email;
+            return email;
         }
 
         public void setEmail(String email) {
-            Email = email;
+            this.email = email;
         }
 
         public Date getBirthdate() {
-            return Birthdate;
+            return birthdate;
         }
 
         public void setBirthdate(Date birthdate) {
-            Birthdate = birthdate;
+            this.birthdate = birthdate;
         }
 
         public boolean isFemale() {
-            return IsFemale;
+            return isFemale;
         }
 
         public void setFemale(boolean female) {
-            IsFemale = female;
+            this.isFemale = female;
         }
 
         public boolean isDeleted() {
-            return IsDeleted;
+            return isDeleted;
         }
 
         public void setDelete(boolean deleted) {
-            IsDeleted = deleted;
+            this.isDeleted = deleted;
         }
 
+        public CustomerAddress getCustomerAddress() {
+            return customerAddress;
+        }
+
+        // Weitere Methoden für die Verwaltung der Adresse können hinzugefügt werden.
     }
 
     private Map<Integer, CustomerDetails> customers = new HashMap<>();
 
-    public boolean CreateCustomer(int CustomerId, String FirstName, String LastName, String Email, Date Birthdate, boolean IsFemale) {
-
-        if (!customers.containsKey(CustomerId)) {
-            if (CustomerId >= 0 && FirstName != null && LastName != null && Email != null && Birthdate != null) {
-                CustomerDetails newCustomer = new CustomerDetails(CustomerId, FirstName, LastName, Email, Birthdate, IsFemale);
-
-                return true;
-            } else {
-                System.out.println("Invalid customer details. Customer not created.");
-                return false;
-            }
-
-        } else {
-            System.out.println("CustomerId is taken");
-            return false;
-        }
-
-    }
-
-
-    public boolean DeleteCustomer(int CustomerId) {
-        if (customers.containsKey(CustomerId)) {
-            CustomerDetails customer = customers.get(CustomerId);
-            customer.setDelete(true);
-            System.out.println("Customer with ID " + CustomerId + " deleted.");
+    public boolean createCustomer(int customerId, String firstName, String lastName, String email, Date birthdate, boolean isFemale) {
+        if (!customers.containsKey(customerId)) {
+            CustomerDetails newCustomer = new CustomerDetails(customerId, firstName, lastName, email, birthdate, isFemale);
+            customers.put(customerId, newCustomer);
             return true;
         } else {
-            System.out.println("Customer with ID " + CustomerId + " not found.");
-            return false;
+            return false; // Kunden-ID bereits vorhanden
         }
     }
-    public String getCustomerDetails(int CustomerId) {
-        if (customers.containsKey(CustomerId)) {
-            CustomerDetails customer = customers.get(CustomerId);
-            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
-            String details = "Customer details for ID " + CustomerId + ":\n";
-            details += "Name: " + customer.getFirstName() + " " + customer.getLastName() + "\n";
-            details += "Email: " + customer.getEmail() + "\n";
-            details += "Birthdate: " + dateFormat.format(customer.getBirthdate()) + "\n";
-            details += "IsFemale: " + customer.isFemale() + "\n";
-            details += "IsDeleted: " + customer.isDeleted() + "\n";
-
-            return details;
+    public boolean deleteCustomer(int customerId) {
+        if (customers.containsKey(customerId)) {
+            customers.remove(customerId);
+            return true;
         } else {
-            return "Customer with ID " + CustomerId + " not found.";
+            return false; // Kunden-ID nicht gefunden
+        }
+    }
+
+    public String getCustomerDetails(int customerId) {
+        if (customers.containsKey(customerId)) {
+            CustomerDetails customer = customers.get(customerId);
+
+            String customerDetails = "Customer Details: \n" +
+                    "Customer ID: " + customer.getCustomerId() + "\n" +
+                    "First Name: " + customer.getFirstName() + "\n" +
+                    "Last Name: " + customer.getLastName() + "\n" +
+                    "Email: " + customer.getEmail() + "\n" +
+                    "Birthdate: " + customer.getBirthdate() + "\n" +
+                    "Is Female: " + customer.isFemale();
+
+            // Kundenadresse wird automatisch hinzugefügt, wenn vorhanden
+
+            return customerDetails;
+        } else {
+            return "Customer with ID " + customerId + " was not found.";
         }
     }
 }
-
-
-
 

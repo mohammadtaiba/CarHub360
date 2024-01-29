@@ -3,7 +3,7 @@ package de.fherfurt.payment;
 import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Map;
-
+import de.fherfurt.customer.Customer;
 public class Payment
 {
     /* Attributes */

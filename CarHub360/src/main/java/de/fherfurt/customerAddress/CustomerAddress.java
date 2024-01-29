@@ -53,31 +53,39 @@ public class CustomerAddress {
             StreetNumber = streetNumber;
         }
 
-
     }
 
     private Map<Integer, CustomerAddressDetails> customerAddresses = new HashMap<>();
 
-    public boolean UpdateCustomerAddress(int CustomerId, int City, String PostalCode, String Street,String StreetNumber){
+    public boolean updateCustomerAddress(int customerId, String city, String postalCode, String street, String streetNumber) {
+        if (customerId >= 0 && city != null && postalCode != null && street != null && streetNumber != null) {
+            CustomerAddressDetails addressDetails = new CustomerAddressDetails();
+            addressDetails.setCustomerId(customerId);
+            addressDetails.setCity(city);
+            addressDetails.setPostalCode(postalCode);
+            addressDetails.setStreet(street);
+            addressDetails.setStreetNumber(streetNumber);
 
-        if (!customerAddresses.containsKey(CustomerId)) {
-        if (CustomerId >= 0 && City != null && PostalCode != null && Street != null && StreetNumber != null) {
-            // Update the customer address
-            this.CustomerId = CustomerId;
-            this.City = City;
-            this.PostalCode = PostalCode;
-            this.Street = Street;
-            this.StreetNumber = StreetNumber;
+            customerAddresses.put(customerId, addressDetails);
 
-            System.out.println("Customer address updated successfully.");
+            return true;
         } else {
-            System.out.println("Invalid customer address details. Update failed.");
-
-        }
-        return false;
-        } else {
-            System.out.println("CustomerId is taken");
             return false;
         }
     }
-}}
+
+    public String getCustomerAddressDetails(int customerId) {
+        if (customerAddresses.containsKey(customerId)) {
+            CustomerAddressDetails addressDetails = customerAddresses.get(customerId);
+
+            // Construct and return address details
+            return "Customer Address details for ID " + customerId + ":\n"
+                    + "City: " + addressDetails.getCity() + "\n"
+                    + "Postal Code: " + addressDetails.getPostalCode() + "\n"
+                    + "Street: " + addressDetails.getStreet() + "\n"
+                    + "Street Number: " + addressDetails.getStreetNumber();
+        } else {
+            return "Customer with ID " + customerId + " does not have an address.";
+        }
+    }
+}

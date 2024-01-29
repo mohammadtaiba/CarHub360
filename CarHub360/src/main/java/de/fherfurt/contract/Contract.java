@@ -2,7 +2,7 @@ package de.fherfurt.contract;
 
 import de.fherfurt.RentVehicle.RentVehicle;
 import de.fherfurt.SaleVehicle.SaleVehicle;
-
+import de.fherfurt.customer.Customer;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.HashMap;

@@ -7,8 +7,8 @@ public class CustomerHistory {
     private int CustomerHistoryId;
     private int CustomerHistoryCustomerId;
     private int CustomerHistoryVehicleId;
-    private de.fherfurt.CustomerHistoryReview CustomerHistoryReview ;
-    private String Desriction;
+    private CustomerHistoryReview CustomerHistoryReview;
+    private String Description;
     private Date ActionDate;
     private boolean IsforRentalCar;
 
@@ -36,20 +36,20 @@ public class CustomerHistory {
         CustomerHistoryVehicleId = customerHistoryVehicleId;
     }
 
-    public de.fherfurt.CustomerHistoryReview getCustomerHistoryReview() {
+    public de.fherfurt.customerHistory.CustomerHistoryReview getCustomerHistoryReview() {
         return CustomerHistoryReview;
     }
 
-    public void setCustomerHistoryReview(de.fherfurt.CustomerHistoryReview customerHistoryReview) {
+    public void setCustomerHistoryReview(de.fherfurt.customerHistory.CustomerHistoryReview customerHistoryReview) {
         CustomerHistoryReview = customerHistoryReview;
     }
 
-    public String getDesriction() {
-        return Desriction;
+    public String getDescription() {
+        return Description;
     }
 
-    public void setDesriction(String desriction) {
-        Desriction = desriction;
+    public void setDescription(String description) {
+        Description = description;
     }
 
     public Date getActionDate() {
@@ -66,5 +66,35 @@ public class CustomerHistory {
 
     public void setIsforRentalCar(boolean isforRentalCar) {
         IsforRentalCar = isforRentalCar;
+    }
+
+    public boolean CreateCustomerHistory(int customerHistoryId, int customerHistoryCustomerId,
+                                         CustomerHistoryReview customerHistoryReview, String description,
+                                         Date actionDate, boolean isforRentalCar) {
+        if (customerHistoryId >= 0 && customerHistoryCustomerId >= 0 && customerHistoryReview != null
+                && description != null && actionDate != null) {
+            this.CustomerHistoryId = customerHistoryId;
+            this.CustomerHistoryCustomerId = customerHistoryCustomerId;
+            this.CustomerHistoryReview = customerHistoryReview;
+            this.Description = description;
+            this.ActionDate = actionDate;
+            this.IsforRentalCar = isforRentalCar;
+            // Additional logic or storage (if needed) can be added here
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public CustomerHistory GetCustomerHistory(int customerHistoryId) {
+        if (this.CustomerHistoryId == customerHistoryId) {
+            return this;
+        } else {
+            return null; // Not found
+        }
+    }
+
+    public CustomerHistoryReview GetCustomerFinalReview() {
+        return this.CustomerHistoryReview;
     }
 }
