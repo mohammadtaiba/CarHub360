@@ -17,7 +17,7 @@ public class PaymentTest
     private Customer customer;
     private PaymentMethod paymentMethod_1, paymentMethod_2, paymentMethod_3;
     private PaymentStatus paymentStatus_1, paymentStatus_2, paymentStatus_3;
-    SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+    private SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 
     @Before
     public void setUp() throws Exception

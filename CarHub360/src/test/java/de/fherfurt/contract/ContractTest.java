@@ -25,7 +25,9 @@ public class ContractTest
     public void setUp() throws Exception {
         contract = new Contract();
 
-        mockCustomer = new Customer(1, "Mohammad", "Taiba", "mohammadtaiba55@gmail.com",
+        mockCustomer = new Customer();
+
+        mockCustomer.createCustomer(1, "Mohammad", "Taiba", "mohammadtaiba55@gmail.com",
                 sdf.parse("01/01/1999"), false);
 
         mockRentVehicle = new RentVehicle(1, "BMW", "M5", 50000, 2023,
@@ -40,58 +42,58 @@ public class ContractTest
     @Test
     public void createPurchaseContract_Success()
     {
-        assertTrue(contract.createPurchaseContract(1, mockCustomer, mockSaleVehicle));
+        assertTrue(contract.createPurchaseContract(1, mockCustomer,1, mockSaleVehicle));
     }
 
     @Test
     public void createRentalContract_Success()
     {
-        assertTrue(contract.createRentalContract(2, mockCustomer, mockRentVehicle, mockStartDate, mockEndDate));
+        assertTrue(contract.createRentalContract(2, mockCustomer, 1, mockRentVehicle, mockStartDate, mockEndDate));
     }
 
     @Test
     public void createRentalContract_Failure()
     {
-        assertFalse(contract.createRentalContract(2, mockCustomer, mockRentVehicle, mockEndDate, mockStartDate)); // End date before start date
-        assertFalse(contract.createRentalContract(-1, mockCustomer, mockRentVehicle, mockEndDate, mockStartDate));
-        assertFalse(contract.createRentalContract(2, null, mockRentVehicle, mockEndDate, mockStartDate));
-        assertFalse(contract.createRentalContract(2, mockCustomer, null, mockEndDate, mockStartDate));
-        assertFalse(contract.createRentalContract(2, mockCustomer, mockRentVehicle, null, mockStartDate));
-        assertFalse(contract.createRentalContract(2, mockCustomer, mockRentVehicle, mockEndDate, null));
+        assertFalse(contract.createRentalContract(2, mockCustomer,2,  mockRentVehicle, mockEndDate, mockStartDate)); // End date before start date
+        assertFalse(contract.createRentalContract(-1, mockCustomer,2, mockRentVehicle, mockEndDate, mockStartDate));
+        assertFalse(contract.createRentalContract(2, mockCustomer,0, mockRentVehicle, mockEndDate, mockStartDate));
+        assertFalse(contract.createRentalContract(2, mockCustomer,2, null, mockEndDate, mockStartDate));
+        assertFalse(contract.createRentalContract(2, mockCustomer,2, mockRentVehicle, null, mockStartDate));
+        assertFalse(contract.createRentalContract(2, mockCustomer,2, mockRentVehicle, mockEndDate, null));
     }
 
     @Test
     public void terminateRentalContract_Success()
     {
-        contract.createRentalContract(3, mockCustomer, mockRentVehicle, mockStartDate, mockEndDate);
+        contract.createRentalContract(3, mockCustomer, 3, mockRentVehicle, mockStartDate, mockEndDate);
         assertTrue(contract.terminateRentalContract(3));
     }
 
     @Test
     public void terminateRentalContract_Failure()
     {
-        contract.createRentalContract(3, mockCustomer, mockRentVehicle, mockStartDate, mockEndDate);
+        contract.createRentalContract(3, mockCustomer,3,  mockRentVehicle, mockStartDate, mockEndDate);
         assertFalse(contract.terminateRentalContract(2));
     }
 
     @Test
     public void renewRentalContract_Success()
     {
-        contract.createRentalContract(4, mockCustomer, mockRentVehicle, mockStartDate, mockEndDate);
+        contract.createRentalContract(4, mockCustomer,4, mockRentVehicle, mockStartDate, mockEndDate);
         assertTrue(contract.renewRentalContract(4, mockEndDate.plusDays(7)));
     }
 
     @Test
     public void renewRentalContract_Failure()
     {
-        contract.createRentalContract(4, mockCustomer, mockRentVehicle, mockStartDate, mockEndDate);
+        contract.createRentalContract(4, mockCustomer,4, mockRentVehicle, mockStartDate, mockEndDate);
         assertFalse(contract.renewRentalContract(4, mockEndDate.minusDays(8)));
     }
 
     @Test
     public void getTotalPrice_Valid()
     {
-        contract.createRentalContract(5, mockCustomer, mockRentVehicle, mockStartDate, mockEndDate);
+        contract.createRentalContract(5, mockCustomer,5, mockRentVehicle, mockStartDate, mockEndDate);
         double totalPrice = contract.getTotalPrice(5);
         assertEquals(700, totalPrice, 0.01);
     }
@@ -99,7 +101,7 @@ public class ContractTest
     @Test
     public void getRentalContractDetails_Valid()
     {
-        contract.createRentalContract(6, mockCustomer, mockRentVehicle, mockStartDate, mockEndDate);
+        contract.createRentalContract(6, mockCustomer,6, mockRentVehicle, mockStartDate, mockEndDate);
         String details = contract.getRentalContractDetails(6);
         assertNotNull(details);
         assertTrue(details.contains("Contract ID: 6"));
@@ -108,7 +110,7 @@ public class ContractTest
     @Test
     public void getPurchaseContractDetails_Valid()
     {
-        contract.createPurchaseContract(7, mockCustomer, mockSaleVehicle);
+        contract.createPurchaseContract(7, mockCustomer,7, mockSaleVehicle);
         String details = contract.getPurchaseContractDetails(7);
         assertNotNull(details);
         assertTrue(details.contains("Contract ID: 7"));

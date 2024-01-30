@@ -3,6 +3,7 @@ package de.fherfurt.contract;
 import de.fherfurt.RentVehicle.RentVehicle;
 import de.fherfurt.SaleVehicle.SaleVehicle;
 import de.fherfurt.customer.Customer;
+
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.HashMap;
@@ -17,40 +18,35 @@ public class Contract
     /**
      * Creates a purchase contract and adds it to the contract collection.
      * @param contractId Unique identifier for the contract.
-     * @param customer Customer associated with the purchase.
+     * @param customerId ID of the customer associated with the purchase.
      * @param saleVehicle Vehicle that is being purchased.
      * @return true if the contract is successfully created and false if the contractId already exists or parameters are invalid.
      */
-    public boolean createPurchaseContract(int contractId, Customer customer, SaleVehicle saleVehicle)
-    {
-        if (contractId >= 0 && customer != null && saleVehicle != null && !contracts.containsKey(contractId))
-        {
-            ContractDetails details = new ContractDetails(customer, saleVehicle, null, false,
-                    LocalDate.now(), null, null);
-
+    public boolean createPurchaseContract(int contractId, Customer customer, int customerId,  SaleVehicle saleVehicle) {
+        if (contractId >= 0 && customerId >= 0 && saleVehicle != null && !contracts.containsKey(contractId)) {
+            ContractDetails details = new ContractDetails(customer, customerId, saleVehicle, null, false, LocalDate.now(), null, null);
             contracts.put(contractId, details);
             return true;
         }
         return false;
     }
-
     /**
      * Creates a rental contract and adds it to the contract collection.
      * @param contractId Unique identifier for the contract.
-     * @param customer Customer associated with the rental.
+     * @param customerId ID of the customer associated with the rental.
      * @param rentVehicle Vehicle that is being rented.
      * @param rentalStartdate The start date of the rental period.
      * @param rentalEnddate The end date of the rental period.
      * @return true if the contract is successfully created and false if the contractId already exists or parameters are invalid.
      */
-    public boolean createRentalContract(int contractId, Customer customer, RentVehicle rentVehicle,
+    public boolean createRentalContract(int contractId, Customer customer, int customerId,  RentVehicle rentVehicle,
                                         LocalDate rentalStartdate, LocalDate rentalEnddate)
     {
-        if (contractId >= 0 && customer != null && rentVehicle != null
+        if (contractId >= 0 && customerId >= 0 && rentVehicle != null
                 && validateRentalPeriod(rentalStartdate, rentalEnddate)
                 && !contracts.containsKey(contractId))
         {
-            ContractDetails details = new ContractDetails(customer, null, rentVehicle, true,
+            ContractDetails details = new ContractDetails(customer, customerId, null, rentVehicle, true,
                     LocalDate.now(), rentalStartdate, rentalEnddate);
             contracts.put(contractId, details);
             return true;
@@ -80,7 +76,8 @@ public class Contract
      * Renews an existing rental contract with a new end date and ensures the vehicle remains unavailable.
      * @param contractId Identifier of the rental contract to be renewed.
      * @param newRentalEnddate New end date for the rental contract.
-     * @return true if the contract is successfully renewed, false if the contract is not found, is not a rental contract, or the new end date is invalid.
+     * @return true if the contract is successfully renewed, false if the contract is not found, is not a rental contract,
+     * or the new end date is invalid.
      */
     public boolean renewRentalContract(int contractId, LocalDate newRentalEnddate)
     {
@@ -123,7 +120,7 @@ public class Contract
         {
             return "Rental Contract Details: \n" +
                     "Contract ID: " + contractId + "\n" +
-                    "Customer: " + details.getCustomer().getFirstName() + " " + details.getCustomer().getLastName() + "\n" +
+                    "Customer: " + details.getCustomer().getCustomerDetails(details.getCustomerId()) + "\n" +
                     "Rent Vehicle: " + details.getRentVehicle().getRentVehicleDetails() + "\n" +
                     "Rental Start Date: " + details.getRentalStartDate() + "\n" +
                     "Rental End Date: " + details.getRentalEndDate();
@@ -143,7 +140,7 @@ public class Contract
         {
             return "Purchase Contract Details: \n" +
                     "Contract ID: " + contractId + "\n" +
-                    "Customer: " + details.getCustomer().getFirstName() + " " + details.getCustomer().getLastName() + "\n" +
+                    "Customer: " + details.getCustomer().getCustomerDetails(details.getCustomerId()) + "\n" +
                     "Sale Vehicle: " + details.getSaleVehicle().getSaleVehicleDetails();
         }
         return "No purchase contract found with this ID.";
@@ -168,6 +165,7 @@ public class Contract
     private static class ContractDetails
     {
         private Customer customer;
+        private int customerId;
         private SaleVehicle saleVehicle;
         private RentVehicle rentVehicle;
         private boolean isRentalContract;
@@ -175,10 +173,11 @@ public class Contract
         private LocalDate rentalStartDate;
         private LocalDate rentalEndDate;
 
-        public ContractDetails(Customer customer, SaleVehicle saleVehicle, RentVehicle rentVehicle, boolean isRentalContract,
+        public ContractDetails(Customer customer, int customerId, SaleVehicle saleVehicle, RentVehicle rentVehicle, boolean isRentalContract,
                                LocalDate contractDate, LocalDate rentalStartdate, LocalDate rentalEnddate)
         {
             this.customer = customer;
+            this.customerId = customerId;
             this.saleVehicle = saleVehicle;
             this.rentVehicle = rentVehicle;
             this.isRentalContract = isRentalContract;
@@ -188,12 +187,14 @@ public class Contract
         }
 
         /* Setter & Getter Methods of inner class-attributes */
-        public Customer getCustomer() {
+
+
+        public Customer getCustomer()
+        {
             return customer;
         }
-
-        public void setCustomer(Customer customer) {
-            this.customer = customer;
+        public int getCustomerId() {
+            return customerId;
         }
 
         public SaleVehicle getSaleVehicle() {

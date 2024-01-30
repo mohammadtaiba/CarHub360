@@ -6,7 +6,7 @@ import java.util.Map;
 import de.fherfurt.customerAddress.CustomerAddress;
 public class Customer {
 
-    private class CustomerDetails {
+    public class CustomerDetails {
         private int customerId;
         private String firstName;
         private String lastName;
@@ -92,19 +92,6 @@ public class Customer {
 
     private Map<Integer, CustomerDetails> customers = new HashMap<>();
 
-    public String getCustomerFirstName(int customerId) {
-        if (customers.containsKey(customerId)) {
-            return customers.get(customerId).getFirstName();
-        }
-        return null;
-    }
-
-    public String getCustomerLastName(int customerId) {
-        if (customers.containsKey(customerId)) {
-            return customers.get(customerId).getLastName();
-        }
-        return null;
-    }
 
     public boolean createCustomer(int customerId, String firstName, String lastName, String email, Date birthdate, boolean isFemale) {
         if (!customers.containsKey(customerId)) {

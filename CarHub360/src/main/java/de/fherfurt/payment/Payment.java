@@ -17,7 +17,8 @@ public class Payment
      * @param paymentMethod The method used for payment.
      * @param paymentStatus The current status of the payment (e.g., processed, pending).
      * @param paymentAmount The amount of the payment.
-     * @return true if the payment is successfully processed, false if the paymentId already exists, is less than or equal to 0, or any parameters are invalid.
+     * @return true if the payment is successfully processed, false if the paymentId already exists,
+     * is less than or equal to 0, or any parameters are invalid.
      */
     public boolean processPayment(int paymentId, Customer customer, int customerId, PaymentMethod paymentMethod,
                                   PaymentStatus paymentStatus, BigDecimal paymentAmount) {
@@ -48,8 +49,7 @@ public class Payment
         }
 
         return "Payment ID: " + paymentId + "\n" +
-                "Customer's First Name: " + details.getCustomer().getCustomerFirstName(details.getCustomerId()) + "\n" +
-                "Customer's Last Name: " + details.getCustomer().getCustomerLastName(details.getCustomerId()) + "\n" +
+                "Customer: " + details.getCustomer().getCustomerDetails(details.getCustomerId()) + "\n" +
                 "Payment Method: " + details.getPaymentMethod() + "\n" +
                 "Payment Status: " + details.getPaymentStatus() + "\n" +
                 "Payment Amount: " + details.getPaymentAmount();
@@ -63,7 +63,8 @@ public class Payment
         private PaymentStatus paymentStatus;
         private BigDecimal paymentAmount;
 
-        public PaymentDetails(Customer customer, int customerId, PaymentMethod paymentMethod, PaymentStatus paymentStatus, BigDecimal paymentAmount)
+        public PaymentDetails(Customer customer, int customerId, PaymentMethod paymentMethod,
+                              PaymentStatus paymentStatus, BigDecimal paymentAmount)
         {
             this.customer = customer;
             this.customerId = customerId;
