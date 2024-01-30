@@ -2,6 +2,7 @@ package de.fherfurt.contract;
 
 import de.fherfurt.RentVehicle.RentVehicle;
 import de.fherfurt.SaleVehicle.SaleVehicle;
+import de.fherfurt.customer.Customer;
 import org.junit.Before;
 import org.junit.Test;
 

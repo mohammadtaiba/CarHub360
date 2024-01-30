@@ -92,6 +92,20 @@ public class Customer {
 
     private Map<Integer, CustomerDetails> customers = new HashMap<>();
 
+    public String getCustomerFirstName(int customerId) {
+        if (customers.containsKey(customerId)) {
+            return customers.get(customerId).getFirstName();
+        }
+        return null;
+    }
+
+    public String getCustomerLastName(int customerId) {
+        if (customers.containsKey(customerId)) {
+            return customers.get(customerId).getLastName();
+        }
+        return null;
+    }
+
     public boolean createCustomer(int customerId, String firstName, String lastName, String email, Date birthdate, boolean isFemale) {
         if (!customers.containsKey(customerId)) {
             CustomerDetails newCustomer = new CustomerDetails(customerId, firstName, lastName, email, birthdate, isFemale);

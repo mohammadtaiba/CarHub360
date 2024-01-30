@@ -19,16 +19,19 @@ public class Payment
      * @param paymentAmount The amount of the payment.
      * @return true if the payment is successfully processed, false if the paymentId already exists, is less than or equal to 0, or any parameters are invalid.
      */
-    public boolean processPayment(int paymentId, Customer customer, PaymentMethod paymentMethod,
+    public boolean processPayment(int paymentId, Customer customer, int customerId, PaymentMethod paymentMethod,
                                   PaymentStatus paymentStatus, BigDecimal paymentAmount) {
+
+
         if (payments.containsKey(paymentId) || paymentId <= 0 || customer == null || paymentMethod == null
                 || paymentStatus == null || paymentAmount == null || paymentAmount.compareTo(BigDecimal.ZERO) <= 0)
         {
             return false;
         }
 
-        PaymentDetails details = new PaymentDetails(customer, paymentMethod, paymentStatus, paymentAmount);
+        PaymentDetails details = new PaymentDetails(customer, customerId, paymentMethod, paymentStatus, paymentAmount);
         payments.put(paymentId, details);
+
         return true;
     }
 
@@ -45,8 +48,8 @@ public class Payment
         }
 
         return "Payment ID: " + paymentId + "\n" +
-                "Customer's First Name: " + details.getCustomer().getFirstName() + "\n" +
-                "Customer's Last Name: " + details.getCustomer().getLastName() + "\n" +
+                "Customer's First Name: " + details.getCustomer().getCustomerFirstName(details.getCustomerId()) + "\n" +
+                "Customer's Last Name: " + details.getCustomer().getCustomerLastName(details.getCustomerId()) + "\n" +
                 "Payment Method: " + details.getPaymentMethod() + "\n" +
                 "Payment Status: " + details.getPaymentStatus() + "\n" +
                 "Payment Amount: " + details.getPaymentAmount();
@@ -55,13 +58,15 @@ public class Payment
     /* Inner class to hold payment details */
     private static class PaymentDetails {
         private Customer customer;
+        private int customerId;
         private PaymentMethod paymentMethod;
         private PaymentStatus paymentStatus;
         private BigDecimal paymentAmount;
 
-        public PaymentDetails(Customer customer, PaymentMethod paymentMethod, PaymentStatus paymentStatus, BigDecimal paymentAmount)
+        public PaymentDetails(Customer customer, int customerId, PaymentMethod paymentMethod, PaymentStatus paymentStatus, BigDecimal paymentAmount)
         {
             this.customer = customer;
+            this.customerId = customerId;
             this.paymentMethod = paymentMethod;
             this.paymentStatus = paymentStatus;
             this.paymentAmount = paymentAmount;
@@ -71,6 +76,9 @@ public class Payment
         public Customer getCustomer()
         {
             return customer;
+        }
+        public int getCustomerId() {
+            return customerId;
         }
         public PaymentMethod getPaymentMethod()
         {
