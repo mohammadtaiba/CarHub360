@@ -1,7 +1,7 @@
 package de.fherfurt.customerHistory;
+import de.fherfurt.customer.Customer;
 
 import java.util.Date;
-
 
 public class CustomerHistory {
     private int CustomerHistoryId;
@@ -68,17 +68,44 @@ public class CustomerHistory {
         IsforRentalCar = isforRentalCar;
     }
 
+    // Ergänzung für Aggregation mit Customer
+    private Customer.CustomerDetails relatedCustomerDetails;
+
+    public CustomerHistory(int customerHistoryId, int customerHistoryCustomerId, int customerHistoryVehicleId,
+                           CustomerHistoryReview customerHistoryReview, String description, Date actionDate,
+                           boolean isforRentalCar, Customer.CustomerDetails relatedCustomerDetails) {
+        this.CustomerHistoryId = customerHistoryId;
+        this.CustomerHistoryCustomerId = customerHistoryCustomerId;
+        this.CustomerHistoryVehicleId = customerHistoryVehicleId;
+        this.CustomerHistoryReview = customerHistoryReview;
+        this.Description = description;
+        this.ActionDate = actionDate;
+        this.IsforRentalCar = isforRentalCar;
+        this.relatedCustomerDetails = relatedCustomerDetails;
+    }
+
+    // Methode zur Abfrage der verbundenen Kundeninformationen
+    public Customer.CustomerDetails getRelatedCustomerDetails() {
+        return this.relatedCustomerDetails;
+    }
+
+    // Weitere Methoden können hier hinzugefügt werden, um die CustomerHistory zu verwalten.
+
+    // Ergänzung für die Vervollständigung der CreateCustomerHistory-Methode
     public boolean CreateCustomerHistory(int customerHistoryId, int customerHistoryCustomerId,
-                                         CustomerHistoryReview customerHistoryReview, String description,
-                                         Date actionDate, boolean isforRentalCar) {
-        if (customerHistoryId >= 0 && customerHistoryCustomerId >= 0 && customerHistoryReview != null
-                && description != null && actionDate != null) {
+                                         int customerHistoryVehicleId, CustomerHistoryReview customerHistoryReview,
+                                         String description, Date actionDate, boolean isforRentalCar,
+                                         Customer.CustomerDetails relatedCustomerDetails) {
+        if (customerHistoryId >= 0 && customerHistoryCustomerId >= 0 && customerHistoryVehicleId >= 0
+                && customerHistoryReview != null && description != null && actionDate != null) {
             this.CustomerHistoryId = customerHistoryId;
             this.CustomerHistoryCustomerId = customerHistoryCustomerId;
+            this.CustomerHistoryVehicleId = customerHistoryVehicleId;
             this.CustomerHistoryReview = customerHistoryReview;
             this.Description = description;
             this.ActionDate = actionDate;
             this.IsforRentalCar = isforRentalCar;
+            this.relatedCustomerDetails = relatedCustomerDetails;
             // Additional logic or storage (if needed) can be added here
             return true;
         } else {
@@ -86,6 +113,7 @@ public class CustomerHistory {
         }
     }
 
+    // Vervollständigung der GetCustomerHistory-Methode
     public CustomerHistory GetCustomerHistory(int customerHistoryId) {
         if (this.CustomerHistoryId == customerHistoryId) {
             return this;
@@ -94,6 +122,7 @@ public class CustomerHistory {
         }
     }
 
+    // Vervollständigung der GetCustomerFinalReview-Methode
     public CustomerHistoryReview GetCustomerFinalReview() {
         return this.CustomerHistoryReview;
     }
