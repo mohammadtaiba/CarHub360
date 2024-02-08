@@ -16,30 +16,27 @@ public class Maintenance {
         private String MaintenanceDescription;
 
         public MaintenanceInfo(int maintenanceId, de.fherfurt.Vehicle.Vehicle vehicle, Date maintenanceStartDate, Date maintenanceEndDate, float maintenanceCost, String maintenanceDescription) {
-            MaintenanceId = maintenanceId;
-            Vehicle = vehicle;
-            MaintenanceStartDate = maintenanceStartDate;
-            MaintenanceEndDate = maintenanceEndDate;
-            MaintenanceCost = maintenanceCost;
-            MaintenanceDescription = maintenanceDescription;
+            this.MaintenanceId = maintenanceId;
+            this.Vehicle = vehicle;
+            this.MaintenanceStartDate = maintenanceStartDate;
+            this.MaintenanceEndDate = maintenanceEndDate;
+            this.MaintenanceCost = maintenanceCost;
+            this.MaintenanceDescription = maintenanceDescription;
         }
 
         public int getMaintenanceId() {
             return MaintenanceId;
         }
-
         public void setMaintenanceId(int maintenanceId) {
             MaintenanceId = maintenanceId;
         }
 
         public Vehicle getVehicle() { return Vehicle; }
-
         public void setVehicle(Vehicle vehicle) { Vehicle = vehicle; }
 
         public Date getMaintenanceStartDate() {
             return MaintenanceStartDate;
         }
-
         public void setMaintenanceStartDate(Date maintenanceStartDate) {
             MaintenanceStartDate = maintenanceStartDate;
         }
@@ -47,7 +44,6 @@ public class Maintenance {
         public Date getMaintenanceEndDate() {
             return MaintenanceEndDate;
         }
-
         public void setMaintenanceEndDate(Date maintenanceEndDate) {
             MaintenanceEndDate = maintenanceEndDate;
         }
@@ -55,7 +51,6 @@ public class Maintenance {
         public float getMaintenanceCost() {
             return MaintenanceCost;
         }
-
         public void setMaintenanceCost(float maintenanceCost) {
             MaintenanceCost = maintenanceCost;
         }
@@ -63,7 +58,6 @@ public class Maintenance {
         public String getMaintenanceDescription() {
             return MaintenanceDescription;
         }
-
         public void setMaintenanceDescription(String maintenanceDescription) {
             MaintenanceDescription = maintenanceDescription;
         }

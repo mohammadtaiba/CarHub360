@@ -24,23 +24,25 @@ public class CustomerTest {
 
     @Test
     public void testCreateCustomer() {
-        assertTrue(customer.createCustomer(1, "John", "Doe", "john.doe@example.com", new Date(), true));
-        assertFalse(customer.createCustomer(1, "Jane", "Doe", "jane.doe@example.com", new Date(), false));
+        assertTrue(customer.createCustomer(1, "Helmut", "Mustermann",
+                "HelmutDerMann@mail.de", new Date(), true));
+        assertFalse(customer.createCustomer(1, "Elena", "Mustermann",
+                "kokosnuss@gmail.com", new Date(), false));
     }
 
     @Test
     public void testDeleteCustomer() {
-        customer.createCustomer(2, "Jane", "Doe", "jane.doe@example.com", new Date(), false);
+        customer.createCustomer(2, "Günter", "Bob", "NerdGünter@email.com", new Date(), false);
         assertTrue(customer.deleteCustomer(2));
         assertFalse(customer.deleteCustomer(3));
     }
 
     @Test
     public void testGetCustomerDetails() {
-        customer.createCustomer(3, "Bob", "Smith", "bob.smith@example.com", new Date(), true);
+        customer.createCustomer(3, "Sheng", "Wang", "tucktuck@gmail.com", new Date(), true);
         String details = customer.getCustomerDetails(3);
         assertNotNull(details);
-        assertTrue(details.contains("Bob"));
-        assertFalse(details.contains("Alice"));
+        assertTrue(details.contains("Sheng"));
+        assertFalse(details.contains("Alina"));
     }
 }

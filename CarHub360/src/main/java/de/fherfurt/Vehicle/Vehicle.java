@@ -31,7 +31,6 @@ public class Vehicle {
         public int getVehicleId() {
             return VehicleId;
         }
-
         public void setVehicleId(int vehicleId) {
             VehicleId = vehicleId;
         }
@@ -39,7 +38,6 @@ public class Vehicle {
         public String getName() {
             return Name;
         }
-
         public void setName(String name) {
             Name = name;
         }
@@ -47,7 +45,6 @@ public class Vehicle {
         public String getBrand() {
             return Brand;
         }
-
         public void setBrand(String brand) {
             Brand = brand;
         }
@@ -55,7 +52,6 @@ public class Vehicle {
         public int getKilometerCount() {
             return KilometerCount;
         }
-
         public void setKilometerCount(int kilometerCount) {
             KilometerCount = kilometerCount;
         }
@@ -63,7 +59,6 @@ public class Vehicle {
         public int getConstructionYear() {
             return ConstructionYear;
         }
-
         public void setConstructionYear(int constructionYear) {
             ConstructionYear = constructionYear;
         }
@@ -71,7 +66,6 @@ public class Vehicle {
         public String getType() {
             return Type;
         }
-
         public void setType(String type) {
             Type = type;
         }

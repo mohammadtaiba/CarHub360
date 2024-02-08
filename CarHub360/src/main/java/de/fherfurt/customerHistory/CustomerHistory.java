@@ -18,10 +18,19 @@ public class CustomerHistory {
         private Date actionDate;
         private boolean isForRentalCar;
 
+        public CustomerHistoryDetails(int customerHistoryId, int customerHistoryCustomerId, Vehicle customerHistoryVehicle, CustomerHistoryReview customerHistoryReview, String description, Date actionDate, boolean isForRentalCar) {
+            this.customerHistoryId = customerHistoryId;
+            this.customerHistoryCustomerId = customerHistoryCustomerId;
+            this.customerHistoryVehicle = customerHistoryVehicle;
+            this.customerHistoryReview = customerHistoryReview;
+            this.description = description;
+            this.actionDate = actionDate;
+            this.isForRentalCar = isForRentalCar;
+        }
+
         public int getCustomerHistoryId() {
             return customerHistoryId;
         }
-
         public void setCustomerHistoryId(int customerHistoryId) {
             this.customerHistoryId = customerHistoryId;
         }
@@ -29,7 +38,6 @@ public class CustomerHistory {
         public int getCustomerHistoryCustomerId() {
             return customerHistoryCustomerId;
         }
-
         public void setCustomerHistoryCustomerId(int customerHistoryCustomerId) {
             this.customerHistoryCustomerId = customerHistoryCustomerId;
         }
@@ -37,7 +45,6 @@ public class CustomerHistory {
         public Vehicle getCustomerHistoryVehicle() {
             return customerHistoryVehicle;
         }
-
         public void setCustomerHistoryVehicle(Vehicle customerHistoryVehicle) {
             this.customerHistoryVehicle = customerHistoryVehicle;
         }
@@ -45,7 +52,6 @@ public class CustomerHistory {
         public CustomerHistoryReview getCustomerHistoryReview() {
             return customerHistoryReview;
         }
-
         public void setCustomerHistoryReview(CustomerHistoryReview customerHistoryReview) {
             this.customerHistoryReview = customerHistoryReview;
         }
@@ -53,7 +59,6 @@ public class CustomerHistory {
         public String getDescription() {
             return description;
         }
-
         public void setDescription(String description) {
             this.description = description;
         }
@@ -61,7 +66,6 @@ public class CustomerHistory {
         public Date getActionDate() {
             return actionDate;
         }
-
         public void setActionDate(Date actionDate) {
             this.actionDate = actionDate;
         }
@@ -69,11 +73,11 @@ public class CustomerHistory {
         public boolean isForRentalCar() {
             return isForRentalCar;
         }
-
         public void setForRentalCar(boolean forRentalCar) {
             isForRentalCar = forRentalCar;
         }
     }
+
 
     private Map<Integer, CustomerHistoryDetails> customerHistoryMap = new HashMap<>();
 
@@ -83,7 +87,9 @@ public class CustomerHistory {
         if (customerHistoryId >= 0 && customerHistoryCustomerId >= 0 && customerHistoryVehicle != null
                 && customerHistoryReview != null && description != null && actionDate != null) {
 
-            CustomerHistoryDetails newCustomerHistory = new CustomerHistoryDetails();
+            CustomerHistoryDetails newCustomerHistory = new CustomerHistoryDetails(customerHistoryId,customerHistoryCustomerId,
+            customerHistoryVehicle, customerHistoryReview,
+                    description, actionDate, isForRentalCar);
             newCustomerHistory.setCustomerHistoryId(customerHistoryId);
             newCustomerHistory.setCustomerHistoryCustomerId(customerHistoryCustomerId);
             newCustomerHistory.setCustomerHistoryVehicle(customerHistoryVehicle);
@@ -109,7 +115,7 @@ public class CustomerHistory {
         if (customerHistoryDetails != null) {
             return customerHistoryDetails.getCustomerHistoryReview();
         } else {
-            return null; // Not found
+            return null;
         }
     }
 }

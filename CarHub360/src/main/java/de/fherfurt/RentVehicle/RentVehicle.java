@@ -30,7 +30,6 @@ public class RentVehicle extends Vehicle
     public int getRentVehicleId() {
         return RentVehicleId;
     }
-
     public void setRentVehicleId(int rentVehicleId) {
         RentVehicleId = rentVehicleId;
     }
@@ -38,7 +37,6 @@ public class RentVehicle extends Vehicle
     public int getRentVehicleVehicleId() {
         return RentVehicleVehicleId;
     }
-
     public void setRentVehicleVehicleId(int rentVehicleVehicleId) {
         RentVehicleVehicleId = rentVehicleVehicleId;
     }
@@ -46,7 +44,6 @@ public class RentVehicle extends Vehicle
     public boolean isAvailable() {
         return IsAvailable;
     }
-
     public void setAvailable(boolean available) {
         IsAvailable = available;
     }
@@ -54,7 +51,6 @@ public class RentVehicle extends Vehicle
     public double getDailyPrice() {
         return DailyPrice;
     }
-
     public void setDailyPrice(double dailyPrice) {
         DailyPrice = dailyPrice;
     }
@@ -62,7 +58,6 @@ public class RentVehicle extends Vehicle
     public String getLicensePlate() {
         return LicensePlate;
     }
-
     public void setLicensePlate(String licensePlate) {
         LicensePlate = licensePlate;
     }
@@ -70,7 +65,6 @@ public class RentVehicle extends Vehicle
     public float getDeposit() {
         return Deposit;
     }
-
     public void setDeposit(float deposit) {
         Deposit = deposit;
     }

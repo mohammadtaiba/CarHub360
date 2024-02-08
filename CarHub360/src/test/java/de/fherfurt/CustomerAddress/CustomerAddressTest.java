@@ -22,20 +22,20 @@ public class CustomerAddressTest {
 
     @Test
     public void testUpdateCustomerAddress() {
-        assertTrue(customerAddress.updateCustomerAddress(1, "City1", "12345", "Street1", "1A"));
-        assertFalse(customerAddress.updateCustomerAddress(-1, "City2", "67890", "Street2", "2B"));
-        assertFalse(customerAddress.updateCustomerAddress(1, null, "67890", "Street2", "2B"));
-        assertFalse(customerAddress.updateCustomerAddress(2, "City3", "67890", "Street3", null));
+        assertTrue(customerAddress.updateCustomerAddress(1, "Erfurt", "99097", "Straße", "22"));
+        assertFalse(customerAddress.updateCustomerAddress(-1, "Leipzig", "54780", "AndereStraße", "48"));
+        assertFalse(customerAddress.updateCustomerAddress(1, null, "13579", "BahnStraße", "66"));
+        assertFalse(customerAddress.updateCustomerAddress(2, "Gotha", "53791", "AndereStraße2", null));
     }
 
     @Test
     public void testGetCustomerAddressDetails() {
-        customerAddress.updateCustomerAddress(1, "City1", "12345", "Street1", "1A");
+        customerAddress.updateCustomerAddress(1, "Erfurt", "99097", "Straße", "22");
         String details = customerAddress.getCustomerAddressDetails(1);
         assertNotNull(details);
-        assertTrue(details.contains("City1"));
-        assertFalse(details.contains("City2"));
-        assertFalse(details.contains("City3"));
+        assertTrue(details.contains("Erfurt"));
+        assertFalse(details.contains("Leipzig"));
+        assertFalse(details.contains("Gotha"));
     }
 }
 

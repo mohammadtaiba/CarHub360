@@ -17,15 +17,12 @@ public class SaleVehicle extends Vehicle
     }
 
     public int getVehicleId() {return VehicleId; }
-
     public void setVehicleId(int vehicleId) {VehicleId = vehicleId; }
 
     public float getSalePrice() { return SalePrice; }
-
     public void setSalePrice(float salePrice) {SalePrice = salePrice;}
 
     public boolean isNew() {return IsNew;}
-
     public void setNew(boolean aNew) {IsNew = aNew;}
 
     public String getSaleVehicleDetails() {
@@ -35,7 +32,6 @@ public class SaleVehicle extends Vehicle
                 "Sale Price: " + getSalePrice() + "\n" +
                 "Is New: " + isNew();
 }
-
 
 }
 

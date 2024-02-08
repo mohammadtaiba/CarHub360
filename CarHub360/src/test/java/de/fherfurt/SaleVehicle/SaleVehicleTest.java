@@ -9,7 +9,7 @@ public class SaleVehicleTest {
 
     @Before
     public void setUp() {
-        saleVehicle = new SaleVehicle(1, "Car1", "Brand1", 10000, 2020, "Sedan", 30000.0f, true);
+        saleVehicle = new SaleVehicle(1, "Maybach", "Mercedes", 10000, 2020, "Sportscar", 30000.0f, true);
     }
 
     @Test

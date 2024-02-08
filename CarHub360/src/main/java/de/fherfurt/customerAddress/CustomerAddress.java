@@ -13,44 +13,48 @@ public class CustomerAddress {
         private String Street;
         private String StreetNumber;
 
+        public CustomerAddressDetails(int customerId, String city, String postalCode, String street, String streetNumber) {
+            this.CustomerId = customerId;
+            this.City = city;
+            this.PostalCode = postalCode;
+            this.Street = street;
+            this.StreetNumber = streetNumber;
+        }
+
+
         public int getCustomerId() {
             return CustomerId;
         }
-
         public void setCustomerId(int customerId) {
-            CustomerId = customerId;
+            this.CustomerId = customerId;
         }
 
         public String getCity() {
             return City;
         }
-
         public void setCity(String city) {
-            City = city;
+            this.City = city;
         }
 
         public String getPostalCode() {
             return PostalCode;
         }
-
         public void setPostalCode(String postalCode) {
-            PostalCode = postalCode;
+            this.PostalCode = postalCode;
         }
 
         public String getStreet() {
             return Street;
         }
-
         public void setStreet(String street) {
-            Street = street;
+            this.Street = street;
         }
 
         public String getStreetNumber() {
             return StreetNumber;
         }
-
         public void setStreetNumber(String streetNumber) {
-            StreetNumber = streetNumber;
+            this.StreetNumber = streetNumber;
         }
 
     }
@@ -59,7 +63,7 @@ public class CustomerAddress {
 
     public boolean updateCustomerAddress(int customerId, String city, String postalCode, String street, String streetNumber) {
         if (customerId >= 0 && city != null && postalCode != null && street != null && streetNumber != null) {
-            CustomerAddressDetails addressDetails = new CustomerAddressDetails();
+            CustomerAddressDetails addressDetails = new CustomerAddressDetails(customerId,city,postalCode, street, streetNumber);
             addressDetails.setCustomerId(customerId);
             addressDetails.setCity(city);
             addressDetails.setPostalCode(postalCode);
@@ -78,7 +82,7 @@ public class CustomerAddress {
         if (customerAddresses.containsKey(customerId)) {
             CustomerAddressDetails addressDetails = customerAddresses.get(customerId);
 
-            // Construct and return address details
+
             return "Customer Address details for ID " + customerId + ":\n"
                     + "City: " + addressDetails.getCity() + "\n"
                     + "Postal Code: " + addressDetails.getPostalCode() + "\n"

@@ -12,8 +12,8 @@ public class RentVehicleTest {
 
     @Before
     public void setUp() {
-        rentVehicle = new RentVehicle(1, "Car1", "Brand1", 10000, 2020, "Sedan",
-                101, 1, true, 50.0, "ABC123", 200.0f);
+        rentVehicle = new RentVehicle(1, "Car1", "BMW", 10000, 2020, "Sportscar",
+                101, 1, true, 50.0, "AWQ99", 200.0f);
     }
 
     @Test
