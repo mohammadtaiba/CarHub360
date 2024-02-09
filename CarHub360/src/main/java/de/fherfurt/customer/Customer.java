@@ -1,8 +1,8 @@
 package de.fherfurt.customer;
 
+import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.List;
 import de.fherfurt.customerAddress.CustomerAddress;
 public class Customer {
 
@@ -82,45 +82,46 @@ public class Customer {
 
     }
 
-    private Map<Integer, CustomerDetails> customers = new HashMap<>();
-
+    private List<CustomerDetails> customers = new ArrayList<>();
 
     public boolean createCustomer(int customerId, String firstName, String lastName, String email, Date birthdate, boolean isFemale) {
-        if (!customers.containsKey(customerId)) {
-            CustomerDetails newCustomer = new CustomerDetails(customerId, firstName, lastName, email, birthdate, isFemale);
-            customers.put(customerId, newCustomer);
-            return true;
-        } else {
-            return false;
+        for (CustomerDetails customer : customers) {
+            if (customer.getCustomerId() == customerId) {
+                return false;
+            }
+            if (customer.getEmail().equals(email)) {
+                return false;
+            }
         }
+        CustomerDetails newCustomer = new CustomerDetails(customerId, firstName, lastName, email, birthdate, isFemale);
+        customers.add(newCustomer);
+        return true;
     }
 
     public boolean deleteCustomer(int customerId) {
-        if (customers.containsKey(customerId)) {
-            customers.remove(customerId);
-            return true;
-        } else {
-            return false;
+        for (CustomerDetails customer : customers) {
+            if (customer.getCustomerId() == customerId) {
+                customers.remove(customer);
+                return true;
+            }
         }
+        return false;
     }
 
     public String getCustomerDetails(int customerId) {
-        if (customers.containsKey(customerId)) {
-            CustomerDetails customer = customers.get(customerId);
-
-            String customerDetails = "Customer Details: \n" +
-                    "Customer ID: " + customer.getCustomerId() + "\n" +
-                    "First Name: " + customer.getFirstName() + "\n" +
-                    "Last Name: " + customer.getLastName() + "\n" +
-                    "Email: " + customer.getEmail() + "\n" +
-                    "Birthdate: " + customer.getBirthdate() + "\n" +
-                    "Is Female: " + customer.isFemale();
-
-
-            return customerDetails;
-        } else {
-            return "Customer with ID " + customerId + " was not found.";
+        for (CustomerDetails customer : customers) {
+            if (customer.getCustomerId() == customerId) {
+                String customerDetails = "Customer Details: \n" +
+                        "Customer ID: " + customer.getCustomerId() + "\n" +
+                        "First Name: " + customer.getFirstName() + "\n" +
+                        "Last Name: " + customer.getLastName() + "\n" +
+                        "Email: " + customer.getEmail() + "\n" +
+                        "Birthdate: " + customer.getBirthdate() + "\n" +
+                        "Is Female: " + customer.isFemale();
+                return customerDetails;
+            }
         }
+        return "Customer with ID " + customerId + " was not found.";
     }
-}
 
+}

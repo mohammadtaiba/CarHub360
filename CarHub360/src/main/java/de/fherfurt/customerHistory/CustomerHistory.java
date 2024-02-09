@@ -89,7 +89,7 @@ public class CustomerHistory {
 
             CustomerHistoryDetails newCustomerHistory = new CustomerHistoryDetails(customerHistoryId,customerHistoryCustomerId,
             customerHistoryVehicle, customerHistoryReview,
-                    description, actionDate, isForRentalCar);
+                    description,  actionDate, isForRentalCar);
             newCustomerHistory.setCustomerHistoryId(customerHistoryId);
             newCustomerHistory.setCustomerHistoryCustomerId(customerHistoryCustomerId);
             newCustomerHistory.setCustomerHistoryVehicle(customerHistoryVehicle);

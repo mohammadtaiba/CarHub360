@@ -1,76 +1,75 @@
 package de.fherfurt.customerAddress;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.List;
 
 public class CustomerAddress {
 
     private class CustomerAddressDetails {
 
-        private int CustomerId;
-        private String City;
-        private String PostalCode;
-        private String Street;
-        private String StreetNumber;
+        private int customerId;
+        private String city;
+        private String postalCode;
+        private String street;
+        private String streetNumber;
 
         public CustomerAddressDetails(int customerId, String city, String postalCode, String street, String streetNumber) {
-            this.CustomerId = customerId;
-            this.City = city;
-            this.PostalCode = postalCode;
-            this.Street = street;
-            this.StreetNumber = streetNumber;
+            this.customerId = customerId;
+            this.city = city;
+            this.postalCode = postalCode;
+            this.street = street;
+            this.streetNumber = streetNumber;
         }
-
 
         public int getCustomerId() {
-            return CustomerId;
+            return customerId;
         }
         public void setCustomerId(int customerId) {
-            this.CustomerId = customerId;
+            this.customerId = customerId;
         }
 
         public String getCity() {
-            return City;
+            return city;
         }
         public void setCity(String city) {
-            this.City = city;
+            this.city = city;
         }
 
         public String getPostalCode() {
-            return PostalCode;
+            return postalCode;
         }
         public void setPostalCode(String postalCode) {
-            this.PostalCode = postalCode;
+            this.postalCode = postalCode;
         }
 
         public String getStreet() {
-            return Street;
+            return street;
         }
         public void setStreet(String street) {
-            this.Street = street;
+            this.street = street;
         }
 
         public String getStreetNumber() {
-            return StreetNumber;
+            return streetNumber;
         }
         public void setStreetNumber(String streetNumber) {
-            this.StreetNumber = streetNumber;
+            this.streetNumber = streetNumber;
         }
 
     }
 
-    private Map<Integer, CustomerAddressDetails> customerAddresses = new HashMap<>();
+    private List<CustomerAddressDetails> customerAddresses = new ArrayList<>();
 
     public boolean updateCustomerAddress(int customerId, String city, String postalCode, String street, String streetNumber) {
         if (customerId >= 0 && city != null && postalCode != null && street != null && streetNumber != null) {
-            CustomerAddressDetails addressDetails = new CustomerAddressDetails(customerId,city,postalCode, street, streetNumber);
+            CustomerAddressDetails addressDetails = new CustomerAddressDetails(customerId, city, postalCode, street, streetNumber);
             addressDetails.setCustomerId(customerId);
             addressDetails.setCity(city);
             addressDetails.setPostalCode(postalCode);
             addressDetails.setStreet(street);
             addressDetails.setStreetNumber(streetNumber);
 
-            customerAddresses.put(customerId, addressDetails);
+            customerAddresses.add(addressDetails);
 
             return true;
         } else {
@@ -79,17 +78,15 @@ public class CustomerAddress {
     }
 
     public String getCustomerAddressDetails(int customerId) {
-        if (customerAddresses.containsKey(customerId)) {
-            CustomerAddressDetails addressDetails = customerAddresses.get(customerId);
-
-
-            return "Customer Address details for ID " + customerId + ":\n"
-                    + "City: " + addressDetails.getCity() + "\n"
-                    + "Postal Code: " + addressDetails.getPostalCode() + "\n"
-                    + "Street: " + addressDetails.getStreet() + "\n"
-                    + "Street Number: " + addressDetails.getStreetNumber();
-        } else {
-            return "Customer with ID " + customerId + " does not have an address.";
+        for (CustomerAddressDetails addressDetails : customerAddresses) {
+            if (addressDetails.getCustomerId() == customerId) {
+                return "Customer Address details for ID " + customerId + ":\n"
+                        + "City: " + addressDetails.getCity() + "\n"
+                        + "Postal Code: " + addressDetails.getPostalCode() + "\n"
+                        + "Street: " + addressDetails.getStreet() + "\n"
+                        + "Street Number: " + addressDetails.getStreetNumber();
+            }
         }
+        return "Customer with ID " + customerId + " does not have an address.";
     }
 }

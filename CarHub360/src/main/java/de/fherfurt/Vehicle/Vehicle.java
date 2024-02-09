@@ -1,167 +1,148 @@
 package de.fherfurt.Vehicle;
 
 import java.time.Year;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Vehicle {
 
-
-    public Vehicle(int vehicleId, String name, String brand, int kilometerCount, int constructionYear, String type) {
-    }
-
     private static class VehicleData {
-        private int VehicleId;
-        private String Name;
-        private String Brand;
-        private int KilometerCount;
-        private int ConstructionYear;
-        private String Type;
+        private int vehicleId;
+        private String name;
+        private String brand;
+        private int kilometerCount;
+        private int constructionYear;
+        private String type;
 
         public VehicleData(int vehicleId, String name, String brand, int kilometerCount, int constructionYear, String type) {
-            this.VehicleId = vehicleId;
-            this.Name = name;
-            this.Brand = brand;
-            this.KilometerCount = kilometerCount;
-            this.ConstructionYear = constructionYear;
-            this.Type = type;
+            this.vehicleId = vehicleId;
+            this.name = name;
+            this.brand = brand;
+            this.kilometerCount = kilometerCount;
+            this.constructionYear = constructionYear;
+            this.type = type;
         }
-
 
         public int getVehicleId() {
-            return VehicleId;
+            return vehicleId;
         }
+
         public void setVehicleId(int vehicleId) {
-            VehicleId = vehicleId;
+            this.vehicleId = vehicleId;
         }
 
         public String getName() {
-            return Name;
+            return name;
         }
+
         public void setName(String name) {
-            Name = name;
+            this.name = name;
         }
 
         public String getBrand() {
-            return Brand;
+            return brand;
         }
+
         public void setBrand(String brand) {
-            Brand = brand;
+            this.brand = brand;
         }
 
         public int getKilometerCount() {
-            return KilometerCount;
+            return kilometerCount;
         }
+
         public void setKilometerCount(int kilometerCount) {
-            KilometerCount = kilometerCount;
+            this.kilometerCount = kilometerCount;
         }
 
         public int getConstructionYear() {
-            return ConstructionYear;
+            return constructionYear;
         }
+
         public void setConstructionYear(int constructionYear) {
-            ConstructionYear = constructionYear;
+            this.constructionYear = constructionYear;
         }
 
         public String getType() {
-            return Type;
-        }
-        public void setType(String type) {
-            Type = type;
+            return type;
         }
 
+        public void setType(String type) {
+            this.type = type;
+        }
     }
 
-    private Map<Integer, Vehicle.VehicleData> Vehicles = new HashMap<>();
+    private List<VehicleData> vehicles = new ArrayList<>();
 
-    public boolean CreateVehicle(int VehicleId, String Name, String Brand, int KilometerCount,int ConstructionYear,String Type)
-    {
-        if (!Vehicles.containsKey(VehicleId)) {
-        Year currentYear = Year.now();
-        if (VehicleId >= 0 && Name != null && Brand != null && KilometerCount >= 0 && currentYear.getValue() >= ConstructionYear && ConstructionYear >= 1900 && Type != null ) {
-            Vehicle.VehicleData newVehicle = new Vehicle.VehicleData(VehicleId, Name, Brand, KilometerCount, ConstructionYear, Type);
-
-            Vehicles.put(VehicleId, newVehicle);
-
-            return true;
+    public boolean createVehicle(int vehicleId, String name, String brand, int kilometerCount, int constructionYear, String type) {
+        if (vehicleId >= 0 && name != null && brand != null && kilometerCount >= 0 && constructionYear >= 1900 && type != null) {
+            Year currentYear = Year.now();
+            if (currentYear.getValue() >= constructionYear) {
+                VehicleData newVehicle = new VehicleData(vehicleId, name, brand, kilometerCount, constructionYear, type);
+                vehicles.add(newVehicle);
+                return true;
+            } else {
+                System.out.println("Invalid construction year. Vehicle not created.");
+                return false;
+            }
         } else {
             System.out.println("Invalid vehicle details. Vehicle not created.");
             return false;
         }
-
-        } else {
-            System.out.println("VehicleId is taken");
-            return false;
-        }
-
-    }
-    public boolean UpdateVehicle(int VehicleId, String Name, String Brand, int KilometerCount,int ConstructionYear,String Type)
-    {
-        if (Vehicles.containsKey(VehicleId)) {
-
-            Vehicle.VehicleData existingVehicle = Vehicles.get(VehicleId);
-
-            existingVehicle.setName(Name);
-            existingVehicle.setBrand(Brand);
-            existingVehicle.setKilometerCount(KilometerCount);
-            existingVehicle.setConstructionYear(ConstructionYear);
-            existingVehicle.setType(Type);
-
-            return true;
-        }
-        return false;
     }
 
-    public boolean DeleteVehicle(int VehicleId) {
-
-        if (Vehicles.containsKey(VehicleId)) {
-
-            Vehicles.remove(VehicleId);
-            return true;
-        }
-        return false;
-    }
-    public boolean CheckNewKilometerCount(int VehicleId, int newKilometerCount) {
-
-        if (Vehicles.containsKey(VehicleId)) {
-
-            Vehicle.VehicleData existingVehicle = Vehicles.get(VehicleId);
-
-
-            if (newKilometerCount >= existingVehicle.getKilometerCount()) {
-                existingVehicle.setKilometerCount(newKilometerCount);
+    public boolean updateVehicle(int vehicleId, String name, String brand, int kilometerCount, int constructionYear, String type) {
+        for (VehicleData vehicle : vehicles) {
+            if (vehicle.getVehicleId() == vehicleId) {
+                vehicle.setName(name);
+                vehicle.setBrand(brand);
+                vehicle.setKilometerCount(kilometerCount);
+                vehicle.setConstructionYear(constructionYear);
+                vehicle.setType(type);
                 return true;
-            } else {
-                System.out.println("Error: The new mileage is smaller than the current mileage.");
             }
-        } else {
-            System.out.println("Vehicle with ID " + VehicleId + " was not found.");
         }
         return false;
     }
 
-    public String getVehicleDetails(int vehicleId){
-
-        if (Vehicles.containsKey(vehicleId)) {
-            Vehicle.VehicleData vehicleData = Vehicles.get(vehicleId);
-
-            return "Vehicle Details: \n" +
-                    "Vehicle ID: " + vehicleId + "\n" +
-                    "Name: " + vehicleData.getName() + "\n" +
-                    "Brand: " + vehicleData.getBrand() + "\n" +
-                    "Kilometer Count: " + vehicleData.getKilometerCount() + "\n" +
-                    "Construction Year: " + vehicleData.getConstructionYear() + "\n" +
-                    "Type: " + vehicleData.getType();
-
+    public boolean deleteVehicle(int vehicleId) {
+        for (VehicleData vehicle : vehicles) {
+            if (vehicle.getVehicleId() == vehicleId) {
+                vehicles.remove(vehicle);
+                return true;
+            }
         }
-        else {
+        return false;
+    }
 
-            return "Vehicle with ID " + vehicleId + " was not found.";
+    public boolean checkNewKilometerCount(int vehicleId, int newKilometerCount) {
+        for (VehicleData vehicle : vehicles) {
+            if (vehicle.getVehicleId() == vehicleId) {
+                if (newKilometerCount >= vehicle.getKilometerCount()) {
+                    vehicle.setKilometerCount(newKilometerCount);
+                    return true;
+                } else {
+                    System.out.println("Error: The new mileage is smaller than the current mileage.");
+                    return false;
+                }
+            }
         }
+        System.out.println("Vehicle with ID " + vehicleId + " was not found.");
+        return false;
+    }
+
+    public String getVehicleDetails(int vehicleId) {
+        for (VehicleData vehicle : vehicles) {
+            if (vehicle.getVehicleId() == vehicleId) {
+                return "Vehicle Details: \n" +
+                        "Vehicle ID: " + vehicleId + "\n" +
+                        "Name: " + vehicle.getName() + "\n" +
+                        "Brand: " + vehicle.getBrand() + "\n" +
+                        "Kilometer Count: " + vehicle.getKilometerCount() + "\n" +
+                        "Construction Year: " + vehicle.getConstructionYear() + "\n" +
+                        "Type: " + vehicle.getType();
+            }
+        }
+        return "Vehicle with ID " + vehicleId + " was not found.";
     }
 }
-
-
-
-
-

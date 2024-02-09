@@ -22,12 +22,15 @@ public class CustomerTest {
         customer = null;
     }
 
+
     @Test
     public void testCreateCustomer() {
         assertTrue(customer.createCustomer(1, "Helmut", "Mustermann",
                 "HelmutDerMann@mail.de", new Date(), true));
         assertFalse(customer.createCustomer(1, "Elena", "Mustermann",
                 "kokosnuss@gmail.com", new Date(), false));
+        assertFalse(customer.createCustomer(2, "Elena", "Musterfrau",
+                "HelmutDerMann@mail.de", new Date(), false));
     }
 
     @Test
