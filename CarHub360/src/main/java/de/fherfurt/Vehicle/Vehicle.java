@@ -6,6 +6,7 @@ import java.util.List;
 
 public class Vehicle {
 
+    // Attributes of the vehicle
     private int vehicleId;
     private String name;
     private String brand;
@@ -13,8 +14,10 @@ public class Vehicle {
     private int constructionYear;
     private String type;
 
+    // List to store vehicles
     private List<Vehicle> vehicles = new ArrayList<>();
 
+    // Constructor to initialize the vehicle attributes
     public Vehicle(int vehicleId, String name, String brand, int kilometerCount, int constructionYear, String type) {
         this.vehicleId = vehicleId;
         this.name = name;
@@ -24,7 +27,7 @@ public class Vehicle {
         this.type = type;
     }
 
-
+    // Getter and setter methods for vehicle attributes
 
     public int getVehicleId() {
         return vehicleId;
@@ -73,7 +76,7 @@ public class Vehicle {
     public void setType(String type) {
         this.type = type;
     }
-
+    // Method to create a new vehicle
     public boolean CreateVehicle(int vehicleId, String name, String brand, int kilometerCount, int constructionYear, String type) {
         if (vehicleId >= 0 && name != null && brand != null && kilometerCount >= 0 && constructionYear >= 1900 && type != null) {
             Year currentYear = Year.now();
@@ -91,6 +94,7 @@ public class Vehicle {
         }
     }
 
+    // Method to update an existing vehicle
     public boolean UpdateVehicle(int vehicleId, String name, String brand, int kilometerCount, int constructionYear, String type) {
         for (Vehicle vehicle : vehicles) {
             if (vehicle.getVehicleId() == vehicleId) {
@@ -105,6 +109,7 @@ public class Vehicle {
         return false;
     }
 
+    // Method to delete an existing vehicle
     public boolean DeleteVehicle(int vehicleId) {
         for (Vehicle vehicle : vehicles) {
             if (vehicle.getVehicleId() == vehicleId) {
@@ -115,6 +120,7 @@ public class Vehicle {
         return false;
     }
 
+    // Method to check and update the kilometer count of a vehicle
     public boolean checkNewKilometerCount(int vehicleId, int newKilometerCount) {
         for (Vehicle vehicle : vehicles) {
             if (vehicle.getVehicleId() == vehicleId) {
@@ -131,6 +137,7 @@ public class Vehicle {
         return false;
     }
 
+    // Method to get details of a vehicle
     public String getVehicleDetails(int vehicleId) {
         for (Vehicle vehicle : vehicles) {
             if (vehicle.getVehicleId() == vehicleId) {
