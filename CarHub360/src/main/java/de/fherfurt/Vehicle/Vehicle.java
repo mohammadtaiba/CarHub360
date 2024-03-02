@@ -6,79 +6,79 @@ import java.util.List;
 
 public class Vehicle {
 
-    private static class VehicleData {
-        private int vehicleId;
-        private String name;
-        private String brand;
-        private int kilometerCount;
-        private int constructionYear;
-        private String type;
+    private int vehicleId;
+    private String name;
+    private String brand;
+    private int kilometerCount;
+    private int constructionYear;
+    private String type;
 
-        public VehicleData(int vehicleId, String name, String brand, int kilometerCount, int constructionYear, String type) {
-            this.vehicleId = vehicleId;
-            this.name = name;
-            this.brand = brand;
-            this.kilometerCount = kilometerCount;
-            this.constructionYear = constructionYear;
-            this.type = type;
-        }
+    private List<Vehicle> vehicles = new ArrayList<>();
 
-        public int getVehicleId() {
-            return vehicleId;
-        }
-
-        public void setVehicleId(int vehicleId) {
-            this.vehicleId = vehicleId;
-        }
-
-        public String getName() {
-            return name;
-        }
-
-        public void setName(String name) {
-            this.name = name;
-        }
-
-        public String getBrand() {
-            return brand;
-        }
-
-        public void setBrand(String brand) {
-            this.brand = brand;
-        }
-
-        public int getKilometerCount() {
-            return kilometerCount;
-        }
-
-        public void setKilometerCount(int kilometerCount) {
-            this.kilometerCount = kilometerCount;
-        }
-
-        public int getConstructionYear() {
-            return constructionYear;
-        }
-
-        public void setConstructionYear(int constructionYear) {
-            this.constructionYear = constructionYear;
-        }
-
-        public String getType() {
-            return type;
-        }
-
-        public void setType(String type) {
-            this.type = type;
-        }
+    public Vehicle(int vehicleId, String name, String brand, int kilometerCount, int constructionYear, String type) {
+        this.vehicleId = vehicleId;
+        this.name = name;
+        this.brand = brand;
+        this.kilometerCount = kilometerCount;
+        this.constructionYear = constructionYear;
+        this.type = type;
     }
 
-    private List<VehicleData> vehicles = new ArrayList<>();
 
-    public boolean createVehicle(int vehicleId, String name, String brand, int kilometerCount, int constructionYear, String type) {
+
+    public int getVehicleId() {
+        return vehicleId;
+    }
+
+    public void setVehicleId(int vehicleId) {
+        this.vehicleId = vehicleId;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getBrand() {
+        return brand;
+    }
+
+    public void setBrand(String brand) {
+        this.brand = brand;
+    }
+
+    public int getKilometerCount() {
+        return kilometerCount;
+    }
+
+    public void setKilometerCount(int kilometerCount) {
+        this.kilometerCount = kilometerCount;
+    }
+
+    public int getConstructionYear() {
+        return constructionYear;
+    }
+
+    public void setConstructionYear(int constructionYear) {
+        this.constructionYear = constructionYear;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public boolean CreateVehicle(int vehicleId, String name, String brand, int kilometerCount, int constructionYear, String type) {
         if (vehicleId >= 0 && name != null && brand != null && kilometerCount >= 0 && constructionYear >= 1900 && type != null) {
             Year currentYear = Year.now();
             if (currentYear.getValue() >= constructionYear) {
-                VehicleData newVehicle = new VehicleData(vehicleId, name, brand, kilometerCount, constructionYear, type);
+                Vehicle newVehicle = new Vehicle(vehicleId, name, brand, kilometerCount, constructionYear, type);
                 vehicles.add(newVehicle);
                 return true;
             } else {
@@ -91,8 +91,8 @@ public class Vehicle {
         }
     }
 
-    public boolean updateVehicle(int vehicleId, String name, String brand, int kilometerCount, int constructionYear, String type) {
-        for (VehicleData vehicle : vehicles) {
+    public boolean UpdateVehicle(int vehicleId, String name, String brand, int kilometerCount, int constructionYear, String type) {
+        for (Vehicle vehicle : vehicles) {
             if (vehicle.getVehicleId() == vehicleId) {
                 vehicle.setName(name);
                 vehicle.setBrand(brand);
@@ -105,8 +105,8 @@ public class Vehicle {
         return false;
     }
 
-    public boolean deleteVehicle(int vehicleId) {
-        for (VehicleData vehicle : vehicles) {
+    public boolean DeleteVehicle(int vehicleId) {
+        for (Vehicle vehicle : vehicles) {
             if (vehicle.getVehicleId() == vehicleId) {
                 vehicles.remove(vehicle);
                 return true;
@@ -116,7 +116,7 @@ public class Vehicle {
     }
 
     public boolean checkNewKilometerCount(int vehicleId, int newKilometerCount) {
-        for (VehicleData vehicle : vehicles) {
+        for (Vehicle vehicle : vehicles) {
             if (vehicle.getVehicleId() == vehicleId) {
                 if (newKilometerCount >= vehicle.getKilometerCount()) {
                     vehicle.setKilometerCount(newKilometerCount);
@@ -132,7 +132,7 @@ public class Vehicle {
     }
 
     public String getVehicleDetails(int vehicleId) {
-        for (VehicleData vehicle : vehicles) {
+        for (Vehicle vehicle : vehicles) {
             if (vehicle.getVehicleId() == vehicleId) {
                 return "Vehicle Details: \n" +
                         "Vehicle ID: " + vehicleId + "\n" +

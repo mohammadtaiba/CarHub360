@@ -7,6 +7,7 @@ import java.util.Date;
 import java.util.List;
 
 public class Maintenance {
+
     private static class MaintenanceInfo {
         private int maintenanceId;
         private Vehicle vehicle;
@@ -66,7 +67,7 @@ public class Maintenance {
             if (maintenance.getMaintenanceId() == maintenanceId) {
                 return "Maintenance Details: \n" +
                         "Maintenance ID: " + maintenance.getMaintenanceId() + " \n" +
-                        "Vehicle: " + maintenance.getVehicle() + " \n" +
+                        "Vehicle: " + maintenance.getVehicle().toString() + " \n" +
                         "Maintenance Start Date: " + maintenance.getMaintenanceStartDate() + " \n" +
                         "Maintenance End Date: " + maintenance.getMaintenanceEndDate() + " \n" +
                         "Maintenance Cost: " + maintenance.getMaintenanceCost() + " \n" +

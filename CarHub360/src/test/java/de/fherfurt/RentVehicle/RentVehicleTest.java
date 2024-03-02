@@ -62,7 +62,7 @@ public class RentVehicleTest {
 
     @Test
     public void testGetLicensePlate() {
-        assertEquals("ABC123", rentVehicle.getLicensePlate());
+        assertEquals("AWQ99", rentVehicle.getLicensePlate());
     }
 
     @Test
@@ -89,7 +89,7 @@ public class RentVehicleTest {
         assertTrue(details.contains("Rent Vehicle ID: 101"));
         assertTrue(details.contains("Is Available: true"));
         assertTrue(details.contains("Daily Price: 50.0"));
-        assertTrue(details.contains("License Plate: ABC123"));
+        assertTrue(details.contains("License Plate: AWQ99"));
         assertTrue(details.contains("Deposit: 200.0"));
     }
 }
