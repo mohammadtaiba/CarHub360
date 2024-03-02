@@ -11,16 +11,16 @@ public class CustomerHistory {
 
     private static class CustomerHistoryDetails {
         private int customerHistoryId;
-        private int customerHistoryCustomerId;
-        private Vehicle customerHistoryVehicle;  // Assoziation mit Vehicle
+        private Customer customer;
+        private Vehicle customerHistoryVehicle;
         private CustomerHistoryReview customerHistoryReview;
         private String description;
         private Date actionDate;
         private boolean isForRentalCar;
 
-        public CustomerHistoryDetails(int customerHistoryId, int customerHistoryCustomerId, Vehicle customerHistoryVehicle, CustomerHistoryReview customerHistoryReview, String description, Date actionDate, boolean isForRentalCar) {
+        public CustomerHistoryDetails(int customerHistoryId, Customer customer, Vehicle customerHistoryVehicle, CustomerHistoryReview customerHistoryReview, String description, Date actionDate, boolean isForRentalCar) {
             this.customerHistoryId = customerHistoryId;
-            this.customerHistoryCustomerId = customerHistoryCustomerId;
+            this.customer = customer;
             this.customerHistoryVehicle = customerHistoryVehicle;
             this.customerHistoryReview = customerHistoryReview;
             this.description = description;
@@ -31,20 +31,23 @@ public class CustomerHistory {
         public int getCustomerHistoryId() {
             return customerHistoryId;
         }
+
         public void setCustomerHistoryId(int customerHistoryId) {
             this.customerHistoryId = customerHistoryId;
         }
 
-        public int getCustomerHistoryCustomerId() {
-            return customerHistoryCustomerId;
+        public Customer getCustomer() {
+            return customer;
         }
-        public void setCustomerHistoryCustomerId(int customerHistoryCustomerId) {
-            this.customerHistoryCustomerId = customerHistoryCustomerId;
+
+        public void setCustomer(Customer customer) {
+            this.customer = customer;
         }
 
         public Vehicle getCustomerHistoryVehicle() {
             return customerHistoryVehicle;
         }
+
         public void setCustomerHistoryVehicle(Vehicle customerHistoryVehicle) {
             this.customerHistoryVehicle = customerHistoryVehicle;
         }
@@ -52,6 +55,7 @@ public class CustomerHistory {
         public CustomerHistoryReview getCustomerHistoryReview() {
             return customerHistoryReview;
         }
+
         public void setCustomerHistoryReview(CustomerHistoryReview customerHistoryReview) {
             this.customerHistoryReview = customerHistoryReview;
         }
@@ -59,6 +63,7 @@ public class CustomerHistory {
         public String getDescription() {
             return description;
         }
+
         public void setDescription(String description) {
             this.description = description;
         }
@@ -66,6 +71,7 @@ public class CustomerHistory {
         public Date getActionDate() {
             return actionDate;
         }
+
         public void setActionDate(Date actionDate) {
             this.actionDate = actionDate;
         }
@@ -73,30 +79,23 @@ public class CustomerHistory {
         public boolean isForRentalCar() {
             return isForRentalCar;
         }
+
         public void setForRentalCar(boolean forRentalCar) {
             isForRentalCar = forRentalCar;
         }
     }
 
-
     private Map<Integer, CustomerHistoryDetails> customerHistoryMap = new HashMap<>();
 
-    public boolean createCustomerHistory(int customerHistoryId, int customerHistoryCustomerId,
+    public boolean createCustomerHistory(int customerHistoryId, Customer customer,
                                          Vehicle customerHistoryVehicle, CustomerHistoryReview customerHistoryReview,
                                          String description, Date actionDate, boolean isForRentalCar) {
-        if (customerHistoryId >= 0 && customerHistoryCustomerId >= 0 && customerHistoryVehicle != null
+        if (customerHistoryId >= 0 && customer != null && customerHistoryVehicle != null
                 && customerHistoryReview != null && description != null && actionDate != null) {
 
-            CustomerHistoryDetails newCustomerHistory = new CustomerHistoryDetails(customerHistoryId,customerHistoryCustomerId,
-            customerHistoryVehicle, customerHistoryReview,
-                    description,  actionDate, isForRentalCar);
-            newCustomerHistory.setCustomerHistoryId(customerHistoryId);
-            newCustomerHistory.setCustomerHistoryCustomerId(customerHistoryCustomerId);
-            newCustomerHistory.setCustomerHistoryVehicle(customerHistoryVehicle);
-            newCustomerHistory.setCustomerHistoryReview(customerHistoryReview);
-            newCustomerHistory.setDescription(description);
-            newCustomerHistory.setActionDate(actionDate);
-            newCustomerHistory.setForRentalCar(isForRentalCar);
+            CustomerHistoryDetails newCustomerHistory = new CustomerHistoryDetails(customerHistoryId, customer,
+                    customerHistoryVehicle, customerHistoryReview,
+                    description, actionDate, isForRentalCar);
 
             customerHistoryMap.put(customerHistoryId, newCustomerHistory);
             return true;
@@ -108,7 +107,6 @@ public class CustomerHistory {
     public CustomerHistoryDetails getCustomerHistory(int customerHistoryId) {
         return customerHistoryMap.get(customerHistoryId);
     }
-
 
     public CustomerHistoryReview getCustomerFinalReview(int customerHistoryId) {
         CustomerHistoryDetails customerHistoryDetails = customerHistoryMap.get(customerHistoryId);
