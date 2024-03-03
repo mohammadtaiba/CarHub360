@@ -5,7 +5,10 @@ import java.util.Date;
 import java.util.List;
 import de.fherfurt.customerAddress.CustomerAddress;
 public class Customer {
-
+    /**
+     * The CustomerDetails class represents the details of a customer.
+     * Each customer detail object includes attributes such as ID, name, email, birthdate, gender, and address.
+     */
     public class CustomerDetails {
         private int customerId;
         private String firstName;
@@ -15,7 +18,7 @@ public class Customer {
         private boolean isFemale;
         private boolean isDeleted;
         private CustomerAddress customerAddress; // composition
-
+        // Constructor and getter/setter methods
         public CustomerDetails(int customerId, String firstName, String lastName, String email, Date birthdate, boolean isFemale) {
             this.customerId = customerId;
             this.firstName = firstName;
@@ -83,7 +86,17 @@ public class Customer {
     }
 
     private List<CustomerDetails> customers = new ArrayList<>();
-
+    /**
+     * Creates a new customer record.
+     *
+     * @param customerId The unique ID of the customer.
+     * @param firstName  The first name of the customer.
+     * @param lastName   The last name of the customer.
+     * @param email      The email address of the customer.
+     * @param birthdate  The birthdate of the customer.
+     * @param isFemale   Indicates whether the customer is female.
+     * @return True if the customer record is successfully created, false otherwise.
+     */
     public boolean createCustomer(int customerId, String firstName, String lastName, String email, Date birthdate, boolean isFemale) {
         for (CustomerDetails customer : customers) {
             if (customer.getCustomerId() == customerId) {
@@ -97,7 +110,12 @@ public class Customer {
         customers.add(newCustomer);
         return true;
     }
-
+    /**
+     * Deletes an existing customer record.
+     *
+     * @param customerId The ID of the customer to be deleted.
+     * @return True if the customer record is successfully deleted, false otherwise.
+     */
     public boolean deleteCustomer(int customerId) {
         for (CustomerDetails customer : customers) {
             if (customer.getCustomerId() == customerId) {
@@ -107,7 +125,12 @@ public class Customer {
         }
         return false;
     }
-
+    /**
+     * Retrieves the details of a customer.
+     *
+     * @param customerId The ID of the customer whose details are to be retrieved.
+     * @return A string containing the details of the customer if found, or a message indicating that the customer was not found.
+     */
     public String getCustomerDetails(int customerId) {
         for (CustomerDetails customer : customers) {
             if (customer.getCustomerId() == customerId) {

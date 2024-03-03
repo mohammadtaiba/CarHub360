@@ -8,18 +8,17 @@ import org.junit.Test;
 import java.util.Date;
 
 import static org.junit.Assert.*;
-public class customerHistory {
 
+public class CustomerHistoryTest {
     @Test
     public void createCustomerHistory_ValidInput_Success() {
         Customer customer = new Customer();
-        Vehicle vehicle = new Vehicle(1, "TestVehicle", "TestBrand", 10000, 2020, "Car");
+        Vehicle vehicle = new Vehicle(1, "X1", "BMW", 15000, 2018, "sports car");
         Date date = new Date();
         CustomerHistory customerHistory = new CustomerHistory();
 
-        assertTrue(customerHistory.createCustomerHistory(1, customer, vehicle, CustomerHistoryReview.EINS, "Description", date, true));
+        assertTrue(customerHistory.createCustomerHistory(1, customer, vehicle, CustomerHistoryReview.EINS, "Description....", date, true));
     }
-
     @Test
     public void createCustomerHistory_InvalidInput_Failure() {
         CustomerHistory customerHistory = new CustomerHistory();
@@ -30,32 +29,30 @@ public class customerHistory {
     @Test
     public void getCustomerHistory_ValidId_Success() {
         Customer customer = new Customer();
-        Vehicle vehicle = new Vehicle(1, "TestVehicle", "TestBrand", 10000, 2020, "Car");
+        Vehicle vehicle = new Vehicle(1, "C-Max", "Ford", 20000, 2020, "Small car");
         Date date = new Date();
         CustomerHistory customerHistory = new CustomerHistory();
-        customerHistory.createCustomerHistory(1, customer, vehicle, CustomerHistoryReview.EINS, "Description", date, true);
+        customerHistory.createCustomerHistory(1, customer, vehicle, CustomerHistoryReview.EINS, "Description....", date, true);
 
         assertNotNull(customerHistory.getCustomerHistory(1));
     }
-
     @Test
     public void getCustomerHistory_InvalidId_ReturnsNull() {
         CustomerHistory customerHistory = new CustomerHistory();
 
-        assertNull(customerHistory.getCustomerHistory(100));
+        assertNull(customerHistory.getCustomerHistory(50));
     }
 
     @Test
     public void getCustomerFinalReview_ValidId_Success() {
         Customer customer = new Customer();
-        Vehicle vehicle = new Vehicle(1, "TestVehicle", "TestBrand", 10000, 2020, "Car");
+        Vehicle vehicle = new Vehicle(1, "Lambo-Diablo-GT", "Lamborghini", 300000, 1990, "race car");
         Date date = new Date();
         CustomerHistory customerHistory = new CustomerHistory();
-        customerHistory.createCustomerHistory(1, customer, vehicle, CustomerHistoryReview.EINS, "Description", date, true);
+        customerHistory.createCustomerHistory(1, customer, vehicle, CustomerHistoryReview.EINS, "Description.....", date, true);
 
         assertNotNull(customerHistory.getCustomerFinalReview(1));
     }
-
     @Test
     public void getCustomerFinalReview_InvalidId_ReturnsNull() {
         CustomerHistory customerHistory = new CustomerHistory();
