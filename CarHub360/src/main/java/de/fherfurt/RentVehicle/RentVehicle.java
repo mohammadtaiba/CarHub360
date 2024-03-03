@@ -6,6 +6,7 @@ import de.fherfurt.Vehicle.Vehicle;
 
 public class RentVehicle extends Vehicle
 {
+    // Attributes of the RentVehicle
     private int RentVehicleId;
     private int RentVehicleVehicleId;
     private boolean IsAvailable;
@@ -14,6 +15,7 @@ public class RentVehicle extends Vehicle
     private float Deposit;
 
 
+    // Constructor to initialize the attributes
     public RentVehicle(int vehicleId, String name, String brand, int kilometerCount, int constructionYear, String type,
                        int rentVehicleId, int rentVehicleVehicleId, boolean isAvailable, double dailyPrice, String licensePlate, float deposit)
     {
@@ -26,7 +28,7 @@ public class RentVehicle extends Vehicle
         this.Deposit = deposit;
     }
 
-
+    // Getter and setter methods for vehicle attributes
     public int getRentVehicleId() {
         return RentVehicleId;
     }
@@ -69,6 +71,11 @@ public class RentVehicle extends Vehicle
         Deposit = deposit;
     }
 
+    // Method to get details of a RentVehicle
+    /**
+     * Retrieves details of a rented vehicle.
+     * @return A string containing the details of the rented vehicle if available, or relevant information indicating unavailability.
+     */
     public String getRentVehicleDetails() {
         return
                 getVehicleDetails(getRentVehicleId())+ "\n" +

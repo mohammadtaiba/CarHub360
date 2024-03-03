@@ -34,7 +34,7 @@ public class MaintenanceTest {
         Date startDate = new Date();
         Date endDate = new Date();
         float cost = 100.0f;
-        String description = "Routine maintenance";
+        String description = "Routine-Wartung";
 
         maintenance.addMaintenance(1, vehicle, startDate, endDate, cost, description);
 
