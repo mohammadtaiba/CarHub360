@@ -8,51 +8,73 @@ import java.util.List;
 
 public class Maintenance {
 
-    // Inner class to hold payment details
-    private static class MaintenanceInfo {
-        private int maintenanceId;
-        private Vehicle vehicle;
-        private Date maintenanceStartDate;
-        private Date maintenanceEndDate;
-        private float maintenanceCost;
-        private String maintenanceDescription;
+    private int maintenanceId;
+    private Vehicle vehicle;
+    private Date maintenanceStartDate;
+    private Date maintenanceEndDate;
+    private float maintenanceCost;
+    private String maintenanceDescription;
+    private List<Maintenance> maintenances = new ArrayList<>();
 
-        // Constructor to initialize the MaintenanceInfo attributes
-        public MaintenanceInfo(int maintenanceId, Vehicle vehicle, Date maintenanceStartDate, Date maintenanceEndDate, float maintenanceCost, String maintenanceDescription) {
-            this.maintenanceId = maintenanceId;
-            this.vehicle = vehicle;
-            this.maintenanceStartDate = maintenanceStartDate;
-            this.maintenanceEndDate = maintenanceEndDate;
-            this.maintenanceCost = maintenanceCost;
-            this.maintenanceDescription = maintenanceDescription;
-        }
 
-        public int getMaintenanceId() {
-            return maintenanceId;
-        }
-
-        public Vehicle getVehicle() {
-            return vehicle;
-        }
-
-        public Date getMaintenanceStartDate() {
-            return maintenanceStartDate;
-        }
-
-        public Date getMaintenanceEndDate() {
-            return maintenanceEndDate;
-        }
-
-        public float getMaintenanceCost() {
-            return maintenanceCost;
-        }
-
-        public String getMaintenanceDescription() {
-            return maintenanceDescription;
-        }
+    // Parameterized constructor
+    public Maintenance(int maintenanceId, Vehicle vehicle, Date maintenanceStartDate, Date maintenanceEndDate,
+                       float maintenanceCost, String maintenanceDescription) {
+        this.maintenanceId = maintenanceId;
+        this.vehicle = vehicle;
+        this.maintenanceStartDate = maintenanceStartDate;
+        this.maintenanceEndDate = maintenanceEndDate;
+        this.maintenanceCost = maintenanceCost;
+        this.maintenanceDescription = maintenanceDescription;
     }
 
-    private List<MaintenanceInfo> maintenances = new ArrayList<>();
+    public int getMaintenanceId() {
+        return maintenanceId;
+    }
+
+    public void setMaintenanceId(int maintenanceId) {
+        this.maintenanceId = maintenanceId;
+    }
+
+    public Vehicle getVehicle() {
+        return vehicle;
+    }
+
+    public void setVehicle(Vehicle vehicle) {
+        this.vehicle = vehicle;
+    }
+
+    public Date getMaintenanceStartDate() {
+        return maintenanceStartDate;
+    }
+
+    public void setMaintenanceStartDate(Date maintenanceStartDate) {
+        this.maintenanceStartDate = maintenanceStartDate;
+    }
+
+    public Date getMaintenanceEndDate() {
+        return maintenanceEndDate;
+    }
+
+    public void setMaintenanceEndDate(Date maintenanceEndDate) {
+        this.maintenanceEndDate = maintenanceEndDate;
+    }
+
+    public float getMaintenanceCost() {
+        return maintenanceCost;
+    }
+
+    public void setMaintenanceCost(float maintenanceCost) {
+        this.maintenanceCost = maintenanceCost;
+    }
+
+    public String getMaintenanceDescription() {
+        return maintenanceDescription;
+    }
+
+    public void setMaintenanceDescription(String maintenanceDescription) {
+        this.maintenanceDescription = maintenanceDescription;
+    }
 
     /**
      * Adds maintenance information for a vehicle.
@@ -64,10 +86,12 @@ public class Maintenance {
      * @param maintenanceDescription Description of the maintenance performed.
      * @return true if maintenance information is successfully added, false if the vehicle provided is null.
      */
-    public boolean addMaintenance(int maintenanceId, Vehicle vehicle, Date maintenanceStartDate, Date maintenanceEndDate, float maintenanceCost, String maintenanceDescription) {
+    public boolean addMaintenance(int maintenanceId, Vehicle vehicle, Date maintenanceStartDate, Date maintenanceEndDate,
+                                  float maintenanceCost, String maintenanceDescription) {
         if (vehicle != null) {
-            MaintenanceInfo maintenanceInfo = new MaintenanceInfo(maintenanceId, vehicle, maintenanceStartDate, maintenanceEndDate, maintenanceCost, maintenanceDescription);
-            maintenances.add(maintenanceInfo);
+            Maintenance maintenance = new Maintenance(maintenanceId, vehicle, maintenanceStartDate, maintenanceEndDate,
+                    maintenanceCost, maintenanceDescription);
+            maintenances.add(maintenance);
             return true;
         } else {
             return false;
@@ -75,13 +99,12 @@ public class Maintenance {
     }
 
     /**
-     * Adds maintenance information for a vehicle.
      * Retrieves details of a maintenance identified by the maintenanceId.
      * @param maintenanceId Unique identifier for the maintenance.
      * @return A string containing the details of the maintenance if found, or a message indicating that the maintenance with the given maintenanceId was not found.
      */
     public String getMaintenanceDetails(int maintenanceId) {
-        for (MaintenanceInfo maintenance : maintenances) {
+        for (Maintenance maintenance : maintenances) {
             if (maintenance.getMaintenanceId() == maintenanceId) {
                 return "Maintenance Details: \n" +
                         "Maintenance ID: " + maintenance.getMaintenanceId() + " \n" +

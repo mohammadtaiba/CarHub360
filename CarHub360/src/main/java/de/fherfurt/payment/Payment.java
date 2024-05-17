@@ -4,16 +4,82 @@ import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Map;
 import de.fherfurt.customer.Customer;
-public class Payment
-{
-    /* Attributes */
-    private Map<Integer, PaymentDetails> payments = new HashMap<>();
 
-    /* class-Methods */
+public class Payment {
+    private int paymentId;
+    private Customer customer;
+    private int customerId;
+    private PaymentMethod paymentMethod;
+    private PaymentStatus paymentStatus;
+    private BigDecimal paymentAmount;
+    private Map<Integer, Payment> payments = new HashMap<>();
+
+
+    // Parameterized constructor
+    public Payment(int paymentId, Customer customer, int customerId, PaymentMethod paymentMethod,
+                   PaymentStatus paymentStatus, BigDecimal paymentAmount) {
+        this.paymentId = paymentId;
+        this.customer = customer;
+        this.customerId = customerId;
+        this.paymentMethod = paymentMethod;
+        this.paymentStatus = paymentStatus;
+        this.paymentAmount = paymentAmount;
+    }
+
+    // Getter and setter methods
+    public int getPaymentId() {
+        return paymentId;
+    }
+
+    public void setPaymentId(int paymentId) {
+        this.paymentId = paymentId;
+    }
+
+    public Customer getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
+    }
+
+    public int getCustomerId() {
+        return customerId;
+    }
+
+    public void setCustomerId(int customerId) {
+        this.customerId = customerId;
+    }
+
+    public PaymentMethod getPaymentMethod() {
+        return paymentMethod;
+    }
+
+    public void setPaymentMethod(PaymentMethod paymentMethod) {
+        this.paymentMethod = paymentMethod;
+    }
+
+    public PaymentStatus getPaymentStatus() {
+        return paymentStatus;
+    }
+
+    public void setPaymentStatus(PaymentStatus paymentStatus) {
+        this.paymentStatus = paymentStatus;
+    }
+
+    public BigDecimal getPaymentAmount() {
+        return paymentAmount;
+    }
+
+    public void setPaymentAmount(BigDecimal paymentAmount) {
+        this.paymentAmount = paymentAmount;
+    }
+
     /**
      * Processes a payment and adds it to the payment collection if it does not already exist and the parameters are valid.
      * @param paymentId Unique identifier for the payment.
      * @param customer The customer making the payment.
+     * @param customerId The ID of the customer making the payment.
      * @param paymentMethod The method used for payment.
      * @param paymentStatus The current status of the payment (e.g., processed, pending).
      * @param paymentAmount The amount of the payment.
@@ -22,17 +88,13 @@ public class Payment
      */
     public boolean processPayment(int paymentId, Customer customer, int customerId, PaymentMethod paymentMethod,
                                   PaymentStatus paymentStatus, BigDecimal paymentAmount) {
-
-
         if (payments.containsKey(paymentId) || paymentId <= 0 || customer == null || paymentMethod == null
-                || paymentStatus == null || paymentAmount == null || paymentAmount.compareTo(BigDecimal.ZERO) <= 0)
-        {
+                || paymentStatus == null || paymentAmount == null || paymentAmount.compareTo(BigDecimal.ZERO) <= 0) {
             return false;
         }
 
-        PaymentDetails details = new PaymentDetails(customer, customerId, paymentMethod, paymentStatus, paymentAmount);
-        payments.put(paymentId, details);
-
+        Payment payment = new Payment(paymentId, customer, customerId, paymentMethod, paymentStatus, paymentAmount);
+        payments.put(paymentId, payment);
         return true;
     }
 
@@ -41,58 +103,16 @@ public class Payment
      * @param paymentId The unique identifier of the payment.
      * @return A string containing the payment details, or a message indicating the payment ID was not found.
      */
-    public String getPaymentDetails(int paymentId)
-    {
-        PaymentDetails details = payments.get(paymentId);
-        if (details == null) {
+    public String getPaymentDetails(int paymentId) {
+        Payment payment = payments.get(paymentId);
+        if (payment == null) {
             return "Payment ID not found.";
         }
 
-        return "Payment ID: " + paymentId + "\n" +
-                "Customer: " + details.getCustomer().getCustomerDetails(details.getCustomerId()) + "\n" +
-                "Payment Method: " + details.getPaymentMethod() + "\n" +
-                "Payment Status: " + details.getPaymentStatus() + "\n" +
-                "Payment Amount: " + details.getPaymentAmount();
+        return "Payment ID: " + payment.getPaymentId() + "\n" +
+                "Customer: " + payment.getCustomer().getCustomerDetails(payment.getCustomerId()) + "\n" +
+                "Payment Method: " + payment.getPaymentMethod() + "\n" +
+                "Payment Status: " + payment.getPaymentStatus() + "\n" +
+                "Payment Amount: " + payment.getPaymentAmount();
     }
-
-    /* Inner class to hold payment details */
-    private static class PaymentDetails {
-        private Customer customer;
-        private int customerId;
-        private PaymentMethod paymentMethod;
-        private PaymentStatus paymentStatus;
-        private BigDecimal paymentAmount;
-
-        public PaymentDetails(Customer customer, int customerId, PaymentMethod paymentMethod,
-                              PaymentStatus paymentStatus, BigDecimal paymentAmount)
-        {
-            this.customer = customer;
-            this.customerId = customerId;
-            this.paymentMethod = paymentMethod;
-            this.paymentStatus = paymentStatus;
-            this.paymentAmount = paymentAmount;
-        }
-
-        /* Setter & Getter Methods of inner class-attributes */
-        public Customer getCustomer()
-        {
-            return customer;
-        }
-        public int getCustomerId() {
-            return customerId;
-        }
-        public PaymentMethod getPaymentMethod()
-        {
-            return paymentMethod;
-        }
-        public PaymentStatus getPaymentStatus()
-        {
-            return paymentStatus;
-        }
-        public BigDecimal getPaymentAmount()
-        {
-            return paymentAmount;
-        }
-    }
-
 }
