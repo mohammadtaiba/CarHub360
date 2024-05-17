@@ -1,8 +1,8 @@
 package de.fherfurt.payment;
 
 import java.math.BigDecimal;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.List;
 import de.fherfurt.customer.Customer;
 
 public class Payment {
@@ -12,8 +12,7 @@ public class Payment {
     private PaymentMethod paymentMethod;
     private PaymentStatus paymentStatus;
     private BigDecimal paymentAmount;
-    private Map<Integer, Payment> payments = new HashMap<>();
-
+    private List<Payment> payments = new ArrayList<>();
 
     // Parameterized constructor
     public Payment(int paymentId, Customer customer, int customerId, PaymentMethod paymentMethod,
@@ -24,6 +23,10 @@ public class Payment {
         this.paymentMethod = paymentMethod;
         this.paymentStatus = paymentStatus;
         this.paymentAmount = paymentAmount;
+    }
+
+    // Default constructor for initializing payments list
+    public Payment() {
     }
 
     // Getter and setter methods
@@ -88,13 +91,19 @@ public class Payment {
      */
     public boolean processPayment(int paymentId, Customer customer, int customerId, PaymentMethod paymentMethod,
                                   PaymentStatus paymentStatus, BigDecimal paymentAmount) {
-        if (payments.containsKey(paymentId) || paymentId <= 0 || customer == null || paymentMethod == null
-                || paymentStatus == null || paymentAmount == null || paymentAmount.compareTo(BigDecimal.ZERO) <= 0) {
+        if (paymentId <= 0 || customer == null || paymentMethod == null || paymentStatus == null
+                || paymentAmount == null || paymentAmount.compareTo(BigDecimal.ZERO) <= 0) {
             return false;
         }
 
+        for (Payment payment : payments) {
+            if (payment.getPaymentId() == paymentId) {
+                return false;
+            }
+        }
+
         Payment payment = new Payment(paymentId, customer, customerId, paymentMethod, paymentStatus, paymentAmount);
-        payments.put(paymentId, payment);
+        payments.add(payment);
         return true;
     }
 
@@ -104,15 +113,15 @@ public class Payment {
      * @return A string containing the payment details, or a message indicating the payment ID was not found.
      */
     public String getPaymentDetails(int paymentId) {
-        Payment payment = payments.get(paymentId);
-        if (payment == null) {
-            return "Payment ID not found.";
+        for (Payment payment : payments) {
+            if (payment.getPaymentId() == paymentId) {
+                return "Payment ID: " + payment.getPaymentId() + "\n" +
+                        "Customer: " + payment.getCustomer().getCustomerDetails(payment.getCustomerId()) + "\n" +
+                        "Payment Method: " + payment.getPaymentMethod() + "\n" +
+                        "Payment Status: " + payment.getPaymentStatus() + "\n" +
+                        "Payment Amount: " + payment.getPaymentAmount();
+            }
         }
-
-        return "Payment ID: " + payment.getPaymentId() + "\n" +
-                "Customer: " + payment.getCustomer().getCustomerDetails(payment.getCustomerId()) + "\n" +
-                "Payment Method: " + payment.getPaymentMethod() + "\n" +
-                "Payment Status: " + payment.getPaymentStatus() + "\n" +
-                "Payment Amount: " + payment.getPaymentAmount();
+        return "Payment ID not found.";
     }
 }
