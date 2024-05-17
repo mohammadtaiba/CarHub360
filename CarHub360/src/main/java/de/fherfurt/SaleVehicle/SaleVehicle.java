@@ -2,31 +2,35 @@ package de.fherfurt.SaleVehicle;
 
 import de.fherfurt.Vehicle.Vehicle;
 
-public class SaleVehicle extends Vehicle
-{
+public class SaleVehicle extends Vehicle {
     // Attributes of the SaleVehicle
-    private int VehicleId;
-    private float SalePrice;
-    private boolean IsNew;
+    private float salePrice;
+    private boolean isNew;
 
     // Constructor to initialize the attributes
     public SaleVehicle(int vehicleId, String name, String brand, int kilometerCount, int constructionYear, String type,
                        float salePrice, boolean isNew) {
         super(vehicleId, name, brand, kilometerCount, constructionYear, type);
-        this.VehicleId = vehicleId;
-        this.SalePrice = salePrice;
-        this.IsNew = isNew;
+        this.salePrice = salePrice;
+        this.isNew = isNew;
     }
 
-    // Getter and setter methods for vehicle attributes
-    public int getVehicleId() {return VehicleId; }
-    public void setVehicleId(int vehicleId) {VehicleId = vehicleId; }
+    // Getter and setter methods for SaleVehicle attributes
+    public float getSalePrice() {
+        return salePrice;
+    }
 
-    public float getSalePrice() { return SalePrice; }
-    public void setSalePrice(float salePrice) {SalePrice = salePrice;}
+    public void setSalePrice(float salePrice) {
+        this.salePrice = salePrice;
+    }
 
-    public boolean isNew() {return IsNew;}
-    public void setNew(boolean aNew) {IsNew = aNew;}
+    public boolean isNew() {
+        return isNew;
+    }
+
+    public void setNew(boolean isNew) {
+        this.isNew = isNew;
+    }
 
     // Method to get details of a SaleVehicle
     /**
@@ -35,11 +39,7 @@ public class SaleVehicle extends Vehicle
      */
     public String getSaleVehicleDetails() {
         return getVehicleDetails(getVehicleId()) + "\n" +
-                "Sale Vehicle Details: \n" +
-                "Vehicle ID: " + getVehicleId() + "\n" +
-                "Sale Price: " + getSalePrice() + "\n" +
-                "Is New: " + isNew();
+                "Sale Price: " + salePrice + "\n" +
+                "Is New: " + isNew;
     }
-
 }
-
