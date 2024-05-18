@@ -1,6 +1,7 @@
 package de.fherfurt.payment;
 
 import de.fherfurt.customer.Customer;
+import de.fherfurt.customerAddress.CustomerAddress;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -26,10 +27,15 @@ public class PaymentTest
         payment_2 = new Payment();
         payment_3 = new Payment();
 
-        customer = new Customer(); // Einzelnes Customer-Objekt für alle Tests
-        customer.createCustomer(1, "Mohammad", "Taiba", "mohammadtaiba55@gmail.com", sdf.parse("01/01/1999"), false);
-        customer.createCustomer(2, "Ahmad", "Sami", "ahmadsami55@gmail.com", sdf.parse("01/01/1992"), false);
-        customer.createCustomer(3, "Julia", "Müller", "juliamueller@gmail.com", sdf.parse("01/01/1995"), true);
+
+        CustomerAddress address1 = new CustomerAddress(1, "Anytown", "123", "Main Street1", "12345");
+        Customer.createCustomer(1, "Mohammad", "Taiba", "mohammadtaiba55@gmail.com", sdf.parse("01/01/1999"), false, address1);
+
+        CustomerAddress address2 = new CustomerAddress(2, "Anytown", "1234", "Main Street2", "12345");
+        Customer.createCustomer(2, "Ahmad", "Sami", "ahmadsami55@gmail.com", sdf.parse("01/01/1992"), false, address2);
+
+        CustomerAddress address3 = new CustomerAddress(3, "Anytown", "12345", "Main Street3", "12345");
+        Customer.createCustomer(3, "Julia", "Müller", "juliamueller@gmail.com", sdf.parse("01/01/1995"), true, address3);
 
         paymentMethod_1 = PaymentMethod.CREDIT_CARD;
         paymentMethod_2 = PaymentMethod.CASH;

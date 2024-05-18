@@ -3,17 +3,20 @@ package de.fherfurt.contract;
 import de.fherfurt.RentVehicle.RentVehicle;
 import de.fherfurt.SaleVehicle.SaleVehicle;
 import de.fherfurt.customer.Customer;
+import de.fherfurt.customerAddress.CustomerAddress;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.lang.reflect.Method;
+import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.util.Date;
+
 import static org.junit.Assert.*;
 
-public class ContractTest
-{
+public class ContractTest {
 
-    private Contract contract;
     private Customer mockCustomer;
     private RentVehicle mockRentVehicle;
     private SaleVehicle mockSaleVehicle;
@@ -23,108 +26,92 @@ public class ContractTest
 
     @Before
     public void setUp() throws Exception {
-        contract = new Contract();
 
-        mockCustomer = new Customer();
+        CustomerAddress mockAddress = new CustomerAddress(1, "Anytown", "123", "12345", "Country");
 
-        mockCustomer.createCustomer(1, "Mohammad", "Taiba", "mohammadtaiba55@gmail.com",
-                sdf.parse("01/01/1999"), false);
 
-        mockRentVehicle = new RentVehicle(1, "BMW", "M5", 50000, 2023,
-                "Sport-Car", 2, 1, true, 100, "XYZ123", 500.0f);
+        mockCustomer = new Customer(1, "Mohammad", "Taiba", "mohammadtaiba55@gmail.com",
+                sdf.parse("01/01/1999"), false, mockAddress);
 
-        mockSaleVehicle = new SaleVehicle(2, "Barcedes", "Benz", 30000, 2018, "PKW", 15000.0f, true);
+
+        mockRentVehicle = new RentVehicle(1, true, new BigDecimal("500.00"), "BMW", new BigDecimal("5"));
+
+
+        mockSaleVehicle = new SaleVehicle(2, new BigDecimal("30000.00"), true);
 
         mockStartDate = LocalDate.now().plusDays(1); // Start date in the future
         mockEndDate = mockStartDate.plusDays(7); // End date one week later
     }
 
     @Test
-    public void createPurchaseContract_Success()
-    {
-        assertTrue(contract.createPurchaseContract(1, mockCustomer,1, mockSaleVehicle));
+    public void createPurchaseContract_Success() {
+        assertTrue(Contract.createPurchaseContract(1, mockCustomer, mockSaleVehicle));
     }
 
     @Test
-    public void createRentalContract_Success()
-    {
-        assertTrue(contract.createRentalContract(2, mockCustomer, 1, mockRentVehicle, mockStartDate, mockEndDate));
+    public void createRentalContract_Success() {
+        assertTrue(Contract.createRentalContract(2, mockCustomer, mockRentVehicle, mockStartDate, mockEndDate));
     }
 
     @Test
-    public void createRentalContract_Failure()
-    {
-        assertFalse(contract.createRentalContract(2, mockCustomer,2,  mockRentVehicle, mockEndDate, mockStartDate)); // End date before start date
-        assertFalse(contract.createRentalContract(-1, mockCustomer,2, mockRentVehicle, mockEndDate, mockStartDate));
-        assertFalse(contract.createRentalContract(2, mockCustomer,0, mockRentVehicle, mockEndDate, mockStartDate));
-        assertFalse(contract.createRentalContract(2, mockCustomer,2, null, mockEndDate, mockStartDate));
-        assertFalse(contract.createRentalContract(2, mockCustomer,2, mockRentVehicle, null, mockStartDate));
-        assertFalse(contract.createRentalContract(2, mockCustomer,2, mockRentVehicle, mockEndDate, null));
+    public void createRentalContract_Failure() {
+        assertFalse(Contract.createRentalContract(2, mockCustomer, mockRentVehicle, mockEndDate, mockStartDate)); // End date before start date
+        assertFalse(Contract.createRentalContract(-1, mockCustomer, mockRentVehicle, mockStartDate, mockEndDate)); // Invalid contract ID
+        assertFalse(Contract.createRentalContract(2, mockCustomer, null, mockStartDate, mockEndDate)); // Null rent vehicle
+        assertFalse(Contract.createRentalContract(2, mockCustomer, mockRentVehicle, null, mockEndDate)); // Null start date
+        assertFalse(Contract.createRentalContract(2, mockCustomer, mockRentVehicle, mockStartDate, null)); // Null end date
     }
 
     @Test
-    public void terminateRentalContract_Success()
-    {
-        contract.createRentalContract(3, mockCustomer, 3, mockRentVehicle, mockStartDate, mockEndDate);
-        assertTrue(contract.terminateRentalContract(3));
+    public void terminateRentalContract_Success() {
+        Contract.createRentalContract(3, mockCustomer, mockRentVehicle, mockStartDate, mockEndDate);
+        assertTrue(Contract.terminateRentalContract(3));
     }
 
     @Test
-    public void terminateRentalContract_Failure()
-    {
-        contract.createRentalContract(3, mockCustomer,3,  mockRentVehicle, mockStartDate, mockEndDate);
-        assertFalse(contract.terminateRentalContract(2));
+    public void terminateRentalContract_Failure() {
+        Contract.createRentalContract(3, mockCustomer, mockRentVehicle, mockStartDate, mockEndDate);
+        assertFalse(Contract.terminateRentalContract(2)); // Non-existent contract ID
     }
 
     @Test
-    public void renewRentalContract_Success()
-    {
-        contract.createRentalContract(4, mockCustomer,4, mockRentVehicle, mockStartDate, mockEndDate);
-        assertTrue(contract.renewRentalContract(4, mockEndDate.plusDays(7)));
+    public void renewRentalContract_Success() {
+        Contract.createRentalContract(4, mockCustomer, mockRentVehicle, mockStartDate, mockEndDate);
+        assertTrue(Contract.renewRentalContract(4, mockEndDate.plusDays(7)));
     }
 
     @Test
-    public void renewRentalContract_Failure()
-    {
-        contract.createRentalContract(4, mockCustomer,4, mockRentVehicle, mockStartDate, mockEndDate);
-        assertFalse(contract.renewRentalContract(4, mockEndDate.minusDays(8)));
+    public void renewRentalContract_Failure() {
+        Contract.createRentalContract(4, mockCustomer, mockRentVehicle, mockStartDate, mockEndDate);
+        assertFalse(Contract.renewRentalContract(4, mockEndDate.minusDays(8))); // New end date before start date
     }
 
     @Test
-    public void getTotalPrice_Valid()
-    {
-        contract.createRentalContract(5, mockCustomer,5, mockRentVehicle, mockStartDate, mockEndDate);
-        double totalPrice = contract.getTotalPrice(5);
-        assertEquals(700, totalPrice, 0.01);
+    public void getTotalPrice_Valid() {
+        Contract.createRentalContract(5, mockCustomer, mockRentVehicle, mockStartDate, mockEndDate);
+        BigDecimal totalPrice = Contract.getTotalPrice(5);
+        assertEquals(BigDecimal.valueOf(3500), totalPrice); // 7 days * 500.0 per day
     }
 
     @Test
-    public void getRentalContractDetails_Valid()
-    {
-        contract.createRentalContract(6, mockCustomer,6, mockRentVehicle, mockStartDate, mockEndDate);
-        String details = contract.getRentalContractDetails(6);
+    public void getRentalContractDetails_Valid() {
+        Contract.createRentalContract(6, mockCustomer, mockRentVehicle, mockStartDate, mockEndDate);
+        String details = Contract.getRentalContractDetails(6);
         assertNotNull(details);
         assertTrue(details.contains("Contract ID: 6"));
     }
 
     @Test
-    public void getPurchaseContractDetails_Valid()
-    {
-        contract.createPurchaseContract(7, mockCustomer,7, mockSaleVehicle);
-        String details = contract.getPurchaseContractDetails(7);
-        assertNotNull(details);
-        assertTrue(details.contains("Contract ID: 7"));
+    public void validateRentalPeriod_Valid() throws Exception {
+        Method method = Contract.class.getDeclaredMethod("validateRentalPeriod", LocalDate.class, LocalDate.class);
+        method.setAccessible(true);
+        assertTrue((Boolean) method.invoke(null, mockStartDate, mockEndDate));
     }
 
     @Test
-    public void validateRentalPeriod_Valid()
-    {
-        assertTrue(Contract.validateRentalPeriod(mockStartDate, mockEndDate));
-    }
-
-    @Test
-    public void validateRentalPeriod_Invalid()
-    {
-        assertFalse(Contract.validateRentalPeriod(mockEndDate, mockStartDate));
+    public void validateRentalPeriod_Invalid() throws Exception {
+        Method method = Contract.class.getDeclaredMethod("validateRentalPeriod", LocalDate.class, LocalDate.class);
+        method.setAccessible(true);
+        assertFalse((Boolean) method.invoke(null, mockEndDate, mockStartDate));
     }
 }
