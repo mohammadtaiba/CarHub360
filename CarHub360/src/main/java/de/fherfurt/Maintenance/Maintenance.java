@@ -16,7 +16,6 @@ public class Maintenance {
     private String maintenanceDescription;
     private List<Maintenance> maintenances = new ArrayList<>();
 
-
     // Parameterized constructor
     public Maintenance(int maintenanceId, Vehicle vehicle, Date maintenanceStartDate, Date maintenanceEndDate,
                        float maintenanceCost, String maintenanceDescription) {
@@ -28,6 +27,7 @@ public class Maintenance {
         this.maintenanceDescription = maintenanceDescription;
     }
 
+    // Getter and setter methods
     public int getMaintenanceId() {
         return maintenanceId;
     }

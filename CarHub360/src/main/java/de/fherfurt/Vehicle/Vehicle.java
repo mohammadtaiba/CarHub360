@@ -84,12 +84,9 @@ public class Vehicle {
                 Vehicle newVehicle = new Vehicle(vehicleId, name, brand, kilometerCount, constructionYear, type);
                 vehicles.add(newVehicle);
                 return true;
-            } else {
-                return false;
             }
-        } else {
-            return false;
         }
+        return false;
     }
 
     // Method to update an existing vehicle

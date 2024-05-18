@@ -18,8 +18,6 @@ public class CustomerHistory {
     private boolean isForRentalCar;
     private List<CustomerHistory> customerHistoryList = new ArrayList<>();
 
-
-
     // Parameterized constructor
     public CustomerHistory(int customerHistoryId, Customer customer, Vehicle customerHistoryVehicle,
                            CustomerHistoryReview customerHistoryReview, String description,
@@ -33,6 +31,7 @@ public class CustomerHistory {
         this.isForRentalCar = isForRentalCar;
     }
 
+    // Getter and setter methods
     public int getCustomerHistoryId() {
         return customerHistoryId;
     }

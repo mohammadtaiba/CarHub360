@@ -7,12 +7,14 @@ public class SaleVehicle {
     private BigDecimal salePrice;
     private boolean isNew;
 
+    // Parameterized constructor
     public SaleVehicle(int vehicleId, BigDecimal salePrice, boolean isNew) {
         this.vehicleId = vehicleId;
         this.salePrice = salePrice;
         this.isNew = isNew;
     }
 
+    // Getter and setter methods
     public int getVehicleId() {
         return vehicleId;
     }
@@ -37,8 +39,10 @@ public class SaleVehicle {
         this.isNew = isNew;
     }
 
-    // Add the getDetails() method
+    // Method to get the details of the SaleVehicle
     public String getDetails() {
-        return "Vehicle ID: " + vehicleId + ", Sale Price: " + salePrice + ", Is New: " + isNew;
+        return "Vehicle ID: " + vehicleId +
+                ", Sale Price: " + salePrice +
+                ", Is New: " + isNew;
     }
 }

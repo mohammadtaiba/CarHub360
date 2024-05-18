@@ -9,6 +9,7 @@ public class RentVehicle {
     private String licensePlate;
     private BigDecimal deposit;
 
+    // Parameterized constructor
     public RentVehicle(int rentVehicleId, boolean isAvailable, BigDecimal dailyPrice, String licensePlate, BigDecimal deposit) {
         this.rentVehicleId = rentVehicleId;
         this.isAvailable = isAvailable;
@@ -17,6 +18,7 @@ public class RentVehicle {
         this.deposit = deposit;
     }
 
+    // Getter and setter methods
     public int getRentVehicleId() {
         return rentVehicleId;
     }
@@ -57,8 +59,10 @@ public class RentVehicle {
         this.deposit = deposit;
     }
 
-    // Add the getDetails() method
+    // Method to get the details of the RentVehicle
     public String getDetails() {
-        return "Rent Vehicle ID: " + rentVehicleId + ", Daily Price: " + dailyPrice + ", License Plate: " + licensePlate;
+        return "Rent Vehicle ID: " + rentVehicleId +
+                ", Daily Price: " + dailyPrice +
+                ", License Plate: " + licensePlate;
     }
 }
