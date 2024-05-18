@@ -1,7 +1,10 @@
 package de.fherfurt.SaleVehicle;
+
 import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
+
+import java.math.BigDecimal;
 
 public class SaleVehicleTest {
 
@@ -9,7 +12,7 @@ public class SaleVehicleTest {
 
     @Before
     public void setUp() {
-        saleVehicle = new SaleVehicle(1, "Maybach", "Mercedes", 10000, 2020, "Sportscar", 30000.0f, true);
+        saleVehicle = new SaleVehicle(1, BigDecimal.valueOf(30000.0), true);
     }
 
     @Test
@@ -25,13 +28,13 @@ public class SaleVehicleTest {
 
     @Test
     public void testGetSalePrice() {
-        assertEquals(30000.0f, saleVehicle.getSalePrice(), 0.01);
+        assertEquals(BigDecimal.valueOf(30000.0), saleVehicle.getSalePrice());
     }
 
     @Test
     public void testSetSalePrice() {
-        saleVehicle.setSalePrice(35000.0f);
-        assertEquals(35000.0f, saleVehicle.getSalePrice(), 0.01);
+        saleVehicle.setSalePrice(BigDecimal.valueOf(35000.0));
+        assertEquals(BigDecimal.valueOf(35000.0), saleVehicle.getSalePrice());
     }
 
     @Test
@@ -46,8 +49,8 @@ public class SaleVehicleTest {
     }
 
     @Test
-    public void testGetSaleVehicleDetails() {
-        String details = saleVehicle.getSaleVehicleDetails();
+    public void testGetDetails() {
+        String details = saleVehicle.getDetails();
         assertNotNull(details);
         assertTrue(details.contains("Vehicle ID: 1"));
         assertTrue(details.contains("Sale Price: 30000.0"));

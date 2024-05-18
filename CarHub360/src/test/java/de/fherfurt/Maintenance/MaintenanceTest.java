@@ -12,11 +12,6 @@ public class MaintenanceTest {
 
     private Maintenance maintenance;
 
-    @Before
-    public void setUp() {
-        maintenance = new Maintenance();
-    }
-
     @Test
     public void testAddMaintenance() {
         Vehicle vehicle = new Vehicle(1,"Astra K","Opel",10000,2020,"Kombi");

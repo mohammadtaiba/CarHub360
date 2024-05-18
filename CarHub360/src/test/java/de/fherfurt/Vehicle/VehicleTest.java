@@ -3,46 +3,56 @@ package de.fherfurt.Vehicle;
 import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
+
 public class VehicleTest {
     private Vehicle vehicle;
 
     @Before
     public void setUp() {
-        vehicle = new Vehicle(1, "Yaris", "Toyota", 15000, 2024, "Small car");
+        // Initialisieren Sie das Fahrzeug-Objekt und fügen Sie es der Liste hinzu
+        vehicle = new Vehicle(1, "Yaris", "Toyota", 15000, 2010, "Small car");
+        Vehicle.createVehicle(1, "Yaris", "Toyota", 15000, 2010, "Small car");
     }
 
     @Test
     public void testCreateVehicle() {
-        assertTrue(vehicle.CreateVehicle(1, "Yaris", "Toyota", 15000, 2010, "Small car"));
-        assertFalse(vehicle.CreateVehicle(-1, "Cayenne", "Porsche", 10000, 2024, "Sports car"));
-        assertFalse(vehicle.CreateVehicle(2, "Sedan", "Toyota", 20000, 2025, "Small car"));
+        // Gültige Fahrzeugerstellung
+        assertTrue(Vehicle.createVehicle(2, "Cayenne", "Porsche", 10000, 2010, "Sports car"));
+        // Ungültige Fahrzeugerstellung (negative ID)
+        assertFalse(Vehicle.createVehicle(-1, "Sedan", "Toyota", 20000, 2024, "Small car"));
+        // Ungültige Fahrzeugerstellung (künftiges Baujahr)
+        assertFalse(Vehicle.createVehicle(3, "Model S", "Tesla", 5000, 2025, "Electric car"));
     }
 
     @Test
     public void testUpdateVehicle() {
-        vehicle.CreateVehicle(1, "Yaris", "Toyota", 15000, 2010, "Small car");
-        assertTrue(vehicle.UpdateVehicle(1, "Yaris", "Toyota", 25000, 2010, "Small car"));
-        assertFalse(vehicle.UpdateVehicle(2, "Yaris", "Toyota", 25000, 2010, "Small car"));
+        // Fahrzeug-Update für ein bestehendes Fahrzeug
+        assertTrue(Vehicle.updateVehicle(1, "Yaris", "Toyota", 25000, 2010, "Small car"));
+        // Fahrzeug-Update für ein nicht existierendes Fahrzeug
+        assertFalse(Vehicle.updateVehicle(4, "Civic", "Honda", 20000, 2015, "Sedan"));
     }
 
     @Test
     public void testDeleteVehicle() {
-        vehicle.CreateVehicle(1, "Yaris", "Toyota", 15000, 2010, "Small car");
-        assertTrue(vehicle.DeleteVehicle(1));
-        assertFalse(vehicle.DeleteVehicle(2));
+        // Löschen eines bestehenden Fahrzeugs
+        assertTrue(Vehicle.deleteVehicle(1));
+        // Löschen eines nicht existierenden Fahrzeugs
+        assertFalse(Vehicle.deleteVehicle(2));
     }
 
     @Test
     public void testCheckNewKilometerCount() {
-        vehicle.CreateVehicle(1, "Yaris", "Toyota", 15000, 2010, "Small car");
-        assertTrue(vehicle.checkNewKilometerCount(1, 20000));
-        assertFalse(vehicle.checkNewKilometerCount(2, 20000));
-        assertFalse(vehicle.checkNewKilometerCount(1, 5000));
+        // Gültiges Kilometer-Update
+        assertTrue(Vehicle.checkNewKilometerCount(1, 20000));
+        // Ungültiges Kilometer-Update (nicht existierendes Fahrzeug)
+        assertFalse(Vehicle.checkNewKilometerCount(2, 20000));
+        // Ungültiges Kilometer-Update (niedrigere Kilometerzahl)
+        assertFalse(Vehicle.checkNewKilometerCount(1, 5000));
     }
 
     @Test
     public void testGetVehicleDetails() {
-        vehicle.CreateVehicle(1, "Yaris", "Toyota", 15000, 2010, "Small car");
+        // Details eines existierenden Fahrzeugs abrufen
         String expected = "Vehicle Details: \n" +
                 "Vehicle ID: 1\n" +
                 "Name: Yaris\n" +
@@ -50,8 +60,9 @@ public class VehicleTest {
                 "Kilometer Count: 15000\n" +
                 "Construction Year: 2010\n" +
                 "Type: Small car";
-        assertEquals(expected, vehicle.getVehicleDetails(1));
+        assertEquals(expected, Vehicle.getVehicleDetails(1));
 
-        assertEquals("Vehicle with ID 2 was not found.", vehicle.getVehicleDetails(2));
+        // Details eines nicht existierenden Fahrzeugs abrufen
+        assertEquals("Vehicle with ID 2 was not found.", Vehicle.getVehicleDetails(2));
     }
 }
