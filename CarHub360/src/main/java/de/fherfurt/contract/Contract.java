@@ -1,21 +1,20 @@
 package de.fherfurt.contract;
 
+import de.fherfurt.customer.Customer;
 import de.fherfurt.RentVehicle.RentVehicle;
 import de.fherfurt.SaleVehicle.SaleVehicle;
-import de.fherfurt.customer.Customer;
 
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
+import java.math.BigDecimal;
 
 public class Contract {
-    /* Attributes */
-    private List<Contract> contracts = new ArrayList<>();
+    private static List<Contract> contracts = new ArrayList<>();
 
     private int contractId;
     private Customer customer;
-    private int customerId;
     private SaleVehicle saleVehicle;
     private RentVehicle rentVehicle;
     private boolean isRentalContract;
@@ -23,12 +22,10 @@ public class Contract {
     private LocalDate rentalStartDate;
     private LocalDate rentalEndDate;
 
-    /* Constructor */
-    public Contract(int contractId, Customer customer, int customerId, SaleVehicle saleVehicle, RentVehicle rentVehicle, boolean isRentalContract,
-                    LocalDate contractDate, LocalDate rentalStartDate, LocalDate rentalEndDate) {
+    public Contract(int contractId, Customer customer, SaleVehicle saleVehicle, RentVehicle rentVehicle,
+                    boolean isRentalContract, LocalDate contractDate, LocalDate rentalStartDate, LocalDate rentalEndDate) {
         this.contractId = contractId;
         this.customer = customer;
-        this.customerId = customerId;
         this.saleVehicle = saleVehicle;
         this.rentVehicle = rentVehicle;
         this.isRentalContract = isRentalContract;
@@ -37,30 +34,28 @@ public class Contract {
         this.rentalEndDate = rentalEndDate;
     }
 
-    /* Methods */
-    public boolean createPurchaseContract(int contractId, Customer customer, int customerId, SaleVehicle saleVehicle) {
-        if (contractId >= 0 && customerId >= 0 && saleVehicle != null && !contractExists(contractId)) {
-            Contract contract = new Contract(contractId, customer, customerId, saleVehicle, null, false, LocalDate.now(), null, null);
+    public static boolean createPurchaseContract(int contractId, Customer customer, SaleVehicle saleVehicle) {
+        if (isValidPurchaseContract(contractId, customer, saleVehicle)) {
+            Contract contract = new Contract(contractId, customer, saleVehicle, null, false,
+                    LocalDate.now(), null, null);
             contracts.add(contract);
             return true;
         }
         return false;
     }
 
-    public boolean createRentalContract(int contractId, Customer customer, int customerId, RentVehicle rentVehicle,
-                                        LocalDate rentalStartdate, LocalDate rentalEnddate) {
-        if (contractId >= 0 && customerId >= 0 && rentVehicle != null
-                && validateRentalPeriod(rentalStartdate, rentalEnddate)
-                && !contractExists(contractId)) {
-            Contract contract = new Contract(contractId, customer, customerId, null, rentVehicle, true,
-                    LocalDate.now(), rentalStartdate, rentalEnddate);
+    public static boolean createRentalContract(int contractId, Customer customer, RentVehicle rentVehicle,
+                                               LocalDate rentalStartDate, LocalDate rentalEndDate) {
+        if (isValidRentalContract(contractId, customer, rentVehicle, rentalStartDate, rentalEndDate)) {
+            Contract contract = new Contract(contractId, customer, null, rentVehicle, true,
+                    LocalDate.now(), rentalStartDate, rentalEndDate);
             contracts.add(contract);
             return true;
         }
         return false;
     }
 
-    public boolean terminateRentalContract(int contractId) {
+    public static boolean terminateRentalContract(int contractId) {
         Contract contract = getContractById(contractId);
         if (contract != null && contract.isRentalContract) {
             contract.setRentalEndDate(LocalDate.now());
@@ -70,66 +65,73 @@ public class Contract {
         return false;
     }
 
-    public boolean renewRentalContract(int contractId, LocalDate newRentalEnddate) {
+    public static boolean renewRentalContract(int contractId, LocalDate newRentalEndDate) {
         Contract contract = getContractById(contractId);
-        if (contract != null && contract.isRentalContract && validateRentalPeriod(contract.getRentalStartDate(), newRentalEnddate)) {
-            contract.setRentalEndDate(newRentalEnddate);
+        if (contract != null && contract.isRentalContract && validateRentalPeriod(contract.getRentalStartDate(), newRentalEndDate)) {
+            contract.setRentalEndDate(newRentalEndDate);
             contract.getRentVehicle().setAvailable(false);
             return true;
         }
         return false;
     }
 
-    public double getTotalPrice(int contractId) {
+    public static BigDecimal getTotalPrice(int contractId) {
         Contract contract = getContractById(contractId);
         if (contract != null && contract.isRentalContract) {
             long daysRented = ChronoUnit.DAYS.between(contract.getRentalStartDate(), contract.getRentalEndDate());
-            return daysRented * contract.getRentVehicle().getDailyPrice();
+            return BigDecimal.valueOf(daysRented).multiply(contract.getRentVehicle().getDailyPrice());
         }
-        return -1;
+        return BigDecimal.valueOf(-1);
     }
 
-    public String getRentalContractDetails(int contractId) {
+    public static String getRentalContractDetails(int contractId) {
         Contract contract = getContractById(contractId);
         if (contract != null && contract.isRentalContract) {
-            return "Rental Contract Details: \n" +
+            return "Rental Contract Details:\n" +
                     "Contract ID: " + contractId + "\n" +
-                    "Customer: " + contract.getCustomer().getCustomerDetails(contract.getCustomerId()) + "\n" +
-                    "Rent Vehicle: " + contract.getRentVehicle().getRentVehicleDetails() + "\n" +
+                    "Customer: " + contract.getCustomer().getDetails() + "\n" +
+                    "Rent Vehicle: " + contract.getRentVehicle().getDetails() + "\n" +
                     "Rental Start Date: " + contract.getRentalStartDate() + "\n" +
                     "Rental End Date: " + contract.getRentalEndDate();
         }
         return "No rental contract found with this ID.";
     }
 
-    public String getPurchaseContractDetails(int contractId) {
+    public static String getPurchaseContractDetails(int contractId) {
         Contract contract = getContractById(contractId);
         if (contract != null && !contract.isRentalContract) {
-            return "Purchase Contract Details: \n" +
+            return "Purchase Contract Details:\n" +
                     "Contract ID: " + contractId + "\n" +
-                    "Customer: " + contract.getCustomer().getCustomerDetails(contract.getCustomerId()) + "\n" +
-                    "Sale Vehicle: " + contract.getSaleVehicle().getSaleVehicleDetails();
+                    "Customer: " + contract.getCustomer().getDetails() + "\n" +
+                    "Sale Vehicle: " + contract.getSaleVehicle().getDetails();
         }
         return "No purchase contract found with this ID.";
     }
 
-    public static boolean validateRentalPeriod(LocalDate startDate, LocalDate endDate) {
-        return startDate != null &&
-                endDate != null &&
-                !startDate.isAfter(endDate) &&
-                !startDate.isBefore(LocalDate.now());
+    private static boolean isValidPurchaseContract(int contractId, Customer customer, SaleVehicle saleVehicle) {
+        return contractId >= 0 && customer != null && saleVehicle != null && !contractExists(contractId);
     }
 
-    /* Utility Methods */
-    private boolean contractExists(int contractId) {
+    private static boolean isValidRentalContract(int contractId, Customer customer, RentVehicle rentVehicle,
+                                                 LocalDate rentalStartDate, LocalDate rentalEndDate) {
+        return contractId >= 0 && customer != null && rentVehicle != null &&
+                validateRentalPeriod(rentalStartDate, rentalEndDate) && !contractExists(contractId);
+    }
+
+    private static boolean validateRentalPeriod(LocalDate startDate, LocalDate endDate) {
+        return startDate != null && endDate != null && !startDate.isAfter(endDate) && !startDate.isBefore(LocalDate.now());
+    }
+
+    private static boolean contractExists(int contractId) {
         return contracts.stream().anyMatch(contract -> contract.getContractId() == contractId);
     }
 
-    private Contract getContractById(int contractId) {
+    private static Contract getContractById(int contractId) {
         return contracts.stream().filter(contract -> contract.getContractId() == contractId).findFirst().orElse(null);
     }
 
-    /* Setter & Getter Methods */
+    // Getter and Setter methods
+
     public int getContractId() {
         return contractId;
     }
@@ -144,14 +146,6 @@ public class Contract {
 
     public void setCustomer(Customer customer) {
         this.customer = customer;
-    }
-
-    public int getCustomerId() {
-        return customerId;
-    }
-
-    public void setCustomerId(int customerId) {
-        this.customerId = customerId;
     }
 
     public SaleVehicle getSaleVehicle() {

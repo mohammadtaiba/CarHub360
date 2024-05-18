@@ -128,4 +128,8 @@ public class Customer {
         }
         return "Customer with ID " + customerId + " was not found.";
     }
+
+    public String getDetails() {
+        return "Customer ID: " + customerId + ", Name: " + firstName + " " + lastName + ", Email: " + email;
+    }
 }

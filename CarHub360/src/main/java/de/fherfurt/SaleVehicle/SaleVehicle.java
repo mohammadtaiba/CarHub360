@@ -1,26 +1,31 @@
 package de.fherfurt.SaleVehicle;
 
-import de.fherfurt.Vehicle.Vehicle;
+import java.math.BigDecimal;
 
-public class SaleVehicle extends Vehicle {
-    // Attributes of the SaleVehicle
-    private float salePrice;
+public class SaleVehicle {
+    private int vehicleId;
+    private BigDecimal salePrice;
     private boolean isNew;
 
-    // Constructor to initialize the attributes
-    public SaleVehicle(int vehicleId, String name, String brand, int kilometerCount, int constructionYear, String type,
-                       float salePrice, boolean isNew) {
-        super(vehicleId, name, brand, kilometerCount, constructionYear, type);
+    public SaleVehicle(int vehicleId, BigDecimal salePrice, boolean isNew) {
+        this.vehicleId = vehicleId;
         this.salePrice = salePrice;
         this.isNew = isNew;
     }
 
-    // Getter and setter methods for SaleVehicle attributes
-    public float getSalePrice() {
+    public int getVehicleId() {
+        return vehicleId;
+    }
+
+    public void setVehicleId(int vehicleId) {
+        this.vehicleId = vehicleId;
+    }
+
+    public BigDecimal getSalePrice() {
         return salePrice;
     }
 
-    public void setSalePrice(float salePrice) {
+    public void setSalePrice(BigDecimal salePrice) {
         this.salePrice = salePrice;
     }
 
@@ -32,14 +37,8 @@ public class SaleVehicle extends Vehicle {
         this.isNew = isNew;
     }
 
-    // Method to get details of a SaleVehicle
-    /**
-     * Retrieves details of a vehicle that is for sale.
-     * @return A string containing the details of the vehicle if available, or relevant information indicating unavailability.
-     */
-    public String getSaleVehicleDetails() {
-        return getVehicleDetails(getVehicleId()) + "\n" +
-                "Sale Price: " + salePrice + "\n" +
-                "Is New: " + isNew;
+    // Add the getDetails() method
+    public String getDetails() {
+        return "Vehicle ID: " + vehicleId + ", Sale Price: " + salePrice + ", Is New: " + isNew;
     }
 }

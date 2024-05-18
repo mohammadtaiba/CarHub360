@@ -28,7 +28,6 @@ public class Vehicle {
     }
 
     // Getter and setter methods for vehicle attributes
-
     public int getVehicleId() {
         return vehicleId;
     }
@@ -78,7 +77,7 @@ public class Vehicle {
     }
 
     // Method to create a new vehicle
-    public boolean createVehicle(int vehicleId, String name, String brand, int kilometerCount, int constructionYear, String type) {
+    public static boolean createVehicle(int vehicleId, String name, String brand, int kilometerCount, int constructionYear, String type) {
         if (vehicleId >= 0 && name != null && brand != null && kilometerCount >= 0 && constructionYear >= 1900 && type != null) {
             Year currentYear = Year.now();
             if (currentYear.getValue() >= constructionYear) {
@@ -86,17 +85,15 @@ public class Vehicle {
                 vehicles.add(newVehicle);
                 return true;
             } else {
-
                 return false;
             }
         } else {
-
             return false;
         }
     }
 
     // Method to update an existing vehicle
-    public boolean updateVehicle(int vehicleId, String name, String brand, int kilometerCount, int constructionYear, String type) {
+    public static boolean updateVehicle(int vehicleId, String name, String brand, int kilometerCount, int constructionYear, String type) {
         for (Vehicle vehicle : vehicles) {
             if (vehicle.getVehicleId() == vehicleId) {
                 vehicle.setName(name);
@@ -111,7 +108,7 @@ public class Vehicle {
     }
 
     // Method to delete an existing vehicle
-    public boolean deleteVehicle(int vehicleId) {
+    public static boolean deleteVehicle(int vehicleId) {
         for (Vehicle vehicle : vehicles) {
             if (vehicle.getVehicleId() == vehicleId) {
                 vehicles.remove(vehicle);
@@ -122,24 +119,22 @@ public class Vehicle {
     }
 
     // Method to check and update the kilometer count of a vehicle
-    public boolean checkNewKilometerCount(int vehicleId, int newKilometerCount) {
+    public static boolean checkNewKilometerCount(int vehicleId, int newKilometerCount) {
         for (Vehicle vehicle : vehicles) {
             if (vehicle.getVehicleId() == vehicleId) {
                 if (newKilometerCount >= vehicle.getKilometerCount()) {
                     vehicle.setKilometerCount(newKilometerCount);
                     return true;
                 } else {
-
                     return false;
                 }
             }
         }
-
         return false;
     }
 
     // Method to get details of a vehicle
-    public String getVehicleDetails(int vehicleId) {
+    public static String getVehicleDetails(int vehicleId) {
         for (Vehicle vehicle : vehicles) {
             if (vehicle.getVehicleId() == vehicleId) {
                 return "Vehicle Details: \n" +
