@@ -2,7 +2,9 @@ package de.fherfurt.customerAddress;
 
 import java.util.ArrayList;
 import java.util.List;
-
+/**
+ * This class manages customer addresses, including attributes such as customer ID, city, postal code, street, and street number.
+ */
 public class CustomerAddress {
     private int customerId;
     private String city;
@@ -11,10 +13,15 @@ public class CustomerAddress {
     private String streetNumber;
     private static List<CustomerAddress> customerAddresses = new ArrayList<>();
 
-    public CustomerAddress() {
-        // Default constructor
-    }
-
+    /**
+     * Parameterized constructor to initialize customer address attributes.
+     *
+     * @param customerId   The unique ID of the customer.
+     * @param city         The city of the customer's address.
+     * @param postalCode   The postal code of the customer's address.
+     * @param street       The street of the customer's address.
+     * @param streetNumber The street number of the customer's address.
+     */
     public CustomerAddress(int customerId, String city, String postalCode, String street, String streetNumber) {
         this.customerId = customerId;
         this.city = city;
@@ -62,7 +69,16 @@ public class CustomerAddress {
     public void setStreetNumber(String streetNumber) {
         this.streetNumber = streetNumber;
     }
-
+    /**
+     * Updates the address details for a customer.
+     *
+     * @param customerId   The unique ID of the customer.
+     * @param city         The city of the customer's address.
+     * @param postalCode   The postal code of the customer's address.
+     * @param street       The street of the customer's address.
+     * @param streetNumber The street number of the customer's address.
+     * @return True if the address details are successfully updated, false otherwise.
+     */
     public static boolean updateCustomerAddress(int customerId, String city, String postalCode, String street, String streetNumber) {
         if (customerId >= 0 && city != null && postalCode != null && street != null && streetNumber != null) {
             for (CustomerAddress address : customerAddresses) {
@@ -82,7 +98,12 @@ public class CustomerAddress {
             return false;
         }
     }
-
+    /**
+     * Retrieves the details of a customer's address.
+     *
+     * @param customerId The unique ID of the customer.
+     * @return A string containing the customer's address details if found, or a message indicating that the customer does not have an address.
+     */
     public static String getCustomerAddressDetails(int customerId) {
         for (CustomerAddress addressDetails : customerAddresses) {
             if (addressDetails.getCustomerId() == customerId) {

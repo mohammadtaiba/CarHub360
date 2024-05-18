@@ -6,7 +6,10 @@ import de.fherfurt.Vehicle.Vehicle;
 import java.util.Date;
 import java.util.ArrayList;
 import java.util.List;
-
+/**
+ * This class maintains the history of actions related to customers.
+ * It includes attributes such as customer history ID, customer, vehicle involved, review, description, action date, and indication of whether it's for a rental car.
+ */
 public class CustomerHistory {
 
     private int customerHistoryId;
@@ -17,8 +20,17 @@ public class CustomerHistory {
     private Date actionDate;
     private boolean isForRentalCar;
     private List<CustomerHistory> customerHistoryList = new ArrayList<>();
-
-    // Parameterized constructor
+    /**
+     * Parameterized constructor to initialize the customer history attributes.
+     *
+     * @param customerHistoryId      The unique ID of the customer history record.
+     * @param customer               The customer associated with the action.
+     * @param customerHistoryVehicle The vehicle involved in the action.
+     * @param customerHistoryReview  The review associated with the action.
+     * @param description            A description of the action.
+     * @param actionDate             The date when the action occurred.
+     * @param isForRentalCar         Indicates whether the action pertains to a rental car.
+     */
     public CustomerHistory(int customerHistoryId, Customer customer, Vehicle customerHistoryVehicle,
                            CustomerHistoryReview customerHistoryReview, String description,
                            Date actionDate, boolean isForRentalCar) {
@@ -91,13 +103,13 @@ public class CustomerHistory {
     /**
      * Creates a new customer history record.
      *
-     * @param customerHistoryId        The unique ID of the customer history record.
-     * @param customer                 The customer associated with the action.
-     * @param customerHistoryVehicle   The vehicle involved in the action.
-     * @param customerHistoryReview    The review associated with the action.
-     * @param description              A description of the action.
-     * @param actionDate               The date when the action occurred.
-     * @param isForRentalCar           Indicates whether the action pertains to a rental car.
+     * @param customerHistoryId      The unique ID of the customer history record.
+     * @param customer               The customer associated with the action.
+     * @param customerHistoryVehicle The vehicle involved in the action.
+     * @param customerHistoryReview  The review associated with the action.
+     * @param description            A description of the action.
+     * @param actionDate             The date when the action occurred.
+     * @param isForRentalCar         Indicates whether the action pertains to a rental car.
      * @return True if the customer history record is successfully created, false otherwise.
      */
     public boolean createCustomerHistory(int customerHistoryId, Customer customer,

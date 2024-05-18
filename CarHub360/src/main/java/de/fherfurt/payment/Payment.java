@@ -4,7 +4,10 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import de.fherfurt.customer.Customer;
-
+/**
+ * This class represents a payment made by a customer.
+ * It includes attributes such as payment ID, customer details, payment method, payment status, and payment amount.
+ */
 public class Payment {
     private int paymentId;
     private Customer customer;
@@ -13,8 +16,16 @@ public class Payment {
     private PaymentStatus paymentStatus;
     private BigDecimal paymentAmount;
     private List<Payment> payments = new ArrayList<>();
-
-    // Parameterized constructor
+    /**
+     * Parameterized constructor to initialize the payment attributes.
+     *
+     * @param paymentId Unique identifier for the payment
+     * @param customer The customer making the payment
+     * @param customerId The ID of the customer making the payment
+     * @param paymentMethod The method used for payment
+     * @param paymentStatus The current status of the payment (e.g., processed, pending)
+     * @param paymentAmount The amount of the payment
+     */
     public Payment(int paymentId, Customer customer, int customerId, PaymentMethod paymentMethod,
                    PaymentStatus paymentStatus, BigDecimal paymentAmount) {
         this.paymentId = paymentId;
@@ -77,17 +88,16 @@ public class Payment {
     public void setPaymentAmount(BigDecimal paymentAmount) {
         this.paymentAmount = paymentAmount;
     }
-
     /**
      * Processes a payment and adds it to the payment collection if it does not already exist and the parameters are valid.
-     * @param paymentId Unique identifier for the payment.
-     * @param customer The customer making the payment.
-     * @param customerId The ID of the customer making the payment.
-     * @param paymentMethod The method used for payment.
-     * @param paymentStatus The current status of the payment (e.g., processed, pending).
-     * @param paymentAmount The amount of the payment.
-     * @return true if the payment is successfully processed, false if the paymentId already exists,
-     * is less than or equal to 0, or any parameters are invalid.
+     *
+     * @param paymentId Unique identifier for the payment
+     * @param customer The customer making the payment
+     * @param customerId The ID of the customer making the payment
+     * @param paymentMethod The method used for payment
+     * @param paymentStatus The current status of the payment (e.g., processed, pending)
+     * @param paymentAmount The amount of the payment
+     * @return true if the payment is successfully processed, false if the paymentId already exists, is less than or equal to 0, or any parameters are invalid
      */
     public boolean processPayment(int paymentId, Customer customer, int customerId, PaymentMethod paymentMethod,
                                   PaymentStatus paymentStatus, BigDecimal paymentAmount) {
@@ -109,8 +119,9 @@ public class Payment {
 
     /**
      * Retrieves the details of a payment in a formatted string.
-     * @param paymentId The unique identifier of the payment.
-     * @return A string containing the payment details, or a message indicating the payment ID was not found.
+     *
+     * @param paymentId The unique identifier of the payment
+     * @return A string containing the payment details, or a message indicating the payment ID was not found
      */
     public String getPaymentDetails(int paymentId) {
         for (Payment payment : payments) {

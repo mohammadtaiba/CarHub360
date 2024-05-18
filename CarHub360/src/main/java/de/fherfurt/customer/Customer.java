@@ -4,7 +4,10 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import de.fherfurt.customerAddress.CustomerAddress;
-
+/**
+ * This class represents a customer, including attributes such as customer ID, first name, last name, email, birthdate,
+ * gender, deletion status, and customer address.
+ */
 public class Customer {
     private int customerId;
     private String firstName;
@@ -16,7 +19,17 @@ public class Customer {
     private CustomerAddress customerAddress;
 
     private static List<Customer> customers = new ArrayList<>();
-
+    /**
+     * Parameterized constructor to initialize customer attributes.
+     *
+     * @param customerId     The unique ID of the customer.
+     * @param firstName      The first name of the customer.
+     * @param lastName       The last name of the customer.
+     * @param email          The email address of the customer.
+     * @param birthdate      The birthdate of the customer.
+     * @param isFemale       Indicates whether the customer is female.
+     * @param customerAddress The address of the customer.
+     */
     public Customer(int customerId, String firstName, String lastName, String email, Date birthdate, boolean isFemale, CustomerAddress customerAddress) {
         this.customerId = customerId;
         this.firstName = firstName;
@@ -91,7 +104,18 @@ public class Customer {
     public void setCustomerAddress(CustomerAddress customerAddress) {
         this.customerAddress = customerAddress;
     }
-
+    /**
+     * Creates a new customer.
+     *
+     * @param customerId     The unique ID of the customer.
+     * @param firstName      The first name of the customer.
+     * @param lastName       The last name of the customer.
+     * @param email          The email address of the customer.
+     * @param birthdate      The birthdate of the customer.
+     * @param isFemale       Indicates whether the customer is female.
+     * @param customerAddress The address of the customer.
+     * @return True if the customer is successfully created, false if a customer with the same ID or email already exists.
+     */
     public static boolean createCustomer(int customerId, String firstName, String lastName, String email, Date birthdate, boolean isFemale, CustomerAddress customerAddress) {
         for (Customer customer : customers) {
             if (customer.getCustomerId() == customerId || customer.getEmail().equals(email)) {
@@ -102,7 +126,12 @@ public class Customer {
         customers.add(newCustomer);
         return true;
     }
-
+    /**
+     * Deletes a customer.
+     *
+     * @param customerId The unique ID of the customer to be deleted.
+     * @return True if the customer is successfully deleted, false otherwise.
+     */
     public static boolean deleteCustomer(int customerId) {
         for (Customer customer : customers) {
             if (customer.getCustomerId() == customerId) {
@@ -112,7 +141,12 @@ public class Customer {
         }
         return false;
     }
-
+    /**
+     * Retrieves the details of a customer.
+     *
+     * @param customerId The unique ID of the customer.
+     * @return A string containing the details of the customer if found, or a message indicating that the customer was not found.
+     */
     public static String getCustomerDetails(int customerId) {
         for (Customer customer : customers) {
             if (customer.getCustomerId() == customerId) {
@@ -128,7 +162,11 @@ public class Customer {
         }
         return "Customer with ID " + customerId + " was not found.";
     }
-
+    /**
+     * Retrieves the basic details of the customer.
+     *
+     * @return A string containing the basic details of the customer.
+     */
     public String getDetails() {
         return "Customer ID: " + customerId + ", Name: " + firstName + " " + lastName + ", Email: " + email;
     }

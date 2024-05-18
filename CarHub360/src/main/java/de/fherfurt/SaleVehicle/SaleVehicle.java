@@ -1,13 +1,21 @@
 package de.fherfurt.SaleVehicle;
 
 import java.math.BigDecimal;
-
+/**
+ * This class represents a vehicle available for sale.
+ * It includes information such as sale price and whether it's new or used.
+ */
 public class SaleVehicle {
     private int vehicleId;
     private BigDecimal salePrice;
     private boolean isNew;
-
-    // Parameterized constructor
+    /**
+     * Constructor for SaleVehicle class.
+     *
+     * @param vehicleId Unique identifier for the vehicle
+     * @param salePrice Sale price of the vehicle
+     * @param isNew Indicates whether the vehicle is new
+     */
     public SaleVehicle(int vehicleId, BigDecimal salePrice, boolean isNew) {
         this.vehicleId = vehicleId;
         this.salePrice = salePrice;
@@ -38,8 +46,11 @@ public class SaleVehicle {
     public void setNew(boolean isNew) {
         this.isNew = isNew;
     }
-
-    // Method to get the details of the SaleVehicle
+    /**
+     * Retrieves details of the SaleVehicle.
+     *
+     * @return Details of the SaleVehicle including ID, sale price, and whether it's new or used
+     */
     public String getDetails() {
         return "Vehicle ID: " + vehicleId +
                 ", Sale Price: " + salePrice +

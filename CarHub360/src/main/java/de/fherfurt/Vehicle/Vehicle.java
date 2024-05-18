@@ -3,7 +3,10 @@ package de.fherfurt.Vehicle;
 import java.time.Year;
 import java.util.ArrayList;
 import java.util.List;
-
+/**
+ * This class represents a vehicle.
+ * It includes attributes such as vehicle ID, name, brand, kilometer count, construction year, and type.
+ */
 public class Vehicle {
 
     // Attributes of the vehicle
@@ -16,8 +19,16 @@ public class Vehicle {
 
     // List to store vehicles
     private static List<Vehicle> vehicles = new ArrayList<>();
-
-    // Constructor to initialize the vehicle attributes
+    /**
+     * Constructor to initialize the vehicle attributes.
+     *
+     * @param vehicleId Unique identifier for the vehicle
+     * @param name Name of the vehicle
+     * @param brand Brand of the vehicle
+     * @param kilometerCount Kilometer count of the vehicle
+     * @param constructionYear Construction year of the vehicle
+     * @param type Type of the vehicle
+     */
     public Vehicle(int vehicleId, String name, String brand, int kilometerCount, int constructionYear, String type) {
         this.vehicleId = vehicleId;
         this.name = name;
@@ -75,8 +86,17 @@ public class Vehicle {
     public void setType(String type) {
         this.type = type;
     }
-
-    // Method to create a new vehicle
+    /**
+     * Creates a new vehicle.
+     *
+     * @param vehicleId Unique identifier for the vehicle
+     * @param name Name of the vehicle
+     * @param brand Brand of the vehicle
+     * @param kilometerCount Kilometer count of the vehicle
+     * @param constructionYear Construction year of the vehicle
+     * @param type Type of the vehicle
+     * @return true if the vehicle is successfully created
+     */
     public static boolean createVehicle(int vehicleId, String name, String brand, int kilometerCount, int constructionYear, String type) {
         if (vehicleId >= 0 && name != null && brand != null && kilometerCount >= 0 && constructionYear >= 1900 && type != null) {
             Year currentYear = Year.now();
@@ -88,8 +108,17 @@ public class Vehicle {
         }
         return false;
     }
-
-    // Method to update an existing vehicle
+    /**
+     * Updates an existing vehicle.
+     *
+     * @param vehicleId Unique identifier for the vehicle
+     * @param name Name of the vehicle
+     * @param brand Brand of the vehicle
+     * @param kilometerCount Kilometer count of the vehicle
+     * @param constructionYear Construction year of the vehicle
+     * @param type Type of the vehicle
+     * @return true if the vehicle is successfully updated
+     */
     public static boolean updateVehicle(int vehicleId, String name, String brand, int kilometerCount, int constructionYear, String type) {
         for (Vehicle vehicle : vehicles) {
             if (vehicle.getVehicleId() == vehicleId) {
@@ -103,8 +132,12 @@ public class Vehicle {
         }
         return false;
     }
-
-    // Method to delete an existing vehicle
+    /**
+     * Deletes an existing vehicle.
+     *
+     * @param vehicleId Unique identifier for the vehicle
+     * @return true if the vehicle is successfully deleted
+     */
     public static boolean deleteVehicle(int vehicleId) {
         for (Vehicle vehicle : vehicles) {
             if (vehicle.getVehicleId() == vehicleId) {
@@ -115,7 +148,13 @@ public class Vehicle {
         return false;
     }
 
-    // Method to check and update the kilometer count of a vehicle
+    /**
+     * Checks and updates the kilometer count of a vehicle.
+     *
+     * @param vehicleId Unique identifier for the vehicle
+     * @param newKilometerCount New kilometer count of the vehicle
+     * @return true if the kilometer count is successfully updated
+     */
     public static boolean checkNewKilometerCount(int vehicleId, int newKilometerCount) {
         for (Vehicle vehicle : vehicles) {
             if (vehicle.getVehicleId() == vehicleId) {
@@ -129,8 +168,12 @@ public class Vehicle {
         }
         return false;
     }
-
-    // Method to get details of a vehicle
+    /**
+     * Retrieves details of a vehicle.
+     *
+     * @param vehicleId Unique identifier for the vehicle
+     * @return Details of the vehicle including ID, name, brand, kilometer count, construction year, and type
+     */
     public static String getVehicleDetails(int vehicleId) {
         for (Vehicle vehicle : vehicles) {
             if (vehicle.getVehicleId() == vehicleId) {

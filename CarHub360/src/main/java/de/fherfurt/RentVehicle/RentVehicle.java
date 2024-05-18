@@ -1,15 +1,25 @@
 package de.fherfurt.RentVehicle;
 
 import java.math.BigDecimal;
-
+/**
+ * This class represents a vehicle available for rent.
+ * It includes information such as daily price, availability, license plate, and deposit.
+ */
 public class RentVehicle {
     private int rentVehicleId;
     private boolean isAvailable;
     private BigDecimal dailyPrice;
     private String licensePlate;
     private BigDecimal deposit;
-
-    // Parameterized constructor
+    /**
+     * Constructor for RentVehicle class.
+     *
+     * @param rentVehicleId Unique identifier for the rent vehicle
+     * @param isAvailable Indicates whether the vehicle is available for rent
+     * @param dailyPrice Daily price for renting the vehicle
+     * @param licensePlate License plate of the vehicle
+     * @param deposit Deposit required for renting the vehicle
+     */
     public RentVehicle(int rentVehicleId, boolean isAvailable, BigDecimal dailyPrice, String licensePlate, BigDecimal deposit) {
         this.rentVehicleId = rentVehicleId;
         this.isAvailable = isAvailable;
@@ -58,8 +68,11 @@ public class RentVehicle {
     public void setDeposit(BigDecimal deposit) {
         this.deposit = deposit;
     }
-
-    // Method to get the details of the RentVehicle
+    /**
+     * Retrieves details of the RentVehicle.
+     *
+     * @return Details of the RentVehicle including ID, daily price, and license plate
+     */
     public String getDetails() {
         return "Rent Vehicle ID: " + rentVehicleId +
                 ", Daily Price: " + dailyPrice +
