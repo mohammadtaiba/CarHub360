@@ -3,6 +3,7 @@ package de.fherfurt.Vehicle;
 import java.time.Year;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Iterator;
 /**
  * This class represents a vehicle.
  * It includes attributes such as vehicle ID, name, brand, kilometer count, construction year, and type.
@@ -139,9 +140,11 @@ public class Vehicle {
      * @return true if the vehicle is successfully deleted
      */
     public static boolean deleteVehicle(int vehicleId) {
-        for (Vehicle vehicle : vehicles) {
+        Iterator<Vehicle> iterator = vehicles.iterator();
+        while (iterator.hasNext()) {
+            Vehicle vehicle = iterator.next();
             if (vehicle.getVehicleId() == vehicleId) {
-                vehicles.remove(vehicle);
+                iterator.remove();
                 return true;
             }
         }
