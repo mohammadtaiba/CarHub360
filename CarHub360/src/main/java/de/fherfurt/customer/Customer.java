@@ -184,4 +184,8 @@ public class Customer {
         return new ArrayList<>(customers); // Return a new list to avoid external modifications.
     }
 
+    public String getFullName() {
+        return this.firstName + " " + this.lastName;
+    }
+
 }

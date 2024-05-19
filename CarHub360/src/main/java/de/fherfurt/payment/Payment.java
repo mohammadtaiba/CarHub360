@@ -127,7 +127,7 @@ public class Payment {
         for (Payment payment : payments) {
             if (payment.getPaymentId() == paymentId) {
                 return "Payment ID: " + payment.getPaymentId() + "\n" +
-                        "Customer: " + payment.getCustomer().getCustomerDetails(payment.getCustomerId()) + "\n" +
+                        "Customer: " + payment.getCustomer().getFullName() + "\n" + // Assuming getFullName() returns a string with customer details
                         "Payment Method: " + payment.getPaymentMethod() + "\n" +
                         "Payment Status: " + payment.getPaymentStatus() + "\n" +
                         "Payment Amount: " + payment.getPaymentAmount();

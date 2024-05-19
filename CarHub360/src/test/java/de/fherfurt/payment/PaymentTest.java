@@ -20,16 +20,17 @@ public class PaymentTest
     private PaymentStatus paymentStatus_1, paymentStatus_2, paymentStatus_3;
     private SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 
+
+
     @Before
-    public void setUp() throws Exception
-    {
+    public void setUp() throws Exception {
         payment_1 = new Payment();
         payment_2 = new Payment();
         payment_3 = new Payment();
 
-
         CustomerAddress address1 = new CustomerAddress(1, "Anytown", "123", "Main Street1", "12345");
         Customer.createCustomer(1, "Mohammad", "Taiba", "mohammadtaiba55@gmail.com", sdf.parse("01/01/1999"), false, address1);
+        customer = Customer.getCustomerList().stream().filter(c -> c.getCustomerId() == 1).findFirst().orElse(null);
 
         CustomerAddress address2 = new CustomerAddress(2, "Anytown", "1234", "Main Street2", "12345");
         Customer.createCustomer(2, "Ahmad", "Sami", "ahmadsami55@gmail.com", sdf.parse("01/01/1992"), false, address2);
@@ -44,6 +45,8 @@ public class PaymentTest
         paymentStatus_2 = PaymentStatus.COMPLETED;
         paymentStatus_3 = PaymentStatus.COMPLETED;
     }
+
+
 
     @After
     public void tearDown() throws Exception
