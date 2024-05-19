@@ -9,50 +9,50 @@ public class VehicleTest {
 
     @Before
     public void setUp() {
-        // Initialisieren Sie das Fahrzeug-Objekt und fügen Sie es der Liste hinzu
+        // Initialize the Vehicle object and add it to the list
         vehicle = new Vehicle(1, "Yaris", "Toyota", 15000, 2010, "Small car");
         Vehicle.createVehicle(1, "Yaris", "Toyota", 15000, 2010, "Small car");
     }
 
     @Test
     public void testCreateVehicle() {
-        // Gültige Fahrzeugerstellung
+        // Valid vehicle creation
         assertTrue(Vehicle.createVehicle(2, "Cayenne", "Porsche", 10000, 2010, "Sports car"));
-        // Ungültige Fahrzeugerstellung (negative ID)
+        // Invalid vehicle creation (negative ID)
         assertFalse(Vehicle.createVehicle(-1, "Sedan", "Toyota", 20000, 2024, "Small car"));
-        // Ungültige Fahrzeugerstellung (künftiges Baujahr)
+        // Invalid vehicle creation (future construction year)
         assertFalse(Vehicle.createVehicle(3, "Model S", "Tesla", 5000, 2025, "Electric car"));
     }
 
     @Test
     public void testUpdateVehicle() {
-        // Fahrzeug-Update für ein bestehendes Fahrzeug
+        // Vehicle update for an existing vehicle
         assertTrue(Vehicle.updateVehicle(1, "Yaris", "Toyota", 25000, 2010, "Small car"));
-        // Fahrzeug-Update für ein nicht existierendes Fahrzeug
+        // Vehicle update for a non-existing vehicle
         assertFalse(Vehicle.updateVehicle(4, "Civic", "Honda", 20000, 2015, "Sedan"));
     }
 
     @Test
     public void testDeleteVehicle() {
-        // Löschen eines bestehenden Fahrzeugs
+        // Deleting an existing vehicle
         assertTrue(Vehicle.deleteVehicle(1));
-        // Löschen eines nicht existierenden Fahrzeugs
+        // Deleting a non-existing vehicle
         assertFalse(Vehicle.deleteVehicle(2));
     }
 
     @Test
     public void testCheckNewKilometerCount() {
-        // Gültiges Kilometer-Update
+        // Valid kilometer update
         assertTrue(Vehicle.checkNewKilometerCount(1, 20000));
-        // Ungültiges Kilometer-Update (nicht existierendes Fahrzeug)
+        // Invalid kilometer update (non-existing vehicle)
         assertFalse(Vehicle.checkNewKilometerCount(2, 20000));
-        // Ungültiges Kilometer-Update (niedrigere Kilometerzahl)
+        // Invalid kilometer update (lower kilometer count)
         assertFalse(Vehicle.checkNewKilometerCount(1, 5000));
     }
 
     @Test
     public void testGetVehicleDetails() {
-        // Details eines existierenden Fahrzeugs abrufen
+        // Retrieve details of an existing vehicle
         String expected = "Vehicle Details: \n" +
                 "Vehicle ID: 1\n" +
                 "Name: Yaris\n" +
@@ -62,7 +62,7 @@ public class VehicleTest {
                 "Type: Small car";
         assertEquals(expected, Vehicle.getVehicleDetails(1));
 
-        // Details eines nicht existierenden Fahrzeugs abrufen
+        // Retrieve details of a non-existing vehicle
         assertEquals("Vehicle with ID 2 was not found.", Vehicle.getVehicleDetails(2));
     }
 }

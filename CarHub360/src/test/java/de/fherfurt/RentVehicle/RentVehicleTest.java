@@ -72,6 +72,7 @@ public class RentVehicleTest {
 
     @Test
     public void testGetDetails() {
+        // Test retrieving the details of a rent vehicle
         String details = rentVehicle.getDetails();
         assertNotNull(details);
         assertTrue(details.contains("Rent Vehicle ID: 1"));
