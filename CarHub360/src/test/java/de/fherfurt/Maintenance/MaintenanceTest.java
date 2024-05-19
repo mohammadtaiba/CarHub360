@@ -3,6 +3,7 @@ package de.fherfurt.Maintenance;
 import static org.junit.Assert.*;
 
 import de.fherfurt.Vehicle.Vehicle;
+import org.junit.Before;
 import org.junit.Test;
 import java.util.Date;
 
@@ -10,6 +11,11 @@ public class MaintenanceTest {
 
     private Maintenance maintenance;
 
+    @Before
+    public void setUp() {
+        // Initialize the maintenance object before each test
+        maintenance = new Maintenance();
+    }
 
     @Test
     public void testAddMaintenance() {

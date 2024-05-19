@@ -1,10 +1,10 @@
 package de.fherfurt.Maintenance;
 
 import de.fherfurt.Vehicle.Vehicle;
-
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
 /**
  * This class represents maintenance information for vehicles.
  * It includes attributes such as maintenance ID, vehicle, maintenance start date, maintenance end date, maintenance cost, and maintenance description.
@@ -17,17 +17,14 @@ public class Maintenance {
     private Date maintenanceEndDate;
     private float maintenanceCost;
     private String maintenanceDescription;
-    private List<Maintenance> maintenances = new ArrayList<>();
-    /**
-     * Parameterized constructor to initialize the maintenance attributes.
-     *
-     * @param maintenanceId Unique identifier for the maintenance
-     * @param vehicle The vehicle for which maintenance information is being added
-     * @param maintenanceStartDate The start date of the maintenance
-     * @param maintenanceEndDate The end date of the maintenance
-     * @param maintenanceCost The cost incurred for the maintenance
-     * @param maintenanceDescription Description of the maintenance performed
-     */
+    private List<Maintenance> maintenances;
+
+    // Default constructor to initialize the maintenances list
+    public Maintenance() {
+        this.maintenances = new ArrayList<>();
+    }
+
+    // Parameterized constructor to initialize the maintenance attributes
     public Maintenance(int maintenanceId, Vehicle vehicle, Date maintenanceStartDate, Date maintenanceEndDate,
                        float maintenanceCost, String maintenanceDescription) {
         this.maintenanceId = maintenanceId;
@@ -86,17 +83,8 @@ public class Maintenance {
     public void setMaintenanceDescription(String maintenanceDescription) {
         this.maintenanceDescription = maintenanceDescription;
     }
-    /**
-     * Adds maintenance information for a vehicle.
-     *
-     * @param maintenanceId Unique identifier for the maintenance
-     * @param vehicle The vehicle for which maintenance information is being added
-     * @param maintenanceStartDate The start date of the maintenance
-     * @param maintenanceEndDate The end date of the maintenance
-     * @param maintenanceCost The cost incurred for the maintenance
-     * @param maintenanceDescription Description of the maintenance performed
-     * @return true if maintenance information is successfully added, false if the vehicle provided is null
-     */
+
+    // Method to add maintenance information for a vehicle
     public boolean addMaintenance(int maintenanceId, Vehicle vehicle, Date maintenanceStartDate, Date maintenanceEndDate,
                                   float maintenanceCost, String maintenanceDescription) {
         if (vehicle != null) {
@@ -108,12 +96,8 @@ public class Maintenance {
             return false;
         }
     }
-    /**
-     * Retrieves details of a maintenance identified by the maintenanceId.
-     *
-     * @param maintenanceId Unique identifier for the maintenance
-     * @return A string containing the details of the maintenance if found, or a message indicating that the maintenance with the given maintenanceId was not found
-     */
+
+    // Method to retrieve details of a maintenance identified by the maintenanceId
     public String getMaintenanceDetails(int maintenanceId) {
         for (Maintenance maintenance : maintenances) {
             if (maintenance.getMaintenanceId() == maintenanceId) {
