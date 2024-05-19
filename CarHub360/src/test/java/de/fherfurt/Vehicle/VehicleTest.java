@@ -37,7 +37,7 @@ public class VehicleTest {
         // Deleting an existing vehicle
         assertTrue(Vehicle.deleteVehicle(1));
         // Deleting a non-existing vehicle
-        assertFalse(Vehicle.deleteVehicle(2));
+        assertFalse(Vehicle.deleteVehicle(10));
     }
 
     @Test
