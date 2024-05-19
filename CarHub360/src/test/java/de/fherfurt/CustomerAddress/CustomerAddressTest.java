@@ -1,5 +1,6 @@
-package de.fherfurt.customerAddress;
+package de.fherfurt.CustomerAddress;
 
+import de.fherfurt.customerAddress.CustomerAddress;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;

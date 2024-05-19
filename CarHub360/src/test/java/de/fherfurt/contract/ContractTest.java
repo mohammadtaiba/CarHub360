@@ -89,9 +89,12 @@ public class ContractTest {
     @Test
     public void getTotalPrice_Valid() {
         Contract.createRentalContract(5, mockCustomer, mockRentVehicle, mockStartDate, mockEndDate);
+
         BigDecimal totalPrice = Contract.getTotalPrice(5);
-        assertEquals(BigDecimal.valueOf(3500), totalPrice); // 7 days * 500.0 per day
+        BigDecimal expectedPrice = BigDecimal.valueOf(3500.0);
+        assertTrue(totalPrice.compareTo(expectedPrice) == 0);
     }
+
 
     @Test
     public void getRentalContractDetails_Valid() {
