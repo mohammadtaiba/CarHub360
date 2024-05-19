@@ -2,6 +2,7 @@ package de.fherfurt.customer;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 import de.fherfurt.customerAddress.CustomerAddress;
 /**
@@ -133,14 +134,17 @@ public class Customer {
      * @return True if the customer is successfully deleted, false otherwise.
      */
     public static boolean deleteCustomer(int customerId) {
-        for (Customer customer : customers) {
+        Iterator<Customer> iterator = customers.iterator();
+        while (iterator.hasNext()) {
+            Customer customer = iterator.next();
             if (customer.getCustomerId() == customerId) {
-                customers.remove(customer);
+                iterator.remove();
                 return true;
             }
         }
         return false;
     }
+
     /**
      * Retrieves the details of a customer.
      *
@@ -170,4 +174,14 @@ public class Customer {
     public String getDetails() {
         return "Customer ID: " + customerId + ", Name: " + firstName + " " + lastName + ", Email: " + email;
     }
+
+    /**
+     * Retrieves the list of all customers.
+     *
+     * @return List<Customer> The list of customers.
+     */
+    public static List<Customer> getCustomerList() {
+        return new ArrayList<>(customers); // Return a new list to avoid external modifications.
+    }
+
 }
