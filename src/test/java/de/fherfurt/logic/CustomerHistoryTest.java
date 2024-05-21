@@ -41,6 +41,7 @@ public class CustomerHistoryTest {
     @Test
     public void testCreateCustomerHistory() {
         assertTrue(customerHistory.createCustomerHistory(2, customer, vehicle, CustomerHistoryReview.VIER, "New Description", new Date(), false));
+        assertTrue(customerHistory.createCustomerHistory(2, customer, vehicle, CustomerHistoryReview.VIER, "New Description", new Date(), false));
         assertFalse(customerHistory.createCustomerHistory(-1, customer, vehicle, CustomerHistoryReview.DREI, "Invalid Description", new Date(), false));
         assertFalse(customerHistory.createCustomerHistory(3, null, vehicle, CustomerHistoryReview.ZWEI, "Invalid Description", new Date(), false));
         assertFalse(customerHistory.createCustomerHistory(4, customer, null, CustomerHistoryReview.EINS, "Invalid Description", new Date(), false));
@@ -68,5 +69,39 @@ public class CustomerHistoryTest {
 
         CustomerHistoryReview invalidReview = customerHistory.getCustomerFinalReview(999);
         assertNull(invalidReview);
+    }
+
+    @Test
+    public void testGettersAndSetters() {
+        // Testing getter methods
+        assertEquals(1, customerHistory.getCustomerHistoryId());
+        assertEquals(customer, customerHistory.getCustomer());
+        assertEquals(vehicle, customerHistory.getCustomerHistoryVehicle());
+        assertEquals(review, customerHistory.getCustomerHistoryReview());
+        assertEquals("Test Description", customerHistory.getDescription());
+        assertEquals(true, customerHistory.isForRentalCar());
+        // You can add more assertions for other getters
+
+        // Testing setter methods
+        Customer newCustomer = new Customer(2, "Jane", "Doe", "jane.doe@example.com", new Date(), true, null);
+        Vehicle newVehicle = new Vehicle(2, "CarModel2", "CarBrand2", 2000, 2022, "SUV");
+        CustomerHistoryReview newReview = CustomerHistoryReview.VIER;
+        Date newDate = new Date();
+        customerHistory.setCustomerHistoryId(2);
+        customerHistory.setCustomer(newCustomer);
+        customerHistory.setCustomerHistoryVehicle(newVehicle);
+        customerHistory.setCustomerHistoryReview(newReview);
+        customerHistory.setDescription("New Description");
+        customerHistory.setActionDate(newDate);
+        customerHistory.setForRentalCar(false);
+
+        assertEquals(2, customerHistory.getCustomerHistoryId());
+        assertEquals(newCustomer, customerHistory.getCustomer());
+        assertEquals(newVehicle, customerHistory.getCustomerHistoryVehicle());
+        assertEquals(newReview, customerHistory.getCustomerHistoryReview());
+        assertEquals("New Description", customerHistory.getDescription());
+        assertEquals(newDate, customerHistory.getActionDate());
+        assertEquals(false, customerHistory.isForRentalCar());
+        // You can add more assertions for other setters
     }
 }

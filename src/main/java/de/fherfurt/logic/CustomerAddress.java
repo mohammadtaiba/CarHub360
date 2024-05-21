@@ -89,6 +89,9 @@ public class CustomerAddress {
                     address.setStreetNumber(streetNumber);
                     return true;
                 }
+                else {
+                    return false;
+                }
             }
 
             CustomerAddress addressDetails = new CustomerAddress(customerId, city, postalCode, street, streetNumber);

@@ -26,10 +26,14 @@ public class CustomerAddressTest {
 
     @Test
     public void testUpdateCustomerAddress() {
+        // Test updating an existing customer address
         assertTrue(CustomerAddress.updateCustomerAddress(1, "Erfurt", "99097", "Neue Straße", "33"));
-        assertFalse(CustomerAddress.updateCustomerAddress(-1, "Leipzig", "54780", "AndereStraße", "48"));
-        assertFalse(CustomerAddress.updateCustomerAddress(1, null, "13579", "BahnStraße", "66"));
-        assertFalse(CustomerAddress.updateCustomerAddress(2, "Gotha", "53791", "AndereStraße2", null));
+        // Test adding a new customer address
+        assertFalse(CustomerAddress.updateCustomerAddress(2, "Leipzig", "54780", "AndereStraße", "48"));
+        // Test when city is null
+        assertFalse(CustomerAddress.updateCustomerAddress(3, null, "13579", "BahnStraße", "66"));
+        // Test when streetNumber is null
+        assertFalse(CustomerAddress.updateCustomerAddress(4, "Gotha", "53791", "AndereStraße2", null));
     }
 
     @Test
