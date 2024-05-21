@@ -86,6 +86,10 @@ public class ContractTest {
         BigDecimal totalPrice = Contract.getTotalPrice(5);
         BigDecimal expectedPrice = BigDecimal.valueOf(3500.0);
         assertTrue(totalPrice.compareTo(expectedPrice) == 0);
+
+        BigDecimal totalPrice2 = Contract.getTotalPrice(90);
+        BigDecimal expectedPrice2 = BigDecimal.valueOf(-1);
+        assertTrue(totalPrice2.compareTo(expectedPrice2) == 0);
     }
 
     @Test
@@ -94,8 +98,20 @@ public class ContractTest {
         String details = Contract.getRentalContractDetails(6);
         assertNotNull(details);
         assertTrue(details.contains("Contract ID: 6"));
+        String details2 = Contract.getRentalContractDetails(100);
+        assertTrue(details2.contains("No rental contract found with this ID."));
     }
 
+    @Test
+    public void getPurchaseContractDetails_Valid() {
+        Contract.createPurchaseContract(7, mockCustomer, mockSaleVehicle);
+        String details = Contract.getPurchaseContractDetails(7);
+        assertNotNull(details);
+        assertTrue(details.contains("Contract ID: 7"));
+        String details2 = Contract.getPurchaseContractDetails(101);
+        assertTrue(details2.contains("No purchase contract found with this ID."));
+
+    }
     @Test
     public void validateRentalPeriod_Valid() throws Exception {
         Method method = Contract.class.getDeclaredMethod("validateRentalPeriod", LocalDate.class, LocalDate.class);
