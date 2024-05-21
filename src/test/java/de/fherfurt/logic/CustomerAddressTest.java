@@ -20,6 +20,7 @@ public class CustomerAddressTest {
     @After
     public void tearDown() {
         customerAddress = null;
+        // Clear the customerAddresses list after each test
         CustomerAddress.updateCustomerAddress(1, "Erfurt", "99097", "Straße", "22"); // Resetting state
     }
 
@@ -48,5 +49,28 @@ public class CustomerAddressTest {
     public void testGetCustomerAddressDetailsNotFound() {
         String details = CustomerAddress.getCustomerAddressDetails(999);
         assertEquals("Customer with ID 999 does not have an address.", details);
+    }
+
+    @Test
+    public void testGettersAndSetters() {
+        // Testing getter methods
+        assertEquals(1, customerAddress.getCustomerId());
+        assertEquals("Erfurt", customerAddress.getCity());
+        assertEquals("99097", customerAddress.getPostalCode());
+        assertEquals("Straße", customerAddress.getStreet());
+        assertEquals("22", customerAddress.getStreetNumber());
+
+        // Testing setter methods
+        customerAddress.setCustomerId(2);
+        customerAddress.setCity("Leipzig");
+        customerAddress.setPostalCode("04109");
+        customerAddress.setStreet("Musterstraße");
+        customerAddress.setStreetNumber("123");
+
+        assertEquals(2, customerAddress.getCustomerId());
+        assertEquals("Leipzig", customerAddress.getCity());
+        assertEquals("04109", customerAddress.getPostalCode());
+        assertEquals("Musterstraße", customerAddress.getStreet());
+        assertEquals("123", customerAddress.getStreetNumber());
     }
 }

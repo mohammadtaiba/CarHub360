@@ -2,7 +2,6 @@ package de.fherfurt.model;
 
 import static org.junit.Assert.*;
 
-import de.fherfurt.model.Vehicle;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -66,5 +65,31 @@ public class VehicleTest {
 
         // Retrieve details of a non-existing vehicle
         assertEquals("Vehicle with ID 2 was not found.", Vehicle.getVehicleDetails(2));
+    }
+
+    @Test
+    public void testGettersAndSetters() {
+        // Testing getter methods
+        assertEquals(1, vehicle.getVehicleId());
+        assertEquals("Yaris", vehicle.getName());
+        assertEquals("Toyota", vehicle.getBrand());
+        assertEquals(15000, vehicle.getKilometerCount());
+        assertEquals(2010, vehicle.getConstructionYear());
+        assertEquals("Small car", vehicle.getType());
+
+        // Testing setter methods
+        vehicle.setVehicleId(2);
+        vehicle.setName("Cayenne");
+        vehicle.setBrand("Porsche");
+        vehicle.setKilometerCount(10000);
+        vehicle.setConstructionYear(2015);
+        vehicle.setType("Sports car");
+
+        assertEquals(2, vehicle.getVehicleId());
+        assertEquals("Cayenne", vehicle.getName());
+        assertEquals("Porsche", vehicle.getBrand());
+        assertEquals(10000, vehicle.getKilometerCount());
+        assertEquals(2015, vehicle.getConstructionYear());
+        assertEquals("Sports car", vehicle.getType());
     }
 }

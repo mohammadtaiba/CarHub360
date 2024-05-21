@@ -1,0 +1,354 @@
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"AutoImportSettings\">\r\n    <option name=\"autoReloadType\" value=\"SELECTIVE\" />\r\n  </component>\r\n  <component name=\"ChangeListManager\">\r\n    <list default=\"true\" id=\"1ae668b4-5b17-4607-9e5f-430942c42cbc\" name=\"Changes\" comment=\"korrekt\" />\r\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\r\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\r\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\r\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\r\n  </component>\r\n  <component name=\"Git.Settings\">\r\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\r\n  </component>\r\n  <component name=\"ProjectColorInfo\">{\r\n  &quot;associatedIndex&quot;: 0\r\n}</component>\r\n  <component name=\"ProjectId\" id=\"2gk85lCFIwgL2bjQ4JDSoSwBCz4\" />\r\n  <component name=\"ProjectLevelVcsManager\">\r\n    <ConfirmationsSetting value=\"2\" id=\"Add\" />\r\n  </component>\r\n  <component name=\"ProjectViewState\">\r\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\r\n    <option name=\"showLibraryContents\" value=\"true\" />\r\n  </component>\r\n  <component name=\"PropertiesComponent\">{\r\n  &quot;keyToString&quot;: {\r\n    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,\r\n    &quot;Downloaded.Files.Path.Enabled&quot;: &quot;false&quot;,\r\n    &quot;JUnit.All in mmra (1).executor&quot;: &quot;Coverage&quot;,\r\n    &quot;JUnit.All in mmra (2).executor&quot;: &quot;Coverage&quot;,\r\n    &quot;JUnit.All in mmra (3).executor&quot;: &quot;Coverage&quot;,\r\n    &quot;JUnit.All in mmra (4).executor&quot;: &quot;Coverage&quot;,\r\n    &quot;JUnit.All in mmra (5).executor&quot;: &quot;Coverage&quot;,\r\n    &quot;JUnit.All in mmra 3.executor&quot;: &quot;Coverage&quot;,\r\n    &quot;JUnit.All in mmra.executor&quot;: &quot;Coverage&quot;,\r\n    &quot;JUnit.All in test.executor&quot;: &quot;Coverage&quot;,\r\n    &quot;JUnit.CustomerAddressTest.executor&quot;: &quot;Run&quot;,\r\n    &quot;Repository.Attach.Annotations&quot;: &quot;false&quot;,\r\n    &quot;Repository.Attach.JavaDocs&quot;: &quot;false&quot;,\r\n    &quot;Repository.Attach.Sources&quot;: &quot;false&quot;,\r\n    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,\r\n    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,\r\n    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,\r\n    &quot;git-widget-placeholder&quot;: &quot;main&quot;,\r\n    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,\r\n    &quot;last_opened_file_path&quot;: &quot;/Users/rudolfminz/Downloads/mmra 3&quot;,\r\n    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,\r\n    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,\r\n    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,\r\n    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,\r\n    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,\r\n    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,\r\n    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,\r\n    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,\r\n    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;\r\n  }\r\n}</component>\r\n  <component name=\"RecentsManager\">\r\n    <key name=\"MoveFile.RECENT_KEYS\">\r\n      <recent name=\"$PROJECT_DIR$\" />\r\n    </key>\r\n  </component>\r\n  <component name=\"RunManager\" selected=\"JUnit.All in mmra\">\r\n    <configuration name=\"All in mmra (2)\" type=\"JUnit\" factoryName=\"JUnit\" temporary=\"true\" nameIsGenerated=\"true\">\r\n      <module name=\"mmra\" />\r\n      <option name=\"PACKAGE_NAME\" value=\"\" />\r\n      <option name=\"TEST_OBJECT\" value=\"package\" />\r\n      <method v=\"2\">\r\n        <option name=\"Make\" enabled=\"true\" />\r\n      </method>\r\n    </configuration>\r\n    <configuration name=\"All in mmra (3)\" type=\"JUnit\" factoryName=\"JUnit\" temporary=\"true\" nameIsGenerated=\"true\">\r\n      <module name=\"mmra\" />\r\n      <option name=\"PACKAGE_NAME\" value=\"\" />\r\n      <option name=\"TEST_OBJECT\" value=\"package\" />\r\n      <method v=\"2\">\r\n        <option name=\"Make\" enabled=\"true\" />\r\n      </method>\r\n    </configuration>\r\n    <configuration name=\"All in mmra (4)\" type=\"JUnit\" factoryName=\"JUnit\" temporary=\"true\" nameIsGenerated=\"true\">\r\n      <module name=\"mmra\" />\r\n      <option name=\"PACKAGE_NAME\" value=\"\" />\r\n      <option name=\"TEST_OBJECT\" value=\"package\" />\r\n      <method v=\"2\">\r\n        <option name=\"Make\" enabled=\"true\" />\r\n      </method>\r\n    </configuration>\r\n    <configuration name=\"All in mmra (5)\" type=\"JUnit\" factoryName=\"JUnit\" temporary=\"true\" nameIsGenerated=\"true\">\r\n      <module name=\"mmra\" />\r\n      <option name=\"PACKAGE_NAME\" value=\"\" />\r\n      <option name=\"TEST_OBJECT\" value=\"package\" />\r\n      <method v=\"2\">\r\n        <option name=\"Make\" enabled=\"true\" />\r\n      </method>\r\n    </configuration>\r\n    <configuration name=\"All in mmra\" type=\"JUnit\" factoryName=\"JUnit\" temporary=\"true\" nameIsGenerated=\"true\">\r\n      <module name=\"mmra\" />\r\n      <option name=\"PACKAGE_NAME\" value=\"\" />\r\n      <option name=\"TEST_OBJECT\" value=\"package\" />\r\n      <method v=\"2\">\r\n        <option name=\"Make\" enabled=\"true\" />\r\n      </method>\r\n    </configuration>\r\n    <recent_temporary>\r\n      <list>\r\n        <item itemvalue=\"JUnit.All in mmra\" />\r\n        <item itemvalue=\"JUnit.All in mmra (5)\" />\r\n        <item itemvalue=\"JUnit.All in mmra (4)\" />\r\n        <item itemvalue=\"JUnit.All in mmra (3)\" />\r\n        <item itemvalue=\"JUnit.All in mmra (2)\" />\r\n      </list>\r\n    </recent_temporary>\r\n  </component>\r\n  <component name=\"SharedIndexes\">\r\n    <attachedChunks>\r\n      <set>\r\n        <option value=\"jdk-21.0.1-openjdk-21.0.1-4caba194b151-9b16c6e2\" />\r\n      </set>\r\n    </attachedChunks>\r\n  </component>\r\n  <component name=\"SpellCheckerSettings\" RuntimeDictionaries=\"0\" Folders=\"0\" CustomDictionaries=\"0\" DefaultDictionary=\"application-level\" UseSingleDictionary=\"true\" transferred=\"true\" />\r\n  <component name=\"TaskManager\">\r\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\r\n      <changelist id=\"1ae668b4-5b17-4607-9e5f-430942c42cbc\" name=\"Changes\" comment=\"\" />\r\n      <created>1716230033268</created>\r\n      <option name=\"number\" value=\"Default\" />\r\n      <option name=\"presentableId\" value=\"Default\" />\r\n      <updated>1716230033268</updated>\r\n      <workItem from=\"1716230034316\" duration=\"1944000\" />\r\n      <workItem from=\"1716232019162\" duration=\"563000\" />\r\n    </task>\r\n    <task id=\"LOCAL-00001\" summary=\"korrekt\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1716231937685</created>\r\n      <option name=\"number\" value=\"00001\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00001\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1716231937685</updated>\r\n    </task>\r\n    <option name=\"localTasksCounter\" value=\"2\" />\r\n    <servers />\r\n  </component>\r\n  <component name=\"TypeScriptGeneratedFilesManager\">\r\n    <option name=\"version\" value=\"3\" />\r\n  </component>\r\n  <component name=\"Vcs.Log.Tabs.Properties\">\r\n    <option name=\"TAB_STATES\">\r\n      <map>\r\n        <entry key=\"MAIN\">\r\n          <value>\r\n            <State />\r\n          </value>\r\n        </entry>\r\n      </map>\r\n    </option>\r\n  </component>\r\n  <component name=\"VcsManagerConfiguration\">\r\n    <option name=\"ADD_EXTERNAL_FILES_SILENTLY\" value=\"true\" />\r\n    <MESSAGE value=\"korrekt\" />\r\n    <option name=\"LAST_COMMIT_MESSAGE\" value=\"korrekt\" />\r\n  </component>\r\n  <component name=\"com.intellij.coverage.CoverageDataManagerImpl\">\r\n    <SUITE FILE_PATH=\"coverage/mmra_3$All_in_mmra__5_.ic\" NAME=\"All in mmra (5) Coverage Results\" MODIFIED=\"1716231814443\" SOURCE_PROVIDER=\"com.intellij.coverage.DefaultCoverageFileProvider\" RUNNER=\"idea\" COVERAGE_BY_TEST_ENABLED=\"false\" COVERAGE_TRACING_ENABLED=\"false\" />\r\n    <SUITE FILE_PATH=\"coverage/mmra_3$All_in_mmra__1_.ic\" NAME=\"All in mmra (1) Coverage Results\" MODIFIED=\"1716230843918\" SOURCE_PROVIDER=\"com.intellij.coverage.DefaultCoverageFileProvider\" RUNNER=\"idea\" COVERAGE_BY_TEST_ENABLED=\"false\" COVERAGE_TRACING_ENABLED=\"false\" />\r\n    <SUITE FILE_PATH=\"coverage/mmra_3$All_in_mmra_3.ic\" NAME=\"All in mmra 3 Coverage Results\" MODIFIED=\"1716230270540\" SOURCE_PROVIDER=\"com.intellij.coverage.DefaultCoverageFileProvider\" RUNNER=\"idea\" COVERAGE_BY_TEST_ENABLED=\"false\" COVERAGE_TRACING_ENABLED=\"false\" />\r\n    <SUITE FILE_PATH=\"coverage/mmra_3$All_in_test.ic\" NAME=\"All in test Coverage Results\" MODIFIED=\"1716230137118\" SOURCE_PROVIDER=\"com.intellij.coverage.DefaultCoverageFileProvider\" RUNNER=\"idea\" COVERAGE_BY_TEST_ENABLED=\"false\" COVERAGE_TRACING_ENABLED=\"false\" />\r\n    <SUITE FILE_PATH=\"coverage/mmra_3$All_in_mmra__3_.ic\" NAME=\"All in mmra (3) Coverage Results\" MODIFIED=\"1716231195461\" SOURCE_PROVIDER=\"com.intellij.coverage.DefaultCoverageFileProvider\" RUNNER=\"idea\" COVERAGE_BY_TEST_ENABLED=\"false\" COVERAGE_TRACING_ENABLED=\"false\" />\r\n    <SUITE FILE_PATH=\"coverage/mmra_3$All_in_mmra.ic\" NAME=\"All in mmra Coverage Results\" MODIFIED=\"1716231945915\" SOURCE_PROVIDER=\"com.intellij.coverage.DefaultCoverageFileProvider\" RUNNER=\"idea\" COVERAGE_BY_TEST_ENABLED=\"false\" COVERAGE_TRACING_ENABLED=\"false\" />\r\n    <SUITE FILE_PATH=\"coverage/mmra_3$All_in_mmra__4_.ic\" NAME=\"All in mmra (4) Coverage Results\" MODIFIED=\"1716231229980\" SOURCE_PROVIDER=\"com.intellij.coverage.DefaultCoverageFileProvider\" RUNNER=\"idea\" COVERAGE_BY_TEST_ENABLED=\"false\" COVERAGE_TRACING_ENABLED=\"false\" />\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	(revision 9a4c6d421b3e5873123939dd02d7c7acdfefdcdd)
++++ b/.idea/workspace.xml	(date 1716315896752)
+@@ -4,7 +4,11 @@
+     <option name="autoReloadType" value="SELECTIVE" />
+   </component>
+   <component name="ChangeListManager">
+-    <list default="true" id="1ae668b4-5b17-4607-9e5f-430942c42cbc" name="Changes" comment="korrekt" />
++    <list default="true" id="1ae668b4-5b17-4607-9e5f-430942c42cbc" name="Changes" comment="korrekt">
++      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/test/java/de/fherfurt/logic/CustomerAddressTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/de/fherfurt/logic/CustomerAddressTest.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/test/java/de/fherfurt/model/VehicleTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/de/fherfurt/model/VehicleTest.java" afterDir="false" />
++    </list>
+     <option name="SHOW_DIALOG" value="false" />
+     <option name="HIGHLIGHT_CONFLICTS" value="true" />
+     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+@@ -17,87 +21,127 @@
+   &quot;associatedIndex&quot;: 0
+ }</component>
+   <component name="ProjectId" id="2gk85lCFIwgL2bjQ4JDSoSwBCz4" />
+-  <component name="ProjectLevelVcsManager">
++  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+     <ConfirmationsSetting value="2" id="Add" />
+   </component>
+   <component name="ProjectViewState">
+     <option name="hideEmptyMiddlePackages" value="true" />
+     <option name="showLibraryContents" value="true" />
+   </component>
+-  <component name="PropertiesComponent">{
+-  &quot;keyToString&quot;: {
+-    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+-    &quot;Downloaded.Files.Path.Enabled&quot;: &quot;false&quot;,
+-    &quot;JUnit.All in mmra (1).executor&quot;: &quot;Coverage&quot;,
+-    &quot;JUnit.All in mmra (2).executor&quot;: &quot;Coverage&quot;,
+-    &quot;JUnit.All in mmra (3).executor&quot;: &quot;Coverage&quot;,
+-    &quot;JUnit.All in mmra (4).executor&quot;: &quot;Coverage&quot;,
+-    &quot;JUnit.All in mmra (5).executor&quot;: &quot;Coverage&quot;,
+-    &quot;JUnit.All in mmra 3.executor&quot;: &quot;Coverage&quot;,
+-    &quot;JUnit.All in mmra.executor&quot;: &quot;Coverage&quot;,
+-    &quot;JUnit.All in test.executor&quot;: &quot;Coverage&quot;,
+-    &quot;JUnit.CustomerAddressTest.executor&quot;: &quot;Run&quot;,
+-    &quot;Repository.Attach.Annotations&quot;: &quot;false&quot;,
+-    &quot;Repository.Attach.JavaDocs&quot;: &quot;false&quot;,
+-    &quot;Repository.Attach.Sources&quot;: &quot;false&quot;,
+-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+-    &quot;last_opened_file_path&quot;: &quot;/Users/rudolfminz/Downloads/mmra 3&quot;,
+-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+-    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+-    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
+-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
++  <component name="PropertiesComponent"><![CDATA[{
++  "keyToString": {
++    "ASKED_ADD_EXTERNAL_FILES": "true",
++    "Downloaded.Files.Path.Enabled": "false",
++    "JUnit.All in CarHub360.executor": "Run",
++    "JUnit.All in mmra (1).executor": "Coverage",
++    "JUnit.All in mmra (2).executor": "Coverage",
++    "JUnit.All in mmra (3).executor": "Coverage",
++    "JUnit.All in mmra (4).executor": "Coverage",
++    "JUnit.All in mmra (5).executor": "Coverage",
++    "JUnit.All in mmra 3.executor": "Coverage",
++    "JUnit.All in mmra.executor": "Coverage",
++    "JUnit.All in test.executor": "Coverage",
++    "JUnit.CustomerAddressTest.executor": "Coverage",
++    "JUnit.RentVehicleTest.executor": "Coverage",
++    "JUnit.SaleVehicleTest.executor": "Coverage",
++    "JUnit.VehicleTest.executor": "Coverage",
++    "JUnit.de.fherfurt in test.executor": "Coverage",
++    "JUnit.de.fherfurt.model in test.executor": "Coverage",
++    "Repository.Attach.Annotations": "false",
++    "Repository.Attach.JavaDocs": "false",
++    "Repository.Attach.Sources": "false",
++    "RunOnceActivity.OpenProjectViewOnStart": "true",
++    "RunOnceActivity.ShowReadmeOnStart": "true",
++    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
++    "git-widget-placeholder": "main",
++    "kotlin-language-version-configured": "true",
++    "last_opened_file_path": "/Users/rudolfminz/Downloads/mmra 3",
++    "node.js.detected.package.eslint": "true",
++    "node.js.detected.package.tslint": "true",
++    "node.js.selected.package.eslint": "(autodetect)",
++    "node.js.selected.package.tslint": "(autodetect)",
++    "nodejs_package_manager_path": "npm",
++    "project.structure.last.edited": "Modules",
++    "project.structure.proportion": "0.0",
++    "project.structure.side.proportion": "0.0",
++    "vue.rearranger.settings.migration": "true"
+   }
+-}</component>
++}]]></component>
+   <component name="RecentsManager">
+     <key name="MoveFile.RECENT_KEYS">
+       <recent name="$PROJECT_DIR$" />
+     </key>
+   </component>
+-  <component name="RunManager" selected="JUnit.All in mmra">
+-    <configuration name="All in mmra (2)" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+-      <module name="mmra" />
+-      <option name="PACKAGE_NAME" value="" />
+-      <option name="TEST_OBJECT" value="package" />
++  <component name="RunManager" selected="JUnit.de.fherfurt in test">
++    <configuration name="CustomerAddressTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
++      <module name="test" />
++      <extension name="coverage">
++        <pattern>
++          <option name="PATTERN" value="de.fherfurt.logic.*" />
++          <option name="ENABLED" value="true" />
++        </pattern>
++      </extension>
++      <option name="PACKAGE_NAME" value="de.fherfurt.logic" />
++      <option name="MAIN_CLASS_NAME" value="de.fherfurt.logic.CustomerAddressTest" />
++      <option name="TEST_OBJECT" value="class" />
+       <method v="2">
+         <option name="Make" enabled="true" />
+       </method>
+     </configuration>
+-    <configuration name="All in mmra (3)" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+-      <module name="mmra" />
+-      <option name="PACKAGE_NAME" value="" />
+-      <option name="TEST_OBJECT" value="package" />
++    <configuration name="RentVehicleTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
++      <module name="test" />
++      <extension name="coverage">
++        <pattern>
++          <option name="PATTERN" value="de.fherfurt.logic.*" />
++          <option name="ENABLED" value="true" />
++        </pattern>
++      </extension>
++      <option name="PACKAGE_NAME" value="de.fherfurt.logic" />
++      <option name="MAIN_CLASS_NAME" value="de.fherfurt.logic.RentVehicleTest" />
++      <option name="TEST_OBJECT" value="class" />
+       <method v="2">
+         <option name="Make" enabled="true" />
+       </method>
+     </configuration>
+-    <configuration name="All in mmra (4)" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+-      <module name="mmra" />
+-      <option name="PACKAGE_NAME" value="" />
+-      <option name="TEST_OBJECT" value="package" />
++    <configuration name="SaleVehicleTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
++      <module name="test" />
++      <extension name="coverage">
++        <pattern>
++          <option name="PATTERN" value="de.fherfurt.logic.*" />
++          <option name="ENABLED" value="true" />
++        </pattern>
++      </extension>
++      <option name="PACKAGE_NAME" value="de.fherfurt.logic" />
++      <option name="MAIN_CLASS_NAME" value="de.fherfurt.logic.SaleVehicleTest" />
++      <option name="TEST_OBJECT" value="class" />
+       <method v="2">
+         <option name="Make" enabled="true" />
+       </method>
+     </configuration>
+-    <configuration name="All in mmra (5)" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+-      <module name="mmra" />
+-      <option name="PACKAGE_NAME" value="" />
+-      <option name="TEST_OBJECT" value="package" />
++    <configuration name="VehicleTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
++      <module name="test" />
++      <extension name="coverage">
++        <pattern>
++          <option name="PATTERN" value="de.fherfurt.model.*" />
++          <option name="ENABLED" value="true" />
++        </pattern>
++      </extension>
++      <option name="PACKAGE_NAME" value="de.fherfurt.model" />
++      <option name="MAIN_CLASS_NAME" value="de.fherfurt.model.VehicleTest" />
++      <option name="TEST_OBJECT" value="class" />
+       <method v="2">
+         <option name="Make" enabled="true" />
+       </method>
+     </configuration>
+-    <configuration name="All in mmra" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+-      <module name="mmra" />
+-      <option name="PACKAGE_NAME" value="" />
++    <configuration name="de.fherfurt in test" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
++      <module name="test" />
++      <extension name="coverage">
++        <pattern>
++          <option name="PATTERN" value="de.fherfurt.*" />
++          <option name="ENABLED" value="true" />
++        </pattern>
++      </extension>
++      <option name="PACKAGE_NAME" value="de.fherfurt" />
+       <option name="TEST_OBJECT" value="package" />
+       <method v="2">
+         <option name="Make" enabled="true" />
+@@ -105,11 +149,11 @@
+     </configuration>
+     <recent_temporary>
+       <list>
+-        <item itemvalue="JUnit.All in mmra" />
+-        <item itemvalue="JUnit.All in mmra (5)" />
+-        <item itemvalue="JUnit.All in mmra (4)" />
+-        <item itemvalue="JUnit.All in mmra (3)" />
+-        <item itemvalue="JUnit.All in mmra (2)" />
++        <item itemvalue="JUnit.de.fherfurt in test" />
++        <item itemvalue="JUnit.CustomerAddressTest" />
++        <item itemvalue="JUnit.SaleVehicleTest" />
++        <item itemvalue="JUnit.RentVehicleTest" />
++        <item itemvalue="JUnit.VehicleTest" />
+       </list>
+     </recent_temporary>
+   </component>
+@@ -117,6 +161,7 @@
+     <attachedChunks>
+       <set>
+         <option value="jdk-21.0.1-openjdk-21.0.1-4caba194b151-9b16c6e2" />
++        <option value="jdk-22-openjdk-22-f644763e9732-8c5c9ae5" />
+       </set>
+     </attachedChunks>
+   </component>
+@@ -162,12 +207,24 @@
+     <option name="LAST_COMMIT_MESSAGE" value="korrekt" />
+   </component>
+   <component name="com.intellij.coverage.CoverageDataManagerImpl">
+-    <SUITE FILE_PATH="coverage/mmra_3$All_in_mmra__5_.ic" NAME="All in mmra (5) Coverage Results" MODIFIED="1716231814443" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
++    <SUITE FILE_PATH="coverage/mmra$VehicleTest.ic" NAME="VehicleTest Coverage Results" MODIFIED="1716315505760" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
++      <FILTER>de.fherfurt.model.*</FILTER>
++    </SUITE>
++    <SUITE FILE_PATH="coverage/mmra_3$All_in_mmra__3_.ic" NAME="All in mmra (3) Coverage Results" MODIFIED="1716231195461" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
++    <SUITE FILE_PATH="coverage/mmra_3$All_in_mmra_3.ic" NAME="All in mmra 3 Coverage Results" MODIFIED="1716230270540" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
++    <SUITE FILE_PATH="coverage/mmra$SaleVehicleTest.ic" NAME="SaleVehicleTest Coverage Results" MODIFIED="1716315538046" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
++      <FILTER>de.fherfurt.logic.*</FILTER>
++    </SUITE>
+     <SUITE FILE_PATH="coverage/mmra_3$All_in_mmra__1_.ic" NAME="All in mmra (1) Coverage Results" MODIFIED="1716230843918" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+-    <SUITE FILE_PATH="coverage/mmra_3$All_in_mmra_3.ic" NAME="All in mmra 3 Coverage Results" MODIFIED="1716230270540" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
++    <SUITE FILE_PATH="coverage/mmra_3$All_in_mmra.ic" NAME="All in mmra Coverage Results" MODIFIED="1716231945915" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
++    <SUITE FILE_PATH="coverage/mmra_3$All_in_mmra__5_.ic" NAME="All in mmra (5) Coverage Results" MODIFIED="1716231814443" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+     <SUITE FILE_PATH="coverage/mmra_3$All_in_test.ic" NAME="All in test Coverage Results" MODIFIED="1716230137118" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+-    <SUITE FILE_PATH="coverage/mmra_3$All_in_mmra__3_.ic" NAME="All in mmra (3) Coverage Results" MODIFIED="1716231195461" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+-    <SUITE FILE_PATH="coverage/mmra_3$All_in_mmra.ic" NAME="All in mmra Coverage Results" MODIFIED="1716231945915" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+     <SUITE FILE_PATH="coverage/mmra_3$All_in_mmra__4_.ic" NAME="All in mmra (4) Coverage Results" MODIFIED="1716231229980" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
++    <SUITE FILE_PATH="coverage/mmra$de_fherfurt_in_test.ic" NAME="de.fherfurt in test Coverage Results" MODIFIED="1716315552916" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
++      <FILTER>de.fherfurt.*</FILTER>
++    </SUITE>
++    <SUITE FILE_PATH="coverage/mmra$RentVehicleTest.ic" NAME="RentVehicleTest Coverage Results" MODIFIED="1716315521461" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
++      <FILTER>de.fherfurt.logic.*</FILTER>
++    </SUITE>
+   </component>
+ </project>
+\ No newline at end of file
+Index: src/test/java/de/fherfurt/logic/CustomerAddressTest.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package de.fherfurt.logic;\r\n\r\nimport de.fherfurt.logic.CustomerAddress;\r\nimport org.junit.After;\r\nimport org.junit.Before;\r\nimport org.junit.Test;\r\n\r\nimport static org.junit.Assert.*;\r\n\r\npublic class CustomerAddressTest {\r\n\r\n    private CustomerAddress customerAddress;\r\n\r\n    @Before\r\n    public void setUp() {\r\n        customerAddress = new CustomerAddress(1, \"Erfurt\", \"99097\", \"Straße\", \"22\");\r\n        CustomerAddress.updateCustomerAddress(1, \"Erfurt\", \"99097\", \"Straße\", \"22\");\r\n    }\r\n\r\n    @After\r\n    public void tearDown() {\r\n        customerAddress = null;\r\n        CustomerAddress.updateCustomerAddress(1, \"Erfurt\", \"99097\", \"Straße\", \"22\"); // Resetting state\r\n    }\r\n\r\n    @Test\r\n    public void testUpdateCustomerAddress() {\r\n        assertTrue(CustomerAddress.updateCustomerAddress(1, \"Erfurt\", \"99097\", \"Neue Straße\", \"33\"));\r\n        assertFalse(CustomerAddress.updateCustomerAddress(-1, \"Leipzig\", \"54780\", \"AndereStraße\", \"48\"));\r\n        assertFalse(CustomerAddress.updateCustomerAddress(1, null, \"13579\", \"BahnStraße\", \"66\"));\r\n        assertFalse(CustomerAddress.updateCustomerAddress(2, \"Gotha\", \"53791\", \"AndereStraße2\", null));\r\n    }\r\n\r\n    @Test\r\n    public void testGetCustomerAddressDetails() {\r\n        CustomerAddress.updateCustomerAddress(1, \"Erfurt\", \"99097\", \"Straße\", \"22\");\r\n        String details = CustomerAddress.getCustomerAddressDetails(1);\r\n        assertNotNull(details);\r\n        assertTrue(details.contains(\"Erfurt\"));\r\n        assertTrue(details.contains(\"99097\"));\r\n        assertTrue(details.contains(\"Straße\"));\r\n        assertTrue(details.contains(\"22\"));\r\n        assertFalse(details.contains(\"Leipzig\"));\r\n        assertFalse(details.contains(\"Gotha\"));\r\n    }\r\n\r\n    @Test\r\n    public void testGetCustomerAddressDetailsNotFound() {\r\n        String details = CustomerAddress.getCustomerAddressDetails(999);\r\n        assertEquals(\"Customer with ID 999 does not have an address.\", details);\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/test/java/de/fherfurt/logic/CustomerAddressTest.java b/src/test/java/de/fherfurt/logic/CustomerAddressTest.java
+--- a/src/test/java/de/fherfurt/logic/CustomerAddressTest.java	(revision 9a4c6d421b3e5873123939dd02d7c7acdfefdcdd)
++++ b/src/test/java/de/fherfurt/logic/CustomerAddressTest.java	(date 1716315813477)
+@@ -20,6 +20,7 @@
+     @After
+     public void tearDown() {
+         customerAddress = null;
++        // Clear the customerAddresses list after each test
+         CustomerAddress.updateCustomerAddress(1, "Erfurt", "99097", "Straße", "22"); // Resetting state
+     }
+ 
+@@ -49,4 +50,27 @@
+         String details = CustomerAddress.getCustomerAddressDetails(999);
+         assertEquals("Customer with ID 999 does not have an address.", details);
+     }
++
++    @Test
++    public void testGettersAndSetters() {
++        // Testing getter methods
++        assertEquals(1, customerAddress.getCustomerId());
++        assertEquals("Erfurt", customerAddress.getCity());
++        assertEquals("99097", customerAddress.getPostalCode());
++        assertEquals("Straße", customerAddress.getStreet());
++        assertEquals("22", customerAddress.getStreetNumber());
++
++        // Testing setter methods
++        customerAddress.setCustomerId(2);
++        customerAddress.setCity("Leipzig");
++        customerAddress.setPostalCode("04109");
++        customerAddress.setStreet("Musterstraße");
++        customerAddress.setStreetNumber("123");
++
++        assertEquals(2, customerAddress.getCustomerId());
++        assertEquals("Leipzig", customerAddress.getCity());
++        assertEquals("04109", customerAddress.getPostalCode());
++        assertEquals("Musterstraße", customerAddress.getStreet());
++        assertEquals("123", customerAddress.getStreetNumber());
++    }
+ }
+Index: src/test/java/de/fherfurt/model/VehicleTest.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package de.fherfurt.model;\r\n\r\nimport static org.junit.Assert.*;\r\n\r\nimport de.fherfurt.model.Vehicle;\r\nimport org.junit.Before;\r\nimport org.junit.Test;\r\n\r\npublic class VehicleTest {\r\n    private Vehicle vehicle;\r\n\r\n    @Before\r\n    public void setUp() {\r\n        // Initialize the Vehicle object and add it to the list\r\n        vehicle = new Vehicle(1, \"Yaris\", \"Toyota\", 15000, 2010, \"Small car\");\r\n        Vehicle.createVehicle(1, \"Yaris\", \"Toyota\", 15000, 2010, \"Small car\");\r\n    }\r\n\r\n    @Test\r\n    public void testCreateVehicle() {\r\n        // Valid vehicle creation\r\n        assertTrue(Vehicle.createVehicle(2, \"Cayenne\", \"Porsche\", 10000, 2010, \"Sports car\"));\r\n        // Invalid vehicle creation (negative ID)\r\n        assertFalse(Vehicle.createVehicle(-1, \"Sedan\", \"Toyota\", 20000, 2024, \"Small car\"));\r\n        // Invalid vehicle creation (future construction year)\r\n        assertFalse(Vehicle.createVehicle(3, \"Model S\", \"Tesla\", 5000, 2025, \"Electric car\"));\r\n    }\r\n\r\n    @Test\r\n    public void testUpdateVehicle() {\r\n        // Vehicle update for an existing vehicle\r\n        assertTrue(Vehicle.updateVehicle(1, \"Yaris\", \"Toyota\", 25000, 2010, \"Small car\"));\r\n        // Vehicle update for a non-existing vehicle\r\n        assertFalse(Vehicle.updateVehicle(4, \"Civic\", \"Honda\", 20000, 2015, \"Sedan\"));\r\n    }\r\n\r\n    @Test\r\n    public void testDeleteVehicle() {\r\n        // Deleting an existing vehicle\r\n        assertTrue(Vehicle.deleteVehicle(1));\r\n        // Deleting a non-existing vehicle\r\n        assertFalse(Vehicle.deleteVehicle(10));\r\n    }\r\n\r\n    @Test\r\n    public void testCheckNewKilometerCount() {\r\n        // Valid kilometer update\r\n        assertTrue(Vehicle.checkNewKilometerCount(1, 20000));\r\n        // Invalid kilometer update (non-existing vehicle)\r\n        assertFalse(Vehicle.checkNewKilometerCount(2, 20000));\r\n        // Invalid kilometer update (lower kilometer count)\r\n        assertFalse(Vehicle.checkNewKilometerCount(1, 5000));\r\n    }\r\n\r\n    @Test\r\n    public void testGetVehicleDetails() {\r\n        // Retrieve details of an existing vehicle\r\n        String expected = \"Vehicle Details: \\n\" +\r\n                \"Vehicle ID: 1\\n\" +\r\n                \"Name: Yaris\\n\" +\r\n                \"Brand: Toyota\\n\" +\r\n                \"Kilometer Count: 15000\\n\" +\r\n                \"Construction Year: 2010\\n\" +\r\n                \"Type: Small car\";\r\n        assertEquals(expected, Vehicle.getVehicleDetails(1));\r\n\r\n        // Retrieve details of a non-existing vehicle\r\n        assertEquals(\"Vehicle with ID 2 was not found.\", Vehicle.getVehicleDetails(2));\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/test/java/de/fherfurt/model/VehicleTest.java b/src/test/java/de/fherfurt/model/VehicleTest.java
+--- a/src/test/java/de/fherfurt/model/VehicleTest.java	(revision 9a4c6d421b3e5873123939dd02d7c7acdfefdcdd)
++++ b/src/test/java/de/fherfurt/model/VehicleTest.java	(date 1716315501719)
+@@ -2,7 +2,6 @@
+ 
+ import static org.junit.Assert.*;
+ 
+-import de.fherfurt.model.Vehicle;
+ import org.junit.Before;
+ import org.junit.Test;
+ 
+@@ -67,4 +66,30 @@
+         // Retrieve details of a non-existing vehicle
+         assertEquals("Vehicle with ID 2 was not found.", Vehicle.getVehicleDetails(2));
+     }
++
++    @Test
++    public void testGettersAndSetters() {
++        // Testing getter methods
++        assertEquals(1, vehicle.getVehicleId());
++        assertEquals("Yaris", vehicle.getName());
++        assertEquals("Toyota", vehicle.getBrand());
++        assertEquals(15000, vehicle.getKilometerCount());
++        assertEquals(2010, vehicle.getConstructionYear());
++        assertEquals("Small car", vehicle.getType());
++
++        // Testing setter methods
++        vehicle.setVehicleId(2);
++        vehicle.setName("Cayenne");
++        vehicle.setBrand("Porsche");
++        vehicle.setKilometerCount(10000);
++        vehicle.setConstructionYear(2015);
++        vehicle.setType("Sports car");
++
++        assertEquals(2, vehicle.getVehicleId());
++        assertEquals("Cayenne", vehicle.getName());
++        assertEquals("Porsche", vehicle.getBrand());
++        assertEquals(10000, vehicle.getKilometerCount());
++        assertEquals(2015, vehicle.getConstructionYear());
++        assertEquals("Sports car", vehicle.getType());
++    }
+ }
