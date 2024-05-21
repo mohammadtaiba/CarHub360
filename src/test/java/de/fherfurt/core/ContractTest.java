@@ -1,6 +1,5 @@
 package de.fherfurt.core;
 
-import de.fherfurt.core.Contract;
 import de.fherfurt.logic.RentVehicle;
 import de.fherfurt.logic.SaleVehicle;
 import de.fherfurt.core.Customer;
@@ -10,6 +9,7 @@ import org.junit.Test;
 
 import java.lang.reflect.Method;
 import java.math.BigDecimal;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 
@@ -26,17 +26,10 @@ public class ContractTest {
 
     @Before
     public void setUp() throws Exception {
-
         CustomerAddress mockAddress = new CustomerAddress(1, "Anytown", "123", "12345", "Country");
-
-
         mockCustomer = new Customer(1, "Mohammad", "Taiba", "mohammadtaiba55@gmail.com",
                 sdf.parse("01/01/1999"), false, mockAddress);
-
-
         mockRentVehicle = new RentVehicle(1, true, new BigDecimal("500.00"), "BMW", new BigDecimal("5"));
-
-
         mockSaleVehicle = new SaleVehicle(2, new BigDecimal("30000.00"), true);
 
         mockStartDate = LocalDate.now().plusDays(1); // Start date in the future
@@ -95,7 +88,6 @@ public class ContractTest {
         assertTrue(totalPrice.compareTo(expectedPrice) == 0);
     }
 
-
     @Test
     public void getRentalContractDetails_Valid() {
         Contract.createRentalContract(6, mockCustomer, mockRentVehicle, mockStartDate, mockEndDate);
@@ -116,5 +108,51 @@ public class ContractTest {
         Method method = Contract.class.getDeclaredMethod("validateRentalPeriod", LocalDate.class, LocalDate.class);
         method.setAccessible(true);
         assertFalse((Boolean) method.invoke(null, mockEndDate, mockStartDate));
+    }
+
+    // Getter and Setter tests
+    @Test
+    public void testGettersAndSetters() throws ParseException {
+        Contract contract = new Contract(1, mockCustomer, mockSaleVehicle, mockRentVehicle, false,
+                LocalDate.now(), mockStartDate, mockEndDate);
+
+        // Test contractId
+        contract.setContractId(2);
+        assertEquals(2, contract.getContractId());
+
+        // Test customer
+        Customer newCustomer = new Customer(2, "John", "Doe", "john.doe@example.com",
+                sdf.parse("02/02/1990"), false, new CustomerAddress(2, "AnotherTown", "456", "67890", "Country"));
+        contract.setCustomer(newCustomer);
+        assertEquals(newCustomer, contract.getCustomer());
+
+        // Test saleVehicle
+        SaleVehicle newSaleVehicle = new SaleVehicle(3, new BigDecimal("25000.00"), true);
+        contract.setSaleVehicle(newSaleVehicle);
+        assertEquals(newSaleVehicle, contract.getSaleVehicle());
+
+        // Test rentVehicle
+        RentVehicle newRentVehicle = new RentVehicle(4, true, new BigDecimal("600.00"), "Audi", new BigDecimal("6"));
+        contract.setRentVehicle(newRentVehicle);
+        assertEquals(newRentVehicle, contract.getRentVehicle());
+
+        // Test isRentalContract
+        contract.setRentalContract(true);
+        assertTrue(contract.isRentalContract());
+
+        // Test contractDate
+        LocalDate newContractDate = LocalDate.now().plusDays(1);
+        contract.setContractDate(newContractDate);
+        assertEquals(newContractDate, contract.getContractDate());
+
+        // Test rentalStartDate
+        LocalDate newRentalStartDate = LocalDate.now().plusDays(2);
+        contract.setRentalStartDate(newRentalStartDate);
+        assertEquals(newRentalStartDate, contract.getRentalStartDate());
+
+        // Test rentalEndDate
+        LocalDate newRentalEndDate = LocalDate.now().plusDays(3);
+        contract.setRentalEndDate(newRentalEndDate);
+        assertEquals(newRentalEndDate, contract.getRentalEndDate());
     }
 }

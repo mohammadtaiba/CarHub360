@@ -14,16 +14,13 @@ import java.text.SimpleDateFormat;
 
 import static org.junit.Assert.*;
 
-public class PaymentTest
-{
+public class PaymentTest {
 
     private Payment payment_1, payment_2, payment_3;
     private Customer customer;
     private PaymentMethod paymentMethod_1, paymentMethod_2, paymentMethod_3;
     private PaymentStatus paymentStatus_1, paymentStatus_2, paymentStatus_3;
     private SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-
-
 
     @Before
     public void setUp() throws Exception {
@@ -49,24 +46,19 @@ public class PaymentTest
         paymentStatus_3 = PaymentStatus.COMPLETED;
     }
 
-
-
     @After
-    public void tearDown() throws Exception
-    {
+    public void tearDown() throws Exception {
     }
 
     @Test
-    public void testProcessPaymentSuccess()
-    {
+    public void testProcessPaymentSuccess() {
         assertTrue(payment_1.processPayment(1, customer, 1, paymentMethod_1, paymentStatus_1, new BigDecimal("100.00")));
         assertTrue(payment_2.processPayment(2, customer, 2, paymentMethod_2, paymentStatus_2, new BigDecimal("1000.00")));
         assertTrue(payment_3.processPayment(3, customer, 3, paymentMethod_3, paymentStatus_3, new BigDecimal("500.00")));
     }
 
     @Test
-    public void testProcessPaymentFailure()
-    {
+    public void testProcessPaymentFailure() {
         assertFalse(payment_1.processPayment(0, customer, 1, paymentMethod_1, paymentStatus_1, new BigDecimal("100.00")));
         assertFalse(payment_1.processPayment(-1, customer, 2, paymentMethod_1, paymentStatus_1, new BigDecimal("100.00")));
         assertFalse(payment_1.processPayment(1, null, 1, paymentMethod_1, paymentStatus_1, new BigDecimal("100.00")));
@@ -78,14 +70,13 @@ public class PaymentTest
     }
 
     @Test
-    public void testGetPaymentDetailsValid()
-    {
-        payment_1.processPayment(1, customer,1, paymentMethod_1, paymentStatus_1, new BigDecimal("100.00"));
+    public void testGetPaymentDetailsValid() {
+        payment_1.processPayment(1, customer, 1, paymentMethod_1, paymentStatus_1, new BigDecimal("100.00"));
         String details_1 = payment_1.getPaymentDetails(1);
         assertNotNull(details_1);
         assertTrue(details_1.contains("Payment ID: 1"));
 
-        payment_2.processPayment(2, customer, 2,paymentMethod_2, paymentStatus_2, new BigDecimal("1000.00"));
+        payment_2.processPayment(2, customer, 2, paymentMethod_2, paymentStatus_2, new BigDecimal("1000.00"));
         String details_2 = payment_2.getPaymentDetails(2);
         assertNotNull(details_2);
         assertTrue(details_2.contains("Payment ID: 2"));
@@ -97,10 +88,33 @@ public class PaymentTest
     }
 
     @Test
-    public void testGetPaymentDetailsInvalid()
-    {
+    public void testGetPaymentDetailsInvalid() {
         payment_1.processPayment(1, customer, 1, paymentMethod_1, paymentStatus_1, new BigDecimal("100.00"));
         String details = payment_1.getPaymentDetails(999);
         assertTrue(details.contains("Payment ID not found."));
+    }
+
+    @Test
+    public void testDefaultConstructor() {
+        Payment payment = new Payment();
+        assertNotNull(payment);
+    }
+
+    @Test
+    public void testSettersAndGetters() {
+        Payment payment = new Payment();
+        payment.setPaymentId(1);
+        payment.setCustomer(customer);
+        payment.setCustomerId(1);
+        payment.setPaymentMethod(paymentMethod_1);
+        payment.setPaymentStatus(paymentStatus_1);
+        payment.setPaymentAmount(new BigDecimal("100.00"));
+
+        assertEquals(1, payment.getPaymentId());
+        assertEquals(customer, payment.getCustomer());
+        assertEquals(1, payment.getCustomerId());
+        assertEquals(paymentMethod_1, payment.getPaymentMethod());
+        assertEquals(paymentStatus_1, payment.getPaymentStatus());
+        assertEquals(new BigDecimal("100.00"), payment.getPaymentAmount());
     }
 }

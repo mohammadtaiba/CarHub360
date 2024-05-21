@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import de.fherfurt.core.Customer;
+
 /**
  * This class represents a payment made by a customer.
  * It includes attributes such as payment ID, customer details, payment method, payment status, and payment amount.
@@ -16,6 +17,7 @@ public class Payment {
     private PaymentStatus paymentStatus;
     private BigDecimal paymentAmount;
     private List<Payment> payments = new ArrayList<>();
+
     /**
      * Parameterized constructor to initialize the payment attributes.
      *
@@ -88,6 +90,7 @@ public class Payment {
     public void setPaymentAmount(BigDecimal paymentAmount) {
         this.paymentAmount = paymentAmount;
     }
+
     /**
      * Processes a payment and adds it to the payment collection if it does not already exist and the parameters are valid.
      *
