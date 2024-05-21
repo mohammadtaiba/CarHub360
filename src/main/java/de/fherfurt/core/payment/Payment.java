@@ -110,9 +110,7 @@ public class Payment {
         }
 
         for (Payment payment : payments) {
-            if (payment.getPaymentId() == paymentId) {
-                return false;
-            }
+            return payment.getPaymentId() != paymentId;
         }
 
         Payment payment = new Payment(paymentId, customer, customerId, paymentMethod, paymentStatus, paymentAmount);

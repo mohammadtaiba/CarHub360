@@ -108,6 +108,9 @@ public class Maintenance {
                         "Maintenance End Date: " + maintenance.getMaintenanceEndDate() + " \n" +
                         "Maintenance Cost: " + maintenance.getMaintenanceCost() + " \n" +
                         "Maintenance Description: " + maintenance.getMaintenanceDescription();
+            } else {
+                return "false";
+
             }
         }
         return "Maintenance with ID " + maintenanceId + " was not found.";

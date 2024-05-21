@@ -55,7 +55,7 @@ public class MaintenanceTest {
         String details = maintenance.getMaintenanceDetails(1);
         assertNotNull(details);
         assertTrue(details.contains("Maintenance ID: 1"));
-        assertTrue(details.contains("Vehicle: " + vehicle));
+        assertTrue(details.contains("Vehicle: " + vehicle.toString())); // Changed to vehicle.toString()
         assertTrue(details.contains("Maintenance Start Date: " + startDate));
         assertTrue(details.contains("Maintenance End Date: " + endDate));
         assertTrue(details.contains("Maintenance Cost: " + cost));
