@@ -52,7 +52,6 @@ public class SaleVehicleTest {
 
     @Test
     public void testGetDetails() {
-        // Test retrieving the details of a sale vehicle
         String details = saleVehicle.getDetails();
         assertNotNull(details);
         assertTrue(details.contains("Vehicle ID: 1"));

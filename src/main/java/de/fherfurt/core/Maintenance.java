@@ -6,8 +6,8 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * This class represents maintenance information for vehicles.
- * It includes attributes such as maintenance ID, vehicle, maintenance start date, maintenance end date, maintenance cost, and maintenance description.
+ * Represents maintenance information for vehicles.
+ * Contains details about maintenance operations including ID, vehicle, dates, cost and description.
  */
 public class Maintenance {
 
@@ -19,12 +19,10 @@ public class Maintenance {
     private String maintenanceDescription;
     private List<Maintenance> maintenances;
 
-    // Default constructor to initialize the maintenances list
     public Maintenance() {
         this.maintenances = new ArrayList<>();
     }
 
-    // Parameterized constructor to initialize the maintenance attributes
     public Maintenance(int maintenanceId, Vehicle vehicle, Date maintenanceStartDate, Date maintenanceEndDate,
                        float maintenanceCost, String maintenanceDescription) {
         this.maintenanceId = maintenanceId;
@@ -35,7 +33,6 @@ public class Maintenance {
         this.maintenanceDescription = maintenanceDescription;
     }
 
-    // Getter and setter methods
     public int getMaintenanceId() {
         return maintenanceId;
     }
@@ -84,7 +81,17 @@ public class Maintenance {
         this.maintenanceDescription = maintenanceDescription;
     }
 
-    // Method to add maintenance information for a vehicle
+    /**
+     * Adds new maintenance information for a vehicle.
+     *
+     * @param maintenanceId Unique identifier for the maintenance record
+     * @param vehicle Vehicle that requires maintenance
+     * @param maintenanceStartDate Start date of maintenance
+     * @param maintenanceEndDate End date of maintenance
+     * @param maintenanceCost Cost of maintenance
+     * @param maintenanceDescription Description of maintenance work
+     * @return true if maintenance was successfully added, false if vehicle is null
+     */
     public boolean addMaintenance(int maintenanceId, Vehicle vehicle, Date maintenanceStartDate, Date maintenanceEndDate,
                                   float maintenanceCost, String maintenanceDescription) {
         if (vehicle != null) {
@@ -97,7 +104,12 @@ public class Maintenance {
         }
     }
 
-    // Method to retrieve details of a maintenance identified by the maintenanceId
+    /**
+     * Retrieves detailed information about a specific maintenance record.
+     *
+     * @param maintenanceId ID of the maintenance record to retrieve
+     * @return String containing all maintenance details if found, error message if not found
+     */
     public String getMaintenanceDetails(int maintenanceId) {
         for (Maintenance maintenance : maintenances) {
             if (maintenance.getMaintenanceId() == maintenanceId) {

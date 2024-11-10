@@ -1,6 +1,7 @@
 package de.fherfurt.logic;
 
 import java.math.BigDecimal;
+
 /**
  * This class represents a vehicle available for sale.
  * It includes information such as sale price and whether it's new or used.
@@ -9,6 +10,7 @@ public class SaleVehicle {
     private int vehicleId;
     private BigDecimal salePrice;
     private boolean isNew;
+
     /**
      * Constructor for SaleVehicle class.
      *
@@ -22,7 +24,6 @@ public class SaleVehicle {
         this.isNew = isNew;
     }
 
-    // Getter and setter methods
     public int getVehicleId() {
         return vehicleId;
     }
@@ -46,6 +47,7 @@ public class SaleVehicle {
     public void setNew(boolean isNew) {
         this.isNew = isNew;
     }
+
     /**
      * Retrieves details of the SaleVehicle.
      *

@@ -8,6 +8,7 @@ import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 import java.math.BigDecimal;
+
 /**
  * This class represents a contract, including attributes such as contract ID, customer, sale vehicle, rent vehicle,
  * contract type, contract date, rental start date, and rental end date.
@@ -23,6 +24,7 @@ public class Contract {
     private LocalDate contractDate;
     private LocalDate rentalStartDate;
     private LocalDate rentalEndDate;
+
     /**
      * Parameterized constructor to initialize contract attributes.
      *
@@ -46,6 +48,7 @@ public class Contract {
         this.rentalStartDate = rentalStartDate;
         this.rentalEndDate = rentalEndDate;
     }
+
     /**
      * Creates a purchase contract.
      *
@@ -63,6 +66,7 @@ public class Contract {
         }
         return false;
     }
+
     /**
      * Creates a rental contract.
      *
@@ -83,6 +87,7 @@ public class Contract {
         }
         return false;
     }
+
     /**
      * Terminates a rental contract.
      *
@@ -98,6 +103,7 @@ public class Contract {
         }
         return false;
     }
+
     /**
      * Renews a rental contract.
      *
@@ -114,6 +120,7 @@ public class Contract {
         }
         return false;
     }
+
     /**
      * Retrieves the total price of a rental contract.
      *
@@ -128,6 +135,7 @@ public class Contract {
         }
         return BigDecimal.valueOf(-1);
     }
+
     /**
      * Retrieves the details of a rental contract.
      *
@@ -146,6 +154,7 @@ public class Contract {
         }
         return "No rental contract found with this ID.";
     }
+
     /**
      * Retrieves the details of a purchase contract.
      *
@@ -162,7 +171,7 @@ public class Contract {
         }
         return "No purchase contract found with this ID.";
     }
-    // Private helper methods
+
     private static boolean isValidPurchaseContract(int contractId, Customer customer, SaleVehicle saleVehicle) {
         return contractId >= 0 && customer != null && saleVehicle != null && !contractExists(contractId);
     }
@@ -184,8 +193,6 @@ public class Contract {
     private static Contract getContractById(int contractId) {
         return contracts.stream().filter(contract -> contract.getContractId() == contractId).findFirst().orElse(null);
     }
-
-    // Getter and Setter methods
 
     public int getContractId() {
         return contractId;

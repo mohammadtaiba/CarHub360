@@ -3,29 +3,31 @@ package de.fherfurt.core.payment;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import de.fherfurt.core.Customer;
 
 /**
- * This class represents a payment made by a customer.
- * It includes attributes such as payment ID, customer details, payment method, payment status, and payment amount.
+ * Represents a payment made by a customer, tracking payment details like ID, customer info,
+ * payment method, status and amount.
  */
 public class Payment {
+    private static final BigDecimal MINIMUM_PAYMENT_AMOUNT = BigDecimal.ZERO;
     private int paymentId;
     private Customer customer;
-    private int customerId;
+    private int customerId; 
     private PaymentMethod paymentMethod;
     private PaymentStatus paymentStatus;
     private BigDecimal paymentAmount;
     private List<Payment> payments = new ArrayList<>();
 
     /**
-     * Parameterized constructor to initialize the payment attributes.
+     * Creates a new Payment with the specified details.
      *
      * @param paymentId Unique identifier for the payment
      * @param customer The customer making the payment
      * @param customerId The ID of the customer making the payment
      * @param paymentMethod The method used for payment
-     * @param paymentStatus The current status of the payment (e.g., processed, pending)
+     * @param paymentStatus The current status of the payment
      * @param paymentAmount The amount of the payment
      */
     public Payment(int paymentId, Customer customer, int customerId, PaymentMethod paymentMethod,
@@ -38,11 +40,9 @@ public class Payment {
         this.paymentAmount = paymentAmount;
     }
 
-    // Default constructor for initializing payments list
     public Payment() {
     }
 
-    // Getter and setter methods
     public int getPaymentId() {
         return paymentId;
     }
@@ -92,25 +92,27 @@ public class Payment {
     }
 
     /**
-     * Processes a payment and adds it to the payment collection if it does not already exist and the parameters are valid.
+     * Processes a new payment by validating the input parameters and adding it to the payment collection.
+     * The payment will not be processed if it already exists or if any parameters are invalid.
      *
      * @param paymentId Unique identifier for the payment
      * @param customer The customer making the payment
      * @param customerId The ID of the customer making the payment
      * @param paymentMethod The method used for payment
-     * @param paymentStatus The current status of the payment (e.g., processed, pending)
+     * @param paymentStatus The current status of the payment
      * @param paymentAmount The amount of the payment
-     * @return true if the payment is successfully processed, false if the paymentId already exists, is less than or equal to 0, or any parameters are invalid
+     * @return true if payment is successfully processed, false if validation fails or payment already exists
      */
     public boolean processPayment(int paymentId, Customer customer, int customerId, PaymentMethod paymentMethod,
                                   PaymentStatus paymentStatus, BigDecimal paymentAmount) {
         if (paymentId <= 0 || customer == null || paymentMethod == null || paymentStatus == null
-                || paymentAmount == null || paymentAmount.compareTo(BigDecimal.ZERO) <= 0) {
+                || paymentAmount == null || paymentAmount.compareTo(MINIMUM_PAYMENT_AMOUNT) <= 0) {
             return false;
         }
 
-        for (Payment payment : payments) {
-            return payment.getPaymentId() != paymentId;
+        boolean paymentExists = payments.stream().anyMatch(payment -> payment.getPaymentId() == paymentId);
+        if (paymentExists) {
+            return false;
         }
 
         Payment payment = new Payment(paymentId, customer, customerId, paymentMethod, paymentStatus, paymentAmount);
@@ -119,21 +121,21 @@ public class Payment {
     }
 
     /**
-     * Retrieves the details of a payment in a formatted string.
+     * Retrieves formatted payment details for a given payment ID.
      *
      * @param paymentId The unique identifier of the payment
-     * @return A string containing the payment details, or a message indicating the payment ID was not found
+     * @return A formatted string containing payment details, or "Payment ID not found" if not found
      */
     public String getPaymentDetails(int paymentId) {
-        for (Payment payment : payments) {
-            if (payment.getPaymentId() == paymentId) {
-                return "Payment ID: " + payment.getPaymentId() + "\n" +
-                        "Customer: " + payment.getCustomer().getFullName() + "\n" + // Assuming getFullName() returns a string with customer details
-                        "Payment Method: " + payment.getPaymentMethod() + "\n" +
-                        "Payment Status: " + payment.getPaymentStatus() + "\n" +
-                        "Payment Amount: " + payment.getPaymentAmount();
-            }
-        }
-        return "Payment ID not found.";
+        Optional<Payment> payment = payments.stream()
+                .filter(p -> p.getPaymentId() == paymentId)
+                .findFirst();
+
+        return payment.map(p -> "Payment ID: " + p.getPaymentId() + "\n" +
+                "Customer: " + p.getCustomer().getFullName() + "\n" +
+                "Payment Method: " + p.getPaymentMethod() + "\n" +
+                "Payment Status: " + p.getPaymentStatus() + "\n" +
+                "Payment Amount: " + p.getPaymentAmount())
+                .orElse("Payment ID not found.");
     }
 }

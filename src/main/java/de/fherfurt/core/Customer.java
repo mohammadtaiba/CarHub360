@@ -5,9 +5,9 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 import de.fherfurt.logic.CustomerAddress;
+
 /**
- * This class represents a customer, including attributes such as customer ID, first name, last name, email, birthdate,
- * gender, deletion status, and customer address.
+ * Represents a customer entity with personal information and address details.
  */
 public class Customer {
     private int customerId;
@@ -20,16 +20,17 @@ public class Customer {
     private CustomerAddress customerAddress;
 
     private static List<Customer> customers = new ArrayList<>();
+
     /**
-     * Parameterized constructor to initialize customer attributes.
+     * Creates a new Customer with the specified details.
      *
-     * @param customerId     The unique ID of the customer.
-     * @param firstName      The first name of the customer.
-     * @param lastName       The last name of the customer.
-     * @param email          The email address of the customer.
-     * @param birthdate      The birthdate of the customer.
-     * @param isFemale       Indicates whether the customer is female.
-     * @param customerAddress The address of the customer.
+     * @param customerId      Unique identifier for the customer
+     * @param firstName      Customer's first name
+     * @param lastName       Customer's last name 
+     * @param email         Customer's email address
+     * @param birthdate     Customer's date of birth
+     * @param isFemale      Customer's gender indicator
+     * @param customerAddress Customer's address information
      */
     public Customer(int customerId, String firstName, String lastName, String email, Date birthdate, boolean isFemale, CustomerAddress customerAddress) {
         this.customerId = customerId;
@@ -105,17 +106,18 @@ public class Customer {
     public void setCustomerAddress(CustomerAddress customerAddress) {
         this.customerAddress = customerAddress;
     }
+
     /**
-     * Creates a new customer.
+     * Creates and adds a new customer to the system if no customer exists with the same ID or email.
      *
-     * @param customerId     The unique ID of the customer.
-     * @param firstName      The first name of the customer.
-     * @param lastName       The last name of the customer.
-     * @param email          The email address of the customer.
-     * @param birthdate      The birthdate of the customer.
-     * @param isFemale       Indicates whether the customer is female.
-     * @param customerAddress The address of the customer.
-     * @return True if the customer is successfully created, false if a customer with the same ID or email already exists.
+     * @param customerId      Unique identifier for the customer
+     * @param firstName      Customer's first name
+     * @param lastName       Customer's last name
+     * @param email         Customer's email address
+     * @param birthdate     Customer's date of birth
+     * @param isFemale      Customer's gender indicator
+     * @param customerAddress Customer's address information
+     * @return true if customer was successfully created, false if customer with ID or email already exists
      */
     public static boolean createCustomer(int customerId, String firstName, String lastName, String email, Date birthdate, boolean isFemale, CustomerAddress customerAddress) {
         for (Customer customer : customers) {
@@ -127,11 +129,12 @@ public class Customer {
         customers.add(newCustomer);
         return true;
     }
+
     /**
-     * Deletes a customer.
+     * Removes a customer from the system based on their ID.
      *
-     * @param customerId The unique ID of the customer to be deleted.
-     * @return True if the customer is successfully deleted, false otherwise.
+     * @param customerId The ID of the customer to delete
+     * @return true if customer was found and deleted, false otherwise
      */
     public static boolean deleteCustomer(int customerId) {
         Iterator<Customer> iterator = customers.iterator();
@@ -146,10 +149,10 @@ public class Customer {
     }
 
     /**
-     * Retrieves the details of a customer.
+     * Retrieves detailed information about a specific customer.
      *
-     * @param customerId The unique ID of the customer.
-     * @return A string containing the details of the customer if found, or a message indicating that the customer was not found.
+     * @param customerId The ID of the customer to retrieve
+     * @return formatted string containing customer details if found, error message if not found
      */
     public static String getCustomerDetails(int customerId) {
         for (Customer customer : customers) {
@@ -166,22 +169,13 @@ public class Customer {
         }
         return "Customer with ID " + customerId + " was not found.";
     }
-    /**
-     * Retrieves the basic details of the customer.
-     *
-     * @return A string containing the basic details of the customer.
-     */
+
     public String getDetails() {
         return "Customer ID: " + customerId + ", Name: " + firstName + " " + lastName + ", Email: " + email;
     }
 
-    /**
-     * Retrieves the list of all customers.
-     *
-     * @return List<Customer> The list of customers.
-     */
     public static List<Customer> getCustomerList() {
-        return new ArrayList<>(customers); // Return a new list to avoid external modifications.
+        return new ArrayList<>(customers);
     }
 
     public String getFullName() {

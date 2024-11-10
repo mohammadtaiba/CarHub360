@@ -66,27 +66,14 @@ public class PaymentTest {
 
     @Test
     public void testProcessPaymentFailure() {
-        // Testing invalid paymentId
         assertFalse(payment_1.processPayment(0, customer_1, 1, paymentMethod_1, paymentStatus_1, new BigDecimal("100.00")));
         assertFalse(payment_1.processPayment(-1, customer_1, 1, paymentMethod_1, paymentStatus_1, new BigDecimal("100.00")));
-
-        // Testing null customer
         assertFalse(payment_1.processPayment(1, null, 1, paymentMethod_1, paymentStatus_1, new BigDecimal("100.00")));
-
-        // Testing null paymentMethod
         assertFalse(payment_1.processPayment(1, customer_1, 1, null, paymentStatus_1, new BigDecimal("100.00")));
-
-        // Testing null paymentStatus
         assertFalse(payment_1.processPayment(1, customer_1, 1, paymentMethod_1, null, new BigDecimal("100.00")));
-
-        // Testing null paymentAmount
         assertFalse(payment_1.processPayment(5, customer_1, 1, paymentMethod_1, paymentStatus_1, null));
-
-        // Testing non-positive paymentAmount
         assertFalse(payment_1.processPayment(5, customer_1, 1, paymentMethod_1, paymentStatus_1, new BigDecimal(0)));
         assertFalse(payment_1.processPayment(5, customer_1, 1, paymentMethod_1, paymentStatus_1, new BigDecimal(-1)));
-
-        // Testing duplicate paymentId
         payment_1.processPayment(1, customer_1, 1, paymentMethod_1, paymentStatus_1, new BigDecimal("100.00"));
         assertFalse(payment_1.processPayment(1, customer_2, 2, paymentMethod_2, paymentStatus_2, new BigDecimal("200.00")));
     }
@@ -138,5 +125,13 @@ public class PaymentTest {
         assertEquals(paymentMethod_1, payment.getPaymentMethod());
         assertEquals(paymentStatus_1, payment.getPaymentStatus());
         assertEquals(new BigDecimal("100.00"), payment.getPaymentAmount());
+    }
+
+    @Test
+    public void testProcessPaymentWithLargeAmount() {
+        assertTrue(payment_1.processPayment(4, customer_1, 1, paymentMethod_1, paymentStatus_1, new BigDecimal("1000000.00")));
+        String details = payment_1.getPaymentDetails(4);
+        assertNotNull(details);
+        assertTrue(details.contains("Payment Amount: 1000000.00"));
     }
 }

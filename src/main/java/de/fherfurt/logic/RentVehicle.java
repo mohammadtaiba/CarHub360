@@ -1,6 +1,7 @@
 package de.fherfurt.logic;
 
 import java.math.BigDecimal;
+
 /**
  * This class represents a vehicle available for rent.
  * It includes information such as daily price, availability, license plate, and deposit.
@@ -11,6 +12,7 @@ public class RentVehicle {
     private BigDecimal dailyPrice;
     private String licensePlate;
     private BigDecimal deposit;
+
     /**
      * Constructor for RentVehicle class.
      *
@@ -28,7 +30,6 @@ public class RentVehicle {
         this.deposit = deposit;
     }
 
-    // Getter and setter methods
     public int getRentVehicleId() {
         return rentVehicleId;
     }
@@ -68,6 +69,7 @@ public class RentVehicle {
     public void setDeposit(BigDecimal deposit) {
         this.deposit = deposit;
     }
+
     /**
      * Retrieves details of the RentVehicle.
      *

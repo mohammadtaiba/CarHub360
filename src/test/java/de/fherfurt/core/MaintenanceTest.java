@@ -14,13 +14,11 @@ public class MaintenanceTest {
 
     @Before
     public void setUp() {
-        // Initialize the maintenance object before each test
         maintenance = new Maintenance();
     }
 
     @Test
     public void testAddMaintenance() {
-        // Valid maintenance entry
         Vehicle vehicle = new Vehicle(1, "Astra K", "Opel", 10000, 2020, "Kombi");
         Date startDate = new Date();
         Date endDate = new Date();
@@ -32,7 +30,6 @@ public class MaintenanceTest {
 
     @Test
     public void testAddMaintenanceInvalidVehicle() {
-        // Invalid maintenance entry (null vehicle)
         Date startDate = new Date();
         Date endDate = new Date();
         float cost = 100.0f;
@@ -43,7 +40,6 @@ public class MaintenanceTest {
 
     @Test
     public void testGetMaintenanceDetails() {
-        // Valid maintenance details retrieval
         Vehicle vehicle = new Vehicle(1, "Astra K", "Opel", 10000, 2020, "Kombi");
         Date startDate = new Date();
         Date endDate = new Date();
@@ -55,7 +51,7 @@ public class MaintenanceTest {
         String details = maintenance.getMaintenanceDetails(1);
         assertNotNull(details);
         assertTrue(details.contains("Maintenance ID: 1"));
-        assertTrue(details.contains("Vehicle: " + vehicle.toString())); // Changed to vehicle.toString()
+        assertTrue(details.contains("Vehicle: " + vehicle.toString()));
         assertTrue(details.contains("Maintenance Start Date: " + startDate));
         assertTrue(details.contains("Maintenance End Date: " + endDate));
         assertTrue(details.contains("Maintenance Cost: " + cost));
@@ -64,7 +60,6 @@ public class MaintenanceTest {
 
     @Test
     public void testGetMaintenanceDetailsNotFound() {
-        // Maintenance details retrieval for non-existing maintenance
         String details = maintenance.getMaintenanceDetails(999);
         assertNotNull(details);
         assertTrue(details.contains("Maintenance with ID 999 was not found."));
@@ -72,7 +67,6 @@ public class MaintenanceTest {
 
     @Test
     public void testDefaultConstructor() {
-        // Testing default constructor and getters/setters
         Maintenance m = new Maintenance();
         m.setMaintenanceId(1);
         Vehicle vehicle = new Vehicle(2, "Model S", "Tesla", 50000, 2021, "Sedan");
@@ -94,7 +88,6 @@ public class MaintenanceTest {
 
     @Test
     public void testParameterizedConstructor() {
-        // Testing parameterized constructor
         Vehicle vehicle = new Vehicle(3, "Civic", "Honda", 15000, 2018, "Sedan");
         Date startDate = new Date();
         Date endDate = new Date();

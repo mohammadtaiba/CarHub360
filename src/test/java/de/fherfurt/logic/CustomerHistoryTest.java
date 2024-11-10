@@ -19,9 +19,13 @@ public class CustomerHistoryTest {
     private Vehicle vehicle;
     private CustomerHistoryReview review;
 
+    /**
+     * Sets up the test environment before each test method.
+     * Initializes dummy objects including customer, vehicle, review and customer history
+     * for testing purposes.
+     */
     @Before
     public void setUp() {
-        // Initializing dummy objects for testing
         customer = new Customer(1, "John", "Doe", "john.doe@example.com", new Date(), true, null);
         vehicle = new Vehicle(1, "CarModel", "CarBrand", 1000, 2020, "Sedan");
         review = CustomerHistoryReview.FÜNF;
@@ -71,18 +75,30 @@ public class CustomerHistoryTest {
         assertNull(invalidReview);
     }
 
+    /**
+     * Test method to verify the functionality of getter and setter methods in CustomerHistory class.
+     * 
+     * Verifies:
+     * - Initial values through getter methods
+     *   - CustomerHistoryId should be 1
+     *   - Customer should match the initial customer object
+     *   - Vehicle should match the initial vehicle object
+     *   - Review should match the initial review value
+     *   - Description should be "Test Description"
+     *   - ForRentalCar should be true
+     * 
+     * - New values through setter methods
+     *   - Sets and verifies new values for Customer, Vehicle, Review, and other fields.
+     */
     @Test
     public void testGettersAndSetters() {
-        // Testing getter methods
         assertEquals(1, customerHistory.getCustomerHistoryId());
         assertEquals(customer, customerHistory.getCustomer());
         assertEquals(vehicle, customerHistory.getCustomerHistoryVehicle());
         assertEquals(review, customerHistory.getCustomerHistoryReview());
         assertEquals("Test Description", customerHistory.getDescription());
         assertEquals(true, customerHistory.isForRentalCar());
-        // You can add more assertions for other getters
 
-        // Testing setter methods
         Customer newCustomer = new Customer(2, "Jane", "Doe", "jane.doe@example.com", new Date(), true, null);
         Vehicle newVehicle = new Vehicle(2, "CarModel2", "CarBrand2", 2000, 2022, "SUV");
         CustomerHistoryReview newReview = CustomerHistoryReview.VIER;
@@ -102,6 +118,5 @@ public class CustomerHistoryTest {
         assertEquals("New Description", customerHistory.getDescription());
         assertEquals(newDate, customerHistory.getActionDate());
         assertEquals(false, customerHistory.isForRentalCar());
-        // You can add more assertions for other setters
     }
 }

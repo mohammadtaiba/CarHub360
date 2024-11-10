@@ -130,15 +130,11 @@ public class CustomerTest {
 
     @Test
     public void testDeleteCustomer() {
-        // Ensure the customer to be deleted is actually in the list
         assertNotNull(Customer.getCustomerDetails(1));
-
-        // Perform deletion
         boolean deleted = Customer.deleteCustomer(1);
         assertTrue(deleted);
         assertEquals(1, Customer.getCustomerList().size());
     }
-
 
     @Test
     public void testDeleteNonExistentCustomer() {

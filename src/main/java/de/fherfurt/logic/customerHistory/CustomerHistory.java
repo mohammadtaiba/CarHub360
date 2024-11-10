@@ -6,9 +6,10 @@ import de.fherfurt.model.Vehicle;
 import java.util.Date;
 import java.util.ArrayList;
 import java.util.List;
+
 /**
- * This class maintains the history of actions related to customers.
- * It includes attributes such as customer history ID, customer, vehicle involved, review, description, action date, and indication of whether it's for a rental car.
+ * Maintains the history of customer actions including reviews, vehicle interactions and rental information.
+ * Each history record contains details about the customer, vehicle, review, description and timing of actions.
  */
 public class CustomerHistory {
 
@@ -20,16 +21,17 @@ public class CustomerHistory {
     private Date actionDate;
     private boolean isForRentalCar;
     private List<CustomerHistory> customerHistoryList = new ArrayList<>();
+
     /**
-     * Parameterized constructor to initialize the customer history attributes.
+     * Creates a new customer history record with the specified details.
      *
-     * @param customerHistoryId      The unique ID of the customer history record.
-     * @param customer               The customer associated with the action.
-     * @param customerHistoryVehicle The vehicle involved in the action.
-     * @param customerHistoryReview  The review associated with the action.
-     * @param description            A description of the action.
-     * @param actionDate             The date when the action occurred.
-     * @param isForRentalCar         Indicates whether the action pertains to a rental car.
+     * @param customerHistoryId      Unique identifier for this history record
+     * @param customer               Associated customer
+     * @param customerHistoryVehicle Vehicle involved in the action
+     * @param customerHistoryReview  Customer's review
+     * @param description            Description of the action
+     * @param actionDate            Date when action occurred
+     * @param isForRentalCar        Whether this involves a rental vehicle
      */
     public CustomerHistory(int customerHistoryId, Customer customer, Vehicle customerHistoryVehicle,
                            CustomerHistoryReview customerHistoryReview, String description,
@@ -43,7 +45,6 @@ public class CustomerHistory {
         this.isForRentalCar = isForRentalCar;
     }
 
-    // Getter and setter methods
     public int getCustomerHistoryId() {
         return customerHistoryId;
     }
@@ -101,16 +102,18 @@ public class CustomerHistory {
     }
 
     /**
-     * Creates a new customer history record.
+     * Creates or updates a customer history record with the provided information.
+     * If a record with the given ID exists, it will be updated. Otherwise, a new record is created.
+     * All parameters must be valid (non-null where applicable and positive ID) for successful creation.
      *
-     * @param customerHistoryId      The unique ID of the customer history record.
-     * @param customer               The customer associated with the action.
-     * @param customerHistoryVehicle The vehicle involved in the action.
-     * @param customerHistoryReview  The review associated with the action.
-     * @param description            A description of the action.
-     * @param actionDate             The date when the action occurred.
-     * @param isForRentalCar         Indicates whether the action pertains to a rental car.
-     * @return True if the customer history record is successfully created, false otherwise.
+     * @param customerHistoryId      Unique identifier for this history record
+     * @param customer               Associated customer
+     * @param customerHistoryVehicle Vehicle involved in the action
+     * @param customerHistoryReview  Customer's review
+     * @param description            Description of the action
+     * @param actionDate            Date when action occurred
+     * @param isForRentalCar        Whether this involves a rental vehicle
+     * @return true if creation/update successful, false if parameters invalid
      */
     public boolean createCustomerHistory(int customerHistoryId, Customer customer,
                                          Vehicle customerHistoryVehicle, CustomerHistoryReview customerHistoryReview,
@@ -121,7 +124,6 @@ public class CustomerHistory {
             CustomerHistory newCustomerHistory = new CustomerHistory(customerHistoryId, customer,
                     customerHistoryVehicle, customerHistoryReview, description, actionDate, isForRentalCar);
 
-            // Check if customer history already exists and update it
             for (CustomerHistory history : customerHistoryList) {
                 if (history.getCustomerHistoryId() == customerHistoryId) {
                     history.setCustomer(customer);
@@ -134,7 +136,6 @@ public class CustomerHistory {
                 }
             }
 
-            // If customer history does not exist, add a new history record
             customerHistoryList.add(newCustomerHistory);
             return true;
         } else {
@@ -143,10 +144,10 @@ public class CustomerHistory {
     }
 
     /**
-     * Retrieves the customer history record associated with the specified ID.
+     * Retrieves a customer history record by its ID.
      *
-     * @param customerHistoryId The ID of the customer history record to retrieve.
-     * @return The customer history record if found, null otherwise.
+     * @param customerHistoryId ID of the history record to retrieve
+     * @return CustomerHistory object if found, null otherwise
      */
     public CustomerHistory getCustomerHistory(int customerHistoryId) {
         for (CustomerHistory history : customerHistoryList) {
@@ -158,10 +159,10 @@ public class CustomerHistory {
     }
 
     /**
-     * Retrieves the final review associated with the specified customer history ID.
+     * Retrieves the review associated with a specific customer history record.
      *
-     * @param customerHistoryId The ID of the customer history record.
-     * @return The final review associated with the customer history if found, null otherwise.
+     * @param customerHistoryId ID of the history record
+     * @return CustomerHistoryReview if history exists, null otherwise
      */
     public CustomerHistoryReview getCustomerFinalReview(int customerHistoryId) {
         CustomerHistory history = getCustomerHistory(customerHistoryId);

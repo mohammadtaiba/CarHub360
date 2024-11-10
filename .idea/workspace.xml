@@ -5,9 +5,23 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1ae668b4-5b17-4607-9e5f-430942c42cbc" name="Changes" comment="Verbesserung">
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_21_05_2024_20_27_[Changes]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_21_05_2024_20_27__Changes_.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_21_05_24,_20_34_[Changes]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_21_05_24,_21_04_[Changes]/Maintenance.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_21_05_24,_21_04_[Changes]/MaintenanceTest.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_21_05_24,_21_04_[Changes]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_21_05_24,_21_33_[Changes]/Maintenance.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_21_05_24,_21_33_[Changes]/MaintenanceTest.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_21_05_24,_21_33_[Changes]/Payment.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_21_05_24,_21_33_[Changes]/PaymentTest.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_21_05_24,_21_33_[Changes]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_21_05_24__20_34__Changes_.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_21_05_24__21_04__Changes_.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_21_05_24__21_33__Changes_.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/de/fherfurt/core/ContractTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/de/fherfurt/core/ContractTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/de/fherfurt/core/ContractTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/de/fherfurt/core/ContractTest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/de/fherfurt/core/payment/Payment.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/fherfurt/core/payment/Payment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/de/fherfurt/core/PaymentTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/de/fherfurt/core/PaymentTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -38,10 +52,10 @@
     &quot;JUnit.All in mmra (1).executor&quot;: &quot;Coverage&quot;,
     &quot;JUnit.All in mmra (2).executor&quot;: &quot;Coverage&quot;,
     &quot;JUnit.All in mmra (3).executor&quot;: &quot;Coverage&quot;,
-    &quot;JUnit.All in mmra (4).executor&quot;: &quot;Coverage&quot;,
+    &quot;JUnit.All in mmra (4).executor&quot;: &quot;Run&quot;,
     &quot;JUnit.All in mmra (5).executor&quot;: &quot;Coverage&quot;,
     &quot;JUnit.All in mmra 3.executor&quot;: &quot;Coverage&quot;,
-    &quot;JUnit.All in mmra.executor&quot;: &quot;Coverage&quot;,
+    &quot;JUnit.All in mmra.executor&quot;: &quot;Run&quot;,
     &quot;JUnit.All in test (1).executor&quot;: &quot;Coverage&quot;,
     &quot;JUnit.All in test.executor&quot;: &quot;Coverage&quot;,
     &quot;JUnit.CustomerAddressTest.executor&quot;: &quot;Run&quot;,
@@ -72,15 +86,7 @@
       <recent name="$PROJECT_DIR$" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.All in mmra (4)">
-    <configuration name="All in mmra (1)" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="mmra" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="TEST_OBJECT" value="package" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
+  <component name="RunManager" selected="JUnit.All in mmra (5)">
     <configuration name="All in mmra (2)" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="mmra" />
       <option name="PACKAGE_NAME" value="" />
@@ -113,21 +119,29 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="All in mmra" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="mmra" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="TEST_OBJECT" value="package" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.All in mmra (5)" />
+        <item itemvalue="JUnit.All in mmra" />
         <item itemvalue="JUnit.All in mmra (4)" />
         <item itemvalue="JUnit.All in mmra (3)" />
         <item itemvalue="JUnit.All in mmra (2)" />
-        <item itemvalue="JUnit.All in mmra (1)" />
-        <item itemvalue="JUnit.All in mmra (5)" />
       </list>
     </recent_temporary>
   </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="jdk-21.0.1-openjdk-21.0.1-f644763e9732-f98dd351" />
-        <option value="jdk-22-openjdk-22-f644763e9732-8c5c9ae5" />
+        <option value="bundled-jdk-9823dce3aa75-28b599e66164-intellij.indexing.shared.core-IU-242.23339.11" />
+        <option value="bundled-js-predefined-d6986cc7102b-5c90d61e3bab-JavaScript-IU-242.23339.11" />
       </set>
     </attachedChunks>
   </component>
@@ -143,6 +157,16 @@
       <workItem from="1716232019162" duration="1401000" />
       <workItem from="1716314648575" duration="1210000" />
       <workItem from="1716316211172" duration="3669000" />
+      <workItem from="1727038205286" duration="727000" />
+      <workItem from="1727112223372" duration="7042000" />
+      <workItem from="1727288531135" duration="118000" />
+      <workItem from="1727288718151" duration="944000" />
+      <workItem from="1728066008879" duration="601000" />
+      <workItem from="1728843702000" duration="18000" />
+      <workItem from="1729103073091" duration="7000" />
+      <workItem from="1729437375287" duration="22000" />
+      <workItem from="1730050338719" duration="684000" />
+      <workItem from="1730710177581" duration="2143000" />
     </task>
     <task id="LOCAL-00001" summary="korrekt">
       <option name="closed" value="true" />
@@ -200,44 +224,45 @@
     <option name="LAST_COMMIT_MESSAGE" value="Verbesserung" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/mmra$All_in_mmra__4_.ic" NAME="All in mmra (4) Coverage Results" MODIFIED="1716319385951" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
-    <SUITE FILE_PATH="coverage/mmra$VehicleTest.ic" NAME="VehicleTest Coverage Results" MODIFIED="1716315505760" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
-      <FILTER>de.fherfurt.model.*</FILTER>
-    </SUITE>
-    <SUITE FILE_PATH="coverage/mmra$All_in_CarHub360__2_.ic" NAME="All in CarHub360 (2) Coverage Results" MODIFIED="1716316128861" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
-    <SUITE FILE_PATH="coverage/mmra$SaleVehicleTest.ic" NAME="SaleVehicleTest Coverage Results" MODIFIED="1716315538046" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
-      <FILTER>de.fherfurt.logic.*</FILTER>
-    </SUITE>
-    <SUITE FILE_PATH="coverage/mmra_3$All_in_mmra.ic" NAME="All in mmra Coverage Results" MODIFIED="1716231945915" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
-    <SUITE FILE_PATH="coverage/mmra_3$de_fherfurt_in_test.ic" NAME="de.fherfurt in test Coverage Results" MODIFIED="1716315079481" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+    <SUITE FILE_PATH="coverage/mmra_3$All_in_mmra__5_.ic" NAME="All in mmra (5) Coverage Results" MODIFIED="1716231814443" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/mmra$All_in_mmra.ic" NAME="All in mmra Coverage Results" MODIFIED="1716319427352" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/mmra$All_in_mmra__5_.ic" NAME="All in mmra (5) Coverage Results" MODIFIED="1716319579293" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/mmra$de_fherfurt_in_test.ic" NAME="de.fherfurt in test Coverage Results" MODIFIED="1716316156982" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>de.fherfurt.*</FILTER>
     </SUITE>
-    <SUITE FILE_PATH="coverage/mmra_3$All_in_mmra__4_.ic" NAME="All in mmra (4) Coverage Results" MODIFIED="1716231229980" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
-    <SUITE FILE_PATH="coverage/mmra$All_in_CarHub360__1_.ic" NAME="All in CarHub360 (1) Coverage Results" MODIFIED="1716316114782" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
-    <SUITE FILE_PATH="coverage/mmra$All_in_mmra__3_.ic" NAME="All in mmra (3) Coverage Results" MODIFIED="1716319354480" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
-    <SUITE FILE_PATH="coverage/mmra$All_in_mmra__5_.ic" NAME="All in mmra (5) Coverage Results" MODIFIED="1716319579293" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
-    <SUITE FILE_PATH="coverage/mmra_3$All_in_mmra__3_.ic" NAME="All in mmra (3) Coverage Results" MODIFIED="1716231195461" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
     <SUITE FILE_PATH="coverage/mmra_3$All_in_test.ic" NAME="All in test Coverage Results" MODIFIED="1716230137118" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
-    <SUITE FILE_PATH="coverage/mmra$CustomerAddressTest.ic" NAME="CustomerAddressTest Coverage Results" MODIFIED="1716315816812" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+    <SUITE FILE_PATH="coverage/mmra_3$All_in_mmra__4_.ic" NAME="All in mmra (4) Coverage Results" MODIFIED="1716231229980" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/mmra$All_in_mmra__1_.ic" NAME="All in mmra (1) Coverage Results" MODIFIED="1716319700381" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/mmra$SaleVehicleTest.ic" NAME="SaleVehicleTest Coverage Results" MODIFIED="1716315538046" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>de.fherfurt.logic.*</FILTER>
     </SUITE>
     <SUITE FILE_PATH="coverage/mmra$RentVehicleTest.ic" NAME="RentVehicleTest Coverage Results" MODIFIED="1716315521461" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>de.fherfurt.logic.*</FILTER>
     </SUITE>
+    <SUITE FILE_PATH="coverage/mmra$CustomerAddressTest.ic" NAME="CustomerAddressTest Coverage Results" MODIFIED="1716315816812" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>de.fherfurt.logic.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/mmra$All_in_mmra__4_.ic" NAME="All in mmra (4) Coverage Results" MODIFIED="1716319385951" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/mmra$All_in_CarHub360__1_.ic" NAME="All in CarHub360 (1) Coverage Results" MODIFIED="1716316114782" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/mmra_3$All_in_mmra__3_.ic" NAME="All in mmra (3) Coverage Results" MODIFIED="1716231195461" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
     <SUITE FILE_PATH="coverage/mmra$All_in_test.ic" NAME="All in test Coverage Results" MODIFIED="1716316141114" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/mmra_3$de_fherfurt_in_test.ic" NAME="de.fherfurt in test Coverage Results" MODIFIED="1716315079481" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>de.fherfurt.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/mmra$All_in_test__1_.ic" NAME="All in test (1) Coverage Results" MODIFIED="1716316416319" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
     <SUITE FILE_PATH="coverage/mmra_3$All_in_mmra__2_.ic" NAME="All in mmra (2) Coverage Results" MODIFIED="1716315088200" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
-    <SUITE FILE_PATH="coverage/mmra_3$All_in_mmra_3.ic" NAME="All in mmra 3 Coverage Results" MODIFIED="1716230270540" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
-    <SUITE FILE_PATH="coverage/mmra$All_in_mmra__1_.ic" NAME="All in mmra (1) Coverage Results" MODIFIED="1716319700381" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
-    <SUITE FILE_PATH="coverage/mmra$All_in_mmra.ic" NAME="All in mmra Coverage Results" MODIFIED="1716319427352" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/mmra$All_in_CarHub360__2_.ic" NAME="All in CarHub360 (2) Coverage Results" MODIFIED="1716316128861" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/mmra$All_in_mmra__3_.ic" NAME="All in mmra (3) Coverage Results" MODIFIED="1716319354480" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
     <SUITE FILE_PATH="coverage/mmra_3$de_fherfurt_core_in_test.ic" NAME="de.fherfurt.core in test Coverage Results" MODIFIED="1716314974126" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>de.fherfurt.core.*</FILTER>
     </SUITE>
-    <SUITE FILE_PATH="coverage/mmra_3$All_in_mmra__1_.ic" NAME="All in mmra (1) Coverage Results" MODIFIED="1716230843918" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
-    <SUITE FILE_PATH="coverage/mmra_3$All_in_mmra__5_.ic" NAME="All in mmra (5) Coverage Results" MODIFIED="1716231814443" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
-    <SUITE FILE_PATH="coverage/mmra$All_in_mmra__2_.ic" NAME="All in mmra (2) Coverage Results" MODIFIED="1716319850655" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
-    <SUITE FILE_PATH="coverage/mmra$All_in_test__1_.ic" NAME="All in test (1) Coverage Results" MODIFIED="1716316416319" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
-    <SUITE FILE_PATH="coverage/mmra$de_fherfurt_in_test.ic" NAME="de.fherfurt in test Coverage Results" MODIFIED="1716316156982" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
-      <FILTER>de.fherfurt.*</FILTER>
+    <SUITE FILE_PATH="coverage/mmra$VehicleTest.ic" NAME="VehicleTest Coverage Results" MODIFIED="1716315505760" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>de.fherfurt.model.*</FILTER>
     </SUITE>
+    <SUITE FILE_PATH="coverage/mmra_3$All_in_mmra_3.ic" NAME="All in mmra 3 Coverage Results" MODIFIED="1716230270540" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/Java_1$All_in_mmra__5_.ic" NAME="All in mmra (5) Coverage Results" MODIFIED="1727112614694" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true" />
+    <SUITE FILE_PATH="coverage/mmra_3$All_in_mmra__1_.ic" NAME="All in mmra (1) Coverage Results" MODIFIED="1716230843918" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/mmra$All_in_mmra__2_.ic" NAME="All in mmra (2) Coverage Results" MODIFIED="1716319850655" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/mmra_3$All_in_mmra.ic" NAME="All in mmra Coverage Results" MODIFIED="1716231945915" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
   </component>
 </project>
