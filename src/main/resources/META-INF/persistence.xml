@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence xmlns="https://jakarta.ee/xml/ns/persistence"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="https://jakarta.ee/xml/ns/persistence
+                                 https://jakarta.ee/xml/ns/persistence/persistence_3_0.xsd"
+             version="3.0">
+
+    <persistence-unit name="myPU">
+        <!-- JPA-Provider (Hibernate) -->
+        <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+
+        <!-- Hier alle Entity-Klassen auflisten -->
+        <class>de.fherfurt.core.entity.Contract</class>
+        <class>de.fherfurt.core.entity.Customer</class>
+        <class>de.fherfurt.core.entity.CustomerAddress</class>
+        <class>de.fherfurt.core.entity.CustomerHistory</class>
+        <class>de.fherfurt.core.entity.Maintenance</class>
+        <class>de.fherfurt.core.entity.Payment</class>
+        <class>de.fherfurt.core.entity.RentVehicle</class>
+        <class>de.fherfurt.core.entity.SaleVehicle</class>
+        <class>de.fherfurt.core.entity.Vehicle</class>
+        <!-- Enums (PaymentMethod, PaymentStatus etc.) müssen NICHT extra eingetragen werden. -->
+
+        <properties>
+            <!-- JDBC-Einstellungen für H2-In-Memory-Datenbank -->
+            <property name="jakarta.persistence.jdbc.driver" value="org.h2.Driver" />
+            <property name="jakarta.persistence.jdbc.url" value="jdbc:h2:mem:test;DB_CLOSE_DELAY=-1" />
+            <property name="jakarta.persistence.jdbc.user" value="sa" />
+            <property name="jakarta.persistence.jdbc.password" value="" />
+
+            <!-- Hibernate-spezifische Einstellungen -->
+            <!-- "update" lässt Hibernate das Schema beim Start automatisch anpassen.
+                 Für Produktion lieber "validate" oder man pflegt DB-Skripte manuell. -->
+            <property name="hibernate.hbm2ddl.auto" value="update" />
+
+            <!-- SQL-Ausgabe in der Konsole anzeigen -->
+            <property name="hibernate.show_sql" value="true" />
+            <property name="hibernate.format_sql" value="true" />
+        </properties>
+    </persistence-unit>
+
+</persistence>

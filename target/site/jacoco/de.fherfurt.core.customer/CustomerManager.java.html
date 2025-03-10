@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="de"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>CustomerManager.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">mmra</a> &gt; <a href="index.source.html" class="el_package">de.fherfurt.core.customer</a> &gt; <span class="el_source">CustomerManager.java</span></div><h1>CustomerManager.java</h1><pre class="source lang-java linenums">package de.fherfurt.core.customer;
+
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.Iterator;
+import java.util.List;
+import de.fherfurt.logic.customerAddress.CustomerAddress;
+
+/**
+ * Manages customer operations such as creation, deletion, and retrieval.
+ */
+<span class="nc" id="L12">public class CustomerManager {</span>
+<span class="nc" id="L13">    private static List&lt;Customer&gt; customers = new ArrayList&lt;&gt;();</span>
+
+    /**
+     * Creates and adds a new customer to the system if no customer exists with the same ID or email.
+     *
+     * @param customerId      Unique identifier for the customer
+     * @param firstName      Customer's first name
+     * @param lastName       Customer's last name
+     * @param email         Customer's email address
+     * @param birthdate     Customer's date of birth
+     * @param isFemale      Customer's gender indicator
+     * @param customerAddress Customer's address information
+     * @return true if customer was successfully created, false if customer with ID or email already exists
+     */
+    public static boolean createCustomer(int customerId, String firstName, String lastName, String email, Date birthdate, boolean isFemale, CustomerAddress customerAddress) {
+<span class="nc bnc" id="L28" title="All 2 branches missed.">        for (Customer customer : customers) {</span>
+<span class="nc bnc" id="L29" title="All 4 branches missed.">            if (customer.getCustomerId() == customerId || customer.getEmail().equals(email)) {</span>
+<span class="nc" id="L30">                return false;</span>
+            }
+<span class="nc" id="L32">        }</span>
+<span class="nc" id="L33">        Customer newCustomer = new Customer(customerId, firstName, lastName, email, birthdate, isFemale, customerAddress);</span>
+<span class="nc" id="L34">        customers.add(newCustomer);</span>
+<span class="nc" id="L35">        return true;</span>
+    }
+
+    /**
+     * Removes a customer from the system based on their ID.
+     *
+     * @param customerId The ID of the customer to delete
+     * @return true if customer was found and deleted, false otherwise
+     */
+    public static boolean deleteCustomer(int customerId) {
+<span class="nc" id="L45">        Customer customerToRemove = customers.stream()</span>
+<span class="nc bnc" id="L46" title="All 2 branches missed.">            .filter(customer -&gt; customer.getCustomerId() == customerId)</span>
+<span class="nc" id="L47">            .findFirst()</span>
+<span class="nc" id="L48">            .orElse(null);</span>
+        
+<span class="nc bnc" id="L50" title="All 2 branches missed.">        if (customerToRemove != null) {</span>
+<span class="nc" id="L51">            customers.remove(customerToRemove);</span>
+<span class="nc" id="L52">            return true;</span>
+        }
+<span class="nc" id="L54">        return false;</span>
+    }
+
+    /**
+     * Retrieves detailed information about a specific customer.
+     *
+     * @param customerId The ID of the customer to retrieve
+     * @return formatted string containing customer details if found, error message if not found
+     */
+    public static String getCustomerDetails(int customerId) {
+<span class="nc bnc" id="L64" title="All 2 branches missed.">        for (Customer customer : customers) {</span>
+<span class="nc bnc" id="L65" title="All 2 branches missed.">            if (customer.getCustomerId() == customerId) {</span>
+<span class="nc" id="L66">                return &quot;Customer Details: \n&quot; +</span>
+<span class="nc" id="L67">                        &quot;Customer ID: &quot; + customer.getCustomerId() + &quot;\n&quot; +</span>
+<span class="nc" id="L68">                        &quot;First Name: &quot; + customer.getFirstName() + &quot;\n&quot; +</span>
+<span class="nc" id="L69">                        &quot;Last Name: &quot; + customer.getLastName() + &quot;\n&quot; +</span>
+<span class="nc" id="L70">                        &quot;Email: &quot; + customer.getEmail() + &quot;\n&quot; +</span>
+<span class="nc" id="L71">                        &quot;Birthdate: &quot; + customer.getBirthdate() + &quot;\n&quot; +</span>
+<span class="nc" id="L72">                        &quot;Is Female: &quot; + customer.isFemale() + &quot;\n&quot; +</span>
+<span class="nc" id="L73">                        &quot;Address: &quot; + customer.getCustomerAddress().getStreet() + &quot; &quot; + customer.getCustomerAddress().getStreetNumber() + &quot;, &quot; + customer.getCustomerAddress().getCity() + &quot; &quot; + customer.getCustomerAddress().getPostalCode();</span>
+            }
+<span class="nc" id="L75">        }</span>
+<span class="nc" id="L76">        return &quot;Customer with ID &quot; + customerId + &quot; was not found.&quot;;</span>
+    }
+
+    /**
+     * Retrieves the list of all customers.
+     *
+     * @return a list of customers
+     */
+    public static List&lt;Customer&gt; getCustomerList() {
+<span class="nc" id="L85">        return customers;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.9.202303310957</span></div></body></html>
