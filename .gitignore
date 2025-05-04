@@ -11,3 +11,7 @@ target/
 # OS-specific files
 .DS_Store
 Thumbs.db
+
+
+# Ignoriere README.md
+README.md
