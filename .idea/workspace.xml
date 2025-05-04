@@ -4,11 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1ae668b4-5b17-4607-9e5f-430942c42cbc" name="Changes" comment="Verbesserung">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+    <list default="true" id="1ae668b4-5b17-4607-9e5f-430942c42cbc" name="Changes" comment="update .gitignore">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/de/fherfurt/core/database/DatabaseConnection.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/fherfurt/core/database/DatabaseConnection.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -32,18 +29,18 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
-  "lastFilter": {
-    "state": "OPEN",
-    "assignee": "mohammadtaiba"
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;mohammadtaiba&quot;
   }
-}]]></component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/mohammadtaiba/CarHub360.git",
-    "accountId": "ad386e4f-e65c-466a-b6b1-020b040692d7"
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/mohammadtaiba/CarHub360.git&quot;,
+    &quot;accountId&quot;: &quot;ad386e4f-e65c-466a-b6b1-020b040692d7&quot;
   }
-}]]></component>
+}</component>
   <component name="ProblemsViewState">
     <option name="selectedTabId" value="ProjectErrors" />
   </component>
@@ -58,56 +55,56 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_ADD_EXTERNAL_FILES": "true",
-    "Application.Main.executor": "Run",
-    "Downloaded.Files.Path.Enabled": "false",
-    "JUnit.All in CarHub360 (1).executor": "Coverage",
-    "JUnit.All in CarHub360 (2).executor": "Coverage",
-    "JUnit.All in CarHub360.executor": "Profiler#1",
-    "JUnit.All in main.executor": "Profiler#1",
-    "JUnit.All in mmra (1).executor": "Coverage",
-    "JUnit.All in mmra (2).executor": "Run",
-    "JUnit.All in mmra (3).executor": "Run",
-    "JUnit.All in mmra (4).executor": "Run",
-    "JUnit.All in mmra (5).executor": "Coverage",
-    "JUnit.All in mmra 3.executor": "Coverage",
-    "JUnit.All in mmra.executor": "Run",
-    "JUnit.All in test (1).executor": "Coverage",
-    "JUnit.All in test.executor": "Run",
-    "JUnit.ContractTest.executor": "Run",
-    "JUnit.CustomerAddressTest.executor": "Run",
-    "JUnit.CustomerAddressTest.testUpdateCustomerAddress.executor": "Coverage",
-    "JUnit.MaintenanceTest.executor": "Run",
-    "JUnit.VehicleTest.executor": "Run",
-    "JUnit.VehicleTest.testCreateVehicle.executor": "Run",
-    "JUnit.de.fherfurt in test.executor": "Coverage",
-    "JUnit.de.fherfurt.core in test.executor": "Coverage",
-    "Repository.Attach.Annotations": "false",
-    "Repository.Attach.JavaDocs": "false",
-    "Repository.Attach.Sources": "false",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit3",
-    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit3": "junit.framework.TestCase",
-    "create.test.in.the.same.root": "true",
-    "git-widget-placeholder": "main",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/moham/IdeaProjects/Java 1/src/main/java/de/fherfurt/repository",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.0",
-    "settings.editor.selected.configurable": "preferences.lookFeel",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;Application.Main.executor&quot;: &quot;Run&quot;,
+    &quot;Downloaded.Files.Path.Enabled&quot;: &quot;false&quot;,
+    &quot;JUnit.All in CarHub360 (1).executor&quot;: &quot;Coverage&quot;,
+    &quot;JUnit.All in CarHub360 (2).executor&quot;: &quot;Coverage&quot;,
+    &quot;JUnit.All in CarHub360.executor&quot;: &quot;Profiler#1&quot;,
+    &quot;JUnit.All in main.executor&quot;: &quot;Profiler#1&quot;,
+    &quot;JUnit.All in mmra (1).executor&quot;: &quot;Coverage&quot;,
+    &quot;JUnit.All in mmra (2).executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.All in mmra (3).executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.All in mmra (4).executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.All in mmra (5).executor&quot;: &quot;Coverage&quot;,
+    &quot;JUnit.All in mmra 3.executor&quot;: &quot;Coverage&quot;,
+    &quot;JUnit.All in mmra.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.All in test (1).executor&quot;: &quot;Coverage&quot;,
+    &quot;JUnit.All in test.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.ContractTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.CustomerAddressTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.CustomerAddressTest.testUpdateCustomerAddress.executor&quot;: &quot;Coverage&quot;,
+    &quot;JUnit.MaintenanceTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.VehicleTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.VehicleTest.testCreateVehicle.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.de.fherfurt in test.executor&quot;: &quot;Coverage&quot;,
+    &quot;JUnit.de.fherfurt.core in test.executor&quot;: &quot;Coverage&quot;,
+    &quot;Repository.Attach.Annotations&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.JavaDocs&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.Sources&quot;: &quot;false&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary&quot;: &quot;JUnit3&quot;,
+    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit3&quot;: &quot;junit.framework.TestCase&quot;,
+    &quot;create.test.in.the.same.root&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/moham/IdeaProjects/Java 1/src/main/java/de/fherfurt/repository&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.lookFeel&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\moham\IdeaProjects\Java 1\src\main\java\de\fherfurt\repository" />
@@ -237,7 +234,7 @@
       <workItem from="1743374202413" duration="59000" />
       <workItem from="1743841829600" duration="24000" />
       <workItem from="1744361241572" duration="2798000" />
-      <workItem from="1746210309802" duration="7980000" />
+      <workItem from="1746210309802" duration="10581000" />
     </task>
     <task id="LOCAL-00001" summary="korrekt">
       <option name="closed" value="true" />
@@ -271,7 +268,23 @@
       <option name="project" value="LOCAL" />
       <updated>1716318148822</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Add docker">
+      <option name="closed" value="true" />
+      <created>1746378571303</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1746378571303</updated>
+    </task>
+    <task id="LOCAL-00006" summary="update .gitignore">
+      <option name="closed" value="true" />
+      <created>1746383649197</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1746383649197</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -292,7 +305,9 @@
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="korrekt" />
     <MESSAGE value="Verbesserung" />
-    <option name="LAST_COMMIT_MESSAGE" value="Verbesserung" />
+    <MESSAGE value="Add docker" />
+    <MESSAGE value="update .gitignore" />
+    <option name="LAST_COMMIT_MESSAGE" value="update .gitignore" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
