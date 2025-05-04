@@ -1,0 +1,31 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"  # Expose the application on port 8080
+    environment:
+      - JAVA_OPTS=-Xmx512m  # Set Java options for memory management
+      - SPRING_DATASOURCE_URL=jdbc:h2:mem:testdb  # Add H2 database URL
+      - SPRING_DATASOURCE_DRIVER_CLASS_NAME=org.h2.Driver  # Add H2 driver class
+      - SPRING_DATASOURCE_USERNAME=sa  # Default username for H2
+      - SPRING_DATASOURCE_PASSWORD=  # Default password for H2 (empty)
+    volumes:
+      - ./src:/usr/src/app/src  # Mount source code for live updates
+    depends_on:
+      - db  # Ensure the database service is started before the app
+    healthcheck:  # Add health check for the application
+      test: ["CMD", "curl", "-f", "http://localhost:8080/actuator/health"]  # Check health endpoint
+      interval: 30s  # Check every 30 seconds
+      timeout: 10s  # Timeout after 10 seconds
+      retries: 3  # Retry 3 times before marking as unhealthy
+
+  db:
+    image: h2database/h2:latest  # Use H2 database for development
+    ports:
+      - "9092:9092"              # Expose H2 console
+    environment:
+      - H2_OPTIONS=-tcpAllowOthers  # Allow TCP connections
