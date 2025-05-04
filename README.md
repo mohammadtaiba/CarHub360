@@ -1,6 +1,6 @@
 # CarHub360
 
-## Projektübersicht
+## Projektübersicht 
 
 CarHub360 ist eine umfassende Anwendung für den Automobilsektor, die sowohl Fahrzeugverkauf als auch -vermietung abdeckt. Ziel ist es, eine intuitive und effiziente Plattform zur Verwaltung von Neu- und Gebrauchtwagen sowie Kurz- und Langzeitmieten bereitzustellen.
 
