@@ -5,111 +5,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1ae668b4-5b17-4607-9e5f-430942c42cbc" name="Changes" comment="Verbesserung">
-      <change afterPath="$PROJECT_DIR$/.dockerignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Dockerfile" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docker-compose.yaml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mmra.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/de/fherfurt/api/ContractResource.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/de/fherfurt/api/CustomerResource.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/de/fherfurt/api/WebApplication.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/de/fherfurt/core/database/DatabaseConnection.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/de/fherfurt/core/entity/Contract.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/de/fherfurt/core/entity/Customer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/de/fherfurt/core/entity/CustomerAddress.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/de/fherfurt/core/entity/CustomerHistory.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/de/fherfurt/core/entity/Maintenance.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/de/fherfurt/core/entity/Payment.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/de/fherfurt/core/entity/RentVehicle.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/de/fherfurt/core/entity/SaleVehicle.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/de/fherfurt/core/entity/Vehicle.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/de/fherfurt/core/repository/ContractRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/de/fherfurt/core/repository/CustomerAddressRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/de/fherfurt/core/repository/CustomerHistoryRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/de/fherfurt/core/repository/CustomerRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/de/fherfurt/core/repository/MaintenanceRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/de/fherfurt/core/repository/PaymentRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/de/fherfurt/core/repository/RentVehicleRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/de/fherfurt/core/repository/SaleVehicleRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/de/fherfurt/core/repository/VehicleRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/de/fherfurt/core/validation/ContractValidator.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/de/fherfurt/service/ContractService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/de/fherfurt/service/CustomerAddressService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/de/fherfurt/service/CustomerHistoryService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/de/fherfurt/service/CustomerService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/de/fherfurt/service/MaintenanceService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/de/fherfurt/service/PaymentService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/de/fherfurt/service/RentVehicleService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/de/fherfurt/service/SaleVehicleService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/de/fherfurt/service/VehicleService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/META-INF/persistence.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Dokumentation/Documentation.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/Dokumentation/Java 1/Documentation.pdf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Dokumentation/Klassendiagramm.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/Dokumentation/Java 1/Klassendiagramm.pdf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Dokumentation/PrasiJava.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/Dokumentation/Java 1/PrasiJava.pdf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Dokumentation/ZwischenpraesentationJava.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/Dokumentation/Java 1/ZwischenpraesentationJava.pdf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/de/fherfurt/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/fherfurt/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/de/fherfurt/core/contract/Contract.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/de/fherfurt/core/contract/ContractManager.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/de/fherfurt/core/contract/ContractValidator.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/de/fherfurt/core/customer/Customer.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/de/fherfurt/core/customer/CustomerManager.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/de/fherfurt/core/maintenance/Maintenance.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/de/fherfurt/core/maintenance/MaintenanceManager.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/de/fherfurt/core/payment/Payment.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/de/fherfurt/core/payment/PaymentManager.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/de/fherfurt/core/payment/PaymentMethod.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/fherfurt/core/entity/utils/PaymentMethod.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/de/fherfurt/core/payment/PaymentStatus.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/fherfurt/core/entity/utils/PaymentStatus.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/de/fherfurt/logic/customerAddress/CustomerAddress.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/de/fherfurt/logic/customerAddress/CustomerAddressManager.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/de/fherfurt/logic/customerHistory/CustomerHistory.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/de/fherfurt/logic/customerHistory/CustomerHistoryManager.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/de/fherfurt/logic/customerHistory/CustomerHistoryReview.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/fherfurt/core/entity/utils/CustomerHistoryReview.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/de/fherfurt/logic/rentVehicle/RentVehicle.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/de/fherfurt/logic/saleVehicle/SaleVehicle.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/de/fherfurt/model/vehicle/Vehicle.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/de/fherfurt/model/vehicle/VehicleManager.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/main.iml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/main.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/de/fherfurt/MainTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/de/fherfurt/MainTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/de/fherfurt/core/contract/ContractTest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/de/fherfurt/core/customer/CustomerTest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/de/fherfurt/core/maintenance/MaintenanceTest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/de/fherfurt/core/payment/PaymentTest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/de/fherfurt/logic/customerAddress/CustomerAddressTest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/de/fherfurt/logic/customerHistory/CustomerHistoryTest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/de/fherfurt/logic/rentVehicle/RentVehicleTest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/de/fherfurt/logic/saleVehicle/SaleVehicleTest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/de/fherfurt/model/vehicleTest/VehicleTest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/de/fherfurt/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/de/fherfurt/Main.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/de/fherfurt/core/contract/Contract.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/de/fherfurt/core/contract/ContractManager.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/de/fherfurt/core/contract/ContractValidator.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/de/fherfurt/core/customer/Customer.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/de/fherfurt/core/customer/CustomerManager.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/de/fherfurt/core/maintenance/Maintenance.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/de/fherfurt/core/maintenance/MaintenanceManager.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/de/fherfurt/core/payment/Payment.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/de/fherfurt/core/payment/PaymentManager.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/de/fherfurt/core/payment/PaymentMethod.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/de/fherfurt/core/payment/PaymentStatus.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/de/fherfurt/logic/customerAddress/CustomerAddress.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/de/fherfurt/logic/customerAddress/CustomerAddressManager.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/de/fherfurt/logic/customerHistory/CustomerHistory.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/de/fherfurt/logic/customerHistory/CustomerHistoryManager.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/de/fherfurt/logic/customerHistory/CustomerHistoryReview.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/de/fherfurt/logic/rentVehicle/RentVehicle.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/de/fherfurt/logic/saleVehicle/SaleVehicle.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/de/fherfurt/model/vehicle/Vehicle.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/de/fherfurt/model/vehicle/VehicleManager.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/de/fherfurt/core/database/DatabaseConnection.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/fherfurt/core/database/DatabaseConnection.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ComposerSettings">
+    <execution />
   </component>
   <component name="CoverageOptionsProvider">
     <option name="myAddOrReplace" value="0" />
@@ -125,6 +32,18 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "lastFilter": {
+    "state": "OPEN",
+    "assignee": "mohammadtaiba"
+  }
+}]]></component>
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/mohammadtaiba/CarHub360.git",
+    "accountId": "ad386e4f-e65c-466a-b6b1-020b040692d7"
+  }
+}]]></component>
   <component name="ProblemsViewState">
     <option name="selectedTabId" value="ProjectErrors" />
   </component>
@@ -139,56 +58,56 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
-    &quot;Application.Main.executor&quot;: &quot;Run&quot;,
-    &quot;Downloaded.Files.Path.Enabled&quot;: &quot;false&quot;,
-    &quot;JUnit.All in CarHub360 (1).executor&quot;: &quot;Coverage&quot;,
-    &quot;JUnit.All in CarHub360 (2).executor&quot;: &quot;Coverage&quot;,
-    &quot;JUnit.All in CarHub360.executor&quot;: &quot;Profiler#1&quot;,
-    &quot;JUnit.All in main.executor&quot;: &quot;Profiler#1&quot;,
-    &quot;JUnit.All in mmra (1).executor&quot;: &quot;Coverage&quot;,
-    &quot;JUnit.All in mmra (2).executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.All in mmra (3).executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.All in mmra (4).executor&quot;: &quot;Coverage&quot;,
-    &quot;JUnit.All in mmra (5).executor&quot;: &quot;Coverage&quot;,
-    &quot;JUnit.All in mmra 3.executor&quot;: &quot;Coverage&quot;,
-    &quot;JUnit.All in mmra.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.All in test (1).executor&quot;: &quot;Coverage&quot;,
-    &quot;JUnit.All in test.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.ContractTest.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.CustomerAddressTest.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.CustomerAddressTest.testUpdateCustomerAddress.executor&quot;: &quot;Coverage&quot;,
-    &quot;JUnit.MaintenanceTest.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.VehicleTest.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.VehicleTest.testCreateVehicle.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.de.fherfurt in test.executor&quot;: &quot;Coverage&quot;,
-    &quot;JUnit.de.fherfurt.core in test.executor&quot;: &quot;Coverage&quot;,
-    &quot;Repository.Attach.Annotations&quot;: &quot;false&quot;,
-    &quot;Repository.Attach.JavaDocs&quot;: &quot;false&quot;,
-    &quot;Repository.Attach.Sources&quot;: &quot;false&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary&quot;: &quot;JUnit3&quot;,
-    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit3&quot;: &quot;junit.framework.TestCase&quot;,
-    &quot;create.test.in.the.same.root&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/moham/IdeaProjects/Java 1/src/main/java/de/fherfurt/repository&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.lookFeel&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "Application.Main.executor": "Run",
+    "Downloaded.Files.Path.Enabled": "false",
+    "JUnit.All in CarHub360 (1).executor": "Coverage",
+    "JUnit.All in CarHub360 (2).executor": "Coverage",
+    "JUnit.All in CarHub360.executor": "Profiler#1",
+    "JUnit.All in main.executor": "Profiler#1",
+    "JUnit.All in mmra (1).executor": "Coverage",
+    "JUnit.All in mmra (2).executor": "Run",
+    "JUnit.All in mmra (3).executor": "Run",
+    "JUnit.All in mmra (4).executor": "Run",
+    "JUnit.All in mmra (5).executor": "Coverage",
+    "JUnit.All in mmra 3.executor": "Coverage",
+    "JUnit.All in mmra.executor": "Run",
+    "JUnit.All in test (1).executor": "Coverage",
+    "JUnit.All in test.executor": "Run",
+    "JUnit.ContractTest.executor": "Run",
+    "JUnit.CustomerAddressTest.executor": "Run",
+    "JUnit.CustomerAddressTest.testUpdateCustomerAddress.executor": "Coverage",
+    "JUnit.MaintenanceTest.executor": "Run",
+    "JUnit.VehicleTest.executor": "Run",
+    "JUnit.VehicleTest.testCreateVehicle.executor": "Run",
+    "JUnit.de.fherfurt in test.executor": "Coverage",
+    "JUnit.de.fherfurt.core in test.executor": "Coverage",
+    "Repository.Attach.Annotations": "false",
+    "Repository.Attach.JavaDocs": "false",
+    "Repository.Attach.Sources": "false",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit3",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit3": "junit.framework.TestCase",
+    "create.test.in.the.same.root": "true",
+    "git-widget-placeholder": "main",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/moham/IdeaProjects/Java 1/src/main/java/de/fherfurt/repository",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0",
+    "settings.editor.selected.configurable": "preferences.lookFeel",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\moham\IdeaProjects\Java 1\src\main\java\de\fherfurt\repository" />
@@ -209,15 +128,7 @@
       <recent name="de.fherfurt.logic.service" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.All in mmra (3)">
-    <configuration name="All in mmra (1)" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="mmra" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="TEST_OBJECT" value="package" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
+  <component name="RunManager" selected="JUnit.All in mmra (4)">
     <configuration name="All in mmra (2)" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="mmra" />
       <option name="PACKAGE_NAME" value="" />
@@ -227,6 +138,14 @@
       </method>
     </configuration>
     <configuration name="All in mmra (3)" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="mmra" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="TEST_OBJECT" value="package" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="All in mmra (4)" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="mmra" />
       <option name="PACKAGE_NAME" value="" />
       <option name="TEST_OBJECT" value="package" />
@@ -252,11 +171,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.All in mmra (4)" />
         <item itemvalue="JUnit.All in mmra (3)" />
         <item itemvalue="JUnit.All in mmra (2)" />
         <item itemvalue="JUnit.All in mmra" />
         <item itemvalue="JUnit.All in mmra (5)" />
-        <item itemvalue="JUnit.All in mmra (1)" />
       </list>
     </recent_temporary>
   </component>
@@ -309,7 +228,16 @@
       <workItem from="1741139004808" duration="2000" />
       <workItem from="1741140256091" duration="3004000" />
       <workItem from="1741441774169" duration="2093000" />
-      <workItem from="1741604081146" duration="2978000" />
+      <workItem from="1741604081146" duration="3626000" />
+      <workItem from="1741637335337" duration="906000" />
+      <workItem from="1741812351508" duration="1381000" />
+      <workItem from="1741878215076" duration="2508000" />
+      <workItem from="1742474717851" duration="22000" />
+      <workItem from="1743342262777" duration="612000" />
+      <workItem from="1743374202413" duration="59000" />
+      <workItem from="1743841829600" duration="24000" />
+      <workItem from="1744361241572" duration="2798000" />
+      <workItem from="1746210309802" duration="7980000" />
     </task>
     <task id="LOCAL-00001" summary="korrekt">
       <option name="closed" value="true" />
@@ -421,7 +349,7 @@
     <SUITE FILE_PATH="coverage/mmra_3$de_fherfurt_core_in_test.ic" NAME="de.fherfurt.core in test Coverage Results" MODIFIED="1716314974126" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>de.fherfurt.core.*</FILTER>
     </SUITE>
-    <SUITE FILE_PATH="coverage/Java_1$All_in_mmra__4_.ic" NAME="All in mmra (4) Coverage Results" MODIFIED="1740507216639" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true" />
+    <SUITE FILE_PATH="coverage/Java_1$All_in_mmra__4_.ic" NAME="All in mmra (4) Coverage Results" MODIFIED="1744361439004" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true" />
     <SUITE FILE_PATH="coverage/Java_1$All_in_mmra__1_.ic" NAME="All in mmra (1) Coverage Results" MODIFIED="1740507264286" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true" />
     <SUITE FILE_PATH="coverage/mmra$VehicleTest.ic" NAME="VehicleTest Coverage Results" MODIFIED="1716315505760" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>de.fherfurt.model.*</FILTER>

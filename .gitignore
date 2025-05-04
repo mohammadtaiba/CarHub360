@@ -1,1 +1,13 @@
 java1/
+target/
+
+# IDE-specific files
+.idea/
+*.iml
+
+# Log files
+*.log
+
+# OS-specific files
+.DS_Store
+Thumbs.db
