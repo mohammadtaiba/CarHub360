@@ -1,4 +1,4 @@
-package de.fherfurt.core.service;
+package de.fherfurt.service;
 
 import de.fherfurt.core.entity.Contract;
 import de.fherfurt.core.entity.Customer;
