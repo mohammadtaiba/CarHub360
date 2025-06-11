@@ -29,3 +29,9 @@ services:
       - "9092:9092"              # Expose H2 console
     environment:
       - H2_OPTIONS=-tcpAllowOthers  # Allow TCP connections
+    volumes:
+      - h2-data:/opt/h2-data  # Persist H2 data
+    restart: unless-stopped
+
+  volumes:
+    h2-data:
