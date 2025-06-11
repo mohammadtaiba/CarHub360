@@ -13,6 +13,7 @@ import java.util.Date;
 public class CustomerHistory {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int customerHistoryId;
 
     /**

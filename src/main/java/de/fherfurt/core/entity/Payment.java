@@ -18,6 +18,7 @@ public class Payment {
     private static final BigDecimal MINIMUM_PAYMENT_AMOUNT = BigDecimal.ZERO;
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int paymentId;
 
     /**

@@ -1,8 +1,7 @@
 package de.fherfurt.core.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
+
 import java.math.BigDecimal;
 
 /**
@@ -14,6 +13,7 @@ import java.math.BigDecimal;
 public class SaleVehicle {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int vehicleId;
     private BigDecimal salePrice;
     private boolean isNew;

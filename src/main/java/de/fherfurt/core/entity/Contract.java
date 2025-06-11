@@ -12,6 +12,7 @@ import java.time.LocalDate;
 public class Contract {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int contractId;
 
     @ManyToOne

@@ -11,6 +11,7 @@ import java.util.Date;
 public class Maintenance {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int maintenanceId;
 
     /**

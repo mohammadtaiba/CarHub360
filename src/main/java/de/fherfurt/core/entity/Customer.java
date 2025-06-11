@@ -11,6 +11,7 @@ import java.util.Date;
 public class Customer {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int customerId;
 
     private String firstName;

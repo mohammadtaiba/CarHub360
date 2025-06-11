@@ -1,8 +1,6 @@
 package de.fherfurt.core.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 /**
  * Represents a customer's address with attributes like customer ID, city, postal code, street, and street number.
@@ -12,6 +10,7 @@ import jakarta.persistence.Table;
 public class CustomerAddress {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int customerId;
     private String city;
     private String postalCode;

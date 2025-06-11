@@ -1,8 +1,6 @@
 package de.fherfurt.core.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 /**
  * Represents a single vehicle with attributes such as ID, name, brand,
@@ -13,6 +11,7 @@ import jakarta.persistence.Table;
 public class Vehicle {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int vehicleId;
     private String name;
     private String brand;
