@@ -9,17 +9,35 @@
     <groupId>de.fherfurt</groupId>
     <artifactId>mmra</artifactId>
     <version>1.0-SNAPSHOT</version>
-    <packaging>jar</packaging>
+    <packaging>war</packaging>
 
     <properties>
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <wildfly.version>27.0.1.Final</wildfly.version>
     </properties>
 
     <build>
         <finalName>mmra</finalName>
         <plugins>
+            <!-- WildFly Maven Plugin -->
+            <plugin>
+                <groupId>org.wildfly.plugins</groupId>
+                <artifactId>wildfly-maven-plugin</artifactId>
+                <version>2.1.0.Final</version>
+                <configuration>
+                    <skip>false</skip>
+                </configuration>
+            </plugin>
+
+            <!-- Maven War Plugin -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>3.3.2</version>
+            </plugin>
+
             <!-- Surefire Plugin für Tests -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -58,31 +76,48 @@
                     <outputDirectory>${project.build.directory}/target/apidocs</outputDirectory>
                 </configuration>
             </plugin>
-
-            <!-- Jar Plugin, um ein ausführbares Jar zu bauen -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-jar-plugin</artifactId>
-                <version>3.3.0</version>
-                <configuration>
-                    <archive>
-                        <manifest>
-                            <addClasspath>true</addClasspath>
-                            <classpathPrefix>lib/</classpathPrefix>
-                            <!--
-                              Main-Class anpassen, falls du wirklich ein Main() in
-                              de.fherfurt.tobe.DeliveryService.Main hast.
-                            -->
-                            <mainClass>de.fherfurt.tobe.DeliveryService.Main</mainClass>
-                        </manifest>
-                    </archive>
-                </configuration>
-            </plugin>
         </plugins>
     </build>
 
+    <!-- JBoss Public Repository für RESTEasy -->
+    <repositories>
+        <repository>
+            <id>jboss-public-repository-group</id>
+            <name>JBoss Public Repository Group</name>
+            <url>https://repository.jboss.org/nexus/content/groups/public/</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
+
     <dependencies>
-        <!-- JUnit für Tests (Jupiter + Vintage) -->
+        <!-- Jakarta EE API -->
+        <dependency>
+            <groupId>jakarta.platform</groupId>
+            <artifactId>jakarta.jakartaee-api</artifactId>
+            <version>9.1.0</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <!-- JSON Processing -->
+        <dependency>
+            <groupId>org.glassfish</groupId>
+            <artifactId>jakarta.json</artifactId>
+            <version>2.0.1</version>
+        </dependency>
+
+        <!-- Swagger/OpenAPI -->
+        <dependency>
+            <groupId>io.swagger.core.v3</groupId>
+            <artifactId>swagger-jaxrs2</artifactId>
+            <version>2.2.8</version>
+        </dependency>
+
+        <!-- JUnit für Tests -->
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-engine</artifactId>
@@ -102,34 +137,26 @@
             <scope>test</scope>
         </dependency>
 
-        <!-- Jakarta Persistence API 3.1 -->
+        <!-- Jakarta Persistence API -->
         <dependency>
             <groupId>jakarta.persistence</groupId>
             <artifactId>jakarta.persistence-api</artifactId>
             <version>3.1.0</version>
         </dependency>
 
-        <!-- Hibernate 6.2.x (Jakarta-Version) -->
+        <!-- Hibernate -->
         <dependency>
             <groupId>org.hibernate.orm</groupId>
             <artifactId>hibernate-core</artifactId>
             <version>6.2.5.Final</version>
         </dependency>
 
-        <!-- H2-Datenbank (In-Memory) -->
+        <!-- H2-Datenbank -->
         <dependency>
             <groupId>com.h2database</groupId>
             <artifactId>h2</artifactId>
             <version>2.1.214</version>
             <scope>runtime</scope>
-        </dependency>
-
-        <!-- Jakarta EE API für EJB und mehr -->
-        <dependency>
-            <groupId>jakarta.platform</groupId>
-            <artifactId>jakarta.jakartaee-api</artifactId>
-            <version>9.1.0</version>
-            <scope>provided</scope>
         </dependency>
     </dependencies>
 </project>
