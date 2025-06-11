@@ -164,9 +164,9 @@
         </dependency>
         <!-- Hibernate als JPA-Provider -->
         <dependency>
-            <groupId>org.hibernate.orm</groupId>
+            <groupId>org.hibernate</groupId>
             <artifactId>hibernate-core</artifactId>
-            <version>6.2.5.Final</version>
+            <version>6.1.7.Final</version>
         </dependency>
 
         <!-- H2-Datenbank (Runtime) -->
