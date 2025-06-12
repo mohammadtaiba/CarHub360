@@ -22,6 +22,9 @@ CarHub360 ist eine umfassende Anwendung für den Automobilsektor, die sowohl Fah
 - Wartungsübersicht
 - Kundenhistorie & Feedback
 - REST API für verschiedene Clients
+- OpenAPI-Dokumentation unter `/swagger-ui`
+    (beim Deployen des WAR-Archivs z.B. als `mmra.war` befindet
+    sich die UI unter `http://localhost:8080/mmra/swagger-ui/`)
 - Skalierbarkeit für wachsende Anforderungen
 
 ## Systemanforderungen
