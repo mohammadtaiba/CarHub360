@@ -8,119 +8,71 @@ import jakarta.inject.Inject;
 import java.time.Year;
 import java.util.List;
 
-/**
- * Manages a collection of vehicles, including operations for creating,
- * updating, deleting, and retrieving vehicle information, now with DB persistence.
- */
 @Stateless
 public class VehicleService {
 
     @Inject
     private VehicleRepository vehicleRepository;
 
-    /**
-     * Creates a new vehicle and saves it to the database.
-     */
-    public boolean createVehicle(int vehicleId,
-                                 String name,
-                                 String brand,
-                                 int kilometerCount,
-                                 int constructionYear,
-                                 String type) {
-
-        if (vehicleId < 0 || name == null || brand == null || kilometerCount < 0 ||
-                constructionYear < 1900 || type == null) {
-            return false;
-        }
-
-        // Prüfen, ob das Baujahr plausibel ist
-        Year currentYear = Year.now();
-        if (currentYear.getValue() < constructionYear) {
-            return false;
-        }
-
-        // Prüfen, ob bereits ein Vehicle mit dieser ID existiert
-        Vehicle existing = vehicleRepository.findById(vehicleId);
-        if (existing != null) {
-            return false;
-        }
-
-        Vehicle newVehicle = new Vehicle(vehicleId, name, brand, kilometerCount, constructionYear, type);
-        vehicleRepository.save(newVehicle);
-        return true;
-    }
-
-    /**
-     * Updates an existing vehicle's details.
-     */
-    public boolean updateVehicle(int vehicleId,
-                                 String name,
-                                 String brand,
-                                 int kilometerCount,
-                                 int constructionYear,
-                                 String type) {
-        Vehicle vehicle = vehicleRepository.findById(vehicleId);
-        if (vehicle == null) {
-            return false;
-        }
-        vehicle.setName(name);
-        vehicle.setBrand(brand);
-        vehicle.setKilometerCount(kilometerCount);
-        vehicle.setConstructionYear(constructionYear);
-        vehicle.setType(type);
-        vehicleRepository.update(vehicle);
-        return true;
-    }
-
-    /**
-     * Deletes an existing vehicle by its ID.
-     */
-    public boolean deleteVehicle(int vehicleId) {
-        Vehicle vehicle = vehicleRepository.findById(vehicleId);
-        if (vehicle != null) {
-            vehicleRepository.delete(vehicleId);
-            return true;
-        }
-        return false;
-    }
-
-    /**
-     * Checks and updates the kilometer count of a vehicle.
-     */
-    public boolean checkNewKilometerCount(int vehicleId, int newKilometerCount) {
-        Vehicle vehicle = vehicleRepository.findById(vehicleId);
-        if (vehicle != null) {
-            if (newKilometerCount >= vehicle.getKilometerCount()) {
-                vehicle.setKilometerCount(newKilometerCount);
-                vehicleRepository.update(vehicle);
-                return true;
-            }
-            return false;
-        }
-        return false;
-    }
-
-    /**
-     * Retrieves details of a vehicle by its ID.
-     */
-    public String getVehicleDetails(int vehicleId) {
-        Vehicle vehicle = vehicleRepository.findById(vehicleId);
-        if (vehicle == null) {
-            return "Vehicle with ID " + vehicleId + " was not found.";
-        }
-        return "Vehicle Details: \n" +
-                "Vehicle ID: " + vehicle.getVehicleId() + "\n" +
-                "Name: " + vehicle.getName() + "\n" +
-                "Brand: " + vehicle.getBrand() + "\n" +
-                "Kilometer Count: " + vehicle.getKilometerCount() + "\n" +
-                "Construction Year: " + vehicle.getConstructionYear() + "\n" +
-                "Type: " + vehicle.getType();
-    }
-
-    /**
-     * Beispiel: Liste aller Fahrzeuge aus der Datenbank abrufen.
-     */
-    public List<Vehicle> getAllVehicles() {
+    public List<Vehicle> findAll() {
         return vehicleRepository.findAll();
+    }
+
+    public Vehicle findById(int vehicleId) {
+        return vehicleRepository.findById(vehicleId);
+    }
+
+    public Vehicle create(Vehicle vehicle) {
+        validateVehicle(vehicle);
+        vehicleRepository.save(vehicle);
+        return vehicle;
+    }
+
+    public Vehicle update(int vehicleId, Vehicle updatedVehicle) {
+        Vehicle existing = vehicleRepository.findById(vehicleId);
+        if (existing == null) {
+            return null;
+        }
+        validateVehicle(updatedVehicle);
+        copyVehicleFields(updatedVehicle, existing);
+        return vehicleRepository.update(existing);
+    }
+
+    public boolean delete(int vehicleId) {
+        if (vehicleRepository.findById(vehicleId) == null) {
+            return false;
+        }
+        vehicleRepository.delete(vehicleId);
+        return true;
+    }
+
+    protected void validateVehicle(Vehicle vehicle) {
+        if (vehicle == null) {
+            throw new IllegalArgumentException("Vehicle payload is required.");
+        }
+        requireText(vehicle.getName(), "name");
+        requireText(vehicle.getBrand(), "brand");
+        requireText(vehicle.getType(), "type");
+        if (vehicle.getKilometerCount() < 0) {
+            throw new IllegalArgumentException("kilometerCount must not be negative.");
+        }
+        int currentYear = Year.now().getValue();
+        if (vehicle.getConstructionYear() < 1900 || vehicle.getConstructionYear() > currentYear + 1) {
+            throw new IllegalArgumentException("constructionYear must be plausible.");
+        }
+    }
+
+    protected void copyVehicleFields(Vehicle source, Vehicle target) {
+        target.setName(source.getName());
+        target.setBrand(source.getBrand());
+        target.setKilometerCount(source.getKilometerCount());
+        target.setConstructionYear(source.getConstructionYear());
+        target.setType(source.getType());
+    }
+
+    private void requireText(String value, String fieldName) {
+        if (value == null || value.trim().isEmpty()) {
+            throw new IllegalArgumentException(fieldName + " is required.");
+        }
     }
 }

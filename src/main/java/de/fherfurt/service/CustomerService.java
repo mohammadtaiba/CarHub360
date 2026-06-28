@@ -1,83 +1,89 @@
 package de.fherfurt.service;
 
 import de.fherfurt.core.entity.Customer;
-import de.fherfurt.core.entity.CustomerAddress;
 import de.fherfurt.core.repository.CustomerRepository;
 import jakarta.ejb.Stateless;
 import jakarta.inject.Inject;
 
-import java.util.Date;
 import java.util.List;
 
-/**
- * Manages customer operations such as creation, deletion, and retrieval,
- * now with persistent storage via CustomerRepository.
- */
 @Stateless
 public class CustomerService {
 
     @Inject
     private CustomerRepository customerRepository;
 
-    /**
-     * Creates and adds a new customer to the system if no customer exists with the same ID or email.
-     */
-    public boolean createCustomer(int customerId, String firstName, String lastName,
-                                  String email, Date birthdate, boolean isFemale,
-                                  CustomerAddress customerAddress) {
+    public List<Customer> findAllActive() {
+        return customerRepository.findAllActive();
+    }
 
-        // Prüfen, ob Kunde mit gleicher ID oder E-Mail existiert
-        if (customerRepository.existsByIdOrEmail(customerId, email)) {
-            return false;
+    public Customer findActiveById(int customerId) {
+        Customer customer = customerRepository.findById(customerId);
+        if (customer == null || customer.isDeleted()) {
+            return null;
+        }
+        return customer;
+    }
+
+    public Customer create(Customer customer) {
+        validateCustomer(customer);
+        if (customerRepository.findByEmail(customer.getEmail()) != null) {
+            throw new IllegalArgumentException("A customer with this email already exists.");
+        }
+        customer.setDeleted(false);
+        customerRepository.save(customer);
+        return customer;
+    }
+
+    public Customer update(int customerId, Customer updatedCustomer) {
+        Customer existing = findActiveById(customerId);
+        if (existing == null) {
+            return null;
         }
 
-        // Neuen Customer anlegen und speichern
-        Customer newCustomer = new Customer(
-                customerId, firstName, lastName, email, birthdate, isFemale, customerAddress
-        );
-        customerRepository.save(newCustomer);
+        validateCustomer(updatedCustomer);
+        Customer duplicateEmail = customerRepository.findByEmail(updatedCustomer.getEmail());
+        if (duplicateEmail != null && duplicateEmail.getCustomerId() != customerId) {
+            throw new IllegalArgumentException("A customer with this email already exists.");
+        }
+
+        existing.setFirstName(updatedCustomer.getFirstName());
+        existing.setLastName(updatedCustomer.getLastName());
+        existing.setEmail(updatedCustomer.getEmail());
+        existing.setBirthdate(updatedCustomer.getBirthdate());
+        existing.setFemale(updatedCustomer.isFemale());
+        existing.setCustomerAddress(updatedCustomer.getCustomerAddress());
+        return customerRepository.update(existing);
+    }
+
+    public boolean softDelete(int customerId) {
+        Customer customer = findActiveById(customerId);
+        if (customer == null) {
+            return false;
+        }
+        customer.setDeleted(true);
+        customerRepository.update(customer);
         return true;
     }
 
-    /**
-     * Removes a customer from the system based on their ID.
-     */
-    public boolean deleteCustomer(int customerId) {
-        Customer existing = customerRepository.findById(customerId);
-        if (existing != null) {
-            customerRepository.delete(customerId);
-            return true;
+    private void validateCustomer(Customer customer) {
+        if (customer == null) {
+            throw new IllegalArgumentException("Customer payload is required.");
         }
-        return false;
+        requireText(customer.getFirstName(), "firstName");
+        requireText(customer.getLastName(), "lastName");
+        requireText(customer.getEmail(), "email");
+        if (!customer.getEmail().contains("@")) {
+            throw new IllegalArgumentException("email must be a valid email address.");
+        }
+        if (customer.getBirthdate() == null) {
+            throw new IllegalArgumentException("birthdate is required.");
+        }
     }
 
-    /**
-     * Retrieves detailed information about a specific customer.
-     */
-    public String getCustomerDetails(int customerId) {
-        Customer customer = customerRepository.findById(customerId);
-        if (customer != null) {
-            return "Customer Details: \n" +
-                    "Customer ID: " + customer.getCustomerId() + "\n" +
-                    "First Name: " + customer.getFirstName() + "\n" +
-                    "Last Name: " + customer.getLastName() + "\n" +
-                    "Email: " + customer.getEmail() + "\n" +
-                    "Birthdate: " + customer.getBirthdate() + "\n" +
-                    "Is Female: " + customer.isFemale() + "\n" +
-                    "Address: " + (customer.getCustomerAddress() != null
-                    ? customer.getCustomerAddress().getStreet() + " "
-                    + customer.getCustomerAddress().getStreetNumber() + ", "
-                    + customer.getCustomerAddress().getCity() + " "
-                    + customer.getCustomerAddress().getPostalCode()
-                    : "No address set");
+    private void requireText(String value, String fieldName) {
+        if (value == null || value.trim().isEmpty()) {
+            throw new IllegalArgumentException(fieldName + " is required.");
         }
-        return "Customer with ID " + customerId + " was not found.";
-    }
-
-    /**
-     * Retrieves the list of all customers from the DB.
-     */
-    public List<Customer> getCustomerList() {
-        return customerRepository.findAll();
     }
 }

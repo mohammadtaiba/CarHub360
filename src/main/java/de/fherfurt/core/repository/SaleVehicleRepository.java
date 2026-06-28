@@ -4,15 +4,13 @@ import de.fherfurt.core.entity.SaleVehicle;
 import jakarta.ejb.Stateless;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
+
 import java.util.List;
 
-/**
- * Provides CRUD operations for SaleVehicle entities in the database.
- */
 @Stateless
 public class SaleVehicleRepository {
 
-    @PersistenceContext
+    @PersistenceContext(unitName = "myPU")
     private EntityManager em;
 
     public SaleVehicle findById(int vehicleId) {
@@ -20,7 +18,7 @@ public class SaleVehicleRepository {
     }
 
     public List<SaleVehicle> findAll() {
-        return em.createQuery("SELECT sv FROM SaleVehicle sv", SaleVehicle.class)
+        return em.createQuery("SELECT sv FROM SaleVehicle sv ORDER BY sv.vehicleId", SaleVehicle.class)
                 .getResultList();
     }
 

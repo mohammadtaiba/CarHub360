@@ -1,71 +1,64 @@
 package de.fherfurt.core.entity;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.PrimaryKeyJoinColumn;
+import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
 
 import java.math.BigDecimal;
 
-/**
- * This class represents a vehicle available for sale.
- * It includes information such as sale price and whether it's new or used.
- */
 @Entity
 @Table(name = "sale_vehicles")
-public class SaleVehicle {
+@PrimaryKeyJoinColumn(name = "vehicle_id")
+public class SaleVehicle extends Vehicle {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int vehicleId;
+    @NotNull
+    @Positive
+    @Column(nullable = false, precision = 12, scale = 2)
     private BigDecimal salePrice;
-    private boolean isNew;
 
-    /**
-     * Parameterloser Konstruktor (für JPA erforderlich).
-     */
+    @Column(nullable = false)
+    private boolean newVehicle;
+
     public SaleVehicle() {
     }
 
-    /**
-     * Constructor for SaleVehicle class.
-     *
-     * @param vehicleId Unique identifier for the vehicle
-     * @param salePrice Sale price of the vehicle
-     * @param isNew     Indicates whether the vehicle is new
-     */
-    public SaleVehicle(int vehicleId, BigDecimal salePrice, boolean isNew) {
-        this.vehicleId = vehicleId;
+    public SaleVehicle(int vehicleId,
+                       String name,
+                       String brand,
+                       int kilometerCount,
+                       int constructionYear,
+                       String type,
+                       BigDecimal salePrice,
+                       boolean newVehicle) {
+        super(vehicleId, name, brand, kilometerCount, constructionYear, type);
         this.salePrice = salePrice;
-        this.isNew = isNew;
-    }
-
-    public int getVehicleId() {
-        return vehicleId;
-    }
-    public void setVehicleId(int vehicleId) {
-        this.vehicleId = vehicleId;
+        this.newVehicle = newVehicle;
     }
 
     public BigDecimal getSalePrice() {
         return salePrice;
     }
+
     public void setSalePrice(BigDecimal salePrice) {
         this.salePrice = salePrice;
     }
 
     public boolean isNew() {
-        return isNew;
-    }
-    public void setNew(boolean aNew) {
-        isNew = aNew;
+        return newVehicle;
     }
 
-    /**
-     * Retrieves details of the SaleVehicle.
-     *
-     * @return Details of the SaleVehicle including ID, sale price, and whether it's new or used
-     */
-    public String getDetails() {
-        return "Vehicle ID: " + vehicleId +
-                ", Sale Price: " + salePrice +
-                ", Is New: " + isNew;
+    public boolean isNewVehicle() {
+        return newVehicle;
+    }
+
+    public void setNew(boolean newVehicle) {
+        this.newVehicle = newVehicle;
+    }
+
+    public void setNewVehicle(boolean newVehicle) {
+        this.newVehicle = newVehicle;
     }
 }

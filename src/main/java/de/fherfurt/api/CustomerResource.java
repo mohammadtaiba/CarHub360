@@ -1,171 +1,107 @@
 package de.fherfurt.api;
 
+import de.fherfurt.api.dto.CustomerAddressRequest;
+import de.fherfurt.api.dto.CustomerRequest;
 import de.fherfurt.core.entity.Customer;
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.PersistenceContext;
-import jakarta.ws.rs.*;
+import de.fherfurt.core.entity.CustomerAddress;
+import de.fherfurt.service.CustomerService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.inject.Inject;
+import jakarta.validation.Valid;
+import jakarta.ws.rs.Consumes;
+import jakarta.ws.rs.DELETE;
+import jakarta.ws.rs.GET;
+import jakarta.ws.rs.POST;
+import jakarta.ws.rs.PUT;
+import jakarta.ws.rs.Path;
+import jakarta.ws.rs.PathParam;
+import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
-import java.util.List;
-import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.Parameter;
-import io.swagger.v3.oas.annotations.responses.ApiResponse;
-import io.swagger.v3.oas.annotations.tags.Tag;
-import io.swagger.v3.oas.annotations.media.Content;
-import io.swagger.v3.oas.annotations.media.Schema;
 
 @Path("/customers")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
-@Tag(name = "Customer Management", description = "APIs for managing customer data")
+@Tag(name = "Customers", description = "Customer lifecycle and soft-delete operations")
 public class CustomerResource {
 
-    @PersistenceContext
-    private EntityManager entityManager;
+    @Inject
+    private CustomerService customerService;
 
     @GET
-    @Operation(
-        summary = "Get all active customers",
-        description = "Retrieves a list of all non-deleted customers",
-        responses = {
-            @ApiResponse(
-                responseCode = "200",
-                description = "List of customers retrieved successfully",
-                content = @Content(
-                    mediaType = MediaType.APPLICATION_JSON,
-                    schema = @Schema(implementation = Customer.class)
-                )
-            )
-        }
-    )
-    public List<Customer> getAllCustomers() {
-        return entityManager.createQuery("SELECT c FROM Customer c WHERE c.isDeleted = false", Customer.class)
-                .getResultList();
+    @Operation(summary = "List active customers")
+    public Response getAllCustomers() {
+        return Response.ok(customerService.findAllActive()).build();
     }
 
     @GET
     @Path("/{id}")
-    @Operation(
-        summary = "Get customer by ID",
-        description = "Retrieves a specific customer by their ID",
-        responses = {
-            @ApiResponse(
-                responseCode = "200",
-                description = "Customer found successfully",
-                content = @Content(
-                    mediaType = MediaType.APPLICATION_JSON,
-                    schema = @Schema(implementation = Customer.class)
-                )
-            ),
-            @ApiResponse(
-                responseCode = "404",
-                description = "Customer not found"
-            )
-        }
-    )
-    public Response getCustomer(
-        @Parameter(description = "ID of the customer to retrieve", required = true)
-        @PathParam("id") int id
-    ) {
-        Customer customer = entityManager.find(Customer.class, id);
-        if (customer == null || customer.isDeleted()) {
-            return Response.status(Response.Status.NOT_FOUND).build();
+    @Operation(summary = "Get one active customer")
+    public Response getCustomer(@PathParam("id") int id) {
+        Customer customer = customerService.findActiveById(id);
+        if (customer == null) {
+            return ApiResponses.notFound("Customer not found.");
         }
         return Response.ok(customer).build();
     }
 
     @POST
-    @Operation(
-        summary = "Create a new customer",
-        description = "Creates a new customer record",
-        responses = {
-            @ApiResponse(
-                responseCode = "201",
-                description = "Customer created successfully",
-                content = @Content(
-                    mediaType = MediaType.APPLICATION_JSON,
-                    schema = @Schema(implementation = Customer.class)
-                )
-            )
+    @Operation(summary = "Create a customer")
+    public Response createCustomer(@Valid CustomerRequest request) {
+        try {
+            Customer created = customerService.create(toCustomer(request));
+            return Response.status(Response.Status.CREATED).entity(created).build();
+        } catch (IllegalArgumentException exception) {
+            return ApiResponses.badRequest(exception);
         }
-    )
-    public Response createCustomer(
-        @Parameter(description = "Customer data to create", required = true)
-        Customer customer
-    ) {
-        customer.setDeleted(false);
-        entityManager.persist(customer);
-        return Response.status(Response.Status.CREATED)
-                .entity(customer)
-                .build();
     }
 
     @PUT
     @Path("/{id}")
-    @Operation(
-        summary = "Update an existing customer",
-        description = "Updates the details of an existing customer",
-        responses = {
-            @ApiResponse(
-                responseCode = "200",
-                description = "Customer updated successfully",
-                content = @Content(
-                    mediaType = MediaType.APPLICATION_JSON,
-                    schema = @Schema(implementation = Customer.class)
-                )
-            ),
-            @ApiResponse(
-                responseCode = "404",
-                description = "Customer not found"
-            )
+    @Operation(summary = "Update a customer")
+    public Response updateCustomer(@PathParam("id") int id, @Valid CustomerRequest request) {
+        try {
+            Customer updated = customerService.update(id, toCustomer(request));
+            if (updated == null) {
+                return ApiResponses.notFound("Customer not found.");
+            }
+            return Response.ok(updated).build();
+        } catch (IllegalArgumentException exception) {
+            return ApiResponses.badRequest(exception);
         }
-    )
-    public Response updateCustomer(
-        @Parameter(description = "ID of the customer to update", required = true)
-        @PathParam("id") int id,
-        @Parameter(description = "Updated customer data", required = true)
-        Customer updatedCustomer
-    ) {
-        Customer existingCustomer = entityManager.find(Customer.class, id);
-        if (existingCustomer == null || existingCustomer.isDeleted()) {
-            return Response.status(Response.Status.NOT_FOUND).build();
-        }
-
-        existingCustomer.setFirstName(updatedCustomer.getFirstName());
-        existingCustomer.setLastName(updatedCustomer.getLastName());
-        existingCustomer.setEmail(updatedCustomer.getEmail());
-        existingCustomer.setBirthdate(updatedCustomer.getBirthdate());
-        existingCustomer.setFemale(updatedCustomer.isFemale());
-        existingCustomer.setCustomerAddress(updatedCustomer.getCustomerAddress());
-
-        return Response.ok(existingCustomer).build();
     }
 
     @DELETE
     @Path("/{id}")
-    @Operation(
-        summary = "Delete a customer",
-        description = "Soft deletes a customer by setting their deleted flag to true",
-        responses = {
-            @ApiResponse(
-                responseCode = "204",
-                description = "Customer deleted successfully"
-            ),
-            @ApiResponse(
-                responseCode = "404",
-                description = "Customer not found"
-            )
+    @Operation(summary = "Soft-delete a customer")
+    public Response deleteCustomer(@PathParam("id") int id) {
+        if (!customerService.softDelete(id)) {
+            return ApiResponses.notFound("Customer not found.");
         }
-    )
-    public Response deleteCustomer(
-        @Parameter(description = "ID of the customer to delete", required = true)
-        @PathParam("id") int id
-    ) {
-        Customer customer = entityManager.find(Customer.class, id);
-        if (customer == null || customer.isDeleted()) {
-            return Response.status(Response.Status.NOT_FOUND).build();
-        }
-        customer.setDeleted(true);
         return Response.noContent().build();
+    }
+
+    private Customer toCustomer(CustomerRequest request) {
+        Customer customer = new Customer();
+        customer.setFirstName(request.getFirstName());
+        customer.setLastName(request.getLastName());
+        customer.setEmail(request.getEmail());
+        customer.setBirthdate(request.getBirthdate());
+        customer.setFemale(Boolean.TRUE.equals(request.getFemale()));
+        customer.setCustomerAddress(toAddress(request.getAddress()));
+        return customer;
+    }
+
+    private CustomerAddress toAddress(CustomerAddressRequest request) {
+        if (request == null) {
+            return null;
+        }
+        CustomerAddress address = new CustomerAddress();
+        address.setCity(request.getCity());
+        address.setPostalCode(request.getPostalCode());
+        address.setStreet(request.getStreet());
+        address.setStreetNumber(request.getStreetNumber());
+        return address;
     }
 }

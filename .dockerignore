@@ -1,0 +1,7 @@
+.git
+.github/modernize
+target
+*.iml
+.idea
+.mvn/timing.properties
+*.log

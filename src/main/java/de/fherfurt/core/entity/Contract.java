@@ -1,12 +1,18 @@
 package de.fherfurt.core.entity;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotNull;
+
 import java.time.LocalDate;
 
-/**
- * This class represents a contract, including attributes such as contract ID, customer, sale vehicle, rent vehicle,
- * contract type, contract date, rental start date, and rental end date.
- */
 @Entity
 @Table(name = "contracts")
 public class Contract {
@@ -15,46 +21,37 @@ public class Contract {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int contractId;
 
-    @ManyToOne
-    @JoinColumn(name = "customer_id")
+    @NotNull
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "customer_id", nullable = false)
     private Customer customer;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "sale_vehicle_id")
     private SaleVehicle saleVehicle;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "rent_vehicle_id")
     private RentVehicle rentVehicle;
 
-    private boolean isRentalContract;
+    @Column(nullable = false)
+    private boolean rentalContract;
+
+    @NotNull
+    @Column(nullable = false)
     private LocalDate contractDate;
+
     private LocalDate rentalStartDate;
     private LocalDate rentalEndDate;
 
-    /**
-     * Parameterloser Konstruktor (für JPA erforderlich).
-     */
     public Contract() {
     }
 
-    /**
-     * Parameterized constructor to initialize contract attributes.
-     *
-     * @param contractId       The unique ID of the contract.
-     * @param customer         The customer associated with the contract.
-     * @param saleVehicle      The vehicle involved in the sale contract.
-     * @param rentVehicle      The vehicle involved in the rental contract.
-     * @param isRentalContract Indicates whether the contract is a rental contract.
-     * @param contractDate     The date of the contract.
-     * @param rentalStartDate  The start date of the rental period.
-     * @param rentalEndDate    The end date of the rental period.
-     */
     public Contract(int contractId,
                     Customer customer,
                     SaleVehicle saleVehicle,
                     RentVehicle rentVehicle,
-                    boolean isRentalContract,
+                    boolean rentalContract,
                     LocalDate contractDate,
                     LocalDate rentalStartDate,
                     LocalDate rentalEndDate) {
@@ -62,7 +59,7 @@ public class Contract {
         this.customer = customer;
         this.saleVehicle = saleVehicle;
         this.rentVehicle = rentVehicle;
-        this.isRentalContract = isRentalContract;
+        this.rentalContract = rentalContract;
         this.contractDate = contractDate;
         this.rentalStartDate = rentalStartDate;
         this.rentalEndDate = rentalEndDate;
@@ -101,11 +98,11 @@ public class Contract {
     }
 
     public boolean isRentalContract() {
-        return isRentalContract;
+        return rentalContract;
     }
 
     public void setRentalContract(boolean rentalContract) {
-        isRentalContract = rentalContract;
+        this.rentalContract = rentalContract;
     }
 
     public LocalDate getContractDate() {

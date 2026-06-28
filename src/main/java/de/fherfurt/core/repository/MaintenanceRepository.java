@@ -4,15 +4,13 @@ import de.fherfurt.core.entity.Maintenance;
 import jakarta.ejb.Stateless;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
+
 import java.util.List;
 
-/**
- * Manages CRUD operations for Maintenance entities in the database.
- */
 @Stateless
 public class MaintenanceRepository {
 
-    @PersistenceContext
+    @PersistenceContext(unitName = "myPU")
     private EntityManager em;
 
     public Maintenance findById(int maintenanceId) {
@@ -20,7 +18,16 @@ public class MaintenanceRepository {
     }
 
     public List<Maintenance> findAll() {
-        return em.createQuery("SELECT m FROM Maintenance m", Maintenance.class)
+        return em.createQuery("SELECT m FROM Maintenance m ORDER BY m.maintenanceId", Maintenance.class)
+                .getResultList();
+    }
+
+    public List<Maintenance> findByVehicleId(int vehicleId) {
+        return em.createQuery(
+                        "SELECT m FROM Maintenance m WHERE m.vehicle.vehicleId = :vehicleId ORDER BY m.maintenanceId",
+                        Maintenance.class
+                )
+                .setParameter("vehicleId", vehicleId)
                 .getResultList();
     }
 

@@ -4,16 +4,13 @@ import de.fherfurt.core.entity.Customer;
 import jakarta.ejb.Stateless;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
+
 import java.util.List;
 
-/**
- * Repository (DAO) for Customer entities.
- * Handles CRUD operations on the database.
- */
 @Stateless
 public class CustomerRepository {
 
-    @PersistenceContext
+    @PersistenceContext(unitName = "myPU")
     private EntityManager em;
 
     public Customer findById(int customerId) {
@@ -21,7 +18,27 @@ public class CustomerRepository {
     }
 
     public List<Customer> findAll() {
-        return em.createQuery("SELECT c FROM Customer c", Customer.class).getResultList();
+        return em.createQuery("SELECT c FROM Customer c ORDER BY c.customerId", Customer.class)
+                .getResultList();
+    }
+
+    public List<Customer> findAllActive() {
+        return em.createQuery(
+                        "SELECT c FROM Customer c WHERE c.deleted = false ORDER BY c.customerId",
+                        Customer.class
+                )
+                .getResultList();
+    }
+
+    public Customer findByEmail(String email) {
+        List<Customer> result = em.createQuery(
+                        "SELECT c FROM Customer c WHERE LOWER(c.email) = LOWER(:email)",
+                        Customer.class
+                )
+                .setParameter("email", email)
+                .setMaxResults(1)
+                .getResultList();
+        return result.isEmpty() ? null : result.get(0);
     }
 
     public void save(Customer customer) {
@@ -37,22 +54,5 @@ public class CustomerRepository {
         if (existing != null) {
             em.remove(existing);
         }
-    }
-
-    /**
-     * Prüft, ob es bereits einen Customer mit gleicher ID oder E-Mail gibt.
-     * Du kannst auch zwei Methoden existById(...) und existByEmail(...) machen,
-     * hier der Einfachheit halber kombiniert.
-     */
-    public boolean existsByIdOrEmail(int customerId, String email) {
-        Long count = em.createQuery(
-                        "SELECT COUNT(c) FROM Customer c WHERE c.customerId = :cid OR c.email = :mail",
-                        Long.class
-                )
-                .setParameter("cid", customerId)
-                .setParameter("mail", email)
-                .getSingleResult();
-
-        return count > 0;
     }
 }

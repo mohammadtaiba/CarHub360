@@ -1,11 +1,24 @@
 package de.fherfurt.core.entity;
 
-import jakarta.persistence.*;
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
+import jakarta.persistence.Temporal;
+import jakarta.persistence.TemporalType;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
+
 import java.util.Date;
 
-/**
- * Represents a customer entity with personal information and address details.
- */
 @Entity
 @Table(name = "customers")
 public class Customer {
@@ -14,49 +27,61 @@ public class Customer {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int customerId;
 
+    @NotBlank
+    @Size(max = 80)
+    @Column(nullable = false, length = 80)
     private String firstName;
+
+    @NotBlank
+    @Size(max = 80)
+    @Column(nullable = false, length = 80)
     private String lastName;
+
+    @NotBlank
+    @Email
+    @Size(max = 160)
+    @Column(nullable = false, unique = true, length = 160)
     private String email;
+
+    @NotNull
     @Temporal(TemporalType.DATE)
+    @Column(nullable = false)
     private Date birthdate;
 
-    private boolean isFemale;
-    private boolean isDeleted;
+    @Column(nullable = false)
+    private boolean female;
 
-    /**
-     * Wir gehen davon aus, dass auch CustomerAddress eine JPA-Entität ist.
-     * Ggf. @ManyToOne oder @OneToOne je nach gewünschter Beziehung.
-     * Hier als Beispiel @ManyToOne.
-     */
-    @ManyToOne
+    @Column(nullable = false)
+    private boolean deleted;
+
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
     @JoinColumn(name = "address_id")
     private CustomerAddress customerAddress;
 
-    /**
-     * Parameterloser Konstruktor (für JPA erforderlich).
-     */
     public Customer() {
     }
 
-    /**
-     * Creates a new Customer with the specified details.
-     */
-    public Customer(int customerId, String firstName, String lastName, String email,
-                    Date birthdate, boolean isFemale, CustomerAddress customerAddress) {
+    public Customer(int customerId,
+                    String firstName,
+                    String lastName,
+                    String email,
+                    Date birthdate,
+                    boolean female,
+                    CustomerAddress customerAddress) {
         this.customerId = customerId;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.birthdate = birthdate;
-        this.isFemale = isFemale;
-        this.isDeleted = false;
+        this.female = female;
+        this.deleted = false;
         this.customerAddress = customerAddress;
     }
 
-    // Getter und Setter
     public int getCustomerId() {
         return customerId;
     }
+
     public void setCustomerId(int customerId) {
         this.customerId = customerId;
     }
@@ -64,6 +89,7 @@ public class Customer {
     public String getFirstName() {
         return firstName;
     }
+
     public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
@@ -71,6 +97,7 @@ public class Customer {
     public String getLastName() {
         return lastName;
     }
+
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
@@ -78,6 +105,7 @@ public class Customer {
     public String getEmail() {
         return email;
     }
+
     public void setEmail(String email) {
         this.email = email;
     }
@@ -85,38 +113,36 @@ public class Customer {
     public Date getBirthdate() {
         return birthdate;
     }
+
     public void setBirthdate(Date birthdate) {
         this.birthdate = birthdate;
     }
 
     public boolean isFemale() {
-        return isFemale;
+        return female;
     }
+
     public void setFemale(boolean female) {
-        isFemale = female;
+        this.female = female;
     }
 
     public boolean isDeleted() {
-        return isDeleted;
+        return deleted;
     }
+
     public void setDeleted(boolean deleted) {
-        isDeleted = deleted;
+        this.deleted = deleted;
     }
 
     public CustomerAddress getCustomerAddress() {
         return customerAddress;
     }
+
     public void setCustomerAddress(CustomerAddress customerAddress) {
         this.customerAddress = customerAddress;
     }
 
-    public String getDetails() {
-        return "Customer ID: " + customerId
-                + ", Name: " + firstName + " " + lastName
-                + ", Email: " + email;
-    }
-
     public String getFullName() {
-        return this.firstName + " " + this.lastName;
+        return firstName + " " + lastName;
     }
 }

@@ -3,79 +3,95 @@ package de.fherfurt.service;
 import de.fherfurt.core.entity.Maintenance;
 import de.fherfurt.core.entity.Vehicle;
 import de.fherfurt.core.repository.MaintenanceRepository;
+import de.fherfurt.core.repository.VehicleRepository;
 import jakarta.ejb.Stateless;
 import jakarta.inject.Inject;
 
+import java.math.BigDecimal;
 import java.util.Date;
+import java.util.List;
 
-/**
- * Manages maintenance records for vehicles with persistent storage.
- */
 @Stateless
 public class MaintenanceService {
 
     @Inject
     private MaintenanceRepository maintenanceRepository;
 
-    /**
-     * Adds a new maintenance record to the DB.
-     *
-     * @param maintenanceId         Unique identifier for the maintenance record
-     * @param vehicle               The vehicle associated with the maintenance
-     * @param maintenanceStartDate  The start date of the maintenance
-     * @param maintenanceEndDate    The end date of the maintenance
-     * @param maintenanceCost       The cost of the maintenance
-     * @param maintenanceDescription A description of the maintenance performed
-     * @return true if the maintenance was successfully added, false if the vehicle is null
-     */
-    public boolean addMaintenance(int maintenanceId,
-                                  Vehicle vehicle,
-                                  Date maintenanceStartDate,
-                                  Date maintenanceEndDate,
-                                  float maintenanceCost,
-                                  String maintenanceDescription) {
-        if (vehicle == null) {
-            return false;
-        }
-        // Optional: Prüfen, ob Maintenance-ID bereits existiert
-        Maintenance existing = maintenanceRepository.findById(maintenanceId);
-        if (existing != null) {
-            // Könnte man als Update interpretieren oder als Fehler
-            return false;
-        }
+    @Inject
+    private VehicleRepository vehicleRepository;
 
-        Maintenance maintenance = new Maintenance(
-                maintenanceId,
-                vehicle,
-                maintenanceStartDate,
-                maintenanceEndDate,
-                maintenanceCost,
-                maintenanceDescription
-        );
+    public List<Maintenance> findAll() {
+        return maintenanceRepository.findAll();
+    }
+
+    public List<Maintenance> findByVehicleId(int vehicleId) {
+        return maintenanceRepository.findByVehicleId(vehicleId);
+    }
+
+    public Maintenance findById(int maintenanceId) {
+        return maintenanceRepository.findById(maintenanceId);
+    }
+
+    public Maintenance create(int vehicleId,
+                              Date startDate,
+                              Date endDate,
+                              BigDecimal cost,
+                              String description) {
+        Vehicle vehicle = requireVehicle(vehicleId);
+        validate(startDate, endDate, cost, description);
+        Maintenance maintenance = new Maintenance(0, vehicle, startDate, endDate, cost, description);
         maintenanceRepository.save(maintenance);
+        return maintenance;
+    }
+
+    public Maintenance update(int maintenanceId,
+                              int vehicleId,
+                              Date startDate,
+                              Date endDate,
+                              BigDecimal cost,
+                              String description) {
+        Maintenance existing = maintenanceRepository.findById(maintenanceId);
+        if (existing == null) {
+            return null;
+        }
+        Vehicle vehicle = requireVehicle(vehicleId);
+        validate(startDate, endDate, cost, description);
+        existing.setVehicle(vehicle);
+        existing.setMaintenanceStartDate(startDate);
+        existing.setMaintenanceEndDate(endDate);
+        existing.setMaintenanceCost(cost);
+        existing.setMaintenanceDescription(description);
+        return maintenanceRepository.update(existing);
+    }
+
+    public boolean delete(int maintenanceId) {
+        if (maintenanceRepository.findById(maintenanceId) == null) {
+            return false;
+        }
+        maintenanceRepository.delete(maintenanceId);
         return true;
     }
 
-    /**
-     * Retrieves the details of a maintenance record by its ID.
-     *
-     * @param maintenanceId The unique identifier of the maintenance record
-     * @return A string containing the details of the maintenance record, or a message indicating it was not found
-     */
-    public String getMaintenanceDetails(int maintenanceId) {
-        Maintenance maintenance = maintenanceRepository.findById(maintenanceId);
-        if (maintenance != null) {
-            // Hier z.B. .toString() auf dem Vehicle oder Vehicle-Details
-            return "Maintenance Details: \n" +
-                    "Maintenance ID: " + maintenance.getMaintenanceId() + " \n" +
-                    "Vehicle: " + (maintenance.getVehicle() != null
-                    ? maintenance.getVehicle().toString()
-                    : "No vehicle assigned") + " \n" +
-                    "Maintenance Start Date: " + maintenance.getMaintenanceStartDate() + " \n" +
-                    "Maintenance End Date: " + maintenance.getMaintenanceEndDate() + " \n" +
-                    "Maintenance Cost: " + maintenance.getMaintenanceCost() + " \n" +
-                    "Maintenance Description: " + maintenance.getMaintenanceDescription();
+    private Vehicle requireVehicle(int vehicleId) {
+        Vehicle vehicle = vehicleRepository.findById(vehicleId);
+        if (vehicle == null) {
+            throw new IllegalArgumentException("vehicleId does not reference an existing vehicle.");
         }
-        return "Maintenance with ID " + maintenanceId + " was not found.";
+        return vehicle;
+    }
+
+    private void validate(Date startDate, Date endDate, BigDecimal cost, String description) {
+        if (startDate == null) {
+            throw new IllegalArgumentException("maintenanceStartDate is required.");
+        }
+        if (endDate != null && endDate.before(startDate)) {
+            throw new IllegalArgumentException("maintenanceEndDate must not be before maintenanceStartDate.");
+        }
+        if (cost == null || cost.compareTo(BigDecimal.ZERO) < 0) {
+            throw new IllegalArgumentException("maintenanceCost must not be negative.");
+        }
+        if (description == null || description.trim().isEmpty()) {
+            throw new IllegalArgumentException("maintenanceDescription is required.");
+        }
     }
 }

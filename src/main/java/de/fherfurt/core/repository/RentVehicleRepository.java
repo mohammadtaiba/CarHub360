@@ -4,15 +4,13 @@ import de.fherfurt.core.entity.RentVehicle;
 import jakarta.ejb.Stateless;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
+
 import java.util.List;
 
-/**
- * Provides CRUD operations for RentVehicle entities in the database.
- */
 @Stateless
 public class RentVehicleRepository {
 
-    @PersistenceContext
+    @PersistenceContext(unitName = "myPU")
     private EntityManager em;
 
     public RentVehicle findById(int rentVehicleId) {
@@ -20,7 +18,8 @@ public class RentVehicleRepository {
     }
 
     public List<RentVehicle> findAll() {
-        return em.createQuery("SELECT rv FROM RentVehicle rv", RentVehicle.class).getResultList();
+        return em.createQuery("SELECT rv FROM RentVehicle rv ORDER BY rv.vehicleId", RentVehicle.class)
+                .getResultList();
     }
 
     public void save(RentVehicle rentVehicle) {

@@ -1,13 +1,25 @@
 package de.fherfurt.core.entity;
 
 import de.fherfurt.core.entity.utils.CustomerHistoryReview;
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
+import jakarta.persistence.Temporal;
+import jakarta.persistence.TemporalType;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
+
 import java.util.Date;
 
-/**
- * Represents a single customer history record, including details about actions,
- * vehicles, reviews, and other related information.
- */
 @Entity
 @Table(name = "customer_histories")
 public class CustomerHistory {
@@ -16,55 +28,51 @@ public class CustomerHistory {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int customerHistoryId;
 
-    /**
-     * Wir gehen davon aus, dass in de.fherfurt.core.entity bereits eine Customer-Entity existiert.
-     * Falls das Mapping 1:n ist, kannst du @ManyToOne verwenden.
-     */
-    @ManyToOne
-    @JoinColumn(name = "customer_id")
+    @NotNull
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "customer_id", nullable = false)
     private Customer customer;
 
-    /**
-     * Ebenso für Vehicle. Falls du es 1:n haben willst, bleibe bei @ManyToOne.
-     */
-    @ManyToOne
-    @JoinColumn(name = "vehicle_id")
+    @NotNull
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "vehicle_id", nullable = false)
     private Vehicle customerHistoryVehicle;
 
-    /**
-     * Enum für die Bewertung. Damit JPA den Enum-Wert als String speichert:
-     */
+    @NotNull
     @Enumerated(EnumType.STRING)
+    @Column(nullable = false, length = 20)
     private CustomerHistoryReview customerHistoryReview;
 
+    @NotBlank
+    @Size(max = 500)
+    @Column(nullable = false, length = 500)
     private String description;
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date actionDate;
-    private boolean isForRentalCar;
 
-    /**
-     * Parameterloser Konstruktor (für JPA erforderlich).
-     */
+    @NotNull
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(nullable = false)
+    private Date actionDate;
+
+    @Column(nullable = false)
+    private boolean forRentalCar;
+
     public CustomerHistory() {
     }
 
-    /**
-     * Constructs a CustomerHistory object with the specified details.
-     */
     public CustomerHistory(int customerHistoryId,
                            Customer customer,
                            Vehicle customerHistoryVehicle,
                            CustomerHistoryReview customerHistoryReview,
                            String description,
                            Date actionDate,
-                           boolean isForRentalCar) {
+                           boolean forRentalCar) {
         this.customerHistoryId = customerHistoryId;
         this.customer = customer;
         this.customerHistoryVehicle = customerHistoryVehicle;
         this.customerHistoryReview = customerHistoryReview;
         this.description = description;
         this.actionDate = actionDate;
-        this.isForRentalCar = isForRentalCar;
+        this.forRentalCar = forRentalCar;
     }
 
     public int getCustomerHistoryId() {
@@ -116,10 +124,10 @@ public class CustomerHistory {
     }
 
     public boolean isForRentalCar() {
-        return isForRentalCar;
+        return forRentalCar;
     }
 
     public void setForRentalCar(boolean forRentalCar) {
-        isForRentalCar = forRentalCar;
+        this.forRentalCar = forRentalCar;
     }
 }

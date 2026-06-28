@@ -5,6 +5,9 @@ import de.fherfurt.core.entity.Customer;
 import de.fherfurt.core.entity.RentVehicle;
 import de.fherfurt.core.entity.SaleVehicle;
 import de.fherfurt.core.repository.ContractRepository;
+import de.fherfurt.core.repository.CustomerRepository;
+import de.fherfurt.core.repository.RentVehicleRepository;
+import de.fherfurt.core.repository.SaleVehicleRepository;
 import de.fherfurt.core.validation.ContractValidator;
 import jakarta.ejb.Stateless;
 import jakarta.inject.Inject;
@@ -12,11 +15,8 @@ import jakarta.inject.Inject;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
+import java.util.List;
 
-/**
- * This class manages the creation, termination, and renewal of contracts,
- * using the ContractRepository for data persistence.
- */
 @Stateless
 public class ContractService {
 
@@ -24,134 +24,167 @@ public class ContractService {
     private ContractRepository contractRepository;
 
     @Inject
+    private CustomerRepository customerRepository;
+
+    @Inject
+    private SaleVehicleRepository saleVehicleRepository;
+
+    @Inject
+    private RentVehicleRepository rentVehicleRepository;
+
+    @Inject
     private ContractValidator contractValidator;
 
-    /**
-     * Creates a purchase contract.
-     */
-    public boolean createPurchaseContract(int contractId, Customer customer, SaleVehicle saleVehicle) {
-        if (contractValidator.isValidPurchaseContract(contractId, customer, saleVehicle)) {
-            Contract contract = new Contract(
-                    contractId,
-                    customer,
-                    saleVehicle,
-                    null,
-                    false,
-                    LocalDate.now(),
-                    null,
-                    null
-            );
-            contractRepository.save(contract);
-            return true;
-        }
-        return false;
+    public List<Contract> findAll() {
+        return contractRepository.findAll();
     }
 
-    /**
-     * Creates a rental contract.
-     */
-    public boolean createRentalContract(int contractId, Customer customer, RentVehicle rentVehicle,
-                                        LocalDate rentalStartDate, LocalDate rentalEndDate) {
-        if (contractValidator.isValidRentalContract(contractId, customer, rentVehicle, rentalStartDate, rentalEndDate)) {
-            Contract contract = new Contract(
-                    contractId,
-                    customer,
-                    null,
-                    rentVehicle,
-                    true,
-                    LocalDate.now(),
-                    rentalStartDate,
-                    rentalEndDate
-            );
-            contractRepository.save(contract);
-            return true;
-        }
-        return false;
+    public Contract findById(int contractId) {
+        return contractRepository.findById(contractId);
     }
 
-    /**
-     * Terminates a rental contract.
-     */
-    public boolean terminateRentalContract(int contractId) {
+    public List<Contract> findByCustomerId(int customerId) {
+        return contractRepository.findByCustomerId(customerId);
+    }
+
+    public List<Contract> findRentalContracts() {
+        return contractRepository.findRentalContracts();
+    }
+
+    public List<Contract> findSaleContracts() {
+        return contractRepository.findSaleContracts();
+    }
+
+    public Contract create(int customerId,
+                           Integer saleVehicleId,
+                           Integer rentVehicleId,
+                           boolean rentalContract,
+                           LocalDate contractDate,
+                           LocalDate rentalStartDate,
+                           LocalDate rentalEndDate) {
+        Customer customer = customerRepository.findById(customerId);
+        SaleVehicle saleVehicle = saleVehicleId == null ? null : saleVehicleRepository.findById(saleVehicleId);
+        RentVehicle rentVehicle = rentVehicleId == null ? null : rentVehicleRepository.findById(rentVehicleId);
+
+        validate(customer, saleVehicle, rentVehicle, rentalContract, rentalStartDate, rentalEndDate);
+        if (rentalContract && !rentVehicle.isAvailable()) {
+            throw new IllegalArgumentException("rentVehicleId references a vehicle that is not available.");
+        }
+
+        Contract contract = new Contract(
+                0,
+                customer,
+                rentalContract ? null : saleVehicle,
+                rentalContract ? rentVehicle : null,
+                rentalContract,
+                contractDate == null ? LocalDate.now() : contractDate,
+                rentalContract ? rentalStartDate : null,
+                rentalContract ? rentalEndDate : null
+        );
+
+        if (rentalContract) {
+            rentVehicle.setAvailable(false);
+            rentVehicleRepository.update(rentVehicle);
+        }
+        contractRepository.save(contract);
+        return contract;
+    }
+
+    public Contract update(int contractId,
+                           int customerId,
+                           Integer saleVehicleId,
+                           Integer rentVehicleId,
+                           boolean rentalContract,
+                           LocalDate contractDate,
+                           LocalDate rentalStartDate,
+                           LocalDate rentalEndDate) {
+        Contract existing = contractRepository.findById(contractId);
+        if (existing == null) {
+            return null;
+        }
+
+        Customer customer = customerRepository.findById(customerId);
+        SaleVehicle saleVehicle = saleVehicleId == null ? null : saleVehicleRepository.findById(saleVehicleId);
+        RentVehicle rentVehicle = rentVehicleId == null ? null : rentVehicleRepository.findById(rentVehicleId);
+
+        validate(customer, saleVehicle, rentVehicle, rentalContract, rentalStartDate, rentalEndDate);
+        if (rentalContract
+                && rentVehicle != null
+                && !rentVehicle.isAvailable()
+                && (existing.getRentVehicle() == null
+                || existing.getRentVehicle().getVehicleId() != rentVehicle.getVehicleId())) {
+            throw new IllegalArgumentException("rentVehicleId references a vehicle that is not available.");
+        }
+
+        releaseExistingRentalVehicle(existing, rentVehicle);
+
+        existing.setCustomer(customer);
+        existing.setSaleVehicle(rentalContract ? null : saleVehicle);
+        existing.setRentVehicle(rentalContract ? rentVehicle : null);
+        existing.setRentalContract(rentalContract);
+        existing.setContractDate(contractDate == null ? LocalDate.now() : contractDate);
+        existing.setRentalStartDate(rentalContract ? rentalStartDate : null);
+        existing.setRentalEndDate(rentalContract ? rentalEndDate : null);
+
+        if (rentalContract && rentVehicle != null) {
+            rentVehicle.setAvailable(false);
+            rentVehicleRepository.update(rentVehicle);
+        }
+        return contractRepository.update(existing);
+    }
+
+    public boolean delete(int contractId) {
+        Contract existing = contractRepository.findById(contractId);
+        if (existing == null) {
+            return false;
+        }
+        if (existing.isRentalContract() && existing.getRentVehicle() != null) {
+            RentVehicle vehicle = existing.getRentVehicle();
+            vehicle.setAvailable(true);
+            rentVehicleRepository.update(vehicle);
+        }
+        contractRepository.delete(contractId);
+        return true;
+    }
+
+    public BigDecimal calculateRentalPrice(int contractId) {
         Contract contract = contractRepository.findById(contractId);
-        if (contract != null && contract.isRentalContract()) {
-            contract.setRentalEndDate(LocalDate.now());
-            if (contract.getRentVehicle() != null) {
-                contract.getRentVehicle().setAvailable(true);
-            }
-            contractRepository.update(contract);
-            return true;
+        if (contract == null || !contract.isRentalContract() || contract.getRentVehicle() == null) {
+            return null;
         }
-        return false;
+        long daysRented = ChronoUnit.DAYS.between(contract.getRentalStartDate(), contract.getRentalEndDate());
+        return BigDecimal.valueOf(daysRented).multiply(contract.getRentVehicle().getDailyPrice());
     }
 
-    /**
-     * Renews a rental contract.
-     */
-    public boolean renewRentalContract(int contractId, LocalDate newRentalEndDate) {
-        Contract contract = contractRepository.findById(contractId);
-        if (contract != null
-                && contract.isRentalContract()
-                && validateRentalPeriod(contract.getRentalStartDate(), newRentalEndDate)) {
-            contract.setRentalEndDate(newRentalEndDate);
-            if (contract.getRentVehicle() != null) {
-                contract.getRentVehicle().setAvailable(false);
-            }
-            contractRepository.update(contract);
-            return true;
+    private void validate(Customer customer,
+                          SaleVehicle saleVehicle,
+                          RentVehicle rentVehicle,
+                          boolean rentalContract,
+                          LocalDate rentalStartDate,
+                          LocalDate rentalEndDate) {
+        List<String> errors = contractValidator.validate(
+                customer,
+                saleVehicle,
+                rentVehicle,
+                rentalContract,
+                rentalStartDate,
+                rentalEndDate
+        );
+        if (!errors.isEmpty()) {
+            throw new IllegalArgumentException(String.join(" ", errors));
         }
-        return false;
     }
 
-    /**
-     * Retrieves the total price of a rental contract.
-     */
-    public BigDecimal getTotalPrice(int contractId) {
-        Contract contract = contractRepository.findById(contractId);
-        if (contract != null && contract.isRentalContract()) {
-            long daysRented = ChronoUnit.DAYS.between(contract.getRentalStartDate(), contract.getRentalEndDate());
-            return BigDecimal.valueOf(daysRented).multiply(contract.getRentVehicle().getDailyPrice());
+    private void releaseExistingRentalVehicle(Contract existing, RentVehicle newRentVehicle) {
+        if (!existing.isRentalContract() || existing.getRentVehicle() == null) {
+            return;
         }
-        return BigDecimal.valueOf(-1);
-    }
-
-    /**
-     * Retrieves the details of a rental contract.
-     */
-    public String getRentalContractDetails(int contractId) {
-        Contract contract = contractRepository.findById(contractId);
-        if (contract != null && contract.isRentalContract()) {
-            return "Rental Contract Details:\n" +
-                    "Contract ID: " + contractId + "\n" +
-                    "Customer: " + contract.getCustomer().getDetails() + "\n" +
-                    "Rent Vehicle: " + contract.getRentVehicle().getDetails() + "\n" +
-                    "Rental Start Date: " + contract.getRentalStartDate() + "\n" +
-                    "Rental End Date: " + contract.getRentalEndDate();
+        if (newRentVehicle != null
+                && existing.getRentVehicle().getVehicleId() == newRentVehicle.getVehicleId()) {
+            return;
         }
-        return "No rental contract found with this ID.";
-    }
-
-    /**
-     * Retrieves the details of a purchase contract.
-     */
-    public String getPurchaseContractDetails(int contractId) {
-        Contract contract = contractRepository.findById(contractId);
-        if (contract != null && !contract.isRentalContract()) {
-            return "Purchase Contract Details:\n" +
-                    "Contract ID: " + contractId + "\n" +
-                    "Customer: " + contract.getCustomer().getDetails() + "\n" +
-                    "Sale Vehicle: " + contract.getSaleVehicle().getDetails();
-        }
-        return "No purchase contract found with this ID.";
-    }
-
-    /**
-     * Internes Hilfsverfahren zum Validieren der Mietperiode (kannst du auch in ContractValidator schieben).
-     */
-    private boolean validateRentalPeriod(LocalDate startDate, LocalDate endDate) {
-        return startDate != null
-                && endDate != null
-                && !startDate.isAfter(endDate)
-                && !startDate.isBefore(LocalDate.now());
+        RentVehicle oldVehicle = existing.getRentVehicle();
+        oldVehicle.setAvailable(true);
+        rentVehicleRepository.update(oldVehicle);
     }
 }
