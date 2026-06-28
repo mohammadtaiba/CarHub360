@@ -1,49 +1,54 @@
 package de.fherfurt.core.validation;
 
-import de.fherfurt.core.entity.Contract;
 import de.fherfurt.core.entity.Customer;
 import de.fherfurt.core.entity.RentVehicle;
 import de.fherfurt.core.entity.SaleVehicle;
-import de.fherfurt.core.repository.ContractRepository;
 import jakarta.ejb.Stateless;
-import jakarta.inject.Inject;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
-/**
- * This class validates contracts by checking data constraints and existing DB entries.
- */
 @Stateless
 public class ContractValidator {
 
-    @Inject
-    private ContractRepository contractRepository;
+    public List<String> validate(Customer customer,
+                                 SaleVehicle saleVehicle,
+                                 RentVehicle rentVehicle,
+                                 boolean rentalContract,
+                                 LocalDate rentalStartDate,
+                                 LocalDate rentalEndDate) {
+        List<String> errors = new ArrayList<>();
 
-    public boolean isValidPurchaseContract(int contractId, Customer customer, SaleVehicle saleVehicle) {
-        if (contractId < 0 || customer == null || saleVehicle == null) {
-            return false;
+        if (customer == null || customer.isDeleted()) {
+            errors.add("customerId must reference an active customer.");
         }
-        // Prüfen, ob Contract bereits existiert
-        return !contractRepository.exists(contractId);
-    }
 
-    public boolean isValidRentalContract(int contractId,
-                                         Customer customer,
-                                         RentVehicle rentVehicle,
-                                         LocalDate rentalStartDate,
-                                         LocalDate rentalEndDate) {
-        if (contractId < 0 || customer == null || rentVehicle == null ||
-                !validateRentalPeriod(rentalStartDate, rentalEndDate)) {
-            return false;
+        if (rentalContract) {
+            if (rentVehicle == null) {
+                errors.add("rentVehicleId is required for rental contracts.");
+            }
+            if (saleVehicle != null) {
+                errors.add("saleVehicleId must be empty for rental contracts.");
+            }
+            if (rentalStartDate == null) {
+                errors.add("rentalStartDate is required for rental contracts.");
+            }
+            if (rentalEndDate == null) {
+                errors.add("rentalEndDate is required for rental contracts.");
+            }
+            if (rentalStartDate != null && rentalEndDate != null && rentalEndDate.isBefore(rentalStartDate)) {
+                errors.add("rentalEndDate must not be before rentalStartDate.");
+            }
+        } else {
+            if (saleVehicle == null) {
+                errors.add("saleVehicleId is required for sale contracts.");
+            }
+            if (rentVehicle != null) {
+                errors.add("rentVehicleId must be empty for sale contracts.");
+            }
         }
-        // Prüfen, ob Contract bereits existiert
-        return !contractRepository.exists(contractId);
-    }
 
-    private boolean validateRentalPeriod(LocalDate startDate, LocalDate endDate) {
-        return startDate != null
-                && endDate != null
-                && !startDate.isAfter(endDate)
-                && !startDate.isBefore(LocalDate.now());
+        return errors;
     }
 }

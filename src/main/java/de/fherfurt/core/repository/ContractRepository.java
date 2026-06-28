@@ -4,16 +4,13 @@ import de.fherfurt.core.entity.Contract;
 import jakarta.ejb.Stateless;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
+
 import java.util.List;
 
-/**
- * Repository (DAO) for Contract entities.
- * Handles all database (CRUD) operations related to Contract.
- */
 @Stateless
 public class ContractRepository {
 
-    @PersistenceContext
+    @PersistenceContext(unitName = "myPU")
     private EntityManager em;
 
     public Contract findById(int contractId) {
@@ -21,7 +18,33 @@ public class ContractRepository {
     }
 
     public List<Contract> findAll() {
-        return em.createQuery("SELECT c FROM Contract c", Contract.class).getResultList();
+        return em.createQuery("SELECT c FROM Contract c ORDER BY c.contractId", Contract.class)
+                .getResultList();
+    }
+
+    public List<Contract> findByCustomerId(int customerId) {
+        return em.createQuery(
+                        "SELECT c FROM Contract c WHERE c.customer.customerId = :customerId ORDER BY c.contractId",
+                        Contract.class
+                )
+                .setParameter("customerId", customerId)
+                .getResultList();
+    }
+
+    public List<Contract> findRentalContracts() {
+        return em.createQuery(
+                        "SELECT c FROM Contract c WHERE c.rentalContract = true ORDER BY c.contractId",
+                        Contract.class
+                )
+                .getResultList();
+    }
+
+    public List<Contract> findSaleContracts() {
+        return em.createQuery(
+                        "SELECT c FROM Contract c WHERE c.rentalContract = false ORDER BY c.contractId",
+                        Contract.class
+                )
+                .getResultList();
     }
 
     public void save(Contract contract) {
@@ -37,12 +60,5 @@ public class ContractRepository {
         if (existing != null) {
             em.remove(existing);
         }
-    }
-
-    /**
-     * Prüft, ob ein Contract mit dieser ID existiert.
-     */
-    public boolean exists(int contractId) {
-        return (findById(contractId) != null);
     }
 }

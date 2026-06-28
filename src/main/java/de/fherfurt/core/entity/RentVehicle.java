@@ -1,67 +1,74 @@
 package de.fherfurt.core.entity;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.PrimaryKeyJoinColumn;
+import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
+import jakarta.validation.constraints.PositiveOrZero;
+import jakarta.validation.constraints.Size;
 
 import java.math.BigDecimal;
 
-/**
- * This class represents a vehicle available for rent.
- * It includes information such as daily price, availability, license plate, and deposit.
- */
 @Entity
 @Table(name = "rent_vehicles")
-public class RentVehicle {
+@PrimaryKeyJoinColumn(name = "vehicle_id")
+public class RentVehicle extends Vehicle {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int rentVehicleId;
+    @Column(nullable = false)
+    private boolean available;
 
-    private boolean isAvailable;
+    @NotNull
+    @Positive
+    @Column(nullable = false, precision = 12, scale = 2)
     private BigDecimal dailyPrice;
+
+    @NotBlank
+    @Size(max = 20)
+    @Column(nullable = false, unique = true, length = 20)
     private String licensePlate;
+
+    @NotNull
+    @PositiveOrZero
+    @Column(nullable = false, precision = 12, scale = 2)
     private BigDecimal deposit;
 
-    /**
-     * Parameterloser Konstruktor (für JPA erforderlich).
-     */
     public RentVehicle() {
     }
 
-    /**
-     * Constructor for RentVehicle class.
-     *
-     * @param rentVehicleId Unique identifier for the rent vehicle
-     * @param isAvailable   Indicates whether the vehicle is available for rent
-     * @param dailyPrice    Daily price for renting the vehicle
-     * @param licensePlate  License plate of the vehicle
-     * @param deposit       Deposit required for renting the vehicle
-     */
-    public RentVehicle(int rentVehicleId,
-                       boolean isAvailable,
+    public RentVehicle(int vehicleId,
+                       String name,
+                       String brand,
+                       int kilometerCount,
+                       int constructionYear,
+                       String type,
+                       boolean available,
                        BigDecimal dailyPrice,
                        String licensePlate,
                        BigDecimal deposit) {
-        this.rentVehicleId = rentVehicleId;
-        this.isAvailable = isAvailable;
+        super(vehicleId, name, brand, kilometerCount, constructionYear, type);
+        this.available = available;
         this.dailyPrice = dailyPrice;
         this.licensePlate = licensePlate;
         this.deposit = deposit;
     }
 
     public int getRentVehicleId() {
-        return rentVehicleId;
+        return getVehicleId();
     }
 
     public void setRentVehicleId(int rentVehicleId) {
-        this.rentVehicleId = rentVehicleId;
+        setVehicleId(rentVehicleId);
     }
 
     public boolean isAvailable() {
-        return isAvailable;
+        return available;
     }
 
     public void setAvailable(boolean available) {
-        isAvailable = available;
+        this.available = available;
     }
 
     public BigDecimal getDailyPrice() {
@@ -86,16 +93,5 @@ public class RentVehicle {
 
     public void setDeposit(BigDecimal deposit) {
         this.deposit = deposit;
-    }
-
-    /**
-     * Retrieves details of the RentVehicle.
-     *
-     * @return Details of the RentVehicle including ID, daily price, and license plate
-     */
-    public String getDetails() {
-        return "Rent Vehicle ID: " + rentVehicleId +
-                ", Daily Price: " + dailyPrice +
-                ", License Plate: " + licensePlate;
     }
 }

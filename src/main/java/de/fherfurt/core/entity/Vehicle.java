@@ -1,40 +1,55 @@
 package de.fherfurt.core.entity;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Inheritance;
+import jakarta.persistence.InheritanceType;
+import jakarta.persistence.Table;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.PositiveOrZero;
+import jakarta.validation.constraints.Size;
 
-/**
- * Represents a single vehicle with attributes such as ID, name, brand,
- * kilometer count, construction year, and type.
- */
 @Entity
 @Table(name = "vehicles")
+@Inheritance(strategy = InheritanceType.JOINED)
 public class Vehicle {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int vehicleId;
+
+    @NotBlank
+    @Size(max = 120)
+    @Column(nullable = false, length = 120)
     private String name;
+
+    @NotBlank
+    @Size(max = 80)
+    @Column(nullable = false, length = 80)
     private String brand;
+
+    @PositiveOrZero
+    @Column(nullable = false)
     private int kilometerCount;
+
+    @Min(1900)
+    @Max(2100)
+    @Column(nullable = false)
     private int constructionYear;
+
+    @NotBlank
+    @Size(max = 80)
+    @Column(nullable = false, length = 80)
     private String type;
 
-    /**
-     * Parameterloser Konstruktor (für JPA erforderlich).
-     */
     public Vehicle() {
     }
 
-    /**
-     * Constructor to initialize the vehicle attributes.
-     *
-     * @param vehicleId        Unique identifier for the vehicle
-     * @param name             Name of the vehicle
-     * @param brand            Brand of the vehicle
-     * @param kilometerCount   Kilometer count of the vehicle
-     * @param constructionYear Construction year of the vehicle
-     * @param type             Type of the vehicle
-     */
     public Vehicle(int vehicleId, String name, String brand, int kilometerCount, int constructionYear, String type) {
         this.vehicleId = vehicleId;
         this.name = name;
@@ -44,10 +59,10 @@ public class Vehicle {
         this.type = type;
     }
 
-    // Getter and setter methods
     public int getVehicleId() {
         return vehicleId;
     }
+
     public void setVehicleId(int vehicleId) {
         this.vehicleId = vehicleId;
     }
@@ -55,6 +70,7 @@ public class Vehicle {
     public String getName() {
         return name;
     }
+
     public void setName(String name) {
         this.name = name;
     }
@@ -62,6 +78,7 @@ public class Vehicle {
     public String getBrand() {
         return brand;
     }
+
     public void setBrand(String brand) {
         this.brand = brand;
     }
@@ -69,6 +86,7 @@ public class Vehicle {
     public int getKilometerCount() {
         return kilometerCount;
     }
+
     public void setKilometerCount(int kilometerCount) {
         this.kilometerCount = kilometerCount;
     }
@@ -76,6 +94,7 @@ public class Vehicle {
     public int getConstructionYear() {
         return constructionYear;
     }
+
     public void setConstructionYear(int constructionYear) {
         this.constructionYear = constructionYear;
     }
@@ -83,6 +102,7 @@ public class Vehicle {
     public String getType() {
         return type;
     }
+
     public void setType(String type) {
         this.type = type;
     }
