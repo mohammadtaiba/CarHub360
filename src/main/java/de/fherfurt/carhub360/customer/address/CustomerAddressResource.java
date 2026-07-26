@@ -47,7 +47,7 @@ public class CustomerAddressResource {
     @Operation(summary = "Create an address")
     public Response createAddress(@Valid CustomerAddressRequest request) {
         try {
-            CustomerAddress created = customerAddressService.create(toAddress(request));
+            CustomerAddress created = customerAddressService.create(CustomerAddressMapper.toAddress(request));
             return Response.status(Response.Status.CREATED).entity(created).build();
         } catch (IllegalArgumentException exception) {
             return ApiResponses.badRequest(exception);
@@ -59,7 +59,7 @@ public class CustomerAddressResource {
     @Operation(summary = "Update an address")
     public Response updateAddress(@PathParam("id") int id, @Valid CustomerAddressRequest request) {
         try {
-            CustomerAddress updated = customerAddressService.update(id, toAddress(request));
+            CustomerAddress updated = customerAddressService.update(id, CustomerAddressMapper.toAddress(request));
             if (updated == null) {
                 return ApiResponses.notFound("Address not found.");
             }
@@ -77,14 +77,5 @@ public class CustomerAddressResource {
             return ApiResponses.notFound("Address not found.");
         }
         return Response.noContent().build();
-    }
-
-    private CustomerAddress toAddress(CustomerAddressRequest request) {
-        CustomerAddress address = new CustomerAddress();
-        address.setCity(request.getCity());
-        address.setPostalCode(request.getPostalCode());
-        address.setStreet(request.getStreet());
-        address.setStreetNumber(request.getStreetNumber());
-        return address;
     }
 }
