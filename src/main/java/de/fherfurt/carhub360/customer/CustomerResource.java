@@ -1,7 +1,5 @@
 package de.fherfurt.carhub360.customer;
 
-import de.fherfurt.carhub360.customer.address.CustomerAddress;
-import de.fherfurt.carhub360.customer.dto.CustomerAddressRequest;
 import de.fherfurt.carhub360.customer.dto.CustomerRequest;
 import de.fherfurt.carhub360.shared.api.ApiResponses;
 import io.swagger.v3.oas.annotations.Operation;
@@ -49,7 +47,7 @@ public class CustomerResource {
     @Operation(summary = "Create a customer")
     public Response createCustomer(@Valid CustomerRequest request) {
         try {
-            Customer created = customerService.create(toCustomer(request));
+            Customer created = customerService.create(CustomerMapper.toCustomer(request));
             return Response.status(Response.Status.CREATED).entity(created).build();
         } catch (IllegalArgumentException exception) {
             return ApiResponses.badRequest(exception);
@@ -61,7 +59,7 @@ public class CustomerResource {
     @Operation(summary = "Update a customer")
     public Response updateCustomer(@PathParam("id") int id, @Valid CustomerRequest request) {
         try {
-            Customer updated = customerService.update(id, toCustomer(request));
+            Customer updated = customerService.update(id, CustomerMapper.toCustomer(request));
             if (updated == null) {
                 return ApiResponses.notFound("Customer not found.");
             }
@@ -79,28 +77,5 @@ public class CustomerResource {
             return ApiResponses.notFound("Customer not found.");
         }
         return Response.noContent().build();
-    }
-
-    private Customer toCustomer(CustomerRequest request) {
-        Customer customer = new Customer();
-        customer.setFirstName(request.getFirstName());
-        customer.setLastName(request.getLastName());
-        customer.setEmail(request.getEmail());
-        customer.setBirthdate(request.getBirthdate());
-        customer.setFemale(Boolean.TRUE.equals(request.getFemale()));
-        customer.setCustomerAddress(toAddress(request.getAddress()));
-        return customer;
-    }
-
-    private CustomerAddress toAddress(CustomerAddressRequest request) {
-        if (request == null) {
-            return null;
-        }
-        CustomerAddress address = new CustomerAddress();
-        address.setCity(request.getCity());
-        address.setPostalCode(request.getPostalCode());
-        address.setStreet(request.getStreet());
-        address.setStreetNumber(request.getStreetNumber());
-        return address;
     }
 }
