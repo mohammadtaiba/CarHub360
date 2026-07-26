@@ -1,6 +1,7 @@
 package de.fherfurt.carhub360.customer;
 
-import de.fherfurt.carhub360.customer.dto.CustomerRequest;
+import de.fherfurt.carhub360.customer.dto.CustomerCreateRequest;
+import de.fherfurt.carhub360.customer.dto.CustomerUpdateRequest;
 import de.fherfurt.carhub360.shared.api.ApiResponses;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -29,7 +30,7 @@ public class CustomerResource {
     @GET
     @Operation(summary = "List active customers")
     public Response getAllCustomers() {
-        return Response.ok(customerService.findAllActive()).build();
+        return Response.ok(CustomerMapper.toResponses(customerService.findAllActive())).build();
     }
 
     @GET
@@ -40,15 +41,17 @@ public class CustomerResource {
         if (customer == null) {
             return ApiResponses.notFound("Customer not found.");
         }
-        return Response.ok(customer).build();
+        return Response.ok(CustomerMapper.toResponse(customer)).build();
     }
 
     @POST
     @Operation(summary = "Create a customer")
-    public Response createCustomer(@Valid CustomerRequest request) {
+    public Response createCustomer(@Valid CustomerCreateRequest request) {
         try {
             Customer created = customerService.create(CustomerMapper.toCustomer(request));
-            return Response.status(Response.Status.CREATED).entity(created).build();
+            return Response.status(Response.Status.CREATED)
+                    .entity(CustomerMapper.toResponse(created))
+                    .build();
         } catch (IllegalArgumentException exception) {
             return ApiResponses.badRequest(exception);
         }
@@ -57,13 +60,13 @@ public class CustomerResource {
     @PUT
     @Path("/{id}")
     @Operation(summary = "Update a customer")
-    public Response updateCustomer(@PathParam("id") int id, @Valid CustomerRequest request) {
+    public Response updateCustomer(@PathParam("id") int id, @Valid CustomerUpdateRequest request) {
         try {
             Customer updated = customerService.update(id, CustomerMapper.toCustomer(request));
             if (updated == null) {
                 return ApiResponses.notFound("Customer not found.");
             }
-            return Response.ok(updated).build();
+            return Response.ok(CustomerMapper.toResponse(updated)).build();
         } catch (IllegalArgumentException exception) {
             return ApiResponses.badRequest(exception);
         }
