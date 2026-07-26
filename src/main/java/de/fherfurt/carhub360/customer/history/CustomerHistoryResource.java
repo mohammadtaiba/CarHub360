@@ -1,6 +1,7 @@
 package de.fherfurt.carhub360.customer.history;
 
-import de.fherfurt.carhub360.customer.history.dto.CustomerHistoryRequest;
+import de.fherfurt.carhub360.customer.history.dto.CustomerHistoryCreateRequest;
+import de.fherfurt.carhub360.customer.history.dto.CustomerHistoryUpdateRequest;
 import de.fherfurt.carhub360.shared.api.ApiResponses;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -31,9 +32,10 @@ public class CustomerHistoryResource {
     @Operation(summary = "List customer history records")
     public Response getCustomerHistories(@QueryParam("customerId") Integer customerId) {
         if (customerId != null) {
-            return Response.ok(customerHistoryService.findByCustomerId(customerId)).build();
+            return Response.ok(CustomerHistoryMapper.toResponses(customerHistoryService.findByCustomerId(customerId)))
+                    .build();
         }
-        return Response.ok(customerHistoryService.findAll()).build();
+        return Response.ok(CustomerHistoryMapper.toResponses(customerHistoryService.findAll())).build();
     }
 
     @GET
@@ -44,12 +46,12 @@ public class CustomerHistoryResource {
         if (history == null) {
             return ApiResponses.notFound("Customer history record not found.");
         }
-        return Response.ok(history).build();
+        return Response.ok(CustomerHistoryMapper.toResponse(history)).build();
     }
 
     @POST
     @Operation(summary = "Create a customer history record")
-    public Response createCustomerHistory(@Valid CustomerHistoryRequest request) {
+    public Response createCustomerHistory(@Valid CustomerHistoryCreateRequest request) {
         try {
             CustomerHistory created = customerHistoryService.create(
                     request.getCustomerId(),
@@ -59,7 +61,9 @@ public class CustomerHistoryResource {
                     request.getActionDate(),
                     request.isForRentalCar()
             );
-            return Response.status(Response.Status.CREATED).entity(created).build();
+            return Response.status(Response.Status.CREATED)
+                    .entity(CustomerHistoryMapper.toResponse(created))
+                    .build();
         } catch (IllegalArgumentException exception) {
             return ApiResponses.badRequest(exception);
         }
@@ -68,7 +72,7 @@ public class CustomerHistoryResource {
     @PUT
     @Path("/{id}")
     @Operation(summary = "Update a customer history record")
-    public Response updateCustomerHistory(@PathParam("id") int id, @Valid CustomerHistoryRequest request) {
+    public Response updateCustomerHistory(@PathParam("id") int id, @Valid CustomerHistoryUpdateRequest request) {
         try {
             CustomerHistory updated = customerHistoryService.update(
                     id,
@@ -82,7 +86,7 @@ public class CustomerHistoryResource {
             if (updated == null) {
                 return ApiResponses.notFound("Customer history record not found.");
             }
-            return Response.ok(updated).build();
+            return Response.ok(CustomerHistoryMapper.toResponse(updated)).build();
         } catch (IllegalArgumentException exception) {
             return ApiResponses.badRequest(exception);
         }

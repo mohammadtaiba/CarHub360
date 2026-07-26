@@ -1,6 +1,7 @@
 package de.fherfurt.carhub360.contract;
 
-import de.fherfurt.carhub360.contract.dto.ContractRequest;
+import de.fherfurt.carhub360.contract.dto.ContractCreateRequest;
+import de.fherfurt.carhub360.contract.dto.ContractResponse;
 import de.fherfurt.carhub360.customer.address.CustomerAddress;
 import de.fherfurt.carhub360.customer.Customer;
 import de.fherfurt.carhub360.customer.CustomerRepository;
@@ -100,7 +101,7 @@ class ContractResourceTest {
         SaleVehicle saleVehicle = saleVehicleService.create(saleVehicle());
         em.flush();
 
-        ContractRequest request = new ContractRequest();
+        ContractCreateRequest request = new ContractCreateRequest();
         request.setCustomerId(customer.getCustomerId());
         request.setSaleVehicleId(saleVehicle.getVehicleId());
         request.setRentalContract(false);
@@ -109,7 +110,10 @@ class ContractResourceTest {
         Response response = contractResource.createContract(request);
 
         assertEquals(Response.Status.CREATED.getStatusCode(), response.getStatus());
-        assertNotNull(response.getEntity());
+        ContractResponse created = (ContractResponse) response.getEntity();
+        assertNotNull(created);
+        assertEquals(customer.getCustomerId(), created.getCustomerId());
+        assertEquals(saleVehicle.getVehicleId(), created.getSaleVehicleId());
     }
 
     @Test
@@ -118,7 +122,7 @@ class ContractResourceTest {
         RentVehicle rentVehicle = rentVehicleService.create(rentVehicle());
         em.flush();
 
-        ContractRequest request = new ContractRequest();
+        ContractCreateRequest request = new ContractCreateRequest();
         request.setCustomerId(customer.getCustomerId());
         request.setRentVehicleId(rentVehicle.getVehicleId());
         request.setRentalContract(true);
@@ -131,7 +135,11 @@ class ContractResourceTest {
         em.flush();
         assertFalse(rentVehicleService.findById(rentVehicle.getVehicleId()).isAvailable());
 
-        int contractId = ((de.fherfurt.carhub360.contract.Contract) createResponse.getEntity()).getContractId();
+        ContractResponse created = (ContractResponse) createResponse.getEntity();
+        assertEquals(rentVehicle.getVehicleId(), created.getRentVehicleId());
+        assertTrue(created.isRentalContract());
+
+        int contractId = created.getContractId();
         Response deleteResponse = contractResource.deleteContract(contractId);
 
         assertEquals(Response.Status.NO_CONTENT.getStatusCode(), deleteResponse.getStatus());
@@ -144,7 +152,7 @@ class ContractResourceTest {
         SaleVehicle saleVehicle = saleVehicleService.create(saleVehicle());
         em.flush();
 
-        ContractRequest request = new ContractRequest();
+        ContractCreateRequest request = new ContractCreateRequest();
         request.setCustomerId(customer.getCustomerId());
         request.setSaleVehicleId(saleVehicle.getVehicleId());
         request.setRentalContract(true);

@@ -1,6 +1,7 @@
 package de.fherfurt.carhub360.customer.address;
 
-import de.fherfurt.carhub360.customer.dto.CustomerAddressRequest;
+import de.fherfurt.carhub360.customer.dto.CustomerAddressCreateRequest;
+import de.fherfurt.carhub360.customer.dto.CustomerAddressUpdateRequest;
 import de.fherfurt.carhub360.shared.api.ApiResponses;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -29,7 +30,7 @@ public class CustomerAddressResource {
     @GET
     @Operation(summary = "List addresses")
     public Response getAddresses() {
-        return Response.ok(customerAddressService.findAll()).build();
+        return Response.ok(CustomerAddressMapper.toResponses(customerAddressService.findAll())).build();
     }
 
     @GET
@@ -40,15 +41,17 @@ public class CustomerAddressResource {
         if (address == null) {
             return ApiResponses.notFound("Address not found.");
         }
-        return Response.ok(address).build();
+        return Response.ok(CustomerAddressMapper.toResponse(address)).build();
     }
 
     @POST
     @Operation(summary = "Create an address")
-    public Response createAddress(@Valid CustomerAddressRequest request) {
+    public Response createAddress(@Valid CustomerAddressCreateRequest request) {
         try {
-            CustomerAddress created = customerAddressService.create(toAddress(request));
-            return Response.status(Response.Status.CREATED).entity(created).build();
+            CustomerAddress created = customerAddressService.create(CustomerAddressMapper.toAddress(request));
+            return Response.status(Response.Status.CREATED)
+                    .entity(CustomerAddressMapper.toResponse(created))
+                    .build();
         } catch (IllegalArgumentException exception) {
             return ApiResponses.badRequest(exception);
         }
@@ -57,13 +60,13 @@ public class CustomerAddressResource {
     @PUT
     @Path("/{id}")
     @Operation(summary = "Update an address")
-    public Response updateAddress(@PathParam("id") int id, @Valid CustomerAddressRequest request) {
+    public Response updateAddress(@PathParam("id") int id, @Valid CustomerAddressUpdateRequest request) {
         try {
-            CustomerAddress updated = customerAddressService.update(id, toAddress(request));
+            CustomerAddress updated = customerAddressService.update(id, CustomerAddressMapper.toAddress(request));
             if (updated == null) {
                 return ApiResponses.notFound("Address not found.");
             }
-            return Response.ok(updated).build();
+            return Response.ok(CustomerAddressMapper.toResponse(updated)).build();
         } catch (IllegalArgumentException exception) {
             return ApiResponses.badRequest(exception);
         }
@@ -77,14 +80,5 @@ public class CustomerAddressResource {
             return ApiResponses.notFound("Address not found.");
         }
         return Response.noContent().build();
-    }
-
-    private CustomerAddress toAddress(CustomerAddressRequest request) {
-        CustomerAddress address = new CustomerAddress();
-        address.setCity(request.getCity());
-        address.setPostalCode(request.getPostalCode());
-        address.setStreet(request.getStreet());
-        address.setStreetNumber(request.getStreetNumber());
-        return address;
     }
 }

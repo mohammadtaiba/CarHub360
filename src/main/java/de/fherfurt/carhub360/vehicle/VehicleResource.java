@@ -1,7 +1,8 @@
 package de.fherfurt.carhub360.vehicle;
 
 import de.fherfurt.carhub360.shared.api.ApiResponses;
-import de.fherfurt.carhub360.vehicle.dto.VehicleRequest;
+import de.fherfurt.carhub360.vehicle.dto.VehicleCreateRequest;
+import de.fherfurt.carhub360.vehicle.dto.VehicleUpdateRequest;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.inject.Inject;
@@ -29,7 +30,7 @@ public class VehicleResource {
     @GET
     @Operation(summary = "List vehicles")
     public Response getVehicles() {
-        return Response.ok(vehicleService.findAll()).build();
+        return Response.ok(VehicleMapper.toResponses(vehicleService.findAll())).build();
     }
 
     @GET
@@ -40,15 +41,17 @@ public class VehicleResource {
         if (vehicle == null) {
             return ApiResponses.notFound("Vehicle not found.");
         }
-        return Response.ok(vehicle).build();
+        return Response.ok(VehicleMapper.toResponse(vehicle)).build();
     }
 
     @POST
     @Operation(summary = "Create a base vehicle")
-    public Response createVehicle(@Valid VehicleRequest request) {
+    public Response createVehicle(@Valid VehicleCreateRequest request) {
         try {
-            Vehicle created = vehicleService.create(toVehicle(request));
-            return Response.status(Response.Status.CREATED).entity(created).build();
+            Vehicle created = vehicleService.create(VehicleMapper.toVehicle(request));
+            return Response.status(Response.Status.CREATED)
+                    .entity(VehicleMapper.toResponse(created))
+                    .build();
         } catch (IllegalArgumentException exception) {
             return ApiResponses.badRequest(exception);
         }
@@ -57,13 +60,13 @@ public class VehicleResource {
     @PUT
     @Path("/{id}")
     @Operation(summary = "Update a base vehicle")
-    public Response updateVehicle(@PathParam("id") int id, @Valid VehicleRequest request) {
+    public Response updateVehicle(@PathParam("id") int id, @Valid VehicleUpdateRequest request) {
         try {
-            Vehicle updated = vehicleService.update(id, toVehicle(request));
+            Vehicle updated = vehicleService.update(id, VehicleMapper.toVehicle(request));
             if (updated == null) {
                 return ApiResponses.notFound("Vehicle not found.");
             }
-            return Response.ok(updated).build();
+            return Response.ok(VehicleMapper.toResponse(updated)).build();
         } catch (IllegalArgumentException exception) {
             return ApiResponses.badRequest(exception);
         }
@@ -77,15 +80,5 @@ public class VehicleResource {
             return ApiResponses.notFound("Vehicle not found.");
         }
         return Response.noContent().build();
-    }
-
-    private Vehicle toVehicle(VehicleRequest request) {
-        Vehicle vehicle = new Vehicle();
-        vehicle.setName(request.getName());
-        vehicle.setBrand(request.getBrand());
-        vehicle.setKilometerCount(request.getKilometerCount());
-        vehicle.setConstructionYear(request.getConstructionYear());
-        vehicle.setType(request.getType());
-        return vehicle;
     }
 }

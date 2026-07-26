@@ -1,6 +1,7 @@
 package de.fherfurt.carhub360.payment;
 
-import de.fherfurt.carhub360.payment.dto.PaymentRequest;
+import de.fherfurt.carhub360.payment.dto.PaymentCreateRequest;
+import de.fherfurt.carhub360.payment.dto.PaymentUpdateRequest;
 import de.fherfurt.carhub360.shared.api.ApiResponses;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -31,9 +32,9 @@ public class PaymentResource {
     @Operation(summary = "List payments")
     public Response getPayments(@QueryParam("customerId") Integer customerId) {
         if (customerId != null) {
-            return Response.ok(paymentService.findByCustomerId(customerId)).build();
+            return Response.ok(PaymentMapper.toResponses(paymentService.findByCustomerId(customerId))).build();
         }
-        return Response.ok(paymentService.findAll()).build();
+        return Response.ok(PaymentMapper.toResponses(paymentService.findAll())).build();
     }
 
     @GET
@@ -44,12 +45,12 @@ public class PaymentResource {
         if (payment == null) {
             return ApiResponses.notFound("Payment not found.");
         }
-        return Response.ok(payment).build();
+        return Response.ok(PaymentMapper.toResponse(payment)).build();
     }
 
     @POST
     @Operation(summary = "Create a payment")
-    public Response createPayment(@Valid PaymentRequest request) {
+    public Response createPayment(@Valid PaymentCreateRequest request) {
         try {
             Payment created = paymentService.create(
                     request.getCustomerId(),
@@ -57,7 +58,9 @@ public class PaymentResource {
                     request.getPaymentStatus(),
                     request.getPaymentAmount()
             );
-            return Response.status(Response.Status.CREATED).entity(created).build();
+            return Response.status(Response.Status.CREATED)
+                    .entity(PaymentMapper.toResponse(created))
+                    .build();
         } catch (IllegalArgumentException exception) {
             return ApiResponses.badRequest(exception);
         }
@@ -66,7 +69,7 @@ public class PaymentResource {
     @PUT
     @Path("/{id}")
     @Operation(summary = "Update a payment")
-    public Response updatePayment(@PathParam("id") int id, @Valid PaymentRequest request) {
+    public Response updatePayment(@PathParam("id") int id, @Valid PaymentUpdateRequest request) {
         try {
             Payment updated = paymentService.update(
                     id,
@@ -78,7 +81,7 @@ public class PaymentResource {
             if (updated == null) {
                 return ApiResponses.notFound("Payment not found.");
             }
-            return Response.ok(updated).build();
+            return Response.ok(PaymentMapper.toResponse(updated)).build();
         } catch (IllegalArgumentException exception) {
             return ApiResponses.badRequest(exception);
         }

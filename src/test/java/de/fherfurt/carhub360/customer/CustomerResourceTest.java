@@ -1,7 +1,8 @@
 package de.fherfurt.carhub360.customer;
 
 import de.fherfurt.carhub360.customer.dto.CustomerAddressRequest;
-import de.fherfurt.carhub360.customer.dto.CustomerRequest;
+import de.fherfurt.carhub360.customer.dto.CustomerCreateRequest;
+import de.fherfurt.carhub360.customer.dto.CustomerResponse;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
@@ -66,13 +67,13 @@ class CustomerResourceTest {
         Response createResponse = resource.createCustomer(customerRequest("john@example.com"));
 
         assertEquals(Response.Status.CREATED.getStatusCode(), createResponse.getStatus());
-        Customer created = (Customer) createResponse.getEntity();
+        CustomerResponse created = (CustomerResponse) createResponse.getEntity();
         assertTrue(created.getCustomerId() > 0);
         assertEquals("John", created.getFirstName());
         assertNotNull(created.getCustomerAddress());
 
         Response listResponse = resource.getAllCustomers();
-        List<Customer> customers = (List<Customer>) listResponse.getEntity();
+        List<CustomerResponse> customers = (List<CustomerResponse>) listResponse.getEntity();
         assertEquals(1, customers.size());
 
         Response deleteResponse = resource.deleteCustomer(created.getCustomerId());
@@ -91,14 +92,14 @@ class CustomerResourceTest {
         assertEquals(Response.Status.BAD_REQUEST.getStatusCode(), duplicateResponse.getStatus());
     }
 
-    private CustomerRequest customerRequest(String email) {
+    private CustomerCreateRequest customerRequest(String email) {
         CustomerAddressRequest address = new CustomerAddressRequest();
         address.setCity("Erfurt");
         address.setPostalCode("99084");
         address.setStreet("Bahnhofstrasse");
         address.setStreetNumber("1");
 
-        CustomerRequest request = new CustomerRequest();
+        CustomerCreateRequest request = new CustomerCreateRequest();
         request.setFirstName("John");
         request.setLastName("Doe");
         request.setEmail(email);

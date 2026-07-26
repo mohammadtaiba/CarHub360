@@ -1,6 +1,7 @@
 package de.fherfurt.carhub360.contract;
 
-import de.fherfurt.carhub360.contract.dto.ContractRequest;
+import de.fherfurt.carhub360.contract.dto.ContractCreateRequest;
+import de.fherfurt.carhub360.contract.dto.ContractUpdateRequest;
 import de.fherfurt.carhub360.shared.api.ApiResponses;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -29,7 +30,7 @@ public class ContractResource {
     @GET
     @Operation(summary = "List contracts")
     public Response getAllContracts() {
-        return Response.ok(contractService.findAll()).build();
+        return Response.ok(ContractMapper.toResponses(contractService.findAll())).build();
     }
 
     @GET
@@ -40,28 +41,28 @@ public class ContractResource {
         if (contract == null) {
             return ApiResponses.notFound("Contract not found.");
         }
-        return Response.ok(contract).build();
+        return Response.ok(ContractMapper.toResponse(contract)).build();
     }
 
     @GET
     @Path("/customer/{customerId}")
     @Operation(summary = "List contracts for a customer")
     public Response getContractsByCustomer(@PathParam("customerId") int customerId) {
-        return Response.ok(contractService.findByCustomerId(customerId)).build();
+        return Response.ok(ContractMapper.toResponses(contractService.findByCustomerId(customerId))).build();
     }
 
     @GET
     @Path("/rental")
     @Operation(summary = "List rental contracts")
     public Response getRentalContracts() {
-        return Response.ok(contractService.findRentalContracts()).build();
+        return Response.ok(ContractMapper.toResponses(contractService.findRentalContracts())).build();
     }
 
     @GET
     @Path("/sale")
     @Operation(summary = "List sale contracts")
     public Response getSaleContracts() {
-        return Response.ok(contractService.findSaleContracts()).build();
+        return Response.ok(ContractMapper.toResponses(contractService.findSaleContracts())).build();
     }
 
     @GET
@@ -80,7 +81,7 @@ public class ContractResource {
 
     @POST
     @Operation(summary = "Create a contract")
-    public Response createContract(@Valid ContractRequest request) {
+    public Response createContract(@Valid ContractCreateRequest request) {
         try {
             Contract created = contractService.create(
                     request.getCustomerId(),
@@ -91,7 +92,9 @@ public class ContractResource {
                     request.getRentalStartDate(),
                     request.getRentalEndDate()
             );
-            return Response.status(Response.Status.CREATED).entity(created).build();
+            return Response.status(Response.Status.CREATED)
+                    .entity(ContractMapper.toResponse(created))
+                    .build();
         } catch (IllegalArgumentException exception) {
             return ApiResponses.badRequest(exception);
         }
@@ -100,7 +103,7 @@ public class ContractResource {
     @PUT
     @Path("/{id}")
     @Operation(summary = "Update a contract")
-    public Response updateContract(@PathParam("id") int id, @Valid ContractRequest request) {
+    public Response updateContract(@PathParam("id") int id, @Valid ContractUpdateRequest request) {
         try {
             Contract updated = contractService.update(
                     id,
@@ -115,7 +118,7 @@ public class ContractResource {
             if (updated == null) {
                 return ApiResponses.notFound("Contract not found.");
             }
-            return Response.ok(updated).build();
+            return Response.ok(ContractMapper.toResponse(updated)).build();
         } catch (IllegalArgumentException exception) {
             return ApiResponses.badRequest(exception);
         }

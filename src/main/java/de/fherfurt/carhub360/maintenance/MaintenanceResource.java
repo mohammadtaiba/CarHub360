@@ -1,6 +1,7 @@
 package de.fherfurt.carhub360.maintenance;
 
-import de.fherfurt.carhub360.maintenance.dto.MaintenanceRequest;
+import de.fherfurt.carhub360.maintenance.dto.MaintenanceCreateRequest;
+import de.fherfurt.carhub360.maintenance.dto.MaintenanceUpdateRequest;
 import de.fherfurt.carhub360.shared.api.ApiResponses;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -31,9 +32,9 @@ public class MaintenanceResource {
     @Operation(summary = "List maintenance records")
     public Response getMaintenanceRecords(@QueryParam("vehicleId") Integer vehicleId) {
         if (vehicleId != null) {
-            return Response.ok(maintenanceService.findByVehicleId(vehicleId)).build();
+            return Response.ok(MaintenanceMapper.toResponses(maintenanceService.findByVehicleId(vehicleId))).build();
         }
-        return Response.ok(maintenanceService.findAll()).build();
+        return Response.ok(MaintenanceMapper.toResponses(maintenanceService.findAll())).build();
     }
 
     @GET
@@ -44,12 +45,12 @@ public class MaintenanceResource {
         if (maintenance == null) {
             return ApiResponses.notFound("Maintenance record not found.");
         }
-        return Response.ok(maintenance).build();
+        return Response.ok(MaintenanceMapper.toResponse(maintenance)).build();
     }
 
     @POST
     @Operation(summary = "Create a maintenance record")
-    public Response createMaintenance(@Valid MaintenanceRequest request) {
+    public Response createMaintenance(@Valid MaintenanceCreateRequest request) {
         try {
             Maintenance created = maintenanceService.create(
                     request.getVehicleId(),
@@ -58,7 +59,9 @@ public class MaintenanceResource {
                     request.getMaintenanceCost(),
                     request.getMaintenanceDescription()
             );
-            return Response.status(Response.Status.CREATED).entity(created).build();
+            return Response.status(Response.Status.CREATED)
+                    .entity(MaintenanceMapper.toResponse(created))
+                    .build();
         } catch (IllegalArgumentException exception) {
             return ApiResponses.badRequest(exception);
         }
@@ -67,7 +70,7 @@ public class MaintenanceResource {
     @PUT
     @Path("/{id}")
     @Operation(summary = "Update a maintenance record")
-    public Response updateMaintenance(@PathParam("id") int id, @Valid MaintenanceRequest request) {
+    public Response updateMaintenance(@PathParam("id") int id, @Valid MaintenanceUpdateRequest request) {
         try {
             Maintenance updated = maintenanceService.update(
                     id,
@@ -80,7 +83,7 @@ public class MaintenanceResource {
             if (updated == null) {
                 return ApiResponses.notFound("Maintenance record not found.");
             }
-            return Response.ok(updated).build();
+            return Response.ok(MaintenanceMapper.toResponse(updated)).build();
         } catch (IllegalArgumentException exception) {
             return ApiResponses.badRequest(exception);
         }
