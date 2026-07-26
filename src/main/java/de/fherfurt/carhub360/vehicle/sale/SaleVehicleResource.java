@@ -1,7 +1,8 @@
 package de.fherfurt.carhub360.vehicle.sale;
 
 import de.fherfurt.carhub360.shared.api.ApiResponses;
-import de.fherfurt.carhub360.vehicle.dto.SaleVehicleRequest;
+import de.fherfurt.carhub360.vehicle.dto.SaleVehicleCreateRequest;
+import de.fherfurt.carhub360.vehicle.dto.SaleVehicleUpdateRequest;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.inject.Inject;
@@ -29,7 +30,7 @@ public class SaleVehicleResource {
     @GET
     @Operation(summary = "List sale vehicles")
     public Response getSaleVehicles() {
-        return Response.ok(saleVehicleService.findAll()).build();
+        return Response.ok(SaleVehicleMapper.toResponses(saleVehicleService.findAll())).build();
     }
 
     @GET
@@ -40,15 +41,17 @@ public class SaleVehicleResource {
         if (vehicle == null) {
             return ApiResponses.notFound("Sale vehicle not found.");
         }
-        return Response.ok(vehicle).build();
+        return Response.ok(SaleVehicleMapper.toResponse(vehicle)).build();
     }
 
     @POST
     @Operation(summary = "Create a sale vehicle")
-    public Response createSaleVehicle(@Valid SaleVehicleRequest request) {
+    public Response createSaleVehicle(@Valid SaleVehicleCreateRequest request) {
         try {
             SaleVehicle created = saleVehicleService.create(SaleVehicleMapper.toSaleVehicle(request));
-            return Response.status(Response.Status.CREATED).entity(created).build();
+            return Response.status(Response.Status.CREATED)
+                    .entity(SaleVehicleMapper.toResponse(created))
+                    .build();
         } catch (IllegalArgumentException exception) {
             return ApiResponses.badRequest(exception);
         }
@@ -57,13 +60,13 @@ public class SaleVehicleResource {
     @PUT
     @Path("/{id}")
     @Operation(summary = "Update a sale vehicle")
-    public Response updateSaleVehicle(@PathParam("id") int id, @Valid SaleVehicleRequest request) {
+    public Response updateSaleVehicle(@PathParam("id") int id, @Valid SaleVehicleUpdateRequest request) {
         try {
             SaleVehicle updated = saleVehicleService.update(id, SaleVehicleMapper.toSaleVehicle(request));
             if (updated == null) {
                 return ApiResponses.notFound("Sale vehicle not found.");
             }
-            return Response.ok(updated).build();
+            return Response.ok(SaleVehicleMapper.toResponse(updated)).build();
         } catch (IllegalArgumentException exception) {
             return ApiResponses.badRequest(exception);
         }

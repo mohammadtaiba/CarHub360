@@ -1,7 +1,8 @@
 package de.fherfurt.carhub360.vehicle.rent;
 
 import de.fherfurt.carhub360.shared.api.ApiResponses;
-import de.fherfurt.carhub360.vehicle.dto.RentVehicleRequest;
+import de.fherfurt.carhub360.vehicle.dto.RentVehicleCreateRequest;
+import de.fherfurt.carhub360.vehicle.dto.RentVehicleUpdateRequest;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.inject.Inject;
@@ -29,7 +30,7 @@ public class RentVehicleResource {
     @GET
     @Operation(summary = "List rent vehicles")
     public Response getRentVehicles() {
-        return Response.ok(rentVehicleService.findAll()).build();
+        return Response.ok(RentVehicleMapper.toResponses(rentVehicleService.findAll())).build();
     }
 
     @GET
@@ -40,15 +41,17 @@ public class RentVehicleResource {
         if (vehicle == null) {
             return ApiResponses.notFound("Rent vehicle not found.");
         }
-        return Response.ok(vehicle).build();
+        return Response.ok(RentVehicleMapper.toResponse(vehicle)).build();
     }
 
     @POST
     @Operation(summary = "Create a rent vehicle")
-    public Response createRentVehicle(@Valid RentVehicleRequest request) {
+    public Response createRentVehicle(@Valid RentVehicleCreateRequest request) {
         try {
             RentVehicle created = rentVehicleService.create(RentVehicleMapper.toRentVehicle(request));
-            return Response.status(Response.Status.CREATED).entity(created).build();
+            return Response.status(Response.Status.CREATED)
+                    .entity(RentVehicleMapper.toResponse(created))
+                    .build();
         } catch (IllegalArgumentException exception) {
             return ApiResponses.badRequest(exception);
         }
@@ -57,13 +60,13 @@ public class RentVehicleResource {
     @PUT
     @Path("/{id}")
     @Operation(summary = "Update a rent vehicle")
-    public Response updateRentVehicle(@PathParam("id") int id, @Valid RentVehicleRequest request) {
+    public Response updateRentVehicle(@PathParam("id") int id, @Valid RentVehicleUpdateRequest request) {
         try {
             RentVehicle updated = rentVehicleService.update(id, RentVehicleMapper.toRentVehicle(request));
             if (updated == null) {
                 return ApiResponses.notFound("Rent vehicle not found.");
             }
-            return Response.ok(updated).build();
+            return Response.ok(RentVehicleMapper.toResponse(updated)).build();
         } catch (IllegalArgumentException exception) {
             return ApiResponses.badRequest(exception);
         }
