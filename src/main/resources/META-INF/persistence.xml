@@ -8,15 +8,15 @@
     <persistence-unit name="myPU" transaction-type="JTA">
         <jta-data-source>java:jboss/datasources/ExampleDS</jta-data-source>
 
-        <class>de.fherfurt.core.entity.Contract</class>
-        <class>de.fherfurt.core.entity.Customer</class>
-        <class>de.fherfurt.core.entity.CustomerAddress</class>
-        <class>de.fherfurt.core.entity.CustomerHistory</class>
-        <class>de.fherfurt.core.entity.Maintenance</class>
-        <class>de.fherfurt.core.entity.Payment</class>
-        <class>de.fherfurt.core.entity.RentVehicle</class>
-        <class>de.fherfurt.core.entity.SaleVehicle</class>
-        <class>de.fherfurt.core.entity.Vehicle</class>
+        <class>de.fherfurt.carhub360.contract.Contract</class>
+        <class>de.fherfurt.carhub360.customer.Customer</class>
+        <class>de.fherfurt.carhub360.customer.address.CustomerAddress</class>
+        <class>de.fherfurt.carhub360.customer.history.CustomerHistory</class>
+        <class>de.fherfurt.carhub360.maintenance.Maintenance</class>
+        <class>de.fherfurt.carhub360.payment.Payment</class>
+        <class>de.fherfurt.carhub360.vehicle.rent.RentVehicle</class>
+        <class>de.fherfurt.carhub360.vehicle.sale.SaleVehicle</class>
+        <class>de.fherfurt.carhub360.vehicle.Vehicle</class>
 
         <properties>
             <property name="jakarta.persistence.schema-generation.database.action" value="drop-and-create"/>
