@@ -47,7 +47,7 @@ public class RentVehicleResource {
     @Operation(summary = "Create a rent vehicle")
     public Response createRentVehicle(@Valid RentVehicleRequest request) {
         try {
-            RentVehicle created = rentVehicleService.create(toRentVehicle(request));
+            RentVehicle created = rentVehicleService.create(RentVehicleMapper.toRentVehicle(request));
             return Response.status(Response.Status.CREATED).entity(created).build();
         } catch (IllegalArgumentException exception) {
             return ApiResponses.badRequest(exception);
@@ -59,7 +59,7 @@ public class RentVehicleResource {
     @Operation(summary = "Update a rent vehicle")
     public Response updateRentVehicle(@PathParam("id") int id, @Valid RentVehicleRequest request) {
         try {
-            RentVehicle updated = rentVehicleService.update(id, toRentVehicle(request));
+            RentVehicle updated = rentVehicleService.update(id, RentVehicleMapper.toRentVehicle(request));
             if (updated == null) {
                 return ApiResponses.notFound("Rent vehicle not found.");
             }
@@ -77,19 +77,5 @@ public class RentVehicleResource {
             return ApiResponses.notFound("Rent vehicle not found.");
         }
         return Response.noContent().build();
-    }
-
-    private RentVehicle toRentVehicle(RentVehicleRequest request) {
-        RentVehicle vehicle = new RentVehicle();
-        vehicle.setName(request.getName());
-        vehicle.setBrand(request.getBrand());
-        vehicle.setKilometerCount(request.getKilometerCount());
-        vehicle.setConstructionYear(request.getConstructionYear());
-        vehicle.setType(request.getType());
-        vehicle.setAvailable(request.isAvailable());
-        vehicle.setDailyPrice(request.getDailyPrice());
-        vehicle.setLicensePlate(request.getLicensePlate());
-        vehicle.setDeposit(request.getDeposit());
-        return vehicle;
     }
 }

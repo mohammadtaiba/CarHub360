@@ -47,7 +47,7 @@ public class SaleVehicleResource {
     @Operation(summary = "Create a sale vehicle")
     public Response createSaleVehicle(@Valid SaleVehicleRequest request) {
         try {
-            SaleVehicle created = saleVehicleService.create(toSaleVehicle(request));
+            SaleVehicle created = saleVehicleService.create(SaleVehicleMapper.toSaleVehicle(request));
             return Response.status(Response.Status.CREATED).entity(created).build();
         } catch (IllegalArgumentException exception) {
             return ApiResponses.badRequest(exception);
@@ -59,7 +59,7 @@ public class SaleVehicleResource {
     @Operation(summary = "Update a sale vehicle")
     public Response updateSaleVehicle(@PathParam("id") int id, @Valid SaleVehicleRequest request) {
         try {
-            SaleVehicle updated = saleVehicleService.update(id, toSaleVehicle(request));
+            SaleVehicle updated = saleVehicleService.update(id, SaleVehicleMapper.toSaleVehicle(request));
             if (updated == null) {
                 return ApiResponses.notFound("Sale vehicle not found.");
             }
@@ -77,17 +77,5 @@ public class SaleVehicleResource {
             return ApiResponses.notFound("Sale vehicle not found.");
         }
         return Response.noContent().build();
-    }
-
-    private SaleVehicle toSaleVehicle(SaleVehicleRequest request) {
-        SaleVehicle vehicle = new SaleVehicle();
-        vehicle.setName(request.getName());
-        vehicle.setBrand(request.getBrand());
-        vehicle.setKilometerCount(request.getKilometerCount());
-        vehicle.setConstructionYear(request.getConstructionYear());
-        vehicle.setType(request.getType());
-        vehicle.setSalePrice(request.getSalePrice());
-        vehicle.setNewVehicle(request.isNewVehicle());
-        return vehicle;
     }
 }

@@ -47,7 +47,7 @@ public class VehicleResource {
     @Operation(summary = "Create a base vehicle")
     public Response createVehicle(@Valid VehicleRequest request) {
         try {
-            Vehicle created = vehicleService.create(toVehicle(request));
+            Vehicle created = vehicleService.create(VehicleMapper.toVehicle(request));
             return Response.status(Response.Status.CREATED).entity(created).build();
         } catch (IllegalArgumentException exception) {
             return ApiResponses.badRequest(exception);
@@ -59,7 +59,7 @@ public class VehicleResource {
     @Operation(summary = "Update a base vehicle")
     public Response updateVehicle(@PathParam("id") int id, @Valid VehicleRequest request) {
         try {
-            Vehicle updated = vehicleService.update(id, toVehicle(request));
+            Vehicle updated = vehicleService.update(id, VehicleMapper.toVehicle(request));
             if (updated == null) {
                 return ApiResponses.notFound("Vehicle not found.");
             }
@@ -77,15 +77,5 @@ public class VehicleResource {
             return ApiResponses.notFound("Vehicle not found.");
         }
         return Response.noContent().build();
-    }
-
-    private Vehicle toVehicle(VehicleRequest request) {
-        Vehicle vehicle = new Vehicle();
-        vehicle.setName(request.getName());
-        vehicle.setBrand(request.getBrand());
-        vehicle.setKilometerCount(request.getKilometerCount());
-        vehicle.setConstructionYear(request.getConstructionYear());
-        vehicle.setType(request.getType());
-        return vehicle;
     }
 }
