@@ -1,20 +1,25 @@
-package de.fherfurt.carhub360.customer.dto;
+package de.fherfurt.carhub360.customer.address.dto;
 
-public class CustomerAddressResponse {
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 
-    private int addressId;
+public class CustomerAddressRequest {
+
+    @NotBlank
+    @Size(max = 120)
     private String city;
+
+    @NotBlank
+    @Size(max = 20)
     private String postalCode;
+
+    @NotBlank
+    @Size(max = 120)
     private String street;
+
+    @NotBlank
+    @Size(max = 20)
     private String streetNumber;
-
-    public int getAddressId() {
-        return addressId;
-    }
-
-    public void setAddressId(int addressId) {
-        this.addressId = addressId;
-    }
 
     public String getCity() {
         return city;

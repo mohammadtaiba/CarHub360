@@ -1,7 +1,7 @@
 package de.fherfurt.carhub360.customer.address;
 
-import de.fherfurt.carhub360.customer.dto.CustomerAddressCreateRequest;
-import de.fherfurt.carhub360.customer.dto.CustomerAddressUpdateRequest;
+import de.fherfurt.carhub360.customer.address.dto.CustomerAddressCreateRequest;
+import de.fherfurt.carhub360.customer.address.dto.CustomerAddressUpdateRequest;
 import de.fherfurt.carhub360.shared.api.ApiResponses;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
