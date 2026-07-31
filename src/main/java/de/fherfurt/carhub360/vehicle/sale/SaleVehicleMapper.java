@@ -5,7 +5,7 @@ import de.fherfurt.carhub360.vehicle.dto.SaleVehicleRequest;
 import de.fherfurt.carhub360.vehicle.dto.SaleVehicleResponse;
 import java.util.List;
 
-final class SaleVehicleMapper {
+public final class SaleVehicleMapper {
 
     private SaleVehicleMapper() {
     }
@@ -24,7 +24,7 @@ final class SaleVehicleMapper {
                 .toList();
     }
 
-    static SaleVehicleResponse toResponse(SaleVehicle vehicle) {
+    public static SaleVehicleResponse toResponse(SaleVehicle vehicle) {
         SaleVehicleResponse response = new SaleVehicleResponse();
         VehicleMapper.applyVehicleResponseFields(vehicle, response);
         response.setSalePrice(vehicle.getSalePrice());

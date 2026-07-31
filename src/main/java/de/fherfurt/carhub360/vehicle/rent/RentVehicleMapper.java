@@ -5,7 +5,7 @@ import de.fherfurt.carhub360.vehicle.dto.RentVehicleRequest;
 import de.fherfurt.carhub360.vehicle.dto.RentVehicleResponse;
 import java.util.List;
 
-final class RentVehicleMapper {
+public final class RentVehicleMapper {
 
     private RentVehicleMapper() {
     }
@@ -26,7 +26,7 @@ final class RentVehicleMapper {
                 .toList();
     }
 
-    static RentVehicleResponse toResponse(RentVehicle vehicle) {
+    public static RentVehicleResponse toResponse(RentVehicle vehicle) {
         RentVehicleResponse response = new RentVehicleResponse();
         VehicleMapper.applyVehicleResponseFields(vehicle, response);
         response.setAvailable(vehicle.isAvailable());
