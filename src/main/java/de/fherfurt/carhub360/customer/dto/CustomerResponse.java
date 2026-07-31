@@ -1,5 +1,6 @@
 package de.fherfurt.carhub360.customer.dto;
 
+import de.fherfurt.carhub360.customer.address.dto.CustomerAddressResponse;
 import java.util.Date;
 
 public class CustomerResponse {

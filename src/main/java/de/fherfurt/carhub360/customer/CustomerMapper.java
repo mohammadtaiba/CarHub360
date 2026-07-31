@@ -1,8 +1,8 @@
 package de.fherfurt.carhub360.customer;
 
 import de.fherfurt.carhub360.customer.address.CustomerAddress;
-import de.fherfurt.carhub360.customer.dto.CustomerAddressResponse;
-import de.fherfurt.carhub360.customer.dto.CustomerAddressRequest;
+import de.fherfurt.carhub360.customer.address.dto.CustomerAddressRequest;
+import de.fherfurt.carhub360.customer.address.dto.CustomerAddressResponse;
 import de.fherfurt.carhub360.customer.dto.CustomerRequest;
 import de.fherfurt.carhub360.customer.dto.CustomerResponse;
 import java.util.List;

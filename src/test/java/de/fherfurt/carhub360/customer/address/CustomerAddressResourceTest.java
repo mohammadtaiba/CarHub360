@@ -1,8 +1,8 @@
 package de.fherfurt.carhub360.customer.address;
 
-import de.fherfurt.carhub360.customer.dto.CustomerAddressCreateRequest;
-import de.fherfurt.carhub360.customer.dto.CustomerAddressResponse;
-import de.fherfurt.carhub360.customer.dto.CustomerAddressUpdateRequest;
+import de.fherfurt.carhub360.customer.address.dto.CustomerAddressCreateRequest;
+import de.fherfurt.carhub360.customer.address.dto.CustomerAddressResponse;
+import de.fherfurt.carhub360.customer.address.dto.CustomerAddressUpdateRequest;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
