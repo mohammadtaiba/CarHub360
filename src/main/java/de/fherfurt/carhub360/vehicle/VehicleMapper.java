@@ -1,11 +1,11 @@
 package de.fherfurt.carhub360.vehicle;
 
-import de.fherfurt.carhub360.vehicle.dto.RentVehicleResponse;
-import de.fherfurt.carhub360.vehicle.dto.SaleVehicleResponse;
 import de.fherfurt.carhub360.vehicle.dto.VehicleRequest;
 import de.fherfurt.carhub360.vehicle.dto.VehicleResponse;
 import de.fherfurt.carhub360.vehicle.rent.RentVehicle;
+import de.fherfurt.carhub360.vehicle.rent.RentVehicleMapper;
 import de.fherfurt.carhub360.vehicle.sale.SaleVehicle;
+import de.fherfurt.carhub360.vehicle.sale.SaleVehicleMapper;
 import java.util.List;
 
 public final class VehicleMapper {
@@ -27,10 +27,10 @@ public final class VehicleMapper {
 
     static VehicleResponse toResponse(Vehicle vehicle) {
         if (vehicle instanceof SaleVehicle saleVehicle) {
-            return toSaleVehicleResponse(saleVehicle);
+            return SaleVehicleMapper.toResponse(saleVehicle);
         }
         if (vehicle instanceof RentVehicle rentVehicle) {
-            return toRentVehicleResponse(rentVehicle);
+            return RentVehicleMapper.toResponse(rentVehicle);
         }
         VehicleResponse response = new VehicleResponse();
         applyVehicleResponseFields(vehicle, response);
@@ -52,23 +52,5 @@ public final class VehicleMapper {
         response.setKilometerCount(vehicle.getKilometerCount());
         response.setConstructionYear(vehicle.getConstructionYear());
         response.setType(vehicle.getType());
-    }
-
-    private static SaleVehicleResponse toSaleVehicleResponse(SaleVehicle vehicle) {
-        SaleVehicleResponse response = new SaleVehicleResponse();
-        applyVehicleResponseFields(vehicle, response);
-        response.setSalePrice(vehicle.getSalePrice());
-        response.setNewVehicle(vehicle.isNewVehicle());
-        return response;
-    }
-
-    private static RentVehicleResponse toRentVehicleResponse(RentVehicle vehicle) {
-        RentVehicleResponse response = new RentVehicleResponse();
-        applyVehicleResponseFields(vehicle, response);
-        response.setAvailable(vehicle.isAvailable());
-        response.setDailyPrice(vehicle.getDailyPrice());
-        response.setLicensePlate(vehicle.getLicensePlate());
-        response.setDeposit(vehicle.getDeposit());
-        return response;
     }
 }
