@@ -4,12 +4,12 @@ import de.fherfurt.carhub360.customer.address.dto.CustomerAddressRequest;
 import de.fherfurt.carhub360.customer.address.dto.CustomerAddressResponse;
 import java.util.List;
 
-final class CustomerAddressMapper {
+public final class CustomerAddressMapper {
 
     private CustomerAddressMapper() {
     }
 
-    static CustomerAddress toAddress(CustomerAddressRequest request) {
+    public static CustomerAddress toAddress(CustomerAddressRequest request) {
         CustomerAddress address = new CustomerAddress();
         address.setCity(request.getCity());
         address.setPostalCode(request.getPostalCode());
@@ -24,7 +24,7 @@ final class CustomerAddressMapper {
                 .toList();
     }
 
-    static CustomerAddressResponse toResponse(CustomerAddress address) {
+    public static CustomerAddressResponse toResponse(CustomerAddress address) {
         CustomerAddressResponse response = new CustomerAddressResponse();
         response.setAddressId(address.getAddressId());
         response.setCity(address.getCity());
