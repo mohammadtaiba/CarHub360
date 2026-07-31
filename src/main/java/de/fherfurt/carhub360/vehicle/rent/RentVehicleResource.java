@@ -1,8 +1,8 @@
 package de.fherfurt.carhub360.vehicle.rent;
 
 import de.fherfurt.carhub360.shared.api.ApiResponses;
-import de.fherfurt.carhub360.vehicle.dto.RentVehicleCreateRequest;
-import de.fherfurt.carhub360.vehicle.dto.RentVehicleUpdateRequest;
+import de.fherfurt.carhub360.vehicle.rent.dto.RentVehicleCreateRequest;
+import de.fherfurt.carhub360.vehicle.rent.dto.RentVehicleUpdateRequest;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.inject.Inject;

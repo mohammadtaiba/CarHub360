@@ -1,5 +1,6 @@
-package de.fherfurt.carhub360.vehicle.dto;
+package de.fherfurt.carhub360.vehicle.sale.dto;
 
+import de.fherfurt.carhub360.vehicle.dto.VehicleResponse;
 import java.math.BigDecimal;
 
 public class SaleVehicleResponse extends VehicleResponse {
