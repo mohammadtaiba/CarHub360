@@ -1,9 +1,6 @@
 package de.fherfurt.carhub360.customer;
 
-import de.fherfurt.carhub360.customer.address.CustomerAddress;
 import de.fherfurt.carhub360.customer.address.CustomerAddressMapper;
-import de.fherfurt.carhub360.customer.address.dto.CustomerAddressRequest;
-import de.fherfurt.carhub360.customer.address.dto.CustomerAddressResponse;
 import de.fherfurt.carhub360.customer.dto.CustomerRequest;
 import de.fherfurt.carhub360.customer.dto.CustomerResponse;
 import java.util.List;
@@ -20,7 +17,9 @@ final class CustomerMapper {
         customer.setEmail(request.getEmail());
         customer.setBirthdate(request.getBirthdate());
         customer.setFemale(Boolean.TRUE.equals(request.getFemale()));
-        customer.setCustomerAddress(toAddress(request.getAddress()));
+        customer.setCustomerAddress(request.getAddress() == null
+                ? null
+                : CustomerAddressMapper.toAddress(request.getAddress()));
         return customer;
     }
 
@@ -39,22 +38,10 @@ final class CustomerMapper {
         response.setBirthdate(customer.getBirthdate());
         response.setFemale(customer.isFemale());
         response.setDeleted(customer.isDeleted());
-        response.setCustomerAddress(toAddressResponse(customer.getCustomerAddress()));
+        response.setCustomerAddress(customer.getCustomerAddress() == null
+                ? null
+                : CustomerAddressMapper.toResponse(customer.getCustomerAddress()));
         response.setFullName(customer.getFullName());
         return response;
-    }
-
-    private static CustomerAddress toAddress(CustomerAddressRequest request) {
-        if (request == null) {
-            return null;
-        }
-        return CustomerAddressMapper.toAddress(request);
-    }
-
-    private static CustomerAddressResponse toAddressResponse(CustomerAddress address) {
-        if (address == null) {
-            return null;
-        }
-        return CustomerAddressMapper.toResponse(address);
     }
 }
