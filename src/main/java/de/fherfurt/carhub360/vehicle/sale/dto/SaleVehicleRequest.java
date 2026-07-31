@@ -1,5 +1,6 @@
-package de.fherfurt.carhub360.vehicle.dto;
+package de.fherfurt.carhub360.vehicle.sale.dto;
 
+import de.fherfurt.carhub360.vehicle.dto.VehicleRequest;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 import java.math.BigDecimal;

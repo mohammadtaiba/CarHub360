@@ -1,8 +1,8 @@
 package de.fherfurt.carhub360.vehicle.sale;
 
 import de.fherfurt.carhub360.shared.api.ApiResponses;
-import de.fherfurt.carhub360.vehicle.dto.SaleVehicleCreateRequest;
-import de.fherfurt.carhub360.vehicle.dto.SaleVehicleUpdateRequest;
+import de.fherfurt.carhub360.vehicle.sale.dto.SaleVehicleCreateRequest;
+import de.fherfurt.carhub360.vehicle.sale.dto.SaleVehicleUpdateRequest;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.inject.Inject;

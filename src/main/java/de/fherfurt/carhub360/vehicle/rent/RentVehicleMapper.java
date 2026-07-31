@@ -1,8 +1,8 @@
 package de.fherfurt.carhub360.vehicle.rent;
 
 import de.fherfurt.carhub360.vehicle.VehicleMapper;
-import de.fherfurt.carhub360.vehicle.dto.RentVehicleRequest;
-import de.fherfurt.carhub360.vehicle.dto.RentVehicleResponse;
+import de.fherfurt.carhub360.vehicle.rent.dto.RentVehicleRequest;
+import de.fherfurt.carhub360.vehicle.rent.dto.RentVehicleResponse;
 import java.util.List;
 
 public final class RentVehicleMapper {

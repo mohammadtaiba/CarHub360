@@ -1,8 +1,8 @@
 package de.fherfurt.carhub360.vehicle.sale;
 
 import de.fherfurt.carhub360.vehicle.VehicleMapper;
-import de.fherfurt.carhub360.vehicle.dto.SaleVehicleRequest;
-import de.fherfurt.carhub360.vehicle.dto.SaleVehicleResponse;
+import de.fherfurt.carhub360.vehicle.sale.dto.SaleVehicleRequest;
+import de.fherfurt.carhub360.vehicle.sale.dto.SaleVehicleResponse;
 import java.util.List;
 
 public final class SaleVehicleMapper {
