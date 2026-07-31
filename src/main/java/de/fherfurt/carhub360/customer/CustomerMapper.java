@@ -1,6 +1,7 @@
 package de.fherfurt.carhub360.customer;
 
 import de.fherfurt.carhub360.customer.address.CustomerAddress;
+import de.fherfurt.carhub360.customer.address.CustomerAddressMapper;
 import de.fherfurt.carhub360.customer.address.dto.CustomerAddressRequest;
 import de.fherfurt.carhub360.customer.address.dto.CustomerAddressResponse;
 import de.fherfurt.carhub360.customer.dto.CustomerRequest;
@@ -47,24 +48,13 @@ final class CustomerMapper {
         if (request == null) {
             return null;
         }
-        CustomerAddress address = new CustomerAddress();
-        address.setCity(request.getCity());
-        address.setPostalCode(request.getPostalCode());
-        address.setStreet(request.getStreet());
-        address.setStreetNumber(request.getStreetNumber());
-        return address;
+        return CustomerAddressMapper.toAddress(request);
     }
 
     private static CustomerAddressResponse toAddressResponse(CustomerAddress address) {
         if (address == null) {
             return null;
         }
-        CustomerAddressResponse response = new CustomerAddressResponse();
-        response.setAddressId(address.getAddressId());
-        response.setCity(address.getCity());
-        response.setPostalCode(address.getPostalCode());
-        response.setStreet(address.getStreet());
-        response.setStreetNumber(address.getStreetNumber());
-        return response;
+        return CustomerAddressMapper.toResponse(address);
     }
 }
