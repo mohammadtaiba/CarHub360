@@ -42,11 +42,11 @@ public class CustomerHistoryResource {
     @Path("/{id}")
     @Operation(summary = "Get one customer history record")
     public Response getCustomerHistory(@PathParam("id") int id) {
-        CustomerHistory history = customerHistoryService.findById(id);
-        if (history == null) {
-            return ApiResponses.notFound("Customer history record not found.");
-        }
-        return Response.ok(CustomerHistoryMapper.toResponse(history)).build();
+        return ApiResponses.okOrNotFound(
+                customerHistoryService.findById(id),
+                CustomerHistoryMapper::toResponse,
+                "Customer history record not found."
+        );
     }
 
     @POST
@@ -61,9 +61,7 @@ public class CustomerHistoryResource {
                     request.getActionDate(),
                     request.isForRentalCar()
             );
-            return Response.status(Response.Status.CREATED)
-                    .entity(CustomerHistoryMapper.toResponse(created))
-                    .build();
+            return ApiResponses.created(CustomerHistoryMapper.toResponse(created));
         } catch (IllegalArgumentException exception) {
             return ApiResponses.badRequest(exception);
         }
@@ -83,10 +81,11 @@ public class CustomerHistoryResource {
                     request.getActionDate(),
                     request.isForRentalCar()
             );
-            if (updated == null) {
-                return ApiResponses.notFound("Customer history record not found.");
-            }
-            return Response.ok(CustomerHistoryMapper.toResponse(updated)).build();
+            return ApiResponses.okOrNotFound(
+                    updated,
+                    CustomerHistoryMapper::toResponse,
+                    "Customer history record not found."
+            );
         } catch (IllegalArgumentException exception) {
             return ApiResponses.badRequest(exception);
         }
@@ -96,9 +95,9 @@ public class CustomerHistoryResource {
     @Path("/{id}")
     @Operation(summary = "Delete a customer history record")
     public Response deleteCustomerHistory(@PathParam("id") int id) {
-        if (!customerHistoryService.delete(id)) {
-            return ApiResponses.notFound("Customer history record not found.");
-        }
-        return Response.noContent().build();
+        return ApiResponses.noContentOrNotFound(
+                customerHistoryService.delete(id),
+                "Customer history record not found."
+        );
     }
 }

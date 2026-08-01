@@ -37,11 +37,11 @@ public class CustomerResource {
     @Path("/{id}")
     @Operation(summary = "Get one active customer")
     public Response getCustomer(@PathParam("id") int id) {
-        Customer customer = customerService.findActiveById(id);
-        if (customer == null) {
-            return ApiResponses.notFound("Customer not found.");
-        }
-        return Response.ok(CustomerMapper.toResponse(customer)).build();
+        return ApiResponses.okOrNotFound(
+                customerService.findActiveById(id),
+                CustomerMapper::toResponse,
+                "Customer not found."
+        );
     }
 
     @POST
@@ -49,9 +49,7 @@ public class CustomerResource {
     public Response createCustomer(@Valid CustomerCreateRequest request) {
         try {
             Customer created = customerService.create(CustomerMapper.toCustomer(request));
-            return Response.status(Response.Status.CREATED)
-                    .entity(CustomerMapper.toResponse(created))
-                    .build();
+            return ApiResponses.created(CustomerMapper.toResponse(created));
         } catch (IllegalArgumentException exception) {
             return ApiResponses.badRequest(exception);
         }
@@ -63,10 +61,7 @@ public class CustomerResource {
     public Response updateCustomer(@PathParam("id") int id, @Valid CustomerUpdateRequest request) {
         try {
             Customer updated = customerService.update(id, CustomerMapper.toCustomer(request));
-            if (updated == null) {
-                return ApiResponses.notFound("Customer not found.");
-            }
-            return Response.ok(CustomerMapper.toResponse(updated)).build();
+            return ApiResponses.okOrNotFound(updated, CustomerMapper::toResponse, "Customer not found.");
         } catch (IllegalArgumentException exception) {
             return ApiResponses.badRequest(exception);
         }
@@ -76,9 +71,6 @@ public class CustomerResource {
     @Path("/{id}")
     @Operation(summary = "Soft-delete a customer")
     public Response deleteCustomer(@PathParam("id") int id) {
-        if (!customerService.softDelete(id)) {
-            return ApiResponses.notFound("Customer not found.");
-        }
-        return Response.noContent().build();
+        return ApiResponses.noContentOrNotFound(customerService.softDelete(id), "Customer not found.");
     }
 }

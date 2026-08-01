@@ -41,11 +41,11 @@ public class PaymentResource {
     @Path("/{id}")
     @Operation(summary = "Get one payment")
     public Response getPayment(@PathParam("id") int id) {
-        Payment payment = paymentService.findById(id);
-        if (payment == null) {
-            return ApiResponses.notFound("Payment not found.");
-        }
-        return Response.ok(PaymentMapper.toResponse(payment)).build();
+        return ApiResponses.okOrNotFound(
+                paymentService.findById(id),
+                PaymentMapper::toResponse,
+                "Payment not found."
+        );
     }
 
     @POST
@@ -58,9 +58,7 @@ public class PaymentResource {
                     request.getPaymentStatus(),
                     request.getPaymentAmount()
             );
-            return Response.status(Response.Status.CREATED)
-                    .entity(PaymentMapper.toResponse(created))
-                    .build();
+            return ApiResponses.created(PaymentMapper.toResponse(created));
         } catch (IllegalArgumentException exception) {
             return ApiResponses.badRequest(exception);
         }
@@ -78,10 +76,7 @@ public class PaymentResource {
                     request.getPaymentStatus(),
                     request.getPaymentAmount()
             );
-            if (updated == null) {
-                return ApiResponses.notFound("Payment not found.");
-            }
-            return Response.ok(PaymentMapper.toResponse(updated)).build();
+            return ApiResponses.okOrNotFound(updated, PaymentMapper::toResponse, "Payment not found.");
         } catch (IllegalArgumentException exception) {
             return ApiResponses.badRequest(exception);
         }
@@ -91,9 +86,6 @@ public class PaymentResource {
     @Path("/{id}")
     @Operation(summary = "Delete a payment")
     public Response deletePayment(@PathParam("id") int id) {
-        if (!paymentService.delete(id)) {
-            return ApiResponses.notFound("Payment not found.");
-        }
-        return Response.noContent().build();
+        return ApiResponses.noContentOrNotFound(paymentService.delete(id), "Payment not found.");
     }
 }

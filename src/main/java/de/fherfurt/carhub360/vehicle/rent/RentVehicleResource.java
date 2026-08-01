@@ -37,11 +37,11 @@ public class RentVehicleResource {
     @Path("/{id}")
     @Operation(summary = "Get one rent vehicle")
     public Response getRentVehicle(@PathParam("id") int id) {
-        RentVehicle vehicle = rentVehicleService.findById(id);
-        if (vehicle == null) {
-            return ApiResponses.notFound("Rent vehicle not found.");
-        }
-        return Response.ok(RentVehicleMapper.toResponse(vehicle)).build();
+        return ApiResponses.okOrNotFound(
+                rentVehicleService.findById(id),
+                RentVehicleMapper::toResponse,
+                "Rent vehicle not found."
+        );
     }
 
     @POST
@@ -49,9 +49,7 @@ public class RentVehicleResource {
     public Response createRentVehicle(@Valid RentVehicleCreateRequest request) {
         try {
             RentVehicle created = rentVehicleService.create(RentVehicleMapper.toRentVehicle(request));
-            return Response.status(Response.Status.CREATED)
-                    .entity(RentVehicleMapper.toResponse(created))
-                    .build();
+            return ApiResponses.created(RentVehicleMapper.toResponse(created));
         } catch (IllegalArgumentException exception) {
             return ApiResponses.badRequest(exception);
         }
@@ -63,10 +61,7 @@ public class RentVehicleResource {
     public Response updateRentVehicle(@PathParam("id") int id, @Valid RentVehicleUpdateRequest request) {
         try {
             RentVehicle updated = rentVehicleService.update(id, RentVehicleMapper.toRentVehicle(request));
-            if (updated == null) {
-                return ApiResponses.notFound("Rent vehicle not found.");
-            }
-            return Response.ok(RentVehicleMapper.toResponse(updated)).build();
+            return ApiResponses.okOrNotFound(updated, RentVehicleMapper::toResponse, "Rent vehicle not found.");
         } catch (IllegalArgumentException exception) {
             return ApiResponses.badRequest(exception);
         }
@@ -76,9 +71,6 @@ public class RentVehicleResource {
     @Path("/{id}")
     @Operation(summary = "Delete a rent vehicle")
     public Response deleteRentVehicle(@PathParam("id") int id) {
-        if (!rentVehicleService.delete(id)) {
-            return ApiResponses.notFound("Rent vehicle not found.");
-        }
-        return Response.noContent().build();
+        return ApiResponses.noContentOrNotFound(rentVehicleService.delete(id), "Rent vehicle not found.");
     }
 }

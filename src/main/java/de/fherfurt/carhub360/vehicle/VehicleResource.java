@@ -37,11 +37,11 @@ public class VehicleResource {
     @Path("/{id}")
     @Operation(summary = "Get one vehicle")
     public Response getVehicle(@PathParam("id") int id) {
-        Vehicle vehicle = vehicleService.findById(id);
-        if (vehicle == null) {
-            return ApiResponses.notFound("Vehicle not found.");
-        }
-        return Response.ok(VehicleMapper.toResponse(vehicle)).build();
+        return ApiResponses.okOrNotFound(
+                vehicleService.findById(id),
+                VehicleMapper::toResponse,
+                "Vehicle not found."
+        );
     }
 
     @POST
@@ -49,9 +49,7 @@ public class VehicleResource {
     public Response createVehicle(@Valid VehicleCreateRequest request) {
         try {
             Vehicle created = vehicleService.create(VehicleMapper.toVehicle(request));
-            return Response.status(Response.Status.CREATED)
-                    .entity(VehicleMapper.toResponse(created))
-                    .build();
+            return ApiResponses.created(VehicleMapper.toResponse(created));
         } catch (IllegalArgumentException exception) {
             return ApiResponses.badRequest(exception);
         }
@@ -63,10 +61,7 @@ public class VehicleResource {
     public Response updateVehicle(@PathParam("id") int id, @Valid VehicleUpdateRequest request) {
         try {
             Vehicle updated = vehicleService.update(id, VehicleMapper.toVehicle(request));
-            if (updated == null) {
-                return ApiResponses.notFound("Vehicle not found.");
-            }
-            return Response.ok(VehicleMapper.toResponse(updated)).build();
+            return ApiResponses.okOrNotFound(updated, VehicleMapper::toResponse, "Vehicle not found.");
         } catch (IllegalArgumentException exception) {
             return ApiResponses.badRequest(exception);
         }
@@ -76,9 +71,6 @@ public class VehicleResource {
     @Path("/{id}")
     @Operation(summary = "Delete a vehicle")
     public Response deleteVehicle(@PathParam("id") int id) {
-        if (!vehicleService.delete(id)) {
-            return ApiResponses.notFound("Vehicle not found.");
-        }
-        return Response.noContent().build();
+        return ApiResponses.noContentOrNotFound(vehicleService.delete(id), "Vehicle not found.");
     }
 }
