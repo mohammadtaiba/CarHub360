@@ -20,6 +20,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static de.fherfurt.carhub360.testsupport.InjectionSupport.inject;
+import static de.fherfurt.carhub360.testsupport.ResponseAssertions.assertNotFound;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -100,6 +101,16 @@ class MaintenanceResourceTest {
         Response deleteResponse = maintenanceResource.deleteMaintenance(created.getMaintenanceId());
 
         assertEquals(Response.Status.NO_CONTENT.getStatusCode(), deleteResponse.getStatus());
+    }
+
+    @Test
+    void missingMaintenanceReturnsNotFoundResponses() {
+        assertNotFound(maintenanceResource.getMaintenance(999), "Maintenance record not found.");
+        assertNotFound(
+                maintenanceResource.updateMaintenance(999, updateMaintenanceRequest(999)),
+                "Maintenance record not found."
+        );
+        assertNotFound(maintenanceResource.deleteMaintenance(999), "Maintenance record not found.");
     }
 
     private MaintenanceCreateRequest maintenanceRequest(int vehicleId) {
