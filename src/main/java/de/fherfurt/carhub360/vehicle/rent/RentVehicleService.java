@@ -1,9 +1,9 @@
 package de.fherfurt.carhub360.vehicle.rent;
 
+import de.fherfurt.carhub360.vehicle.VehicleFields;
 import jakarta.ejb.Stateless;
 import jakarta.inject.Inject;
 import java.math.BigDecimal;
-import java.time.Year;
 import java.util.List;
 
 @Stateless
@@ -32,11 +32,7 @@ public class RentVehicleService {
             return null;
         }
         validate(updatedVehicle);
-        existing.setName(updatedVehicle.getName());
-        existing.setBrand(updatedVehicle.getBrand());
-        existing.setKilometerCount(updatedVehicle.getKilometerCount());
-        existing.setConstructionYear(updatedVehicle.getConstructionYear());
-        existing.setType(updatedVehicle.getType());
+        VehicleFields.copy(updatedVehicle, existing);
         existing.setAvailable(updatedVehicle.isAvailable());
         existing.setDailyPrice(updatedVehicle.getDailyPrice());
         existing.setLicensePlate(updatedVehicle.getLicensePlate());
@@ -63,35 +59,13 @@ public class RentVehicleService {
     }
 
     private void validate(RentVehicle vehicle) {
-        validateVehicleFields(vehicle);
+        VehicleFields.validate(vehicle, "Rent vehicle payload is required.");
         if (vehicle.getDailyPrice() == null || vehicle.getDailyPrice().compareTo(BigDecimal.ZERO) <= 0) {
             throw new IllegalArgumentException("dailyPrice must be greater than zero.");
         }
         if (vehicle.getDeposit() == null || vehicle.getDeposit().compareTo(BigDecimal.ZERO) < 0) {
             throw new IllegalArgumentException("deposit must not be negative.");
         }
-        requireText(vehicle.getLicensePlate(), "licensePlate");
-    }
-
-    private void validateVehicleFields(RentVehicle vehicle) {
-        if (vehicle == null) {
-            throw new IllegalArgumentException("Rent vehicle payload is required.");
-        }
-        requireText(vehicle.getName(), "name");
-        requireText(vehicle.getBrand(), "brand");
-        requireText(vehicle.getType(), "type");
-        if (vehicle.getKilometerCount() < 0) {
-            throw new IllegalArgumentException("kilometerCount must not be negative.");
-        }
-        int currentYear = Year.now().getValue();
-        if (vehicle.getConstructionYear() < 1900 || vehicle.getConstructionYear() > currentYear + 1) {
-            throw new IllegalArgumentException("constructionYear must be plausible.");
-        }
-    }
-
-    private void requireText(String value, String fieldName) {
-        if (value == null || value.trim().isEmpty()) {
-            throw new IllegalArgumentException(fieldName + " is required.");
-        }
+        VehicleFields.requireText(vehicle.getLicensePlate(), "licensePlate");
     }
 }
