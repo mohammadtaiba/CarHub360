@@ -1,5 +1,6 @@
 package de.fherfurt.carhub360.vehicle;
 
+import de.fherfurt.carhub360.shared.validation.RequiredText;
 import java.time.Year;
 
 public final class VehicleFields {
@@ -11,9 +12,9 @@ public final class VehicleFields {
         if (vehicle == null) {
             throw new IllegalArgumentException(requiredMessage);
         }
-        requireText(vehicle.getName(), "name");
-        requireText(vehicle.getBrand(), "brand");
-        requireText(vehicle.getType(), "type");
+        RequiredText.require(vehicle.getName(), "name");
+        RequiredText.require(vehicle.getBrand(), "brand");
+        RequiredText.require(vehicle.getType(), "type");
         if (vehicle.getKilometerCount() < 0) {
             throw new IllegalArgumentException("kilometerCount must not be negative.");
         }
@@ -29,11 +30,5 @@ public final class VehicleFields {
         target.setKilometerCount(source.getKilometerCount());
         target.setConstructionYear(source.getConstructionYear());
         target.setType(source.getType());
-    }
-
-    public static void requireText(String value, String fieldName) {
-        if (value == null || value.trim().isEmpty()) {
-            throw new IllegalArgumentException(fieldName + " is required.");
-        }
     }
 }

@@ -2,6 +2,7 @@ package de.fherfurt.carhub360.customer.history;
 
 import de.fherfurt.carhub360.customer.Customer;
 import de.fherfurt.carhub360.customer.CustomerRepository;
+import de.fherfurt.carhub360.shared.validation.RequiredText;
 import de.fherfurt.carhub360.vehicle.Vehicle;
 import de.fherfurt.carhub360.vehicle.VehicleRepository;
 import jakarta.ejb.Stateless;
@@ -106,9 +107,7 @@ public class CustomerHistoryService {
         if (review == null) {
             throw new IllegalArgumentException("customerHistoryReview is required.");
         }
-        if (description == null || description.trim().isEmpty()) {
-            throw new IllegalArgumentException("description is required.");
-        }
+        RequiredText.require(description, "description");
         if (actionDate == null) {
             throw new IllegalArgumentException("actionDate is required.");
         }

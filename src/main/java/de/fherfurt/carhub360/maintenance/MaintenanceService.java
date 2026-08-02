@@ -1,5 +1,6 @@
 package de.fherfurt.carhub360.maintenance;
 
+import de.fherfurt.carhub360.shared.validation.RequiredText;
 import de.fherfurt.carhub360.vehicle.Vehicle;
 import de.fherfurt.carhub360.vehicle.VehicleRepository;
 import jakarta.ejb.Stateless;
@@ -87,8 +88,6 @@ public class MaintenanceService {
         if (cost == null || cost.compareTo(BigDecimal.ZERO) < 0) {
             throw new IllegalArgumentException("maintenanceCost must not be negative.");
         }
-        if (description == null || description.trim().isEmpty()) {
-            throw new IllegalArgumentException("maintenanceDescription is required.");
-        }
+        RequiredText.require(description, "maintenanceDescription");
     }
 }
