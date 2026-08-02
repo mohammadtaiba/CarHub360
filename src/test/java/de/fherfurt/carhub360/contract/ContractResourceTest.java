@@ -2,6 +2,7 @@ package de.fherfurt.carhub360.contract;
 
 import de.fherfurt.carhub360.contract.dto.ContractCreateRequest;
 import de.fherfurt.carhub360.contract.dto.ContractResponse;
+import de.fherfurt.carhub360.contract.dto.ContractUpdateRequest;
 import de.fherfurt.carhub360.customer.address.CustomerAddress;
 import de.fherfurt.carhub360.customer.Customer;
 import de.fherfurt.carhub360.customer.CustomerRepository;
@@ -26,6 +27,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static de.fherfurt.carhub360.testsupport.InjectionSupport.inject;
+import static de.fherfurt.carhub360.testsupport.ResponseAssertions.assertNotFound;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -162,6 +164,26 @@ class ContractResourceTest {
         Response response = contractResource.createContract(request);
 
         assertEquals(Response.Status.BAD_REQUEST.getStatusCode(), response.getStatus());
+    }
+
+    @Test
+    void missingContractReturnsNotFoundResponses() {
+        assertNotFound(contractResource.getContract(999), "Contract not found.");
+        assertNotFound(contractResource.getRentalPrice(999), "Contract not found.");
+        assertNotFound(
+                contractResource.updateContract(999, contractUpdateRequest()),
+                "Contract not found."
+        );
+        assertNotFound(contractResource.deleteContract(999), "Contract not found.");
+    }
+
+    private ContractUpdateRequest contractUpdateRequest() {
+        ContractUpdateRequest request = new ContractUpdateRequest();
+        request.setCustomerId(999);
+        request.setSaleVehicleId(999);
+        request.setRentalContract(false);
+        request.setContractDate(LocalDate.now());
+        return request;
     }
 
     private Customer customer(String email) {
