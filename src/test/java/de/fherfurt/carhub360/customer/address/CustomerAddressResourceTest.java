@@ -15,6 +15,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static de.fherfurt.carhub360.testsupport.InjectionSupport.inject;
+import static de.fherfurt.carhub360.testsupport.ResponseAssertions.assertNotFound;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -85,6 +86,16 @@ class CustomerAddressResourceTest {
         Response deleteResponse = customerAddressResource.deleteAddress(created.getAddressId());
 
         assertEquals(Response.Status.NO_CONTENT.getStatusCode(), deleteResponse.getStatus());
+    }
+
+    @Test
+    void missingAddressReturnsNotFoundResponses() {
+        assertNotFound(customerAddressResource.getAddress(999), "Address not found.");
+        assertNotFound(
+                customerAddressResource.updateAddress(999, updateAddressRequest()),
+                "Address not found."
+        );
+        assertNotFound(customerAddressResource.deleteAddress(999), "Address not found.");
     }
 
     private CustomerAddressCreateRequest addressRequest() {

@@ -23,6 +23,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static de.fherfurt.carhub360.testsupport.InjectionSupport.inject;
+import static de.fherfurt.carhub360.testsupport.ResponseAssertions.assertNotFound;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -117,6 +118,22 @@ class CustomerHistoryResourceTest {
         Response deleteResponse = customerHistoryResource.deleteCustomerHistory(created.getCustomerHistoryId());
 
         assertEquals(Response.Status.NO_CONTENT.getStatusCode(), deleteResponse.getStatus());
+    }
+
+    @Test
+    void missingCustomerHistoryReturnsNotFoundResponses() {
+        assertNotFound(
+                customerHistoryResource.getCustomerHistory(999),
+                "Customer history record not found."
+        );
+        assertNotFound(
+                customerHistoryResource.updateCustomerHistory(999, updateHistoryRequest(999, 999)),
+                "Customer history record not found."
+        );
+        assertNotFound(
+                customerHistoryResource.deleteCustomerHistory(999),
+                "Customer history record not found."
+        );
     }
 
     private CustomerHistoryCreateRequest historyRequest(int customerId, int vehicleId) {

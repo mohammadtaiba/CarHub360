@@ -16,6 +16,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static de.fherfurt.carhub360.testsupport.InjectionSupport.inject;
+import static de.fherfurt.carhub360.testsupport.ResponseAssertions.assertNotFound;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -88,6 +89,16 @@ class SaleVehicleResourceTest {
         Response deleteResponse = saleVehicleResource.deleteSaleVehicle(created.getVehicleId());
 
         assertEquals(Response.Status.NO_CONTENT.getStatusCode(), deleteResponse.getStatus());
+    }
+
+    @Test
+    void missingSaleVehicleReturnsNotFoundResponses() {
+        assertNotFound(saleVehicleResource.getSaleVehicle(999), "Sale vehicle not found.");
+        assertNotFound(
+                saleVehicleResource.updateSaleVehicle(999, updateSaleVehicleRequest()),
+                "Sale vehicle not found."
+        );
+        assertNotFound(saleVehicleResource.deleteSaleVehicle(999), "Sale vehicle not found.");
     }
 
     private SaleVehicleCreateRequest saleVehicleRequest() {
