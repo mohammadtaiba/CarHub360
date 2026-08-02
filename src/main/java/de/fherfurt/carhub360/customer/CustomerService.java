@@ -1,5 +1,6 @@
 package de.fherfurt.carhub360.customer;
 
+import de.fherfurt.carhub360.shared.validation.RequiredText;
 import jakarta.ejb.Stateless;
 import jakarta.inject.Inject;
 import java.util.List;
@@ -67,20 +68,14 @@ public class CustomerService {
         if (customer == null) {
             throw new IllegalArgumentException("Customer payload is required.");
         }
-        requireText(customer.getFirstName(), "firstName");
-        requireText(customer.getLastName(), "lastName");
-        requireText(customer.getEmail(), "email");
+        RequiredText.require(customer.getFirstName(), "firstName");
+        RequiredText.require(customer.getLastName(), "lastName");
+        RequiredText.require(customer.getEmail(), "email");
         if (!customer.getEmail().contains("@")) {
             throw new IllegalArgumentException("email must be a valid email address.");
         }
         if (customer.getBirthdate() == null) {
             throw new IllegalArgumentException("birthdate is required.");
-        }
-    }
-
-    private void requireText(String value, String fieldName) {
-        if (value == null || value.trim().isEmpty()) {
-            throw new IllegalArgumentException(fieldName + " is required.");
         }
     }
 }
