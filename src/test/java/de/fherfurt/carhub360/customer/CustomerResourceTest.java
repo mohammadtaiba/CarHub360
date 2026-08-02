@@ -3,6 +3,7 @@ package de.fherfurt.carhub360.customer;
 import de.fherfurt.carhub360.customer.address.dto.CustomerAddressRequest;
 import de.fherfurt.carhub360.customer.dto.CustomerCreateRequest;
 import de.fherfurt.carhub360.customer.dto.CustomerResponse;
+import de.fherfurt.carhub360.customer.dto.CustomerUpdateRequest;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
@@ -16,6 +17,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static de.fherfurt.carhub360.testsupport.InjectionSupport.inject;
+import static de.fherfurt.carhub360.testsupport.ResponseAssertions.assertNotFound;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -92,6 +94,16 @@ class CustomerResourceTest {
         assertEquals(Response.Status.BAD_REQUEST.getStatusCode(), duplicateResponse.getStatus());
     }
 
+    @Test
+    void missingCustomerReturnsNotFoundResponses() {
+        assertNotFound(resource.getCustomer(999), "Customer not found.");
+        assertNotFound(
+                resource.updateCustomer(999, customerUpdateRequest("missing@example.com")),
+                "Customer not found."
+        );
+        assertNotFound(resource.deleteCustomer(999), "Customer not found.");
+    }
+
     private CustomerCreateRequest customerRequest(String email) {
         CustomerAddressRequest address = new CustomerAddressRequest();
         address.setCity("Erfurt");
@@ -105,6 +117,23 @@ class CustomerResourceTest {
         request.setEmail(email);
         request.setBirthdate(new Date());
         request.setFemale(Boolean.FALSE);
+        request.setAddress(address);
+        return request;
+    }
+
+    private CustomerUpdateRequest customerUpdateRequest(String email) {
+        CustomerAddressRequest address = new CustomerAddressRequest();
+        address.setCity("Erfurt");
+        address.setPostalCode("99084");
+        address.setStreet("Bahnhofstrasse");
+        address.setStreetNumber("2");
+
+        CustomerUpdateRequest request = new CustomerUpdateRequest();
+        request.setFirstName("Jane");
+        request.setLastName("Doe");
+        request.setEmail(email);
+        request.setBirthdate(new Date());
+        request.setFemale(Boolean.TRUE);
         request.setAddress(address);
         return request;
     }

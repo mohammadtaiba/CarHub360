@@ -21,6 +21,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static de.fherfurt.carhub360.testsupport.InjectionSupport.inject;
+import static de.fherfurt.carhub360.testsupport.ResponseAssertions.assertNotFound;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -101,6 +102,13 @@ class PaymentResourceTest {
         Response deleteResponse = paymentResource.deletePayment(created.getPaymentId());
 
         assertEquals(Response.Status.NO_CONTENT.getStatusCode(), deleteResponse.getStatus());
+    }
+
+    @Test
+    void missingPaymentReturnsNotFoundResponses() {
+        assertNotFound(paymentResource.getPayment(999), "Payment not found.");
+        assertNotFound(paymentResource.updatePayment(999, updatePaymentRequest(999)), "Payment not found.");
+        assertNotFound(paymentResource.deletePayment(999), "Payment not found.");
     }
 
     private PaymentCreateRequest paymentRequest(int customerId) {
