@@ -37,11 +37,11 @@ public class ContractResource {
     @Path("/{id}")
     @Operation(summary = "Get one contract")
     public Response getContract(@PathParam("id") int id) {
-        Contract contract = contractService.findById(id);
-        if (contract == null) {
-            return ApiResponses.notFound("Contract not found.");
-        }
-        return Response.ok(ContractMapper.toResponse(contract)).build();
+        return ApiResponses.okOrNotFound(
+                contractService.findById(id),
+                ContractMapper::toResponse,
+                "Contract not found."
+        );
     }
 
     @GET
@@ -92,9 +92,7 @@ public class ContractResource {
                     request.getRentalStartDate(),
                     request.getRentalEndDate()
             );
-            return Response.status(Response.Status.CREATED)
-                    .entity(ContractMapper.toResponse(created))
-                    .build();
+            return ApiResponses.created(ContractMapper.toResponse(created));
         } catch (IllegalArgumentException exception) {
             return ApiResponses.badRequest(exception);
         }
@@ -115,10 +113,7 @@ public class ContractResource {
                     request.getRentalStartDate(),
                     request.getRentalEndDate()
             );
-            if (updated == null) {
-                return ApiResponses.notFound("Contract not found.");
-            }
-            return Response.ok(ContractMapper.toResponse(updated)).build();
+            return ApiResponses.okOrNotFound(updated, ContractMapper::toResponse, "Contract not found.");
         } catch (IllegalArgumentException exception) {
             return ApiResponses.badRequest(exception);
         }
@@ -128,9 +123,6 @@ public class ContractResource {
     @Path("/{id}")
     @Operation(summary = "Delete a contract")
     public Response deleteContract(@PathParam("id") int id) {
-        if (!contractService.delete(id)) {
-            return ApiResponses.notFound("Contract not found.");
-        }
-        return Response.noContent().build();
+        return ApiResponses.noContentOrNotFound(contractService.delete(id), "Contract not found.");
     }
 }

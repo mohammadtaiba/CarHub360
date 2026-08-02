@@ -37,11 +37,11 @@ public class CustomerAddressResource {
     @Path("/{id}")
     @Operation(summary = "Get one address")
     public Response getAddress(@PathParam("id") int id) {
-        CustomerAddress address = customerAddressService.findById(id);
-        if (address == null) {
-            return ApiResponses.notFound("Address not found.");
-        }
-        return Response.ok(CustomerAddressMapper.toResponse(address)).build();
+        return ApiResponses.okOrNotFound(
+                customerAddressService.findById(id),
+                CustomerAddressMapper::toResponse,
+                "Address not found."
+        );
     }
 
     @POST
@@ -49,9 +49,7 @@ public class CustomerAddressResource {
     public Response createAddress(@Valid CustomerAddressCreateRequest request) {
         try {
             CustomerAddress created = customerAddressService.create(CustomerAddressMapper.toAddress(request));
-            return Response.status(Response.Status.CREATED)
-                    .entity(CustomerAddressMapper.toResponse(created))
-                    .build();
+            return ApiResponses.created(CustomerAddressMapper.toResponse(created));
         } catch (IllegalArgumentException exception) {
             return ApiResponses.badRequest(exception);
         }
@@ -63,10 +61,7 @@ public class CustomerAddressResource {
     public Response updateAddress(@PathParam("id") int id, @Valid CustomerAddressUpdateRequest request) {
         try {
             CustomerAddress updated = customerAddressService.update(id, CustomerAddressMapper.toAddress(request));
-            if (updated == null) {
-                return ApiResponses.notFound("Address not found.");
-            }
-            return Response.ok(CustomerAddressMapper.toResponse(updated)).build();
+            return ApiResponses.okOrNotFound(updated, CustomerAddressMapper::toResponse, "Address not found.");
         } catch (IllegalArgumentException exception) {
             return ApiResponses.badRequest(exception);
         }
@@ -76,9 +71,6 @@ public class CustomerAddressResource {
     @Path("/{id}")
     @Operation(summary = "Delete an address")
     public Response deleteAddress(@PathParam("id") int id) {
-        if (!customerAddressService.delete(id)) {
-            return ApiResponses.notFound("Address not found.");
-        }
-        return Response.noContent().build();
+        return ApiResponses.noContentOrNotFound(customerAddressService.delete(id), "Address not found.");
     }
 }

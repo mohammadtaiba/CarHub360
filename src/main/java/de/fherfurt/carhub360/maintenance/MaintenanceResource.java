@@ -41,11 +41,11 @@ public class MaintenanceResource {
     @Path("/{id}")
     @Operation(summary = "Get one maintenance record")
     public Response getMaintenance(@PathParam("id") int id) {
-        Maintenance maintenance = maintenanceService.findById(id);
-        if (maintenance == null) {
-            return ApiResponses.notFound("Maintenance record not found.");
-        }
-        return Response.ok(MaintenanceMapper.toResponse(maintenance)).build();
+        return ApiResponses.okOrNotFound(
+                maintenanceService.findById(id),
+                MaintenanceMapper::toResponse,
+                "Maintenance record not found."
+        );
     }
 
     @POST
@@ -59,9 +59,7 @@ public class MaintenanceResource {
                     request.getMaintenanceCost(),
                     request.getMaintenanceDescription()
             );
-            return Response.status(Response.Status.CREATED)
-                    .entity(MaintenanceMapper.toResponse(created))
-                    .build();
+            return ApiResponses.created(MaintenanceMapper.toResponse(created));
         } catch (IllegalArgumentException exception) {
             return ApiResponses.badRequest(exception);
         }
@@ -80,10 +78,7 @@ public class MaintenanceResource {
                     request.getMaintenanceCost(),
                     request.getMaintenanceDescription()
             );
-            if (updated == null) {
-                return ApiResponses.notFound("Maintenance record not found.");
-            }
-            return Response.ok(MaintenanceMapper.toResponse(updated)).build();
+            return ApiResponses.okOrNotFound(updated, MaintenanceMapper::toResponse, "Maintenance record not found.");
         } catch (IllegalArgumentException exception) {
             return ApiResponses.badRequest(exception);
         }
@@ -93,9 +88,6 @@ public class MaintenanceResource {
     @Path("/{id}")
     @Operation(summary = "Delete a maintenance record")
     public Response deleteMaintenance(@PathParam("id") int id) {
-        if (!maintenanceService.delete(id)) {
-            return ApiResponses.notFound("Maintenance record not found.");
-        }
-        return Response.noContent().build();
+        return ApiResponses.noContentOrNotFound(maintenanceService.delete(id), "Maintenance record not found.");
     }
 }
