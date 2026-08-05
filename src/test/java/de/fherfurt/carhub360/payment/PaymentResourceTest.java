@@ -61,6 +61,7 @@ class PaymentResourceTest {
         PaymentService paymentService = new PaymentService();
         inject(paymentService, "paymentRepository", paymentRepository);
         inject(paymentService, "customerRepository", customerRepository);
+        inject(paymentService, "paymentValidator", new PaymentValidator());
 
         paymentResource = new PaymentResource();
         inject(paymentResource, "paymentService", paymentService);

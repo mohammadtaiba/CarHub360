@@ -16,6 +16,7 @@ import de.fherfurt.carhub360.payment.PaymentMethod;
 import de.fherfurt.carhub360.payment.PaymentRepository;
 import de.fherfurt.carhub360.payment.PaymentService;
 import de.fherfurt.carhub360.payment.PaymentStatus;
+import de.fherfurt.carhub360.payment.PaymentValidator;
 import de.fherfurt.carhub360.vehicle.Vehicle;
 import de.fherfurt.carhub360.vehicle.VehicleRepository;
 import de.fherfurt.carhub360.vehicle.VehicleService;
@@ -82,6 +83,7 @@ class OperationalServiceTest {
         paymentService = new PaymentService();
         inject(paymentService, "paymentRepository", paymentRepository);
         inject(paymentService, "customerRepository", customerRepository);
+        inject(paymentService, "paymentValidator", new PaymentValidator());
 
         maintenanceService = new MaintenanceService();
         inject(maintenanceService, "maintenanceRepository", maintenanceRepository);
