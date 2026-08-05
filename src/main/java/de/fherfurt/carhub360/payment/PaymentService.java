@@ -16,6 +16,9 @@ public class PaymentService {
     @Inject
     private CustomerRepository customerRepository;
 
+    @Inject
+    private PaymentValidator paymentValidator;
+
     public List<Payment> findAll() {
         return paymentRepository.findAll();
     }
@@ -33,7 +36,7 @@ public class PaymentService {
                           PaymentStatus paymentStatus,
                           BigDecimal paymentAmount) {
         Customer customer = requireActiveCustomer(customerId);
-        validate(paymentMethod, paymentStatus, paymentAmount);
+        paymentValidator.validate(paymentMethod, paymentStatus, paymentAmount);
         Payment payment = new Payment(0, customer, paymentMethod, paymentStatus, paymentAmount);
         paymentRepository.save(payment);
         return payment;
@@ -49,7 +52,7 @@ public class PaymentService {
             return null;
         }
         Customer customer = requireActiveCustomer(customerId);
-        validate(paymentMethod, paymentStatus, paymentAmount);
+        paymentValidator.validate(paymentMethod, paymentStatus, paymentAmount);
         existing.setCustomer(customer);
         existing.setPaymentMethod(paymentMethod);
         existing.setPaymentStatus(paymentStatus);
@@ -71,17 +74,5 @@ public class PaymentService {
             throw new IllegalArgumentException("customerId does not reference an active customer.");
         }
         return customer;
-    }
-
-    private void validate(PaymentMethod method, PaymentStatus status, BigDecimal amount) {
-        if (method == null) {
-            throw new IllegalArgumentException("paymentMethod is required.");
-        }
-        if (status == null) {
-            throw new IllegalArgumentException("paymentStatus is required.");
-        }
-        if (amount == null || amount.compareTo(BigDecimal.ZERO) <= 0) {
-            throw new IllegalArgumentException("paymentAmount must be greater than zero.");
-        }
     }
 }
