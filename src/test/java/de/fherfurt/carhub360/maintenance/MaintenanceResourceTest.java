@@ -60,6 +60,7 @@ class MaintenanceResourceTest {
         MaintenanceService maintenanceService = new MaintenanceService();
         inject(maintenanceService, "maintenanceRepository", maintenanceRepository);
         inject(maintenanceService, "vehicleRepository", vehicleRepository);
+        inject(maintenanceService, "maintenanceValidator", new MaintenanceValidator());
 
         maintenanceResource = new MaintenanceResource();
         inject(maintenanceResource, "maintenanceService", maintenanceService);

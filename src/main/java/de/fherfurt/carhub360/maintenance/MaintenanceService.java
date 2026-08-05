@@ -1,6 +1,5 @@
 package de.fherfurt.carhub360.maintenance;
 
-import de.fherfurt.carhub360.shared.validation.RequiredText;
 import de.fherfurt.carhub360.vehicle.Vehicle;
 import de.fherfurt.carhub360.vehicle.VehicleRepository;
 import jakarta.ejb.Stateless;
@@ -17,6 +16,9 @@ public class MaintenanceService {
 
     @Inject
     private VehicleRepository vehicleRepository;
+
+    @Inject
+    private MaintenanceValidator maintenanceValidator;
 
     public List<Maintenance> findAll() {
         return maintenanceRepository.findAll();
@@ -36,7 +38,7 @@ public class MaintenanceService {
                               BigDecimal cost,
                               String description) {
         Vehicle vehicle = requireVehicle(vehicleId);
-        validate(startDate, endDate, cost, description);
+        maintenanceValidator.validate(startDate, endDate, cost, description);
         Maintenance maintenance = new Maintenance(0, vehicle, startDate, endDate, cost, description);
         maintenanceRepository.save(maintenance);
         return maintenance;
@@ -53,7 +55,7 @@ public class MaintenanceService {
             return null;
         }
         Vehicle vehicle = requireVehicle(vehicleId);
-        validate(startDate, endDate, cost, description);
+        maintenanceValidator.validate(startDate, endDate, cost, description);
         existing.setVehicle(vehicle);
         existing.setMaintenanceStartDate(startDate);
         existing.setMaintenanceEndDate(endDate);
@@ -76,18 +78,5 @@ public class MaintenanceService {
             throw new IllegalArgumentException("vehicleId does not reference an existing vehicle.");
         }
         return vehicle;
-    }
-
-    private void validate(Date startDate, Date endDate, BigDecimal cost, String description) {
-        if (startDate == null) {
-            throw new IllegalArgumentException("maintenanceStartDate is required.");
-        }
-        if (endDate != null && endDate.before(startDate)) {
-            throw new IllegalArgumentException("maintenanceEndDate must not be before maintenanceStartDate.");
-        }
-        if (cost == null || cost.compareTo(BigDecimal.ZERO) < 0) {
-            throw new IllegalArgumentException("maintenanceCost must not be negative.");
-        }
-        RequiredText.require(description, "maintenanceDescription");
     }
 }

@@ -11,6 +11,7 @@ import de.fherfurt.carhub360.customer.history.CustomerHistoryService;
 import de.fherfurt.carhub360.maintenance.Maintenance;
 import de.fherfurt.carhub360.maintenance.MaintenanceRepository;
 import de.fherfurt.carhub360.maintenance.MaintenanceService;
+import de.fherfurt.carhub360.maintenance.MaintenanceValidator;
 import de.fherfurt.carhub360.payment.Payment;
 import de.fherfurt.carhub360.payment.PaymentMethod;
 import de.fherfurt.carhub360.payment.PaymentRepository;
@@ -88,6 +89,7 @@ class OperationalServiceTest {
         maintenanceService = new MaintenanceService();
         inject(maintenanceService, "maintenanceRepository", maintenanceRepository);
         inject(maintenanceService, "vehicleRepository", vehicleRepository);
+        inject(maintenanceService, "maintenanceValidator", new MaintenanceValidator());
 
         customerHistoryService = new CustomerHistoryService();
         inject(customerHistoryService, "repository", historyRepository);
