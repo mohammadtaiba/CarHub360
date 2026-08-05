@@ -8,6 +8,7 @@ import de.fherfurt.carhub360.customer.history.CustomerHistory;
 import de.fherfurt.carhub360.customer.history.CustomerHistoryRepository;
 import de.fherfurt.carhub360.customer.history.CustomerHistoryReview;
 import de.fherfurt.carhub360.customer.history.CustomerHistoryService;
+import de.fherfurt.carhub360.customer.history.CustomerHistoryValidator;
 import de.fherfurt.carhub360.maintenance.Maintenance;
 import de.fherfurt.carhub360.maintenance.MaintenanceRepository;
 import de.fherfurt.carhub360.maintenance.MaintenanceService;
@@ -93,6 +94,7 @@ class OperationalServiceTest {
         inject(customerHistoryService, "repository", historyRepository);
         inject(customerHistoryService, "customerRepository", customerRepository);
         inject(customerHistoryService, "vehicleRepository", vehicleRepository);
+        inject(customerHistoryService, "customerHistoryValidator", new CustomerHistoryValidator());
     }
 
     @AfterEach

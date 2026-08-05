@@ -70,6 +70,7 @@ class CustomerHistoryResourceTest {
         inject(customerHistoryService, "repository", historyRepository);
         inject(customerHistoryService, "customerRepository", customerRepository);
         inject(customerHistoryService, "vehicleRepository", vehicleRepository);
+        inject(customerHistoryService, "customerHistoryValidator", new CustomerHistoryValidator());
 
         customerHistoryResource = new CustomerHistoryResource();
         inject(customerHistoryResource, "customerHistoryService", customerHistoryService);
