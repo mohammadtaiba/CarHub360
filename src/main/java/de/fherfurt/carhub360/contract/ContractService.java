@@ -17,7 +17,7 @@ public class ContractService {
     private ContractReferenceResolver contractReferenceResolver;
 
     @Inject
-    private ContractValidator contractValidator;
+    private ContractValidationService contractValidationService;
 
     @Inject
     private ContractPriceCalculator contractPriceCalculator;
@@ -57,7 +57,7 @@ public class ContractService {
                            LocalDate rentalEndDate) {
         ContractReferences references = contractReferenceResolver.resolve(customerId, saleVehicleId, rentVehicleId);
 
-        validate(references, rentalContract, rentalStartDate, rentalEndDate);
+        contractValidationService.validate(references, rentalContract, rentalStartDate, rentalEndDate);
         contractRentalVehicleService.requireAvailableForCreate(rentalContract, references.rentVehicle());
 
         Contract contract = contractFactory.create(
@@ -91,7 +91,7 @@ public class ContractService {
         ContractReferences references = contractReferenceResolver.resolve(customerId, saleVehicleId, rentVehicleId);
         RentVehicle rentVehicle = references.rentVehicle();
 
-        validate(references, rentalContract, rentalStartDate, rentalEndDate);
+        contractValidationService.validate(references, rentalContract, rentalStartDate, rentalEndDate);
         contractRentalVehicleService.requireAvailableForUpdate(existing, rentalContract, rentVehicle);
         contractRentalVehicleService.releaseReplacedVehicle(existing, rentVehicle);
 
@@ -123,22 +123,5 @@ public class ContractService {
     public BigDecimal calculateRentalPrice(int contractId) {
         Contract contract = contractRepository.findById(contractId);
         return contractPriceCalculator.calculateRentalPrice(contract);
-    }
-
-    private void validate(ContractReferences references,
-                          boolean rentalContract,
-                          LocalDate rentalStartDate,
-                          LocalDate rentalEndDate) {
-        List<String> errors = contractValidator.validate(
-                references.customer(),
-                references.saleVehicle(),
-                references.rentVehicle(),
-                rentalContract,
-                rentalStartDate,
-                rentalEndDate
-        );
-        if (!errors.isEmpty()) {
-            throw new IllegalArgumentException(String.join(" ", errors));
-        }
     }
 }
