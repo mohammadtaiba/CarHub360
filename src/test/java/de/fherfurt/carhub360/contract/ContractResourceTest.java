@@ -91,6 +91,9 @@ class ContractResourceTest {
         inject(contractService, "rentVehicleRepository", rentVehicleRepository);
         inject(contractService, "contractValidator", new ContractValidator());
         inject(contractService, "contractPriceCalculator", new ContractPriceCalculator());
+        ContractRentalVehicleService contractRentalVehicleService = new ContractRentalVehicleService();
+        inject(contractRentalVehicleService, "rentVehicleRepository", rentVehicleRepository);
+        inject(contractService, "contractRentalVehicleService", contractRentalVehicleService);
 
         contractResource = new ContractResource();
         inject(contractResource, "contractService", contractService);

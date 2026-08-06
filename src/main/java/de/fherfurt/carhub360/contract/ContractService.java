@@ -33,6 +33,9 @@ public class ContractService {
     @Inject
     private ContractPriceCalculator contractPriceCalculator;
 
+    @Inject
+    private ContractRentalVehicleService contractRentalVehicleService;
+
     public List<Contract> findAll() {
         return contractRepository.findAll();
     }
@@ -65,9 +68,7 @@ public class ContractService {
         RentVehicle rentVehicle = rentVehicleId == null ? null : rentVehicleRepository.findById(rentVehicleId);
 
         validate(customer, saleVehicle, rentVehicle, rentalContract, rentalStartDate, rentalEndDate);
-        if (rentalContract && !rentVehicle.isAvailable()) {
-            throw new IllegalArgumentException("rentVehicleId references a vehicle that is not available.");
-        }
+        contractRentalVehicleService.requireAvailableForCreate(rentalContract, rentVehicle);
 
         Contract contract = new Contract(
                 0,
@@ -80,10 +81,7 @@ public class ContractService {
                 rentalContract ? rentalEndDate : null
         );
 
-        if (rentalContract) {
-            rentVehicle.setAvailable(false);
-            rentVehicleRepository.update(rentVehicle);
-        }
+        contractRentalVehicleService.reserveIfRental(rentalContract, rentVehicle);
         contractRepository.save(contract);
         return contract;
     }
@@ -106,15 +104,8 @@ public class ContractService {
         RentVehicle rentVehicle = rentVehicleId == null ? null : rentVehicleRepository.findById(rentVehicleId);
 
         validate(customer, saleVehicle, rentVehicle, rentalContract, rentalStartDate, rentalEndDate);
-        if (rentalContract
-                && rentVehicle != null
-                && !rentVehicle.isAvailable()
-                && (existing.getRentVehicle() == null
-                || existing.getRentVehicle().getVehicleId() != rentVehicle.getVehicleId())) {
-            throw new IllegalArgumentException("rentVehicleId references a vehicle that is not available.");
-        }
-
-        releaseExistingRentalVehicle(existing, rentVehicle);
+        contractRentalVehicleService.requireAvailableForUpdate(existing, rentalContract, rentVehicle);
+        contractRentalVehicleService.releaseReplacedVehicle(existing, rentVehicle);
 
         existing.setCustomer(customer);
         existing.setSaleVehicle(rentalContract ? null : saleVehicle);
@@ -124,10 +115,7 @@ public class ContractService {
         existing.setRentalStartDate(rentalContract ? rentalStartDate : null);
         existing.setRentalEndDate(rentalContract ? rentalEndDate : null);
 
-        if (rentalContract && rentVehicle != null) {
-            rentVehicle.setAvailable(false);
-            rentVehicleRepository.update(rentVehicle);
-        }
+        contractRentalVehicleService.reserveIfRental(rentalContract, rentVehicle);
         return contractRepository.update(existing);
     }
 
@@ -136,11 +124,7 @@ public class ContractService {
         if (existing == null) {
             return false;
         }
-        if (existing.isRentalContract() && existing.getRentVehicle() != null) {
-            RentVehicle vehicle = existing.getRentVehicle();
-            vehicle.setAvailable(true);
-            rentVehicleRepository.update(vehicle);
-        }
+        contractRentalVehicleService.releaseCurrentVehicle(existing);
         contractRepository.delete(contractId);
         return true;
     }
@@ -167,18 +151,5 @@ public class ContractService {
         if (!errors.isEmpty()) {
             throw new IllegalArgumentException(String.join(" ", errors));
         }
-    }
-
-    private void releaseExistingRentalVehicle(Contract existing, RentVehicle newRentVehicle) {
-        if (!existing.isRentalContract() || existing.getRentVehicle() == null) {
-            return;
-        }
-        if (newRentVehicle != null
-                && existing.getRentVehicle().getVehicleId() == newRentVehicle.getVehicleId()) {
-            return;
-        }
-        RentVehicle oldVehicle = existing.getRentVehicle();
-        oldVehicle.setAvailable(true);
-        rentVehicleRepository.update(oldVehicle);
     }
 }
