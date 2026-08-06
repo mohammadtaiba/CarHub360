@@ -23,6 +23,7 @@ import de.fherfurt.carhub360.payment.PaymentValidator;
 import de.fherfurt.carhub360.vehicle.Vehicle;
 import de.fherfurt.carhub360.vehicle.VehicleRepository;
 import de.fherfurt.carhub360.vehicle.VehicleService;
+import de.fherfurt.carhub360.vehicle.VehicleValidator;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
@@ -83,6 +84,7 @@ class OperationalServiceTest {
 
         vehicleService = new VehicleService();
         inject(vehicleService, "vehicleRepository", vehicleRepository);
+        inject(vehicleService, "vehicleValidator", new VehicleValidator());
 
         paymentService = new PaymentService();
         inject(paymentService, "paymentRepository", paymentRepository);
