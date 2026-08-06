@@ -2,7 +2,6 @@ package de.fherfurt.carhub360.customer.history;
 
 import de.fherfurt.carhub360.customer.Customer;
 import de.fherfurt.carhub360.customer.CustomerRepository;
-import de.fherfurt.carhub360.shared.validation.RequiredText;
 import de.fherfurt.carhub360.vehicle.Vehicle;
 import de.fherfurt.carhub360.vehicle.VehicleRepository;
 import jakarta.ejb.Stateless;
@@ -21,6 +20,9 @@ public class CustomerHistoryService {
 
     @Inject
     private VehicleRepository vehicleRepository;
+
+    @Inject
+    private CustomerHistoryValidator customerHistoryValidator;
 
     public List<CustomerHistory> findAll() {
         return repository.findAll();
@@ -42,7 +44,7 @@ public class CustomerHistoryService {
                                   boolean forRentalCar) {
         Customer customer = requireActiveCustomer(customerId);
         Vehicle vehicle = requireVehicle(vehicleId);
-        validate(review, description, actionDate);
+        customerHistoryValidator.validate(review, description, actionDate);
         CustomerHistory history = new CustomerHistory(
                 0,
                 customer,
@@ -69,7 +71,7 @@ public class CustomerHistoryService {
         }
         Customer customer = requireActiveCustomer(customerId);
         Vehicle vehicle = requireVehicle(vehicleId);
-        validate(review, description, actionDate);
+        customerHistoryValidator.validate(review, description, actionDate);
         existing.setCustomer(customer);
         existing.setCustomerHistoryVehicle(vehicle);
         existing.setCustomerHistoryReview(review);
@@ -101,15 +103,5 @@ public class CustomerHistoryService {
             throw new IllegalArgumentException("vehicleId does not reference an existing vehicle.");
         }
         return vehicle;
-    }
-
-    private void validate(CustomerHistoryReview review, String description, Date actionDate) {
-        if (review == null) {
-            throw new IllegalArgumentException("customerHistoryReview is required.");
-        }
-        RequiredText.require(description, "description");
-        if (actionDate == null) {
-            throw new IllegalArgumentException("actionDate is required.");
-        }
     }
 }
