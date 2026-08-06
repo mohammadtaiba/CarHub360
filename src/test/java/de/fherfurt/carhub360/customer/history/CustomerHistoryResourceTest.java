@@ -3,6 +3,7 @@ package de.fherfurt.carhub360.customer.history;
 import de.fherfurt.carhub360.customer.Customer;
 import de.fherfurt.carhub360.customer.CustomerRepository;
 import de.fherfurt.carhub360.customer.CustomerService;
+import de.fherfurt.carhub360.customer.CustomerValidator;
 import de.fherfurt.carhub360.customer.address.CustomerAddress;
 import de.fherfurt.carhub360.customer.history.dto.CustomerHistoryCreateRequest;
 import de.fherfurt.carhub360.customer.history.dto.CustomerHistoryResponse;
@@ -62,6 +63,7 @@ class CustomerHistoryResourceTest {
 
         customerService = new CustomerService();
         inject(customerService, "customerRepository", customerRepository);
+        inject(customerService, "customerValidator", new CustomerValidator());
 
         vehicleService = new VehicleService();
         inject(vehicleService, "vehicleRepository", vehicleRepository);

@@ -3,6 +3,7 @@ package de.fherfurt.carhub360.payment;
 import de.fherfurt.carhub360.customer.Customer;
 import de.fherfurt.carhub360.customer.CustomerRepository;
 import de.fherfurt.carhub360.customer.CustomerService;
+import de.fherfurt.carhub360.customer.CustomerValidator;
 import de.fherfurt.carhub360.customer.address.CustomerAddress;
 import de.fherfurt.carhub360.payment.dto.PaymentCreateRequest;
 import de.fherfurt.carhub360.payment.dto.PaymentResponse;
@@ -57,6 +58,7 @@ class PaymentResourceTest {
 
         customerService = new CustomerService();
         inject(customerService, "customerRepository", customerRepository);
+        inject(customerService, "customerValidator", new CustomerValidator());
 
         PaymentService paymentService = new PaymentService();
         inject(paymentService, "paymentRepository", paymentRepository);

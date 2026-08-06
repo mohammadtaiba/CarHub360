@@ -1,6 +1,5 @@
 package de.fherfurt.carhub360.customer;
 
-import de.fherfurt.carhub360.shared.validation.RequiredText;
 import jakarta.ejb.Stateless;
 import jakarta.inject.Inject;
 import java.util.List;
@@ -10,6 +9,9 @@ public class CustomerService {
 
     @Inject
     private CustomerRepository customerRepository;
+
+    @Inject
+    private CustomerValidator customerValidator;
 
     public List<Customer> findAllActive() {
         return customerRepository.findAllActive();
@@ -24,7 +26,7 @@ public class CustomerService {
     }
 
     public Customer create(Customer customer) {
-        validateCustomer(customer);
+        customerValidator.validate(customer);
         if (customerRepository.findByEmail(customer.getEmail()) != null) {
             throw new IllegalArgumentException("A customer with this email already exists.");
         }
@@ -39,7 +41,7 @@ public class CustomerService {
             return null;
         }
 
-        validateCustomer(updatedCustomer);
+        customerValidator.validate(updatedCustomer);
         Customer duplicateEmail = customerRepository.findByEmail(updatedCustomer.getEmail());
         if (duplicateEmail != null && duplicateEmail.getCustomerId() != customerId) {
             throw new IllegalArgumentException("A customer with this email already exists.");
@@ -62,20 +64,5 @@ public class CustomerService {
         customer.setDeleted(true);
         customerRepository.update(customer);
         return true;
-    }
-
-    private void validateCustomer(Customer customer) {
-        if (customer == null) {
-            throw new IllegalArgumentException("Customer payload is required.");
-        }
-        RequiredText.require(customer.getFirstName(), "firstName");
-        RequiredText.require(customer.getLastName(), "lastName");
-        RequiredText.require(customer.getEmail(), "email");
-        if (!customer.getEmail().contains("@")) {
-            throw new IllegalArgumentException("email must be a valid email address.");
-        }
-        if (customer.getBirthdate() == null) {
-            throw new IllegalArgumentException("birthdate is required.");
-        }
     }
 }
