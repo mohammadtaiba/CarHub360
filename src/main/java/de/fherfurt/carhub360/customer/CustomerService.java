@@ -13,6 +13,9 @@ public class CustomerService {
     @Inject
     private CustomerValidator customerValidator;
 
+    @Inject
+    private CustomerEmailUniquenessService customerEmailUniquenessService;
+
     public List<Customer> findAllActive() {
         return customerRepository.findAllActive();
     }
@@ -27,9 +30,7 @@ public class CustomerService {
 
     public Customer create(Customer customer) {
         customerValidator.validate(customer);
-        if (customerRepository.findByEmail(customer.getEmail()) != null) {
-            throw new IllegalArgumentException("A customer with this email already exists.");
-        }
+        customerEmailUniquenessService.requireUniqueForCreate(customer.getEmail());
         customer.setDeleted(false);
         customerRepository.save(customer);
         return customer;
@@ -42,10 +43,7 @@ public class CustomerService {
         }
 
         customerValidator.validate(updatedCustomer);
-        Customer duplicateEmail = customerRepository.findByEmail(updatedCustomer.getEmail());
-        if (duplicateEmail != null && duplicateEmail.getCustomerId() != customerId) {
-            throw new IllegalArgumentException("A customer with this email already exists.");
-        }
+        customerEmailUniquenessService.requireUniqueForUpdate(customerId, updatedCustomer.getEmail());
 
         existing.setFirstName(updatedCustomer.getFirstName());
         existing.setLastName(updatedCustomer.getLastName());
