@@ -55,6 +55,7 @@ class CustomerResourceTest {
         CustomerEmailUniquenessService customerEmailUniquenessService = new CustomerEmailUniquenessService();
         inject(customerEmailUniquenessService, "customerRepository", customerRepository);
         inject(customerService, "customerEmailUniquenessService", customerEmailUniquenessService);
+        inject(customerService, "customerProfileUpdater", new CustomerProfileUpdater());
 
         resource = new CustomerResource();
         inject(resource, "customerService", customerService);

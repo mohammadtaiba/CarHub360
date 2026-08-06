@@ -3,6 +3,7 @@ package de.fherfurt.carhub360;
 import de.fherfurt.carhub360.customer.address.CustomerAddress;
 import de.fherfurt.carhub360.customer.Customer;
 import de.fherfurt.carhub360.customer.CustomerEmailUniquenessService;
+import de.fherfurt.carhub360.customer.CustomerProfileUpdater;
 import de.fherfurt.carhub360.customer.CustomerReferenceService;
 import de.fherfurt.carhub360.customer.CustomerRepository;
 import de.fherfurt.carhub360.customer.CustomerService;
@@ -87,6 +88,7 @@ class OperationalServiceTest {
         CustomerEmailUniquenessService customerEmailUniquenessService = new CustomerEmailUniquenessService();
         inject(customerEmailUniquenessService, "customerRepository", customerRepository);
         inject(customerService, "customerEmailUniquenessService", customerEmailUniquenessService);
+        inject(customerService, "customerProfileUpdater", new CustomerProfileUpdater());
 
         vehicleService = new VehicleService();
         inject(vehicleService, "vehicleRepository", vehicleRepository);

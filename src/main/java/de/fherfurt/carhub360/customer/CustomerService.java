@@ -16,6 +16,9 @@ public class CustomerService {
     @Inject
     private CustomerEmailUniquenessService customerEmailUniquenessService;
 
+    @Inject
+    private CustomerProfileUpdater customerProfileUpdater;
+
     public List<Customer> findAllActive() {
         return customerRepository.findAllActive();
     }
@@ -45,12 +48,7 @@ public class CustomerService {
         customerValidator.validate(updatedCustomer);
         customerEmailUniquenessService.requireUniqueForUpdate(customerId, updatedCustomer.getEmail());
 
-        existing.setFirstName(updatedCustomer.getFirstName());
-        existing.setLastName(updatedCustomer.getLastName());
-        existing.setEmail(updatedCustomer.getEmail());
-        existing.setBirthdate(updatedCustomer.getBirthdate());
-        existing.setFemale(updatedCustomer.isFemale());
-        existing.setCustomerAddress(updatedCustomer.getCustomerAddress());
+        customerProfileUpdater.apply(existing, updatedCustomer);
         return customerRepository.update(existing);
     }
 
