@@ -52,6 +52,9 @@ class CustomerResourceTest {
         CustomerService customerService = new CustomerService();
         inject(customerService, "customerRepository", customerRepository);
         inject(customerService, "customerValidator", new CustomerValidator());
+        CustomerEmailUniquenessService customerEmailUniquenessService = new CustomerEmailUniquenessService();
+        inject(customerEmailUniquenessService, "customerRepository", customerRepository);
+        inject(customerService, "customerEmailUniquenessService", customerEmailUniquenessService);
 
         resource = new CustomerResource();
         inject(resource, "customerService", customerService);

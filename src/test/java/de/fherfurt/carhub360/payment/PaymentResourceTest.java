@@ -1,6 +1,7 @@
 package de.fherfurt.carhub360.payment;
 
 import de.fherfurt.carhub360.customer.Customer;
+import de.fherfurt.carhub360.customer.CustomerEmailUniquenessService;
 import de.fherfurt.carhub360.customer.CustomerReferenceService;
 import de.fherfurt.carhub360.customer.CustomerRepository;
 import de.fherfurt.carhub360.customer.CustomerService;
@@ -60,6 +61,9 @@ class PaymentResourceTest {
         customerService = new CustomerService();
         inject(customerService, "customerRepository", customerRepository);
         inject(customerService, "customerValidator", new CustomerValidator());
+        CustomerEmailUniquenessService customerEmailUniquenessService = new CustomerEmailUniquenessService();
+        inject(customerEmailUniquenessService, "customerRepository", customerRepository);
+        inject(customerService, "customerEmailUniquenessService", customerEmailUniquenessService);
 
         CustomerReferenceService customerReferenceService = new CustomerReferenceService();
         inject(customerReferenceService, "customerRepository", customerRepository);
