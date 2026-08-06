@@ -10,7 +10,6 @@ import jakarta.ejb.Stateless;
 import jakarta.inject.Inject;
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.time.temporal.ChronoUnit;
 import java.util.List;
 
 @Stateless
@@ -30,6 +29,9 @@ public class ContractService {
 
     @Inject
     private ContractValidator contractValidator;
+
+    @Inject
+    private ContractPriceCalculator contractPriceCalculator;
 
     public List<Contract> findAll() {
         return contractRepository.findAll();
@@ -145,11 +147,7 @@ public class ContractService {
 
     public BigDecimal calculateRentalPrice(int contractId) {
         Contract contract = contractRepository.findById(contractId);
-        if (contract == null || !contract.isRentalContract() || contract.getRentVehicle() == null) {
-            return null;
-        }
-        long daysRented = ChronoUnit.DAYS.between(contract.getRentalStartDate(), contract.getRentalEndDate());
-        return BigDecimal.valueOf(daysRented).multiply(contract.getRentVehicle().getDailyPrice());
+        return contractPriceCalculator.calculateRentalPrice(contract);
     }
 
     private void validate(Customer customer,
