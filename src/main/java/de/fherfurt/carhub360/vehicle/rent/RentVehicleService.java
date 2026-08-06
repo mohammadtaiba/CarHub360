@@ -1,10 +1,8 @@
 package de.fherfurt.carhub360.vehicle.rent;
 
-import de.fherfurt.carhub360.shared.validation.RequiredText;
 import de.fherfurt.carhub360.vehicle.VehicleFields;
 import jakarta.ejb.Stateless;
 import jakarta.inject.Inject;
-import java.math.BigDecimal;
 import java.util.List;
 
 @Stateless
@@ -12,6 +10,9 @@ public class RentVehicleService {
 
     @Inject
     private RentVehicleRepository repository;
+
+    @Inject
+    private RentVehicleValidator rentVehicleValidator;
 
     public List<RentVehicle> findAll() {
         return repository.findAll();
@@ -22,7 +23,7 @@ public class RentVehicleService {
     }
 
     public RentVehicle create(RentVehicle rentVehicle) {
-        validate(rentVehicle);
+        rentVehicleValidator.validate(rentVehicle);
         repository.save(rentVehicle);
         return rentVehicle;
     }
@@ -32,7 +33,7 @@ public class RentVehicleService {
         if (existing == null) {
             return null;
         }
-        validate(updatedVehicle);
+        rentVehicleValidator.validate(updatedVehicle);
         VehicleFields.copy(updatedVehicle, existing);
         existing.setAvailable(updatedVehicle.isAvailable());
         existing.setDailyPrice(updatedVehicle.getDailyPrice());
@@ -57,16 +58,5 @@ public class RentVehicleService {
         }
         repository.delete(rentVehicleId);
         return true;
-    }
-
-    private void validate(RentVehicle vehicle) {
-        VehicleFields.validate(vehicle, "Rent vehicle payload is required.");
-        if (vehicle.getDailyPrice() == null || vehicle.getDailyPrice().compareTo(BigDecimal.ZERO) <= 0) {
-            throw new IllegalArgumentException("dailyPrice must be greater than zero.");
-        }
-        if (vehicle.getDeposit() == null || vehicle.getDeposit().compareTo(BigDecimal.ZERO) < 0) {
-            throw new IllegalArgumentException("deposit must not be negative.");
-        }
-        RequiredText.require(vehicle.getLicensePlate(), "licensePlate");
     }
 }

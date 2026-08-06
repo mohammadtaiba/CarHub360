@@ -3,7 +3,6 @@ package de.fherfurt.carhub360.vehicle.sale;
 import de.fherfurt.carhub360.vehicle.VehicleFields;
 import jakarta.ejb.Stateless;
 import jakarta.inject.Inject;
-import java.math.BigDecimal;
 import java.util.List;
 
 @Stateless
@@ -11,6 +10,9 @@ public class SaleVehicleService {
 
     @Inject
     private SaleVehicleRepository repository;
+
+    @Inject
+    private SaleVehicleValidator saleVehicleValidator;
 
     public List<SaleVehicle> findAll() {
         return repository.findAll();
@@ -21,7 +23,7 @@ public class SaleVehicleService {
     }
 
     public SaleVehicle create(SaleVehicle saleVehicle) {
-        validate(saleVehicle);
+        saleVehicleValidator.validate(saleVehicle);
         repository.save(saleVehicle);
         return saleVehicle;
     }
@@ -31,7 +33,7 @@ public class SaleVehicleService {
         if (existing == null) {
             return null;
         }
-        validate(updatedVehicle);
+        saleVehicleValidator.validate(updatedVehicle);
         VehicleFields.copy(updatedVehicle, existing);
         existing.setSalePrice(updatedVehicle.getSalePrice());
         existing.setNewVehicle(updatedVehicle.isNewVehicle());
@@ -44,12 +46,5 @@ public class SaleVehicleService {
         }
         repository.delete(vehicleId);
         return true;
-    }
-
-    private void validate(SaleVehicle vehicle) {
-        VehicleFields.validate(vehicle, "Sale vehicle payload is required.");
-        if (vehicle.getSalePrice() == null || vehicle.getSalePrice().compareTo(BigDecimal.ZERO) <= 0) {
-            throw new IllegalArgumentException("salePrice must be greater than zero.");
-        }
     }
 }
