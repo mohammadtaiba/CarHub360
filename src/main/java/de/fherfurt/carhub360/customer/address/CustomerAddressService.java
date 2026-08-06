@@ -1,6 +1,5 @@
 package de.fherfurt.carhub360.customer.address;
 
-import de.fherfurt.carhub360.shared.validation.RequiredText;
 import jakarta.ejb.Stateless;
 import jakarta.inject.Inject;
 import java.util.List;
@@ -11,6 +10,9 @@ public class CustomerAddressService {
     @Inject
     private CustomerAddressRepository repository;
 
+    @Inject
+    private CustomerAddressValidator customerAddressValidator;
+
     public List<CustomerAddress> findAll() {
         return repository.findAll();
     }
@@ -20,7 +22,7 @@ public class CustomerAddressService {
     }
 
     public CustomerAddress create(CustomerAddress address) {
-        validate(address);
+        customerAddressValidator.validate(address);
         repository.save(address);
         return address;
     }
@@ -30,7 +32,7 @@ public class CustomerAddressService {
         if (existing == null) {
             return null;
         }
-        validate(address);
+        customerAddressValidator.validate(address);
         existing.setCity(address.getCity());
         existing.setPostalCode(address.getPostalCode());
         existing.setStreet(address.getStreet());
@@ -44,15 +46,5 @@ public class CustomerAddressService {
         }
         repository.delete(addressId);
         return true;
-    }
-
-    private void validate(CustomerAddress address) {
-        if (address == null) {
-            throw new IllegalArgumentException("Address payload is required.");
-        }
-        RequiredText.require(address.getCity(), "city");
-        RequiredText.require(address.getPostalCode(), "postalCode");
-        RequiredText.require(address.getStreet(), "street");
-        RequiredText.require(address.getStreetNumber(), "streetNumber");
     }
 }

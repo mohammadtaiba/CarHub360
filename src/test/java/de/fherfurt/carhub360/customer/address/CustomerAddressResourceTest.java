@@ -48,6 +48,7 @@ class CustomerAddressResourceTest {
 
         CustomerAddressService customerAddressService = new CustomerAddressService();
         inject(customerAddressService, "repository", customerAddressRepository);
+        inject(customerAddressService, "customerAddressValidator", new CustomerAddressValidator());
 
         customerAddressResource = new CustomerAddressResource();
         inject(customerAddressResource, "customerAddressService", customerAddressService);
