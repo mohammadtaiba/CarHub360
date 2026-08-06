@@ -11,6 +11,7 @@ import de.fherfurt.carhub360.customer.history.dto.CustomerHistoryUpdateRequest;
 import de.fherfurt.carhub360.vehicle.Vehicle;
 import de.fherfurt.carhub360.vehicle.VehicleRepository;
 import de.fherfurt.carhub360.vehicle.VehicleService;
+import de.fherfurt.carhub360.vehicle.VehicleValidator;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
@@ -67,6 +68,7 @@ class CustomerHistoryResourceTest {
 
         vehicleService = new VehicleService();
         inject(vehicleService, "vehicleRepository", vehicleRepository);
+        inject(vehicleService, "vehicleValidator", new VehicleValidator());
 
         CustomerHistoryService customerHistoryService = new CustomerHistoryService();
         inject(customerHistoryService, "repository", historyRepository);

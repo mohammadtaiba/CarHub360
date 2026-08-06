@@ -48,6 +48,7 @@ class VehicleResourceTest {
 
         VehicleService vehicleService = new VehicleService();
         inject(vehicleService, "vehicleRepository", vehicleRepository);
+        inject(vehicleService, "vehicleValidator", new VehicleValidator());
 
         vehicleResource = new VehicleResource();
         inject(vehicleResource, "vehicleService", vehicleService);

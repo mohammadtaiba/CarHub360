@@ -10,6 +10,9 @@ public class VehicleService {
     @Inject
     private VehicleRepository vehicleRepository;
 
+    @Inject
+    private VehicleValidator vehicleValidator;
+
     public List<Vehicle> findAll() {
         return vehicleRepository.findAll();
     }
@@ -19,7 +22,7 @@ public class VehicleService {
     }
 
     public Vehicle create(Vehicle vehicle) {
-        VehicleFields.validate(vehicle, "Vehicle payload is required.");
+        vehicleValidator.validate(vehicle);
         vehicleRepository.save(vehicle);
         return vehicle;
     }
@@ -29,7 +32,7 @@ public class VehicleService {
         if (existing == null) {
             return null;
         }
-        VehicleFields.validate(updatedVehicle, "Vehicle payload is required.");
+        vehicleValidator.validate(updatedVehicle);
         VehicleFields.copy(updatedVehicle, existing);
         return vehicleRepository.update(existing);
     }
