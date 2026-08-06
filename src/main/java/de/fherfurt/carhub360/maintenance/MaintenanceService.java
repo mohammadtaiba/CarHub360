@@ -1,7 +1,7 @@
 package de.fherfurt.carhub360.maintenance;
 
 import de.fherfurt.carhub360.vehicle.Vehicle;
-import de.fherfurt.carhub360.vehicle.VehicleRepository;
+import de.fherfurt.carhub360.vehicle.VehicleReferenceService;
 import jakarta.ejb.Stateless;
 import jakarta.inject.Inject;
 import java.math.BigDecimal;
@@ -15,7 +15,7 @@ public class MaintenanceService {
     private MaintenanceRepository maintenanceRepository;
 
     @Inject
-    private VehicleRepository vehicleRepository;
+    private VehicleReferenceService vehicleReferenceService;
 
     @Inject
     private MaintenanceValidator maintenanceValidator;
@@ -37,7 +37,7 @@ public class MaintenanceService {
                               Date endDate,
                               BigDecimal cost,
                               String description) {
-        Vehicle vehicle = requireVehicle(vehicleId);
+        Vehicle vehicle = vehicleReferenceService.requireVehicle(vehicleId);
         maintenanceValidator.validate(startDate, endDate, cost, description);
         Maintenance maintenance = new Maintenance(0, vehicle, startDate, endDate, cost, description);
         maintenanceRepository.save(maintenance);
@@ -54,7 +54,7 @@ public class MaintenanceService {
         if (existing == null) {
             return null;
         }
-        Vehicle vehicle = requireVehicle(vehicleId);
+        Vehicle vehicle = vehicleReferenceService.requireVehicle(vehicleId);
         maintenanceValidator.validate(startDate, endDate, cost, description);
         existing.setVehicle(vehicle);
         existing.setMaintenanceStartDate(startDate);
@@ -70,13 +70,5 @@ public class MaintenanceService {
         }
         maintenanceRepository.delete(maintenanceId);
         return true;
-    }
-
-    private Vehicle requireVehicle(int vehicleId) {
-        Vehicle vehicle = vehicleRepository.findById(vehicleId);
-        if (vehicle == null) {
-            throw new IllegalArgumentException("vehicleId does not reference an existing vehicle.");
-        }
-        return vehicle;
     }
 }

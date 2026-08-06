@@ -1,9 +1,9 @@
 package de.fherfurt.carhub360.customer.history;
 
 import de.fherfurt.carhub360.customer.Customer;
-import de.fherfurt.carhub360.customer.CustomerRepository;
+import de.fherfurt.carhub360.customer.CustomerReferenceService;
 import de.fherfurt.carhub360.vehicle.Vehicle;
-import de.fherfurt.carhub360.vehicle.VehicleRepository;
+import de.fherfurt.carhub360.vehicle.VehicleReferenceService;
 import jakarta.ejb.Stateless;
 import jakarta.inject.Inject;
 import java.util.Date;
@@ -16,10 +16,10 @@ public class CustomerHistoryService {
     private CustomerHistoryRepository repository;
 
     @Inject
-    private CustomerRepository customerRepository;
+    private CustomerReferenceService customerReferenceService;
 
     @Inject
-    private VehicleRepository vehicleRepository;
+    private VehicleReferenceService vehicleReferenceService;
 
     @Inject
     private CustomerHistoryValidator customerHistoryValidator;
@@ -42,8 +42,8 @@ public class CustomerHistoryService {
                                   String description,
                                   Date actionDate,
                                   boolean forRentalCar) {
-        Customer customer = requireActiveCustomer(customerId);
-        Vehicle vehicle = requireVehicle(vehicleId);
+        Customer customer = customerReferenceService.requireActiveCustomer(customerId);
+        Vehicle vehicle = vehicleReferenceService.requireVehicle(vehicleId);
         customerHistoryValidator.validate(review, description, actionDate);
         CustomerHistory history = new CustomerHistory(
                 0,
@@ -69,8 +69,8 @@ public class CustomerHistoryService {
         if (existing == null) {
             return null;
         }
-        Customer customer = requireActiveCustomer(customerId);
-        Vehicle vehicle = requireVehicle(vehicleId);
+        Customer customer = customerReferenceService.requireActiveCustomer(customerId);
+        Vehicle vehicle = vehicleReferenceService.requireVehicle(vehicleId);
         customerHistoryValidator.validate(review, description, actionDate);
         existing.setCustomer(customer);
         existing.setCustomerHistoryVehicle(vehicle);
@@ -87,21 +87,5 @@ public class CustomerHistoryService {
         }
         repository.delete(customerHistoryId);
         return true;
-    }
-
-    private Customer requireActiveCustomer(int customerId) {
-        Customer customer = customerRepository.findById(customerId);
-        if (customer == null || customer.isDeleted()) {
-            throw new IllegalArgumentException("customerId does not reference an active customer.");
-        }
-        return customer;
-    }
-
-    private Vehicle requireVehicle(int vehicleId) {
-        Vehicle vehicle = vehicleRepository.findById(vehicleId);
-        if (vehicle == null) {
-            throw new IllegalArgumentException("vehicleId does not reference an existing vehicle.");
-        }
-        return vehicle;
     }
 }

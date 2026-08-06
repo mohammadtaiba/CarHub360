@@ -2,6 +2,7 @@ package de.fherfurt.carhub360;
 
 import de.fherfurt.carhub360.customer.address.CustomerAddress;
 import de.fherfurt.carhub360.customer.Customer;
+import de.fherfurt.carhub360.customer.CustomerReferenceService;
 import de.fherfurt.carhub360.customer.CustomerRepository;
 import de.fherfurt.carhub360.customer.CustomerService;
 import de.fherfurt.carhub360.customer.CustomerValidator;
@@ -21,6 +22,7 @@ import de.fherfurt.carhub360.payment.PaymentService;
 import de.fherfurt.carhub360.payment.PaymentStatus;
 import de.fherfurt.carhub360.payment.PaymentValidator;
 import de.fherfurt.carhub360.vehicle.Vehicle;
+import de.fherfurt.carhub360.vehicle.VehicleReferenceService;
 import de.fherfurt.carhub360.vehicle.VehicleRepository;
 import de.fherfurt.carhub360.vehicle.VehicleService;
 import de.fherfurt.carhub360.vehicle.VehicleValidator;
@@ -86,20 +88,26 @@ class OperationalServiceTest {
         inject(vehicleService, "vehicleRepository", vehicleRepository);
         inject(vehicleService, "vehicleValidator", new VehicleValidator());
 
+        CustomerReferenceService customerReferenceService = new CustomerReferenceService();
+        inject(customerReferenceService, "customerRepository", customerRepository);
+
+        VehicleReferenceService vehicleReferenceService = new VehicleReferenceService();
+        inject(vehicleReferenceService, "vehicleRepository", vehicleRepository);
+
         paymentService = new PaymentService();
         inject(paymentService, "paymentRepository", paymentRepository);
-        inject(paymentService, "customerRepository", customerRepository);
+        inject(paymentService, "customerReferenceService", customerReferenceService);
         inject(paymentService, "paymentValidator", new PaymentValidator());
 
         maintenanceService = new MaintenanceService();
         inject(maintenanceService, "maintenanceRepository", maintenanceRepository);
-        inject(maintenanceService, "vehicleRepository", vehicleRepository);
+        inject(maintenanceService, "vehicleReferenceService", vehicleReferenceService);
         inject(maintenanceService, "maintenanceValidator", new MaintenanceValidator());
 
         customerHistoryService = new CustomerHistoryService();
         inject(customerHistoryService, "repository", historyRepository);
-        inject(customerHistoryService, "customerRepository", customerRepository);
-        inject(customerHistoryService, "vehicleRepository", vehicleRepository);
+        inject(customerHistoryService, "customerReferenceService", customerReferenceService);
+        inject(customerHistoryService, "vehicleReferenceService", vehicleReferenceService);
         inject(customerHistoryService, "customerHistoryValidator", new CustomerHistoryValidator());
     }
 
