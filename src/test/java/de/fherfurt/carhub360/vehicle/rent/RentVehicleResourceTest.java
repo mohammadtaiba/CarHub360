@@ -50,6 +50,7 @@ class RentVehicleResourceTest {
 
         RentVehicleService rentVehicleService = new RentVehicleService();
         inject(rentVehicleService, "repository", rentVehicleRepository);
+        inject(rentVehicleService, "rentVehicleValidator", new RentVehicleValidator());
 
         rentVehicleResource = new RentVehicleResource();
         inject(rentVehicleResource, "rentVehicleService", rentVehicleService);

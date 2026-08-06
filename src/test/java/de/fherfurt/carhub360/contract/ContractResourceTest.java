@@ -11,9 +11,11 @@ import de.fherfurt.carhub360.customer.CustomerValidator;
 import de.fherfurt.carhub360.vehicle.rent.RentVehicle;
 import de.fherfurt.carhub360.vehicle.rent.RentVehicleRepository;
 import de.fherfurt.carhub360.vehicle.rent.RentVehicleService;
+import de.fherfurt.carhub360.vehicle.rent.RentVehicleValidator;
 import de.fherfurt.carhub360.vehicle.sale.SaleVehicle;
 import de.fherfurt.carhub360.vehicle.sale.SaleVehicleRepository;
 import de.fherfurt.carhub360.vehicle.sale.SaleVehicleService;
+import de.fherfurt.carhub360.vehicle.sale.SaleVehicleValidator;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
@@ -76,9 +78,11 @@ class ContractResourceTest {
 
         saleVehicleService = new SaleVehicleService();
         inject(saleVehicleService, "repository", saleVehicleRepository);
+        inject(saleVehicleService, "saleVehicleValidator", new SaleVehicleValidator());
 
         rentVehicleService = new RentVehicleService();
         inject(rentVehicleService, "repository", rentVehicleRepository);
+        inject(rentVehicleService, "rentVehicleValidator", new RentVehicleValidator());
 
         ContractService contractService = new ContractService();
         inject(contractService, "contractRepository", contractRepository);

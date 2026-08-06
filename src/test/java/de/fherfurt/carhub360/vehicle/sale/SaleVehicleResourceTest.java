@@ -49,6 +49,7 @@ class SaleVehicleResourceTest {
 
         SaleVehicleService saleVehicleService = new SaleVehicleService();
         inject(saleVehicleService, "repository", saleVehicleRepository);
+        inject(saleVehicleService, "saleVehicleValidator", new SaleVehicleValidator());
 
         saleVehicleResource = new SaleVehicleResource();
         inject(saleVehicleResource, "saleVehicleService", saleVehicleService);
