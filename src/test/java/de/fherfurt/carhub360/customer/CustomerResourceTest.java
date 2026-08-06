@@ -51,6 +51,7 @@ class CustomerResourceTest {
 
         CustomerService customerService = new CustomerService();
         inject(customerService, "customerRepository", customerRepository);
+        inject(customerService, "customerValidator", new CustomerValidator());
 
         resource = new CustomerResource();
         inject(resource, "customerService", customerService);

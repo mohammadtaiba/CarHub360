@@ -7,6 +7,7 @@ import de.fherfurt.carhub360.customer.address.CustomerAddress;
 import de.fherfurt.carhub360.customer.Customer;
 import de.fherfurt.carhub360.customer.CustomerRepository;
 import de.fherfurt.carhub360.customer.CustomerService;
+import de.fherfurt.carhub360.customer.CustomerValidator;
 import de.fherfurt.carhub360.vehicle.rent.RentVehicle;
 import de.fherfurt.carhub360.vehicle.rent.RentVehicleRepository;
 import de.fherfurt.carhub360.vehicle.rent.RentVehicleService;
@@ -71,6 +72,7 @@ class ContractResourceTest {
 
         customerService = new CustomerService();
         inject(customerService, "customerRepository", customerRepository);
+        inject(customerService, "customerValidator", new CustomerValidator());
 
         saleVehicleService = new SaleVehicleService();
         inject(saleVehicleService, "repository", saleVehicleRepository);
