@@ -36,6 +36,9 @@ public class ContractService {
     @Inject
     private ContractRentalVehicleService contractRentalVehicleService;
 
+    @Inject
+    private ContractFactory contractFactory;
+
     public List<Contract> findAll() {
         return contractRepository.findAll();
     }
@@ -70,15 +73,14 @@ public class ContractService {
         validate(customer, saleVehicle, rentVehicle, rentalContract, rentalStartDate, rentalEndDate);
         contractRentalVehicleService.requireAvailableForCreate(rentalContract, rentVehicle);
 
-        Contract contract = new Contract(
-                0,
+        Contract contract = contractFactory.create(
                 customer,
-                rentalContract ? null : saleVehicle,
-                rentalContract ? rentVehicle : null,
+                saleVehicle,
+                rentVehicle,
                 rentalContract,
-                contractDate == null ? LocalDate.now() : contractDate,
-                rentalContract ? rentalStartDate : null,
-                rentalContract ? rentalEndDate : null
+                contractDate,
+                rentalStartDate,
+                rentalEndDate
         );
 
         contractRentalVehicleService.reserveIfRental(rentalContract, rentVehicle);
@@ -107,13 +109,16 @@ public class ContractService {
         contractRentalVehicleService.requireAvailableForUpdate(existing, rentalContract, rentVehicle);
         contractRentalVehicleService.releaseReplacedVehicle(existing, rentVehicle);
 
-        existing.setCustomer(customer);
-        existing.setSaleVehicle(rentalContract ? null : saleVehicle);
-        existing.setRentVehicle(rentalContract ? rentVehicle : null);
-        existing.setRentalContract(rentalContract);
-        existing.setContractDate(contractDate == null ? LocalDate.now() : contractDate);
-        existing.setRentalStartDate(rentalContract ? rentalStartDate : null);
-        existing.setRentalEndDate(rentalContract ? rentalEndDate : null);
+        contractFactory.apply(
+                existing,
+                customer,
+                saleVehicle,
+                rentVehicle,
+                rentalContract,
+                contractDate,
+                rentalStartDate,
+                rentalEndDate
+        );
 
         contractRentalVehicleService.reserveIfRental(rentalContract, rentVehicle);
         return contractRepository.update(existing);
