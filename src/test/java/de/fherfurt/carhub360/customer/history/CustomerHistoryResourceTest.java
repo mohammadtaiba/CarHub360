@@ -1,6 +1,7 @@
 package de.fherfurt.carhub360.customer.history;
 
 import de.fherfurt.carhub360.customer.Customer;
+import de.fherfurt.carhub360.customer.CustomerReferenceService;
 import de.fherfurt.carhub360.customer.CustomerRepository;
 import de.fherfurt.carhub360.customer.CustomerService;
 import de.fherfurt.carhub360.customer.CustomerValidator;
@@ -9,6 +10,7 @@ import de.fherfurt.carhub360.customer.history.dto.CustomerHistoryCreateRequest;
 import de.fherfurt.carhub360.customer.history.dto.CustomerHistoryResponse;
 import de.fherfurt.carhub360.customer.history.dto.CustomerHistoryUpdateRequest;
 import de.fherfurt.carhub360.vehicle.Vehicle;
+import de.fherfurt.carhub360.vehicle.VehicleReferenceService;
 import de.fherfurt.carhub360.vehicle.VehicleRepository;
 import de.fherfurt.carhub360.vehicle.VehicleService;
 import de.fherfurt.carhub360.vehicle.VehicleValidator;
@@ -70,10 +72,16 @@ class CustomerHistoryResourceTest {
         inject(vehicleService, "vehicleRepository", vehicleRepository);
         inject(vehicleService, "vehicleValidator", new VehicleValidator());
 
+        CustomerReferenceService customerReferenceService = new CustomerReferenceService();
+        inject(customerReferenceService, "customerRepository", customerRepository);
+
+        VehicleReferenceService vehicleReferenceService = new VehicleReferenceService();
+        inject(vehicleReferenceService, "vehicleRepository", vehicleRepository);
+
         CustomerHistoryService customerHistoryService = new CustomerHistoryService();
         inject(customerHistoryService, "repository", historyRepository);
-        inject(customerHistoryService, "customerRepository", customerRepository);
-        inject(customerHistoryService, "vehicleRepository", vehicleRepository);
+        inject(customerHistoryService, "customerReferenceService", customerReferenceService);
+        inject(customerHistoryService, "vehicleReferenceService", vehicleReferenceService);
         inject(customerHistoryService, "customerHistoryValidator", new CustomerHistoryValidator());
 
         customerHistoryResource = new CustomerHistoryResource();

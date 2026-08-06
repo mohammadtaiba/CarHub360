@@ -1,7 +1,7 @@
 package de.fherfurt.carhub360.payment;
 
 import de.fherfurt.carhub360.customer.Customer;
-import de.fherfurt.carhub360.customer.CustomerRepository;
+import de.fherfurt.carhub360.customer.CustomerReferenceService;
 import jakarta.ejb.Stateless;
 import jakarta.inject.Inject;
 import java.math.BigDecimal;
@@ -14,7 +14,7 @@ public class PaymentService {
     private PaymentRepository paymentRepository;
 
     @Inject
-    private CustomerRepository customerRepository;
+    private CustomerReferenceService customerReferenceService;
 
     @Inject
     private PaymentValidator paymentValidator;
@@ -35,7 +35,7 @@ public class PaymentService {
                           PaymentMethod paymentMethod,
                           PaymentStatus paymentStatus,
                           BigDecimal paymentAmount) {
-        Customer customer = requireActiveCustomer(customerId);
+        Customer customer = customerReferenceService.requireActiveCustomer(customerId);
         paymentValidator.validate(paymentMethod, paymentStatus, paymentAmount);
         Payment payment = new Payment(0, customer, paymentMethod, paymentStatus, paymentAmount);
         paymentRepository.save(payment);
@@ -51,7 +51,7 @@ public class PaymentService {
         if (existing == null) {
             return null;
         }
-        Customer customer = requireActiveCustomer(customerId);
+        Customer customer = customerReferenceService.requireActiveCustomer(customerId);
         paymentValidator.validate(paymentMethod, paymentStatus, paymentAmount);
         existing.setCustomer(customer);
         existing.setPaymentMethod(paymentMethod);
@@ -66,13 +66,5 @@ public class PaymentService {
         }
         paymentRepository.delete(paymentId);
         return true;
-    }
-
-    private Customer requireActiveCustomer(int customerId) {
-        Customer customer = customerRepository.findById(customerId);
-        if (customer == null || customer.isDeleted()) {
-            throw new IllegalArgumentException("customerId does not reference an active customer.");
-        }
-        return customer;
     }
 }

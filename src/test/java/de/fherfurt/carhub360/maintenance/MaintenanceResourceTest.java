@@ -4,6 +4,7 @@ import de.fherfurt.carhub360.maintenance.dto.MaintenanceCreateRequest;
 import de.fherfurt.carhub360.maintenance.dto.MaintenanceResponse;
 import de.fherfurt.carhub360.maintenance.dto.MaintenanceUpdateRequest;
 import de.fherfurt.carhub360.vehicle.Vehicle;
+import de.fherfurt.carhub360.vehicle.VehicleReferenceService;
 import de.fherfurt.carhub360.vehicle.VehicleRepository;
 import de.fherfurt.carhub360.vehicle.VehicleService;
 import de.fherfurt.carhub360.vehicle.VehicleValidator;
@@ -59,9 +60,12 @@ class MaintenanceResourceTest {
         inject(vehicleService, "vehicleRepository", vehicleRepository);
         inject(vehicleService, "vehicleValidator", new VehicleValidator());
 
+        VehicleReferenceService vehicleReferenceService = new VehicleReferenceService();
+        inject(vehicleReferenceService, "vehicleRepository", vehicleRepository);
+
         MaintenanceService maintenanceService = new MaintenanceService();
         inject(maintenanceService, "maintenanceRepository", maintenanceRepository);
-        inject(maintenanceService, "vehicleRepository", vehicleRepository);
+        inject(maintenanceService, "vehicleReferenceService", vehicleReferenceService);
         inject(maintenanceService, "maintenanceValidator", new MaintenanceValidator());
 
         maintenanceResource = new MaintenanceResource();
