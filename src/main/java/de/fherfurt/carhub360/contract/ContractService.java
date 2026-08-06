@@ -1,11 +1,6 @@
 package de.fherfurt.carhub360.contract;
 
-import de.fherfurt.carhub360.customer.Customer;
-import de.fherfurt.carhub360.customer.CustomerRepository;
 import de.fherfurt.carhub360.vehicle.rent.RentVehicle;
-import de.fherfurt.carhub360.vehicle.rent.RentVehicleRepository;
-import de.fherfurt.carhub360.vehicle.sale.SaleVehicle;
-import de.fherfurt.carhub360.vehicle.sale.SaleVehicleRepository;
 import jakarta.ejb.Stateless;
 import jakarta.inject.Inject;
 import java.math.BigDecimal;
@@ -19,13 +14,7 @@ public class ContractService {
     private ContractRepository contractRepository;
 
     @Inject
-    private CustomerRepository customerRepository;
-
-    @Inject
-    private SaleVehicleRepository saleVehicleRepository;
-
-    @Inject
-    private RentVehicleRepository rentVehicleRepository;
+    private ContractReferenceResolver contractReferenceResolver;
 
     @Inject
     private ContractValidator contractValidator;
@@ -66,24 +55,22 @@ public class ContractService {
                            LocalDate contractDate,
                            LocalDate rentalStartDate,
                            LocalDate rentalEndDate) {
-        Customer customer = customerRepository.findById(customerId);
-        SaleVehicle saleVehicle = saleVehicleId == null ? null : saleVehicleRepository.findById(saleVehicleId);
-        RentVehicle rentVehicle = rentVehicleId == null ? null : rentVehicleRepository.findById(rentVehicleId);
+        ContractReferences references = contractReferenceResolver.resolve(customerId, saleVehicleId, rentVehicleId);
 
-        validate(customer, saleVehicle, rentVehicle, rentalContract, rentalStartDate, rentalEndDate);
-        contractRentalVehicleService.requireAvailableForCreate(rentalContract, rentVehicle);
+        validate(references, rentalContract, rentalStartDate, rentalEndDate);
+        contractRentalVehicleService.requireAvailableForCreate(rentalContract, references.rentVehicle());
 
         Contract contract = contractFactory.create(
-                customer,
-                saleVehicle,
-                rentVehicle,
+                references.customer(),
+                references.saleVehicle(),
+                references.rentVehicle(),
                 rentalContract,
                 contractDate,
                 rentalStartDate,
                 rentalEndDate
         );
 
-        contractRentalVehicleService.reserveIfRental(rentalContract, rentVehicle);
+        contractRentalVehicleService.reserveIfRental(rentalContract, references.rentVehicle());
         contractRepository.save(contract);
         return contract;
     }
@@ -101,18 +88,17 @@ public class ContractService {
             return null;
         }
 
-        Customer customer = customerRepository.findById(customerId);
-        SaleVehicle saleVehicle = saleVehicleId == null ? null : saleVehicleRepository.findById(saleVehicleId);
-        RentVehicle rentVehicle = rentVehicleId == null ? null : rentVehicleRepository.findById(rentVehicleId);
+        ContractReferences references = contractReferenceResolver.resolve(customerId, saleVehicleId, rentVehicleId);
+        RentVehicle rentVehicle = references.rentVehicle();
 
-        validate(customer, saleVehicle, rentVehicle, rentalContract, rentalStartDate, rentalEndDate);
+        validate(references, rentalContract, rentalStartDate, rentalEndDate);
         contractRentalVehicleService.requireAvailableForUpdate(existing, rentalContract, rentVehicle);
         contractRentalVehicleService.releaseReplacedVehicle(existing, rentVehicle);
 
         contractFactory.apply(
                 existing,
-                customer,
-                saleVehicle,
+                references.customer(),
+                references.saleVehicle(),
                 rentVehicle,
                 rentalContract,
                 contractDate,
@@ -139,16 +125,14 @@ public class ContractService {
         return contractPriceCalculator.calculateRentalPrice(contract);
     }
 
-    private void validate(Customer customer,
-                          SaleVehicle saleVehicle,
-                          RentVehicle rentVehicle,
+    private void validate(ContractReferences references,
                           boolean rentalContract,
                           LocalDate rentalStartDate,
                           LocalDate rentalEndDate) {
         List<String> errors = contractValidator.validate(
-                customer,
-                saleVehicle,
-                rentVehicle,
+                references.customer(),
+                references.saleVehicle(),
+                references.rentVehicle(),
                 rentalContract,
                 rentalStartDate,
                 rentalEndDate
